@@ -2,6 +2,7 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,13 +22,14 @@ import lombok.Setter;
 @Table(name = "stavke_popisa")
 public class StavkePopisa {
 
+	@Id
 	@Column(name = "rbr", nullable = false)
-	@NonNull private int rbr;
+	private int rbr;
 	
 	@Column(name = "popisana_kolicina", nullable = false)
-	@NonNull private double popisanaKolicina;
+	private double popisanaKolicina;
 
 	@ManyToOne
-	@JoinColumn(name="popisni_dokument_id", referencedColumnName="brojPopisa", nullable=true)
+	@JoinColumn(name="popisni_dokument_id", referencedColumnName="broj_popisa", nullable=true)
 	private PopisniDokument popisniDokument;
 }
