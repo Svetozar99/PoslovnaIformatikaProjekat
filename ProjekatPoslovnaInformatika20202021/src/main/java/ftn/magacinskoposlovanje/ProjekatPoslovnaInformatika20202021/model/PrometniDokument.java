@@ -62,10 +62,14 @@ public class PrometniDokument {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="magacin", referencedColumnName="sifra_magacina", nullable=false)
+	@JoinColumn(name="sifra_magacina", referencedColumnName="sifra_magacina", nullable=false)
 	private Magacin magacin;
 	
 	@ManyToOne
-	@JoinColumn(name="magacin", referencedColumnName="id_preduzeca", nullable=false)
+	@JoinColumn(name="id_preduzeca", referencedColumnName="id_preduzeca", nullable=false)
 	private Preduzece preduzece;
+	
+	@ManyToOne
+	@JoinColumn(name="magacinska_kartica_id", referencedColumnName="id", nullable=false)
+	private MagacinskaKartica magacinskaKartica;
 }

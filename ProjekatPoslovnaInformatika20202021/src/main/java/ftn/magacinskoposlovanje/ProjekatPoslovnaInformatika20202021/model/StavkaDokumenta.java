@@ -43,7 +43,7 @@ public class StavkaDokumenta {
 	
 	@ManyToOne
 	@JoinColumn(name="prometni_dokument", referencedColumnName="redni_broj", nullable=false)
-	private MagacinskaKartica prometniDokument;
+	private PrometniDokument prometniDokument;
 	
 	@ManyToOne
 	@JoinColumn(name="roba_usluga", referencedColumnName="sifra", nullable=false)

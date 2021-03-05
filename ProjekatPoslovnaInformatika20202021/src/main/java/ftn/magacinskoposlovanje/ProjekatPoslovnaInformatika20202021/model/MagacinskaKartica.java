@@ -27,7 +27,7 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
-@Table(name = "magacinsa_kartica")
+@Table(name = "magacinska_kartica")
 public class MagacinskaKartica {
 	
 	@Id
@@ -74,10 +74,10 @@ public class MagacinskaKartica {
 	@JoinColumn(name="roba_ili_usluga", referencedColumnName="sifra", nullable=false)
 	private RobaIliUsluga robaIliUsluga;
 
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacinskaKartica")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="idPrometa")
 	private List<PrometMagacinskeKartice> prometMagacinskeKartice = new ArrayList<PrometMagacinskeKartice>();
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacinskaKartica")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="idStavke")
 	private List<StavkaDokumenta> stavkaDokumenta = new ArrayList<StavkaDokumenta>();
 	
 }

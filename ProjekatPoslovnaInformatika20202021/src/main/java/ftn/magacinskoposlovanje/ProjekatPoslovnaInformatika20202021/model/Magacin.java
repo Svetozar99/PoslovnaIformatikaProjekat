@@ -47,7 +47,6 @@ public class Magacin {
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
 	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
 	
-	
 	@ManyToOne
 	@JoinColumn(name="preduzece", referencedColumnName="id_preduzeca", nullable=false)
 	private Preduzece preduzece;
