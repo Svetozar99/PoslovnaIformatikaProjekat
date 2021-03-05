@@ -30,6 +30,10 @@ public class StavkePopisa {
 	private double popisanaKolicina;
 
 	@ManyToOne
-	@JoinColumn(name="popisni_dokument_id", referencedColumnName="broj_popisa", nullable=true)
+	@JoinColumn(name="popisni_dokument_id", referencedColumnName="broj_popisa", nullable=false)
 	private PopisniDokument popisniDokument;
+	
+	@ManyToOne
+	@JoinColumn(name="roba_usluga_id", referencedColumnName="sifra", nullable=false)
+	private RobaIliUsluga robaIliUsluga;
 }
