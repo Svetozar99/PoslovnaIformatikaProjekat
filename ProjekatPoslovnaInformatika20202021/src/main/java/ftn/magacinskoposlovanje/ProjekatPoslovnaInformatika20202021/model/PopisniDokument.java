@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +27,7 @@ import static javax.persistence.FetchType.LAZY;
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
 @Table(name = "popisni_dokument")
 public class PopisniDokument {
@@ -43,4 +45,8 @@ public class PopisniDokument {
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="popisniDokument")
 	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
+
+	@ManyToOne
+	@JoinColumn(name="poslovna_godina", referencedColumnName="broj_godine", nullable=false)
+	private PoslovnaGodina poslovnaGodina;
 }

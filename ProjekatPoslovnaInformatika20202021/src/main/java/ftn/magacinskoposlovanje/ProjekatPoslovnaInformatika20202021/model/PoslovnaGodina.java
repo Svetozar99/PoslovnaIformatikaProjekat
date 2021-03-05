@@ -25,17 +25,17 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
-@Table(name = "roba_usluga")
-public class RobaIliUsluga {
+@Table(name = "poslovna_godina")
+public class PoslovnaGodina {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sifra", nullable = false, unique = true)
-	private int sifra;
+	@Column(name = "broj_godine", nullable = false, unique = true)
+	private int brojGodine;
 	
-	@Column(name = "naziv", nullable = false)
-	private String naziv;
+	@Column(name = "zakljucena", nullable = false)
+	private boolean zakljucena;
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="popisniDokument")
-	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovnaGodina")
+	private List<PopisniDokument> popisniDokumenti = new ArrayList<PopisniDokument>();
 }

@@ -2,6 +2,8 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,12 +19,16 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
 @Table(name = "stavke_popisa")
 public class StavkePopisa {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, unique = true)
+	private int id;
+	
 	@Column(name = "rbr", nullable = false)
 	private int rbr;
 	
