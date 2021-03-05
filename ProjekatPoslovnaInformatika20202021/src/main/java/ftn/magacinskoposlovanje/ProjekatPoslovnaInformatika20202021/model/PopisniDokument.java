@@ -49,4 +49,8 @@ public class PopisniDokument {
 	@ManyToOne
 	@JoinColumn(name="poslovna_godina", referencedColumnName="broj_godine", nullable=false)
 	private PoslovnaGodina poslovnaGodina;
+	
+	@ManyToOne
+	@JoinColumn(name="magacin", referencedColumnName="sifra_magacina", nullable=false)
+	private Magacin magacin;
 }
