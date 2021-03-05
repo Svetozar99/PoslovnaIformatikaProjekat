@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,4 +40,8 @@ public class PoslovnaGodina {
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovnaGodina")
 	private List<PopisniDokument> popisniDokumenti = new ArrayList<PopisniDokument>();
+	
+	@ManyToOne
+	@JoinColumn(name="preduzece", referencedColumnName="id_preduzeca", nullable=false)
+	private Preduzece preduzece;
 }
