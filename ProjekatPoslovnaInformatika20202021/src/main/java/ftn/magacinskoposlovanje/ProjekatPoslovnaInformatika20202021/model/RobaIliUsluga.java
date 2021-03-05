@@ -44,10 +44,10 @@ public class RobaIliUsluga {
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
 	private List<MagacinskaKartica> magacinskeKartice = new ArrayList<MagacinskaKartica>();
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="roba_usluga")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="robaIliUsluga")
 	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="roba_usluga")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="robaIliUsluga")
 	private List<StavkaDokumenta> stavkeDokumenta = new ArrayList<StavkaDokumenta>();
 	
 	@ManyToOne

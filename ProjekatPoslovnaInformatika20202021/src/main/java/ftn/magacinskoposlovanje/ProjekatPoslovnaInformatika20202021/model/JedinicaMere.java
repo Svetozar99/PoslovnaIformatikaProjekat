@@ -40,7 +40,7 @@ public class JedinicaMere {
 	@Column(name = "skraceni_naziv", nullable = false)
 	public String skraceniNaziv;
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="jedinica_mere")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="jedinicaMere")
 	private List<RobaIliUsluga> robeIliUsluge = new ArrayList<RobaIliUsluga>();
 	
 

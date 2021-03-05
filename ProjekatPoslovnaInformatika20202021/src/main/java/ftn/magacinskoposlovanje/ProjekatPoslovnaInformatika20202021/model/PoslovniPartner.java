@@ -53,7 +53,7 @@ public class PoslovniPartner {
 	@Column(name = "MIB", nullable = false)
 	private int MIB;
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovni_partner")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovniPartner")
 	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
 	
 	@ManyToOne

@@ -45,7 +45,7 @@ public class PrometniDokument {
 	@Column(name = "status", nullable = false)
 	private String status;
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="prometni_dokument")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="prometniDokument")
 	private List<StavkaDokumenta> stavkaDokumenta = new ArrayList<StavkaDokumenta>();
 	
 	@ManyToOne
