@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,4 +40,17 @@ public class RobaIliUsluga {
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="popisniDokument")
 	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
+	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
+	private List<MagacinskaKartica> magacinskeKartice = new ArrayList<MagacinskaKartica>();
+	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="roba_usluga")
+	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
+	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="roba_usluga")
+	private List<StavkaDokumenta> stavkeDokumenta = new ArrayList<StavkaDokumenta>();
+	
+	@ManyToOne
+	@JoinColumn(name="jedinica_mere", referencedColumnName="id_jedinice_mere", nullable=false)
+	private JedinicaMere jedinicaMere;
 }

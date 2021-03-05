@@ -53,4 +53,11 @@ public class Preduzece {
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="preduzece")
 	private List<Magacin> magacini = new ArrayList<Magacin>();
+	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="preduzece")
+	private List<PoslovniPartner> poslovniPartneri = new ArrayList<PoslovniPartner>();
+
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="preduzece")
+	private List<PrometniDokument> prometniDokument = new ArrayList<PrometniDokument>();
+	
 }

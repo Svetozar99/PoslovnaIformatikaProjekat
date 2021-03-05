@@ -41,6 +41,13 @@ public class PoslovnaGodina {
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovnaGodina")
 	private List<PopisniDokument> popisniDokumenti = new ArrayList<PopisniDokument>();
 	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovnaGodina")
+	private List<MagacinskaKartica> magacinskeKartice = new ArrayList<MagacinskaKartica>();
+	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="poslovnaGodina")
+	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
+	
+	
 	@ManyToOne
 	@JoinColumn(name="preduzece", referencedColumnName="id_preduzeca", nullable=false)
 	private Preduzece preduzece;
