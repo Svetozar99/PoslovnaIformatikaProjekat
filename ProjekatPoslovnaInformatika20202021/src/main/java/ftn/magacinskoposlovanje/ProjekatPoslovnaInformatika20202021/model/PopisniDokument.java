@@ -41,7 +41,7 @@ public class PopisniDokument {
 	private Date datumPopisa;
 	
 	@Column(name = "status", nullable = false)
-	private String status;
+	private Status status = Status.F; //Prepravljeno da bude enumeracija
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="popisniDokument")
 	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
