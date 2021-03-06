@@ -49,7 +49,7 @@ public class PrometniDokument {
 	private List<StavkaDokumenta> stavkaDokumenta = new ArrayList<StavkaDokumenta>();
 	
 	@ManyToOne
-	@JoinColumn(name="poslovni_partner", referencedColumnName="sifra_partnera", nullable=false)
+	@JoinColumn(name="poslovni_partner", referencedColumnName="sifra_partnera", nullable=true)
 	private PoslovniPartner poslovniPartner;
 	
 	@ManyToOne
@@ -62,7 +62,7 @@ public class PrometniDokument {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="sifra_magacina", referencedColumnName="sifra_magacina", nullable=false)
+	@JoinColumn(name="sifra_magacina", referencedColumnName="sifra_magacina", nullable=true)
 	private Magacin magacin;
 	
 	@ManyToOne
