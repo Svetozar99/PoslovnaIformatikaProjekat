@@ -55,28 +55,63 @@
                 <div class="col-sm">
                   <div class="card" style="width: 18rem;">
                       <div class="card-body">
-                        <input type="text", placeholder="Dobavljač">
-                        <input type="text", placeholder="Mesto i adresa">
-                        <input type="text", placeholder="Mesto izdavanja robe">
-                        <input type="text", placeholder="PIB dobavljača">
-                        <input type="text", placeholder="Tekući račun">
+                        <input class="form-control" type="text", placeholder="Dobavljač">
+                        <input class="form-control" type="text", placeholder="Mesto i adresa">
+                        <input class="form-control" type="text", placeholder="Mesto izdavanja robe">
+                        <input class="form-control" type="text", placeholder="PIB dobavljača">
+                        <input class="form-control" type="text", placeholder="Tekući račun">
                       </div>
                     </div>
                 </div>
                 <div class="col-sm">
                   <div class="card" style="width: 18rem;">
                       <div class="card-body">
-                          <input type="text", placeholder="Kupac">
-                          <input type="text", placeholder="Mesto i adresa">
-                          <input type="text", placeholder="PIB kupca">
+                          <input class="form-control" type="text", placeholder="Kupac">
+                          <input class="form-control" type="text", placeholder="Mesto i adresa">
+                          <input class="form-control" type="text", placeholder="PIB kupca">
                       </div>
                     </div>
                 </div>
               </div>
-              <label>
+              <p style="padding-top: 3%;">
                 Način otpreme: 
-              <input type="text">
-            </label>
+              <input class="form-control col-sm-2" style="display: inline;" type="text">
+              </p>
+              <p style="padding-top: 3%; text-align: center;">
+                <b>PRIJEMNICA Br.</b>
+              <input class="form-control col-sm-2" style="display: inline;" type="text">
+            </p>
+            <p style="padding-top: 3%;">
+                Datum izdavanja: 
+              <input class="form-control col-sm-2" style="display: inline;" type="text">
+            </p>
+            <table class="table">
+                <thead >
+                    <tr>
+                        <th>Redni broj</th> 
+                        <th>Šifra artikla</th> 
+                        <th>Naziv</th> 
+                        <th>Jed. mere</th> 
+                        <th>Količina</th> 
+                        <th>Cena</th> 
+                        <th>Iznos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    </tr>
+                </tbody>
+            </table>
+            <footer style="padding-top: 3%;">
+                <div style="float: left;">
+                    Robu izdao:
+                    <input type="text", class="form-control col-sm-10">
+                </div>
+                <div style="float: right;">
+                    Robu primio:
+                    <input type="text", class="form-control col-sm-10">
+                </div>
+            </footer>
         </div>
 
     </div>
