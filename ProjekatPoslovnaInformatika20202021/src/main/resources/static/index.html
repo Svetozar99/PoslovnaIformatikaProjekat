@@ -36,9 +36,9 @@
                         Prometni dokument
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Prijemnica</a>
-                      <a class="dropdown-item" href="#">Otpremnica</a>
-                      <a class="dropdown-item" href="#">Međumagacinski promet</a>
+                      <button class="dropdown-item" onclick="odrediPrometniDokument('prijemnica')">Prijemnica</button>
+                      <button class="dropdown-item" onclick="odrediPrometniDokument('otpremnica')" href="#">Otpremnica</button>
+                      <button class="dropdown-item" onclick="odrediPrometniDokument('medjumagacinskiPromet')" href="#">Međumagacinski promet</button>
                     </div>
                   </li>
                 <a class="nav-item nav-link" href="#">Magacinska kartica</a>
@@ -49,38 +49,91 @@
 
     <div class="container" style="padding-top: 3%;">
         
-        <!--Prijemnica-->
-        <div id="prijemnica" class="main">
-            <div class="row">
-                <div class="col-sm">
-                  <div class="card" style="width: 18rem;">
-                      <div class="card-body">
-                        <input class="form-control" type="text", placeholder="Dobavljač">
-                        <input class="form-control" type="text", placeholder="Mesto i adresa">
-                        <input class="form-control" type="text", placeholder="Mesto izdavanja robe">
-                        <input class="form-control" type="text", placeholder="PIB dobavljača">
-                        <input class="form-control" type="text", placeholder="Tekući račun">
-                      </div>
+        <!--Prometni dokument-->
+        <div id="prometniDokment" class="main" style="display:none;">
+            <div id="prijemnica" style="display:none;">
+                <div class="row">
+                    <div class="col-sm">
+                      <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <input class="form-control" type="text", placeholder="Dobavljač">
+                            <input class="form-control" type="text", placeholder="Mesto i adresa">
+                            <input class="form-control" type="text", placeholder="Mesto izdavanja robe">
+                            <input class="form-control" type="text", placeholder="PIB dobavljača">
+                            <input class="form-control" type="text", placeholder="Tekući račun">
+                          </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm">
-                  <div class="card" style="width: 18rem;">
-                      <div class="card-body">
-                          <input class="form-control" type="text", placeholder="Kupac">
-                          <input class="form-control" type="text", placeholder="Mesto i adresa">
-                          <input class="form-control" type="text", placeholder="PIB kupca">
-                      </div>
+                    <div class="col-sm">
+                      <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                              <input class="form-control" type="text", placeholder="Kupac">
+                              <input class="form-control" type="text", placeholder="Mesto i adresa">
+                              <input class="form-control" type="text", placeholder="PIB kupca">
+                          </div>
+                        </div>
                     </div>
-                </div>
-              </div>
-              <p style="padding-top: 3%;">
-                Način otpreme: 
-              <input class="form-control col-sm-2" style="display: inline;" type="text">
-              </p>
-              <p style="padding-top: 3%; text-align: center;">
-                <b>PRIJEMNICA Br.</b>
-              <input class="form-control col-sm-2" style="display: inline;" type="text">
-            </p>
+                  </div>
+                  <p style="padding-top: 3%;">
+                    Način otpreme: 
+                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                  </p>
+                  <p style="padding-top: 3%; text-align: center;">
+                    <b>PRIJEMNICA Br.</b>
+                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                </p>
+            </div>
+            <div id="otpremnica" style="display:none;">
+                <div class="row">
+                    <div class="col-sm">
+                      <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <input class="form-control" type="text", placeholder="Prodavac">
+                            <input class="form-control" type="text", placeholder="Mesto i adresa">
+                            <input class="form-control" type="text", placeholder="PIB prodavca">
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                              <input class="form-control" type="text", placeholder="Kupac">
+                              <input class="form-control" type="text", placeholder="Mesto i adresa">
+                              <input class="form-control" type="text", placeholder="PIB kupca">
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <p style="padding-top: 3%; text-align: center;">
+                    <b>OTPREMNICA Br.</b>
+                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                </p>
+            </div>
+            <div id="medjumagacinskiPromet" style="display:none;">
+                <div class="row">
+                    <div class="col-sm">
+                      <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                            <input class="form-control" type="text", placeholder="Šifra magacina">
+                            <input class="form-control" type="text", placeholder="Naziv magacina">
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                      <div class="card" style="width: 18rem;">
+                          <div class="card-body">
+                              <input class="form-control" type="text", placeholder="Šifra magacina">
+                              <input class="form-control" type="text", placeholder="Naziv magacina">
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <p style="padding-top: 3%; text-align: center;">
+                    <b>MEĐUMAGACINSKI PROMET Br.</b>
+                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                </p>
+            </div>
+              
             <p style="padding-top: 3%;">
                 Datum izdavanja: 
               <input class="form-control col-sm-2" style="display: inline;" type="text">
