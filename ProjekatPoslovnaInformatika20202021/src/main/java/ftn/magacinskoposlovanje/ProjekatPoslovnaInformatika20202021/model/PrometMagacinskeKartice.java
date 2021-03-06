@@ -31,10 +31,10 @@ public class PrometMagacinskeKartice {
 	private int idPrometa;
 	
 	@Column(name = "vrsta_prometa", nullable = false)
-	private String vrstaPrometa;//mozda treba enumeracija
+	private VrstaPrometa vrstaPrometa;//mozda treba enumeracija // prepravljeno da bude enumeracija
 	
 	@Column(name = "smer", nullable = false)
-	private String smer;//i ovdje isto
+	private Smer smer;//i ovdje isto // prepravljeno da bude enumeracija
 	
 	@Column(name = "kolicina", nullable = false)
 	private double kolicina;
