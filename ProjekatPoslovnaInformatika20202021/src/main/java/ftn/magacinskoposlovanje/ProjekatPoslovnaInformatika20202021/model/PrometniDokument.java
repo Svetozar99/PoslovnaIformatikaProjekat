@@ -37,7 +37,7 @@ public class PrometniDokument {
 	private int redniBroj;
 	
 	@Column(name = "vrsta_dokumenta", nullable = false)
-	private String vrstaDokumenta;
+	private VrstaDokumenta vrstaDokumenta; //prepravio da bude enumeracija
 	
 	@Column(name = "datum", nullable = false)
 	private Date datum;
