@@ -35,11 +35,7 @@ public class StavkaDokumenta {
 	public double cena;
 	
 	@Column(name = "vrednost", nullable = false)
-	public double vrednost;
-
-	@ManyToOne
-	@JoinColumn(name="magacinska_kartica", referencedColumnName="id", nullable=false)
-	private MagacinskaKartica magacinskaKartica;
+	public double vrednost; //racuna se kao kolicina * cena
 	
 	@ManyToOne
 	@JoinColumn(name="prometni_dokument", referencedColumnName="redni_broj", nullable=false)

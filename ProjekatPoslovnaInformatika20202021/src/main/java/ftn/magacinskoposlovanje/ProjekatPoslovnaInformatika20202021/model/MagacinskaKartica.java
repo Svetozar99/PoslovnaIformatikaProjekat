@@ -77,7 +77,4 @@ public class MagacinskaKartica {
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="idPrometa")
 	private List<PrometMagacinskeKartice> prometMagacinskeKartice = new ArrayList<PrometMagacinskeKartice>();
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="idStavke")
-	private List<StavkaDokumenta> stavkaDokumenta = new ArrayList<StavkaDokumenta>();
-	
 }

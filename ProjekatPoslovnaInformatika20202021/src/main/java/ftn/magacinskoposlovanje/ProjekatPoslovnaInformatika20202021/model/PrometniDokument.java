@@ -43,7 +43,7 @@ public class PrometniDokument {
 	private Date datum;
 	
 	@Column(name = "status", nullable = false)
-	private Status status; //prepravio da bude enumeracija
+	private Status status = Status.F; //prepravio da bude enumeracija
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="prometniDokument")
 	private List<StavkaDokumenta> stavkaDokumenta = new ArrayList<StavkaDokumenta>();
