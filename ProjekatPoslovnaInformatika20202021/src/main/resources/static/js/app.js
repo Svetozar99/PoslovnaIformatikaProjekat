@@ -58,13 +58,11 @@ function dodajRed(){
     html += '<td style="text-align: center;"></td>';
     html += '<td style="text-align: center;"></td>';
     html += '<td style="text-align: center;">';
-    html += '<label>';
-    html += '<select style="width: 120%;" class="form-control" name="nazivRobe" id="' + nazivInput + '">';
+    html += '<select class="form-control" name="nazivRobe" id="' + nazivInput + '">';
     html += '<option value="">Roba1</option>';
     html += '<option value="">Roba2</option>';
     html += '<option value="">Roba3</option>';
     html += '</select>';
-    html += '</label>';
     html += '</td>';
     html += '<td style="text-align: center;"></td>';
     html += '<td style="text-align: center; width: 10%;"><input id="' + kolicinaInput + '" class="form-control" type="text"></td>';

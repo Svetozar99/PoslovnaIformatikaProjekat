@@ -56,20 +56,28 @@
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            <input class="form-control" type="text", placeholder="Dobavljač">
-                            <input class="form-control" type="text", placeholder="Mesto i adresa">
-                            <input class="form-control" type="text", placeholder="Mesto izdavanja robe">
-                            <input class="form-control" type="text", placeholder="PIB dobavljača">
-                            <input class="form-control" type="text", placeholder="Tekući račun">
+                            <select class="form-control" id="inputDobavljac">
+                              <option value="">Dobavljac1</option>
+                              <option value="">Dobavljac2</option>
+                              <option value="">Dobavljac3</option>
+                            </select>
+                            <input class="form-control" readonly type="text",  placeholder="Mesto i adresa">
+                            <input class="form-control" readonly type="text", placeholder="Mesto izdavanja robe">
+                            <input class="form-control" readonly type="text", placeholder="PIB dobavljača">
+                            <input class="form-control" readonly type="text", placeholder="Tekući račun">
                           </div>
                         </div>
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                              <input class="form-control" type="text", placeholder="Kupac">
-                              <input class="form-control" type="text", placeholder="Mesto i adresa">
-                              <input class="form-control" type="text", placeholder="PIB kupca">
+                              <select class="form-control" id="inputKupac">
+                                <option value="">Kupac1</option>
+                                <option value="">Kupac2</option>
+                                <option value="">Kupac3</option>
+                              </select>
+                              <input class="form-control" readonly type="text", placeholder="Mesto i adresa">
+                              <input class="form-control" readonly type="text", placeholder="PIB kupca">
                           </div>
                         </div>
                     </div>
