@@ -2,6 +2,7 @@ var prikaziOtpremnicu = false;
 var prikaziPrijemnicu = false;
 var prikaziMedjumagacinskiPromet = false;
 var counter = 0;
+var redovi = [];
 
 function odrediPrometniDokument(nazivDokumenta){
     if(nazivDokumenta === "otpremnica"){
@@ -21,6 +22,11 @@ function odrediPrometniDokument(nazivDokumenta){
 }
 
 function prikaziPrometniDokument(){
+    redovi.forEach(element => {
+        console.log("red"+element.id);
+        $("#red"+element.id).remove();
+    });
+    redovi = [];
     $("#prometniDokment").show();
     var prijemnica = $("#prijemnica");
     prijemnica.hide()
@@ -53,6 +59,7 @@ function dodajRed(){
 					'naziv':nazivInput,
 					'kolicina':kolicinaInput
 				}
+    redovi.push(red);
 	var html = '';
 	html += '<tr id="'+ redId + '">';
     html += '<td style="text-align: center;"></td>';

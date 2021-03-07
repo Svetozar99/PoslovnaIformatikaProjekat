@@ -50,13 +50,13 @@
     <div class="container" style="padding-top: 3%;">
         
         <!--Prometni dokument-->
-        <div id="prometniDokment" class="main" style="display:none; overflow: auto;">
+        <div id="prometniDokment" class="main" style="display:none; overflow: visible;">
             <div id="prijemnica" style="display:none;">
                 <div class="row">
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            <select class="form-control" id="inputDobavljac">
+                            <select onchange="prikaziPrometniDokument()" class="form-control" id="inputDobavljac">
                               <option value="">Dobavljac1</option>
                               <option value="">Dobavljac2</option>
                               <option value="">Dobavljac3</option>
@@ -96,18 +96,26 @@
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            <input class="form-control" type="text", placeholder="Prodavac">
-                            <input class="form-control" type="text", placeholder="Mesto i adresa">
-                            <input class="form-control" type="text", placeholder="PIB prodavca">
+                            <select onchange="prikaziPrometniDokument()" class="form-control" id="inputProdavac">
+                              <option value="">Prodavac1</option>
+                              <option value="">Prodavac2</option>
+                              <option value="">Prodavac3</option>
+                            </select>
+                            <input class="form-control" readonly type="text", placeholder="Mesto i adresa">
+                            <input class="form-control" readonly type="text", placeholder="PIB prodavca">
                           </div>
                         </div>
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                              <input class="form-control" type="text", placeholder="Kupac">
-                              <input class="form-control" type="text", placeholder="Mesto i adresa">
-                              <input class="form-control" type="text", placeholder="PIB kupca">
+                            <select class="form-control" id="inputKupac">
+                              <option value="">Kupac1</option>
+                              <option value="">Kupac2</option>
+                              <option value="">Kupac3</option>
+                            </select>
+                              <input class="form-control" readonly type="text", placeholder="Mesto i adresa">
+                              <input class="form-control" readonly type="text", placeholder="PIB kupca">
                           </div>
                         </div>
                     </div>
@@ -122,16 +130,26 @@
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            <input class="form-control" type="text", placeholder="Šifra magacina">
-                            <input class="form-control" type="text", placeholder="Naziv magacina">
+                            <label>Magacin iz kog se prebacuje roba:
+                            <select onchange="prikaziPrometniDokument()" class="form-control" id="inputMagacin">
+                              <option value="">Magacin1</option>
+                              <option value="">Magacin2</option>
+                              <option value="">Magacin3</option>
+                            </select>
+                          </label>
                           </div>
                         </div>
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                              <input class="form-control" type="text", placeholder="Šifra magacina">
-                              <input class="form-control" type="text", placeholder="Naziv magacina">
+                            <label>Magacin u koji se prebacuje roba:
+                            <select class="form-control" id="inputMagacin">
+                              <option value="">Magacin1</option>
+                              <option value="">Magacin2</option>
+                              <option value="">Magacin3</option>
+                            </select>
+                          </label>
                           </div>
                         </div>
                     </div>
