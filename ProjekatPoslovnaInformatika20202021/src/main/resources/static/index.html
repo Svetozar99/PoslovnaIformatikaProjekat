@@ -37,8 +37,8 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <button class="dropdown-item" onclick="odrediPrometniDokument('prijemnica')">Prijemnica</button>
-                      <button class="dropdown-item" onclick="odrediPrometniDokument('otpremnica')" href="#">Otpremnica</button>
-                      <button class="dropdown-item" onclick="odrediPrometniDokument('medjumagacinskiPromet')" href="#">Međumagacinski promet</button>
+                      <button class="dropdown-item" onclick="odrediPrometniDokument('otpremnica')">Otpremnica</button>
+                      <button class="dropdown-item" onclick="odrediPrometniDokument('medjumagacinskiPromet')">Međumagacinski promet</button>
                     </div>
                   </li>
                 <a class="nav-item nav-link" href="#">Magacinska kartica</a>
@@ -50,7 +50,7 @@
     <div class="container" style="padding-top: 3%;">
         
         <!--Prometni dokument-->
-        <div id="prometniDokment" class="main" style="display:none;">
+        <div id="prometniDokment" class="main" style="display:none; overflow: auto;">
             <div id="prijemnica" style="display:none;">
                 <div class="row">
                     <div class="col-sm">
@@ -141,21 +141,24 @@
             <table class="table">
                 <thead >
                     <tr>
-                        <th>Redni broj</th> 
-                        <th>Šifra artikla</th> 
-                        <th>Naziv</th> 
-                        <th>Jed. mere</th> 
-                        <th>Količina</th> 
-                        <th>Cena</th> 
-                        <th>Iznos</th>
+                        <th style="text-align: center;">Redni broj</th> 
+                        <th style="text-align: center;">Šifra artikla</th> 
+                        <th style="text-align: center;">Naziv</th> 
+                        <th style="text-align: center;">Jed. mere</th> 
+                        <th style="text-align: center;">Količina</th> 
+                        <th style="text-align: center;">Cena</th> 
+                        <th style="text-align: center;">Iznos</th>
+                        <th style="text-align: center;"></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                    </tr>
+                <tbody id="sadrzajTabele">
+                    
                 </tbody>
             </table>
-            <footer style="padding-top: 3%;">
+            <div style="float: right;">
+              <button onclick="dodajRed()" class="btn btn-secondary">Dodaj novi red</button>
+            </div>
+            <footer style="padding-top: 10%;">
                 <div style="float: left;">
                     Robu izdao:
                     <input type="text", class="form-control col-sm-10">
@@ -163,6 +166,12 @@
                 <div style="float: right;">
                     Robu primio:
                     <input type="text", class="form-control col-sm-10">
+                </div>
+                <br>
+                <br>
+                <br>
+                <div style="display: inline-flexbox; text-align: center;">
+                  <button onclick="proknjizi()" class="btn btn-secondary">Proknjiži</button>
                 </div>
             </footer>
         </div>

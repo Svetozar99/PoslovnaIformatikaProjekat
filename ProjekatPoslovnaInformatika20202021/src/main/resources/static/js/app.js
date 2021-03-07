@@ -1,9 +1,9 @@
 var prikaziOtpremnicu = false;
 var prikaziPrijemnicu = false;
 var prikaziMedjumagacinskiPromet = false;
+var counter = 0;
 
 function odrediPrometniDokument(nazivDokumenta){
-    console.log("odrediPrometniDokument")
     if(nazivDokumenta === "otpremnica"){
         prikaziOtpremnicu = true;
         prikaziPrijemnicu = false;
@@ -30,12 +30,52 @@ function prikaziPrometniDokument(){
     medjumagacinskiPromet.hide()
     if(prikaziPrijemnicu){
         prijemnica.show();
-        console.log("prijemnica")
     }else if(prikaziOtpremnicu){
         otpremnica.show();
-        console.log("otpremnica")
     }else if(prikaziMedjumagacinskiPromet){
         medjumagacinskiPromet.show();
-        console.log("medjumagacinskiPromet")
     }
+}
+
+function ukloniRed(redId){
+    console.log("redId: "+redId);
+    $("#"+redId).remove();
+}
+
+function dodajRed(){
+    console.log("Dodavanje novog reda");
+    counter = counter + 1;
+	var nazivInput = 'nazivInput'+counter;
+    var kolicinaInput = 'kolicinaInput'+counter;
+    var redId = "red"+counter;
+	var red = {
+					'id':counter,
+					'naziv':nazivInput,
+					'kolicina':kolicinaInput
+				}
+	var html = '';
+	html += '<tr id="'+ redId + '">';
+    html += '<td style="text-align: center;"></td>';
+    html += '<td style="text-align: center;"></td>';
+    html += '<td style="text-align: center;">';
+    html += '<label>';
+    html += '<select style="width: 120%;" class="form-control" name="nazivRobe" id="' + nazivInput + '">';
+    html += '<option value="">Roba1</option>';
+    html += '<option value="">Roba2</option>';
+    html += '<option value="">Roba3</option>';
+    html += '</select>';
+    html += '</label>';
+    html += '</td>';
+    html += '<td style="text-align: center;"></td>';
+    html += '<td style="text-align: center; width: 10%;"><input id="' + kolicinaInput + '" class="form-control" type="text"></td>';
+    html += '<td style="text-align: center;"></td>';
+    html += '<td style="text-align: center; width: 10%;"><input readonly  class="form-control" type="text"></td>';
+    html += '<td style="text-align: center;"><button onclick="ukloniRed(\'' + redId + '\')" class="btn btn-danger">Ukloni</button></td>';
+    html += '</tr>';
+
+	$('#sadrzajTabele').append(html);
+}
+
+function proknjizi(){
+    console.log("Proknjizi!!!");
 }
