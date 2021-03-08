@@ -4,28 +4,35 @@ var prikaziMedjumagacinskiPromet = false;
 var counter = 0;
 var redovi = [];
 var prikaziPreduzeca = false;
-var dodavanjePreduzeca = false;
+var dodajPreduzece = false;
 
 function odrediPrikaz(nazivDokumenta){
     if(nazivDokumenta === "otpremnica"){
         prikaziOtpremnicu = true;
         prikaziPrijemnicu = false;
         prikaziMedjumagacinskiPromet = false;
+        prikaziPreduzeca = false;
+        dodavanjePreduzeca = false;
     }else if( nazivDokumenta === "prijemnica"){
         prikaziPrijemnicu = true;
         prikaziOtpremnicu = false;
         prikaziMedjumagacinskiPromet = false;
+        prikaziPreduzeca = false;
+        dodavanjePreduzeca = false;
     }else if(nazivDokumenta === "medjumagacinskiPromet"){
         prikaziMedjumagacinskiPromet = true;
         prikaziOtpremnicu = false;
         prikaziPrijemnicu = false;
+        prikaziPreduzeca = false;
+        dodavanjePreduzeca = false;
     }else if(nazivDokumenta === "svaPreduzeca"){
         prikaziPreduzeca = true;
         prikaziOtpremnicu = false;
         prikaziPrijemnicu = false;
         prikaziMedjumagacinskiPromet = false;
+        dodavanjePreduzeca = false;
     }else if(nazivDokumenta === "dodajPreduzece"){
-        dodajPreduzece = true;
+        dodavanjePreduzeca = true;
         prikaziPreduzeca = false;
         prikaziOtpremnicu = false;
         prikaziPrijemnicu = false;
@@ -40,26 +47,29 @@ function prikazi(){
         $("#red"+element.id).remove();
     });
     redovi = [];
-    $("#prometniDokment").show();
+    var prometniDokment = $("#prometniDokment");
     var prijemnica = $("#prijemnica");
-    prijemnica.hide()
     var otpremnica = $("#otpremnica");
-    otpremnica.hide()
     var medjumagacinskiPromet = $("#medjumagacinskiPromet");
-    medjumagacinskiPromet.hide()
+    var preduzecaTable = $("#preduzecaTable");
+    var dodajPreduzece = $("#dodajPreduzece");
+    otpremnica.hide();
+    prijemnica.hide();
+    medjumagacinskiPromet.hide();
+    preduzecaTable.hide();
+    dodajPreduzece.hide();
+    prometniDokment.hide();
     if(prikaziPrijemnicu){
+        prometniDokment.show();
         prijemnica.show();
-        $("#preduzecaTable").hide();
     }else if(prikaziOtpremnicu){
+        prometniDokment.show();
         otpremnica.show();
     }else if(prikaziMedjumagacinskiPromet){
+        prometniDokment.show();
         medjumagacinskiPromet.show();
-    }else if(prikaziPreduzeca){
-        $("#prometniDokment").hide();
-    }else if(dodajPreduzece){
-        $("#preduzecaTable").hide();
-        $("#prometniDokment").hide();
-        $("#dodajPreduzece").show();
+    }else if(dodavanjePreduzeca){
+        dodajPreduzece.show();
     }
 }
 
