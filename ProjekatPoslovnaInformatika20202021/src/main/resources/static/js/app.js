@@ -4,7 +4,7 @@ var prikaziMedjumagacinskiPromet = false;
 var counter = 0;
 var redovi = [];
 
-function odrediPrometniDokument(nazivDokumenta){
+function odrediPrikaz(nazivDokumenta){
     if(nazivDokumenta === "otpremnica"){
         prikaziOtpremnicu = true;
         prikaziPrijemnicu = false;
@@ -18,10 +18,10 @@ function odrediPrometniDokument(nazivDokumenta){
         prikaziOtpremnicu = false;
         prikaziPrijemnicu = false;
     }
-    prikaziPrometniDokument();
+    prikazi();
 }
 
-function prikaziPrometniDokument(){
+function prikazi(){
     redovi.forEach(element => {
         console.log("red"+element.id);
         $("#red"+element.id).remove();
@@ -83,4 +83,19 @@ function dodajRed(){
 
 function proknjizi(){
     console.log("Proknjizi!!!");
+}
+
+function promeniIzgledTaba(dropdown){
+    var prometniDokumentDropdown = $("#prometniDokumentDropdown");
+    var robeUslugeDropdown = $("#robeUslugeDropdown");
+    if(dropdown === "prometniDokumentDropdown"){
+        console.log("prometniDokumentDropdown")
+        prometniDokumentDropdown.addClass("active");
+        robeUslugeDropdown.removeClass("active");
+    }
+    else if(dropdown === "robeUslugeDropdown"){
+        console.log("robeUslugeDropdown")
+        robeUslugeDropdown.addClass("active");
+        prometniDokumentDropdown.removeClass("active");
+    }
 }
