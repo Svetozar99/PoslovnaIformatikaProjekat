@@ -20,7 +20,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInter
 @RestController
 @RequestMapping(value = "api/preduzece")
 public class PreduzeceController {
-
+	
 	@Autowired
 	private PreduzeceServiceInterface preduzeceService;
 	

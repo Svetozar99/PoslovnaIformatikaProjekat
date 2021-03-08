@@ -28,7 +28,7 @@ public class PrometMagacinskeKartice {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_prometa", nullable = false, unique = true)
-	private int idPrometa;
+	private Integer idPrometa;
 	
 	@Column(name = "vrsta_prometa", nullable = false)
 	private VrstaPrometa vrstaPrometa;//mozda treba enumeracija // prepravljeno da bude enumeracija
@@ -54,4 +54,94 @@ public class PrometMagacinskeKartice {
 	@ManyToOne
 	@JoinColumn(name="magacinska_kartica", referencedColumnName="id", nullable=false)
 	private MagacinskaKartica magacinskaKartica;
+	
+	public PrometMagacinskeKartice() {
+		super();
+	}
+
+	public PrometMagacinskeKartice(Integer idPrometa, VrstaPrometa vrstaPrometa, Smer smer, double kolicina,
+			double cena, double vrednost, String dokument, Date datumPrometa, MagacinskaKartica magacinskaKartica) {
+		super();
+		this.idPrometa = idPrometa;
+		this.vrstaPrometa = vrstaPrometa;
+		this.smer = smer;
+		this.kolicina = kolicina;
+		this.cena = cena;
+		this.vrednost = vrednost;
+		this.dokument = dokument;
+		this.datumPrometa = datumPrometa;
+		this.magacinskaKartica = magacinskaKartica;
+	}
+
+	public Integer getIdPrometa() {
+		return idPrometa;
+	}
+
+	public void setIdPrometa(Integer idPrometa) {
+		this.idPrometa = idPrometa;
+	}
+
+	public VrstaPrometa getVrstaPrometa() {
+		return vrstaPrometa;
+	}
+
+	public void setVrstaPrometa(VrstaPrometa vrstaPrometa) {
+		this.vrstaPrometa = vrstaPrometa;
+	}
+
+	public Smer getSmer() {
+		return smer;
+	}
+
+	public void setSmer(Smer smer) {
+		this.smer = smer;
+	}
+
+	public double getKolicina() {
+		return kolicina;
+	}
+
+	public void setKolicina(double kolicina) {
+		this.kolicina = kolicina;
+	}
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
+	}
+
+	public double getVrednost() {
+		return vrednost;
+	}
+
+	public void setVrednost(double vrednost) {
+		this.vrednost = vrednost;
+	}
+
+	public String getDokument() {
+		return dokument;
+	}
+
+	public void setDokument(String dokument) {
+		this.dokument = dokument;
+	}
+
+	public Date getDatumPrometa() {
+		return datumPrometa;
+	}
+
+	public void setDatumPrometa(Date datumPrometa) {
+		this.datumPrometa = datumPrometa;
+	}
+
+	public MagacinskaKartica getMagacinskaKartica() {
+		return magacinskaKartica;
+	}
+
+	public void setMagacinskaKartica(MagacinskaKartica magacinskaKartica) {
+		this.magacinskaKartica = magacinskaKartica;
+	}
 }

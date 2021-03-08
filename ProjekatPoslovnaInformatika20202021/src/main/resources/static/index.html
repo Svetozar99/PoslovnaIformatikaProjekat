@@ -59,6 +59,15 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('dodajPreduzece')">Dodaj preduzeće</button>
                     </div>
                   </li>
+
+                  <li id="prikazMagKartDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagKartDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Promet magacinske kartice
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="prikazSvihPrometaMagKartica()">Svi prometi magacinskih kartica</button>
+                    </div>
+                  </li>
                 <a class="nav-item nav-link" href="#">Magacinska kartica</a>
               </div>
             </div>
@@ -230,13 +239,18 @@
         </div>
 <!-- Prikaz svih preduzeca -->
         <table class="table" id="preduzecaTable" style="display: none;">
-          <tr>
-            <th style="text-align: center;">Naziv</th>
-            <th style="text-align: center;">Adresa</th>
-            <th style="text-align: center;">Broj telefona</th>
-            <th style="text-align: center;">PIB</th>
-            <th style="text-align: center;">MIB</th>
-          </tr>
+          <thead>
+            <tr>
+              <th style="text-align: center;">Naziv</th>
+              <th style="text-align: center;">Adresa</th>
+              <th style="text-align: center;">Broj telefona</th>
+              <th style="text-align: center;">PIB</th>
+              <th style="text-align: center;">MIB</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyPreduzece">
+
+          </tbody>
         </table>
 <!-- Forma za dodavanje preduzeca -->
         <form id="dodajPreduzece" style="display: none;">
@@ -262,6 +276,25 @@
           </div>
           <button onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
       </form>
+
+      <!-- Prikaz svih prometa magacinskih kartica -->
+
+      <table class="table" id="prometiMagacinskihKarticaTable" style="display: none;">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Vrsta prometa</th>
+            <th style="text-align: center;">Smer</th>
+            <th style="text-align: center;">Količina</th>
+            <th style="text-align: center;">Cena</th>
+            <th style="text-align: center;">Dokument</th>
+            <th style="text-align: center;">Datum</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyProm">
+
+        </tbody>
+        
+      </table>
       </div>
 </body>
 </html>
