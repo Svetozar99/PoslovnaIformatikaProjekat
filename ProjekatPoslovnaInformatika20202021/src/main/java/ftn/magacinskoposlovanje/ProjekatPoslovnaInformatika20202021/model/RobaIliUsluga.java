@@ -22,10 +22,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
 @Table(name = "roba_usluga")
 public class RobaIliUsluga {
@@ -33,7 +29,7 @@ public class RobaIliUsluga {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "sifra", nullable = false, unique = true)
-	private int sifra;
+	private Integer sifra;
 	
 	@Column(name = "naziv", nullable = false)
 	private String naziv;
@@ -53,4 +49,60 @@ public class RobaIliUsluga {
 	@ManyToOne
 	@JoinColumn(name="jedinica_mere", referencedColumnName="id_jedinice_mere", nullable=false)
 	private JedinicaMere jedinicaMere;
+
+	public Integer getSifra() {
+		return sifra;
+	}
+
+	public void setSifra(Integer sifra) {
+		this.sifra = sifra;
+	}
+
+	public String getNaziv() {
+		return naziv;
+	}
+
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
+	}
+
+	public List<StavkePopisa> getStavkePopisa() {
+		return stavkePopisa;
+	}
+
+	public void setStavkePopisa(List<StavkePopisa> stavkePopisa) {
+		this.stavkePopisa = stavkePopisa;
+	}
+
+	public List<MagacinskaKartica> getMagacinskeKartice() {
+		return magacinskeKartice;
+	}
+
+	public void setMagacinskeKartice(List<MagacinskaKartica> magacinskeKartice) {
+		this.magacinskeKartice = magacinskeKartice;
+	}
+
+	public List<PrometniDokument> getPrometniDokumenti() {
+		return prometniDokumenti;
+	}
+
+	public void setPrometniDokumenti(List<PrometniDokument> prometniDokumenti) {
+		this.prometniDokumenti = prometniDokumenti;
+	}
+
+	public List<StavkaDokumenta> getStavkeDokumenta() {
+		return stavkeDokumenta;
+	}
+
+	public void setStavkeDokumenta(List<StavkaDokumenta> stavkeDokumenta) {
+		this.stavkeDokumenta = stavkeDokumenta;
+	}
+
+	public JedinicaMere getJedinicaMere() {
+		return jedinicaMere;
+	}
+
+	public void setJedinicaMere(JedinicaMere jedinicaMere) {
+		this.jedinicaMere = jedinicaMere;
+	}
 }

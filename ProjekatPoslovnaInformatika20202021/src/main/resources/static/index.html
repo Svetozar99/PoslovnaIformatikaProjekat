@@ -31,7 +31,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <li id="prometniDokumentDropdown" class="nav-item dropdown active" onclick="promeniIzgledTaba('prometniDokumentDropdown')">
+                <li id="prometniDokumentDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prometniDokumentDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Prometni dokument
                     </a>
@@ -41,7 +41,7 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('medjumagacinskiPromet')">Međumagacinski promet</button>
                     </div>
                   </li>
-                  <li class="nav-item dropdown" id="robeUslugeDropdown" onclick="promeniIzgledTaba('robeUslugeDropdown')">
+                  <!--<li class="nav-item dropdown" id="robeUslugeDropdown" onclick="promeniIzgledTaba('robeUslugeDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Robe/Ulsuge
                     </a>
@@ -49,8 +49,8 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('sveRobeUsluge')">Sve robe/usluge</button>
                       <button class="dropdown-item" onclick="odrediPrikaz('dodavanjeRobeUsluge')">Dodavanje robe/usluge</button>
                     </div>
-                  </li>
-                  <li id="preduzeceDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('preduzeceDropdown')">
+                  </li> -->
+                  <li class="nav-item dropdown" id="preduzeceDropdown" onclick="promeniIzgledTaba('preduzeceDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Preduzeće
                     </a>
@@ -228,7 +228,7 @@
                 </div>
             </footer>
         </div>
-<!-- Prikaz svih preduzeca -->
+        <!-- Prikaz svih preduzeca -->
         <table class="table" id="preduzecaTable" style="display: none;">
           <tr>
             <th style="text-align: center;">Naziv</th>
@@ -238,7 +238,7 @@
             <th style="text-align: center;">MIB</th>
           </tr>
         </table>
-<!-- Forma za dodavanje preduzeca -->
+        <!-- Forma za dodavanje preduzeca -->
         <form id="dodajPreduzece" style="display: none;">
           <div class="form-group">
               <label for="naziv">Naziv:</label> <input type="text"
@@ -262,6 +262,21 @@
           </div>
           <button onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
       </form>
+
+      <!-- Forma za dodavanje robe/usluge -->
+      <form id="dodavanjeRobeUsluge" style="display: none;">
+        <div id="selectPreduzece" class="form-group">
+
+        </div>
+        <div class="form-group">
+            <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
+                                                        class="form-control" id="nazivInputRobaUsluga" placeholder="Unesite naziv robe/usluge">
+        </div>
+        <div id="selectJedinicaMere" class="form-group">
+
+        </div>
+        <button onclick="submitRobaUsluga()" type="submit" class="btn btn-secondary">Dodaj</button>
+    </form>
       </div>
 </body>
 </html>
