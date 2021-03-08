@@ -1,0 +1,2 @@
+INSERT INTO PREDUZECE(id_preduzeca, naziv_preduzeca, adresa, telefon, PIB, MIB) VALUES(1, 'Koka produkt', 'Tvrdoski put bb Ljubinje', '0644094513', 12345, 54321);
+INSERT INTO PREDUZECE(id_preduzeca, naziv_preduzeca, adresa, telefon, PIB, MIB) VALUES(2, 'Farmavit', 'Svetosavska bb Ljubinje', '065192738', 98765, 56789);
