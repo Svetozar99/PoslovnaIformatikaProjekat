@@ -68,7 +68,15 @@
                       <button class="dropdown-item" onclick="prikazSvihPrometaMagKartica()">Svi prometi magacinskih kartica</button>
                     </div>
                   </li>
-                <a class="nav-item nav-link" href="#">Magacinska kartica</a>
+
+                  <li id="prikazMagacinskeKarticeDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagacinskeKarticeDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Magacinske kartice
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="prikazSvihMagacinskihKartica()">Sve magacinske kartice</button>
+                    </div>
+                  </li>
               </div>
             </div>
           </nav>
@@ -307,6 +315,26 @@
           </tr>
         </thead>
         <tbody id="tbodyProm">
+
+        </tbody>
+        
+      </table>
+      <!-- Prikaz svih magacinskih kartica -->
+      <table class="table" id="magacinskeKarticeTable" style="display: none;">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Početno stanje količinski</th>
+            <th style="text-align: center;">Promet ulaza količinski</th>
+            <th style="text-align: center;">Promet izlaza količinski</th>
+            <th style="text-align: center;">Ukupna količina</th>
+            <th style="text-align: center;">Početno stanje vrednosno</th>
+            <th style="text-align: center;">Promet ulaza vrednosno</th>
+            <th style="text-align: center;">Promet izlaza vrednosno</th>
+            <th style="text-align: center;">Ukupna vrednost</th>
+            <th style="text-align: center;">Cena</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyMagacinskeKartice">
 
         </tbody>
         

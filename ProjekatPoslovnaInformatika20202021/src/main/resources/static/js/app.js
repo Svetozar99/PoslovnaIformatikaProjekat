@@ -4,6 +4,7 @@ var prikaziMedjumagacinskiPromet = false;
 var counter = 0;
 var redovi = [];
 var prikaziPreduzeca = false;
+var prikaziMagacinskeKartice = false;
 var dodajPreduzece = false;
 
 var prikaziFormuZaDodavanjeRobeUsluge = false;
@@ -15,6 +16,7 @@ var prikaziPrometeMagacinskihKartica = false;
 function odrediPrikaz(id){
     dodavanjePreduzeca = false;
     prikaziPreduzeca = false;
+    prikaziMagacinskeKartice = false;
     prikaziOtpremnicu = false;
     prikaziPrijemnicu = false;
     prikaziMedjumagacinskiPromet = false;
@@ -34,6 +36,8 @@ function odrediPrikaz(id){
         prikaziFormuZaDodavanjeRobeUsluge = true;
     }else if(id === "sviPrometiMagKart"){
         prikaziPrometeMagacinskihKartica = true;
+    }else if(id === "sveMagacinskeKartice"){
+        prikaziMagacinskeKartice = true;
     }
     prikazi();
 }
@@ -54,6 +58,8 @@ function prikazi(){
     var dodavanjeRobeUsluge = $("#dodavanjeRobeUsluge");
 
     var prometMagKart = $("#prometiMagacinskihKarticaTable");
+    var magacinskeKartice = $("#magacinskeKarticeTable");
+    
 
     otpremnica.hide();
     prijemnica.hide();
@@ -61,8 +67,7 @@ function prikazi(){
     preduzecaTable.hide();
     dodajPreduzece.hide();
     prometniDokment.hide();
-
-    dodavanjeRobeUsluge.hide();
+    magacinskeKartice.hide();
     if(prikaziPrijemnicu || prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
         dajRobuIliUsluge();
     }
@@ -88,6 +93,9 @@ function prikazi(){
 
     }else if(prikaziPrometeMagacinskihKartica){
         prometMagKart.show();
+
+    }else if(prikaziMagacinskeKartice){
+        magacinskeKartice.show();
 
     }
 }
@@ -164,15 +172,16 @@ function promeniIzgledTaba(dropdown){
 
     var preduzeceDropdown = $("#preduzeceDropdown");
 
-    var preduzeceDropdown = $("preduzeceDropdown");
     var prikazMagKartDropdown = $("#prikazMagKartDropdown");
-
+    
+    var prikazMagacinskeKartice = $("#prikazMagacinskeKarticeDropdown");
     if(dropdown === "prometniDokumentDropdown"){
         console.log("prometniDokumentDropdown")
         prometniDokumentDropdown.addClass("active");
         preduzeceDropdown.removeClass("active");
         robeUslugeDropdown.removeClass("active");
         prikazMagKartDropdown.removeClass("active");
+        prikazMagacinskeKartice.removeClass("active");
     }
     else if(dropdown === "robeUslugeDropdown"){
         console.log("robeUslugeDropdown")
@@ -180,6 +189,7 @@ function promeniIzgledTaba(dropdown){
         preduzeceDropdown.removeClass("active");
         prometniDokumentDropdown.removeClass("active");
         prikazMagKartDropdown.removeClass("active");
+        prikazMagacinskeKartice.removeClass("active");
     }
     else if(dropdown === "preduzeceDropdown"){
         console.log("preduzeceDropdown")
@@ -187,6 +197,7 @@ function promeniIzgledTaba(dropdown){
         robeUslugeDropdown.removeClass("active");
         prometniDokumentDropdown.removeClass("active");
         prikazMagKartDropdown.removeClass("active");
+        prikazMagacinskeKartice.removeClass("active");
     }
     else if(dropdown === "prikazMagKartDropdown"){
         console.log("prikazMagKartDropdown")
@@ -194,6 +205,15 @@ function promeniIzgledTaba(dropdown){
         preduzeceDropdown.removeClass("active");
         robeUslugeDropdown.removeClass("active");
         prometniDokumentDropdown.removeClass("active");
+        prikazMagacinskeKartice.removeClass("active");
+    }
+    else if(dropdown === "prikazMagacinskeKarticeDropdown"){
+        console.log("prikazMagacinskeKarticeDropdown")
+        prikazMagKartDropdown.removeClass("active");
+        preduzeceDropdown.removeClass("active");
+        robeUslugeDropdown.removeClass("active");
+        prometniDokumentDropdown.removeClass("active");
+        prikazMagacinskeKartice.addClass("active");
     }
 }
 function prikazSvihPreduzeca() {
@@ -376,4 +396,46 @@ function formatDate(date) {
     
     return year + "-" + months[monthIndex] + "-" + day;
 
+}
+
+function prikazSvihMagacinskihKartica() {
+
+    var tabelaMK = $("#magacinskeKarticeTable");
+    var tbodyMK = $("#tbodyMagacinskeKartice");
+    
+    odrediPrikaz('sveMagacinskeKartice');
+    function prikaziMagKart(){
+        $.ajax({
+            type: "GET",
+            contentType : 'application/json; charset=utf-8',
+            url : "http://localhost:8080/api/magacinska-kartica",
+            success : function(result){
+                tabelaMK.show();
+                tbodyMK.empty();
+                for(p in result){
+                    tbodyMK.append(
+                        '<tr>'
+							+'<td align="center">'+'<a href="" id="prikaziJedno" result-prID="'+result[p].id+'">'+result[p].pocetnoStanjeKolicinski+'</a>'+'</td>'
+							+'<td align="center">'+result[p].prometUlazaKolicinski+'</td>'
+							+'<td align="center">'+result[p].prometIzlazaKolicinski+'</td>'
+							+'<td align="center">'+result[p].ukupnaKolicina+'</td>'
+							+'<td align="center">'+result[p].pocetnoStanjeVrednosno+'</td>'
+							+'<td align="center">'+result[p].prometUlazaVrednosno+'</td>'
+							+'<td align="center">'+result[p].prometIzlazaVrednosno+'</td>'
+							+'<td align="center">'+result[p].ukupnaVrednost+'</td>'
+							+'<td align="center">'+result[p].cena+'</td>'
+							+'<td/>'
+						+'</tr>'
+                    )};
+                    selectedId = $(this).attr('result-prID');
+                    
+            },
+            error :function(e){
+                alert('ne valja nesto');
+            }
+        });
+    }
+    prikaziMagKart();
+
+    console.log('aaaaa');
 }
