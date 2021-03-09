@@ -274,7 +274,7 @@ function dajRobuIliUsluge(){
             robeUsluge = result;
         },
         error :function(e){
-            alert('ne valja nesto');
+            console.log("Greska!!!");
         }
     });
 }
