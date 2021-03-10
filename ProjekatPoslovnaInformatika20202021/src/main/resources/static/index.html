@@ -24,7 +24,9 @@
 
     <!-- Ukljucivanje js fajlova -->
     <script src="js/app.js"></script>
-</head>
+    <script src="js/prometniDokument.js"></script>
+    <script src="js/robeIliUsluge.js"></script>
+  </head>
 <body>
 
     <header>
@@ -41,7 +43,7 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('medjumagacinskiPromet')">Međumagacinski promet</button>
                     </div>
                   </li>
-                  <!--<li class="nav-item dropdown" id="robeUslugeDropdown" onclick="promeniIzgledTaba('robeUslugeDropdown')">
+                  <li class="nav-item dropdown" id="robeUslugeDropdown" onclick="promeniIzgledTaba('robeUslugeDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Robe/Ulsuge
                     </a>
@@ -49,7 +51,7 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('sveRobeUsluge')">Sve robe/usluge</button>
                       <button class="dropdown-item" onclick="odrediPrikaz('dodavanjeRobeUsluge')">Dodavanje robe/usluge</button>
                     </div>
-                  </li> -->
+                  </li>
                   <li class="nav-item dropdown" id="preduzeceDropdown" onclick="promeniIzgledTaba('preduzeceDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Preduzeće
@@ -68,15 +70,7 @@
                       <button class="dropdown-item" onclick="prikazSvihPrometaMagKartica()">Svi prometi magacinskih kartica</button>
                     </div>
                   </li>
-
-                  <li id="prikazMagacinskeKarticeDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagacinskeKarticeDropdown')">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Magacinske kartice
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <button class="dropdown-item" onclick="prikazSvihMagacinskihKartica()">Sve magacinske kartice</button>
-                    </div>
-                  </li>
+                <a class="nav-item nav-link" href="#">Magacinska kartica</a>
               </div>
             </div>
           </nav>
@@ -288,12 +282,12 @@
 
       <!-- Forma za dodavanje robe/usluge -->
       <form id="dodavanjeRobeUsluge" style="display: none;">
-        <div id="selectPreduzece" class="form-group">
-
-        </div>
         <div class="form-group">
             <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
                                                         class="form-control" id="nazivInputRobaUsluga" placeholder="Unesite naziv robe/usluge">
+        </div>
+        <div id="selectPreduzece" class="form-group">
+
         </div>
         <div id="selectJedinicaMere" class="form-group">
 
@@ -315,26 +309,6 @@
           </tr>
         </thead>
         <tbody id="tbodyProm">
-
-        </tbody>
-        
-      </table>
-      <!-- Prikaz svih magacinskih kartica -->
-      <table class="table" id="magacinskeKarticeTable" style="display: none;">
-        <thead>
-          <tr>
-            <th style="text-align: center;">Početno stanje količinski</th>
-            <th style="text-align: center;">Promet ulaza količinski</th>
-            <th style="text-align: center;">Promet izlaza količinski</th>
-            <th style="text-align: center;">Ukupna količina</th>
-            <th style="text-align: center;">Početno stanje vrednosno</th>
-            <th style="text-align: center;">Promet ulaza vrednosno</th>
-            <th style="text-align: center;">Promet izlaza vrednosno</th>
-            <th style="text-align: center;">Ukupna vrednost</th>
-            <th style="text-align: center;">Cena</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyMagacinskeKartice">
 
         </tbody>
         
