@@ -1,14 +1,17 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +59,30 @@ public class PreduzeceController {
 		
 		preduzece = preduzeceService.save(preduzece);
 		return new ResponseEntity<PreduzeceDTO>(new PreduzeceDTO(preduzece), HttpStatus.CREATED);
+	}
+	
+	@PutMapping(value = "/{id}", consumes = "application/json")
+	public ResponseEntity<PreduzeceDTO> updatePreduzece(@RequestBody PreduzeceDTO preduzeceDTO, @PathVariable("id") Integer id) throws ParseException{
+		Preduzece preduzece = preduzeceService.findById(id);
+		if(preduzece == null) {
+			return new ResponseEntity<PreduzeceDTO>(HttpStatus.BAD_REQUEST);
+		}
+		preduzece.setNazivPreduzeca(preduzeceDTO.getNaziv());
+		preduzece.setAdresa(preduzeceDTO.getAdresa());
+		preduzece.setTelefon(preduzeceDTO.getTelefon());
+		preduzece.setPIB(preduzeceDTO.getpIB());
+		preduzece.setMIB(preduzeceDTO.getmIB());
+		preduzece = preduzeceService.save(preduzece);
+		return new ResponseEntity<PreduzeceDTO>(new PreduzeceDTO(preduzece), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deletePreduzece(@PathVariable("id") Integer id){
+		Preduzece preduzece = preduzeceService.findById(id);
+		if(preduzece != null) {
+			preduzeceService.remove(id);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 }
