@@ -78,7 +78,10 @@ function dajPreduzeca(text){
                 selectPreduzeca(result);
             }else if(text === "prometniDokument"){
                 console.log("Prometni dokument!");
+            }else if(text === "magacinPreduzece"){
+            	selectPreduzecaMagacin(result);
             }
+            
         }
     });
 }

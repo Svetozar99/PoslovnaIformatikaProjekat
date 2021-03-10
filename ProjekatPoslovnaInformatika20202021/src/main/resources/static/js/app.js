@@ -105,6 +105,7 @@ function prikazi(){
         dodajPreduzece.show();
 
     }else if(dodavanjeMagacina){
+    	dajPreduzeca("magacinPreduzece");
     	dodajMagacin.show();
         
     }else if(prikaziFormuZaDodavanjeRobeUsluge){
