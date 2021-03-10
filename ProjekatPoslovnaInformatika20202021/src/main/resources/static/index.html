@@ -73,7 +73,14 @@
                       <button class="dropdown-item" onclick="prikazSvihPrometaMagKartica()">Svi prometi magacinskih kartica</button>
                     </div>
                   </li>
-                <a class="nav-item nav-link" href="#">Magacinska kartica</a>
+                  <li id="prikazMagacinskihKarticaDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagacinskihKarticaDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Magacinske kartice
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="prikazSvihMagacinskihKartica()">Sve magacinske kartice</button>
+                    </div>
+                  </li>
               </div>
             </div>
           </nav>
@@ -297,7 +304,6 @@
         </div>
         <button onclick="submitRobaUsluga()" type="submit" class="btn btn-secondary">Dodaj</button>
     </form>
-
       <!-- Prikaz svih prometa magacinskih kartica -->
 
       <table class="table" id="prometiMagacinskihKarticaTable" style="display: none;">
@@ -312,6 +318,26 @@
           </tr>
         </thead>
         <tbody id="tbodyProm">
+
+        </tbody>
+        
+      </table>
+<!-- Sve magacinske kartice -->
+      <table class="table" id="magacinskeKarticeTable" style="display: none;">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Pocetno Stanje Kolicinski</th>
+            <th style="text-align: center;">Promet Ulaza Kolicinski</th>
+            <th style="text-align: center;">Promet Izlaza Kolicinski</th>
+            <th style="text-align: center;">Ukupna Kolicina</th>
+            <th style="text-align: center;">Pocetno Stanje Vrednosno</th>
+            <th style="text-align: center;">Promet Ulaza Vrednosno</th>
+            <th style="text-align: center;">Promet Izlaza Vrednosno</th>
+            <th style="text-align: center;">Ukupna Vrednost</th>
+            <th style="text-align: center;">Cena</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyMagacinskeKartice">
 
         </tbody>
         
