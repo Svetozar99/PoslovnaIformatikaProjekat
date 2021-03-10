@@ -125,67 +125,40 @@ function prikazi(){
 function promeniIzgledTaba(dropdown){
     var prometniDokumentDropdown = $("#prometniDokumentDropdown");
     var robeUslugeDropdown = $("#robeUslugeDropdown");
-
     var preduzeceDropdown = $("#preduzeceDropdown");
-    
     var magacinDropdown = $("#magacinDropdown");
-
     var prikazMagKartDropdown = $("#prikazMagKartDropdown");
-    
     var prikazMagacinskeKartice = $("#prikazMagacinskeKarticeDropdown");
+
+    prometniDokumentDropdown.removeClass("active");
+    preduzeceDropdown.removeClass("active");
+    robeUslugeDropdown.removeClass("active");
+    prikazMagKartDropdown.removeClass("active");
+    prikazMagacinskeKartice.removeClass("active");
+    magacinDropdown.removeClass("active");
     if(dropdown === "prometniDokumentDropdown"){
         console.log("prometniDokumentDropdown")
         prometniDokumentDropdown.addClass("active");
-        preduzeceDropdown.removeClass("active");
-        robeUslugeDropdown.removeClass("active");
-        prikazMagKartDropdown.removeClass("active");
-        prikazMagacinskeKartice.removeClass("active");
-        magacinDropdown.removeClass("active");
     }
     else if(dropdown === "robeUslugeDropdown"){
         console.log("robeUslugeDropdown")
         robeUslugeDropdown.addClass("active");
-        preduzeceDropdown.removeClass("active");
-        prometniDokumentDropdown.removeClass("active");
-        prikazMagKartDropdown.removeClass("active");
-        prikazMagacinskeKartice.removeClass("active");
-        magacinDropdown.removeClass("active");
     }
     else if(dropdown === "preduzeceDropdown"){
         console.log("preduzeceDropdown")
         preduzeceDropdown.addClass("active");
-        robeUslugeDropdown.removeClass("active");
-        prometniDokumentDropdown.removeClass("active");
-        prikazMagKartDropdown.removeClass("active");
-        prikazMagacinskeKartice.removeClass("active");
-        magacinDropdown.removeClass("active");
     }
     else if(dropdown === "magacinDropdown"){
         console.log("magacinDropdown")
         magacinDropdown.addClass("active");
-        preduzeceDropdown.removeClass("active");
-        robeUslugeDropdown.removeClass("active");
-        prometniDokumentDropdown.removeClass("active");
-        prikazMagKartDropdown.removeClass("active");
-        prikazMagacinskeKartice.removeClass("active");
     }
     else if(dropdown === "prikazMagKartDropdown"){
         console.log("prikazMagKartDropdown")
         prikazMagKartDropdown.addClass("active");
-        preduzeceDropdown.removeClass("active");
-        robeUslugeDropdown.removeClass("active");
-        prometniDokumentDropdown.removeClass("active");
-        prikazMagacinskeKartice.removeClass("active");
-        magacinDropdown.removeClass("active");
     }
     else if(dropdown === "prikazMagacinskeKarticeDropdown"){
-        console.log("prikazMagacinskeKarticeDropdown")
-        prikazMagKartDropdown.removeClass("active");
-        preduzeceDropdown.removeClass("active");
-        robeUslugeDropdown.removeClass("active");
-        prometniDokumentDropdown.removeClass("active");
+        console.log("prikazMagacinskeKarticeDropdown");
         prikazMagacinskeKartice.addClass("active");
-        magacinDropdown.removeClass("active");
     }
 }
 
