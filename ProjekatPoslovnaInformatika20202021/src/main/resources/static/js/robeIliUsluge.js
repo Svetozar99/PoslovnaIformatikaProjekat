@@ -1,12 +1,16 @@
 var robeUsluge = [];
 
-function dajRobuIliUsluge(){
+function dajRobuIliUsluge(text){
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
         url : "http://localhost:8080/api/roba-ili-usluga",
         success : function(result){
-            robeUsluge = result;
+            if(text === "svaRobaIliUsluge"){
+                prikaziRobeIliUsluge(result);
+            }else{
+                robeUsluge = result;
+            }
         },
         error :function(e){
             console.log("Greska!!!");
@@ -75,4 +79,22 @@ function submitRobaUsluga(){
         }
     });
 
+}
+
+function prikaziRobeIliUsluge(list){
+    var tbodyRobaUsluga = $('#tbodyRobaUsluga');
+    var html='';
+    tbodyRobaUsluga.empty();
+    list.forEach(ru => {
+        html='<tr>';
+        html +=     '<td align="center">'+ru.sifra+'</td>';
+        html +=     '<td align="center">';
+        html +=         '<a href="" id="prikaziJedno" result-prID="'+ru.sifra+'">';
+        html +=             ru.naziv;
+        html +=         '</a>';
+        html +=     '</td>';
+        html +=     '<td align="center">'+ru.jedinicaMere+'</td>';
+        html +=   '</tr>';
+        tbodyRobaUsluga.append(html);
+    });
 }

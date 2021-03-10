@@ -10,6 +10,7 @@ var prikaziMagacine = false;
 var dodajMagacin = false;
 
 var prikaziFormuZaDodavanjeRobeUsluge = false;
+var prikaziSveRobeUsluge = false;
 var prikaziPrometeMagacinskihKartica = false;
 
 
@@ -41,6 +42,8 @@ function odrediPrikaz(id){
         prikaziMagacine = true;
     }else if(id === "dodajMagacin"){
     	dodavanjeMagacina = true;
+    }else if(id === "sveRobeUsluge"){
+        prikaziSveRobeUsluge = true;
     }else if(id === "dodavanjeRobeUsluge"){
         prikaziFormuZaDodavanjeRobeUsluge = true;
     }else if(id === "sviPrometiMagKart"){
@@ -68,10 +71,9 @@ function prikazi(){
     var dodajMagacin = $("#dodajMagacin");
 
     var dodavanjeRobeUsluge = $("#dodavanjeRobeUsluge");
-
+    var robeUslugeTable = $('#robeUslugeTable');
     var prometMagKart = $("#prometiMagacinskihKarticaTable");
     var magacinskeKartice = $("#magacinskeKarticeTable");
-    
 
     otpremnica.hide();
     prijemnica.hide();
@@ -79,16 +81,13 @@ function prikazi(){
     preduzecaTable.hide();
     dodajPreduzece.hide();
     prometniDokment.hide();
-
-    
     magaciniTable.hide();
     dodajMagacin.hide();
-
-
     magacinskeKartice.hide();
     prometMagKart.hide();
-
     dodavanjeRobeUsluge.hide();
+    robeUslugeTable.hide();
+
     if(prikaziPrijemnicu || prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
         dajRobuIliUsluge();
     }   
@@ -103,11 +102,13 @@ function prikazi(){
         medjumagacinskiPromet.show();
     }else if(dodavanjePreduzeca){
         dodajPreduzece.show();
-
     }else if(dodavanjeMagacina){
     	dajPreduzeca("magacinPreduzece");
     	dodajMagacin.show();
         
+    }else if(prikaziSveRobeUsluge){
+        dajRobuIliUsluge("svaRobaIliUsluge");
+        robeUslugeTable.show();
     }else if(prikaziFormuZaDodavanjeRobeUsluge){
         dajPreduzeca("selectPreduzeca");
         dajJediniceMere();

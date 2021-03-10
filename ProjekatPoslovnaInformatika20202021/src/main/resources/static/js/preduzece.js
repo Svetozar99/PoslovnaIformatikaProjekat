@@ -22,7 +22,6 @@ function prikazSvihPreduzeca() {
 							+'<td align="center">'+result[preduzece].telefon+'</td>'
 							+'<td align="center">'+result[preduzece].pIB+'</td>'
 							+'<td align="center">'+result[preduzece].mIB+'</td>'
-							+'<td/>'
 						+'</tr>'
                     )};
                     selectedId = $(this).attr('result-prID');
