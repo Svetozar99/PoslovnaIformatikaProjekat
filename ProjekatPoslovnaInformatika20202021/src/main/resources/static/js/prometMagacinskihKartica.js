@@ -2,8 +2,6 @@ function prikazSvihPrometaMagKartica() {
 
     var tabelaPrometaMK = $("#prometiMagacinskihKarticaTable");
     var tbodyPro = $("#tbodyProm");
-    
-    odrediPrikaz('sviPrometiMagKart');
     function prikaziPromete(){
         $.ajax({
             type: "GET",

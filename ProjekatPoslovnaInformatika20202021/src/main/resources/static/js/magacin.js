@@ -2,7 +2,7 @@ function prikazSvihMagacina() {
 
     var tabelaMagacina = $("#magaciniTable");
     var tbodyMagacin = $("#tbodyMagacin");
-    odrediPrikaz('sviMagacini');
+    
     function prikaziMagacine(){
         $.ajax({
             type: "GET",

@@ -5,7 +5,6 @@ function prikazSvihPreduzeca() {
 
     var tabelaPreduzeca = $("#preduzecaTable");
     var tbodyPred = $("#tbodyPreduzece");
-    odrediPrikaz('svaPreduzeca');
     function prikaziPreduzeca(){
         $.ajax({
             type: "GET",

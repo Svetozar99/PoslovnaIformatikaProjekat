@@ -3,7 +3,6 @@ function prikazSvihMagacinskihKartica() {
     var tabelaMK = $("#magacinskeKarticeTable");
     var tbodyMK = $("#tbodyMagacinskeKartice");
     
-    odrediPrikaz('sveMagacinskeKartice');
     function prikaziMagKart(){
         $.ajax({
             type: "GET",
