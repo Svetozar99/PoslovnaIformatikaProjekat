@@ -6,6 +6,9 @@ var redovi = [];
 var prikaziPreduzeca = false;
 var dodajPreduzece = false;
 
+var prikaziMagacine = false;
+var dodajMagacin = false;
+
 var prikaziFormuZaDodavanjeRobeUsluge = false;
 var robeUsluge = [];
 
@@ -15,6 +18,8 @@ var prikaziPrometeMagacinskihKartica = false;
 function odrediPrikaz(id){
     dodavanjePreduzeca = false;
     prikaziPreduzeca = false;
+    dodavanjeMagacina = false;
+    prikaziMagacine = false;
     prikaziOtpremnicu = false;
     prikaziPrijemnicu = false;
     prikaziMedjumagacinskiPromet = false;
@@ -27,9 +32,13 @@ function odrediPrikaz(id){
     }else if(id === "medjumagacinskiPromet"){
         prikaziMedjumagacinskiPromet = true; 
     }else if(id === "svaPreduzeca"){
-        prikaziPreduzeca = true;  
+        prikaziPreduzeca = true; 
     }else if(id === "dodajPreduzece"){
         dodavanjePreduzeca = true;
+    }else if(id === "sviMagacini"){
+        prikaziMagacine = true;
+    }else if(id === "dodajMagacin"){
+    	dodavanjeMagacina = true;
     }else if(id === "dodavanjeRobeUsluge"){
         prikaziFormuZaDodavanjeRobeUsluge = true;
     }else if(id === "sviPrometiMagKart"){
@@ -50,6 +59,9 @@ function prikazi(){
     var medjumagacinskiPromet = $("#medjumagacinskiPromet");
     var preduzecaTable = $("#preduzecaTable");
     var dodajPreduzece = $("#dodajPreduzece");
+    
+    var magaciniTable = $("#magaciniTable");
+    var dodajMagacin = $("#dodajMagacin");
 
     var dodavanjeRobeUsluge = $("#dodavanjeRobeUsluge");
 
@@ -61,6 +73,9 @@ function prikazi(){
     preduzecaTable.hide();
     dodajPreduzece.hide();
     prometniDokment.hide();
+    
+    magaciniTable.hide();
+    dodajMagacin.hide();
 
     dodavanjeRobeUsluge.hide();
     if(prikaziPrijemnicu || prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
@@ -81,6 +96,9 @@ function prikazi(){
     }else if(dodavanjePreduzeca){
         dodajPreduzece.show();
 
+    }else if(dodavanjeMagacina){
+    	dodajMagacin.show();
+        
     }else if(prikaziFormuZaDodavanjeRobeUsluge){
         dajPreduzeca();
         dajJediniceMere();
@@ -163,6 +181,8 @@ function promeniIzgledTaba(dropdown){
     var robeUslugeDropdown = $("#robeUslugeDropdown");
 
     var preduzeceDropdown = $("#preduzeceDropdown");
+    
+    var magacinDropdown = $("#magacinDropdown");
 
     var preduzeceDropdown = $("preduzeceDropdown");
     var prikazMagKartDropdown = $("#prikazMagKartDropdown");
@@ -184,6 +204,13 @@ function promeniIzgledTaba(dropdown){
     else if(dropdown === "preduzeceDropdown"){
         console.log("preduzeceDropdown")
         preduzeceDropdown.addClass("active");
+        robeUslugeDropdown.removeClass("active");
+        prometniDokumentDropdown.removeClass("active");
+        prikazMagKartDropdown.removeClass("active");
+    }
+    else if(dropdown === "magacinDropdown"){
+        console.log("magacinDropdown")
+        magacinDropdown.addClass("active");
         robeUslugeDropdown.removeClass("active");
         prometniDokumentDropdown.removeClass("active");
         prikazMagKartDropdown.removeClass("active");

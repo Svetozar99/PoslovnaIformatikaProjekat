@@ -19,6 +19,8 @@ INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Cement',2);
 INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Ogrev',3);
 
 INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (1, 'Magacin 1', 1);
+INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (2, 'Magacin 2', 2);
+INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (3, 'Magacin 3', 1);
 
 INSERT INTO poslovna_godina(broj_godine, zakljucena, preduzece) VALUES (1, 0, 1);
 

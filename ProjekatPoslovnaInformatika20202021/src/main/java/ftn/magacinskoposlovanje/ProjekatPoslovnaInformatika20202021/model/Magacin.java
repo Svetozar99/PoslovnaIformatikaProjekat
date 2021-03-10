@@ -50,4 +50,67 @@ public class Magacin {
 	@ManyToOne
 	@JoinColumn(name="preduzece", referencedColumnName="id_preduzeca", nullable=false)
 	private Preduzece preduzece;
+	
+	public Magacin() {
+		super();
+	}
+
+	public Magacin(int sifraMagacina, String nazivMagacina, List<PopisniDokument> popisniDokumenti,
+			List<MagacinskaKartica> magacinskeKartice, List<PrometniDokument> prometniDokumenti, Preduzece preduzece) {
+		super();
+		this.sifraMagacina = sifraMagacina;
+		this.nazivMagacina = nazivMagacina;
+		this.popisniDokumenti = popisniDokumenti;
+		this.magacinskeKartice = magacinskeKartice;
+		this.prometniDokumenti = prometniDokumenti;
+		this.preduzece = preduzece;
+	}
+
+	public int getSifraMagacina() {
+		return sifraMagacina;
+	}
+
+	public void setSifraMagacina(int sifraMagacina) {
+		this.sifraMagacina = sifraMagacina;
+	}
+
+	public String getNazivMagacina() {
+		return nazivMagacina;
+	}
+
+	public void setNazivMagacina(String nazivMagacina) {
+		this.nazivMagacina = nazivMagacina;
+	}
+
+	public List<PopisniDokument> getPopisniDokumenti() {
+		return popisniDokumenti;
+	}
+
+	public void setPopisniDokumenti(List<PopisniDokument> popisniDokumenti) {
+		this.popisniDokumenti = popisniDokumenti;
+	}
+
+	public List<MagacinskaKartica> getMagacinskeKartice() {
+		return magacinskeKartice;
+	}
+
+	public void setMagacinskeKartice(List<MagacinskaKartica> magacinskeKartice) {
+		this.magacinskeKartice = magacinskeKartice;
+	}
+
+	public List<PrometniDokument> getPrometniDokumenti() {
+		return prometniDokumenti;
+	}
+
+	public void setPrometniDokumenti(List<PrometniDokument> prometniDokumenti) {
+		this.prometniDokumenti = prometniDokumenti;
+	}
+
+	public Preduzece getPreduzece() {
+		return preduzece;
+	}
+
+	public void setPreduzece(Preduzece preduzece) {
+		this.preduzece = preduzece;
+	}
 }

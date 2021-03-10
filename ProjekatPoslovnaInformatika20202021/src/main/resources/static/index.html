@@ -24,6 +24,7 @@
 
     <!-- Ukljucivanje js fajlova -->
     <script src="js/app.js"></script>
+    <script src="js/magacin.js"></script>
 </head>
 <body>
 
@@ -57,6 +58,16 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <button class="dropdown-item" onclick="prikazSvihPreduzeca()">Sva preduzeća</button>
                       <button class="dropdown-item" onclick="odrediPrikaz('dodajPreduzece')">Dodaj preduzeće</button>
+                    </div>
+                  </li>
+                  
+                 <li class="nav-item dropdown" id="magacinDropdown" onclick="promeniIzgledTaba('magacinDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Magacin
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="prikazSvihMagacina()">Svi magacini</button>
+                      <button class="dropdown-item" onclick="odrediPrikaz('dodajMagacin')">Dodaj magacin</button>
                     </div>
                   </li>
 
@@ -275,6 +286,33 @@
                                                                  class="form-control" id="mib" placeholder="Unesite MIB preduzeća">
           </div>
           <button onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
+      </form>
+      
+      <!-- Prikaz svih magacina -->
+        <table class="table" id="magaciniTable" style="display: none;">
+          <thead>
+            <tr>
+              <th style="text-align: center;">Sifra</th>
+              <th style="text-align: center;">Naziv magacina</th>
+              <th style="text-align: center;">Sifra preduzeca</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyMagacin">
+
+          </tbody>
+        </table>
+        <!-- Forma za dodavanje magacina -->
+        <form id="dodajMagacin" style="display: none;">
+          <div class="form-group">
+              <label for="naziv">Naziv:</label> <input type="text"
+                                                          class="form-control" id="nazivMagacina" placeholder="Unesite naziv magacina">
+          </div>
+          <div class="form-group">
+              <label for="pib">Sifra preduzeca:</label> <input type="text"
+                                                                 class="form-control" id="preduzece" placeholder="Unesite sifru preduzeća u kome se nalazi magacin">
+          </div>
+
+          <button onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
       </form>
 
 
