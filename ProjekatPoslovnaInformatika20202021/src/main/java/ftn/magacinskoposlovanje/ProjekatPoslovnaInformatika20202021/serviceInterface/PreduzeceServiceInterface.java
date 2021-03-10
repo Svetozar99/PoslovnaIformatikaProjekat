@@ -13,4 +13,6 @@ public interface PreduzeceServiceInterface {
 	public Preduzece save(Preduzece preduzece);
 	
 	public void remove(Integer id);
+	
+	public Preduzece findById(Integer preduzeceId);
 }

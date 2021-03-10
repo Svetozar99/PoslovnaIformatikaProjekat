@@ -17,7 +17,7 @@ function prikazSvihMagacina() {
                 			
                 			+'<td align="center">'+result[magacin].id+'</td>'
 							+'<td align="center">'+'<a href="" id="prikaziJedno" result-magID="'+result[magacin].id+'">'+result[magacin].naziv+'</a>'+'</td>'
-							+'<td align="center">'+result[magacin].preduzece.id+'</td>'
+							+'<td align="center">'+result[magacin].nazivPreduzeca+'</td>'
 							
 						+'</tr>'
                     )};
@@ -40,7 +40,7 @@ function submitMagacin(){
     var preduzeceInput = $("#preduzece");
 
     var formData = {
-        "nazivMagacina": nazivInput.val(),
+        "naziv": nazivInput.val(),
         "preduzece": preduzeceInput.val()
         
     }

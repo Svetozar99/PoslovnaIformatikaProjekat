@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/magacin")
@@ -23,6 +25,9 @@ public class MagacinController {
 	
 	@Autowired
 	MagacinServiceInterface magacinServiceInterface;
+	
+	@Autowired
+	PreduzeceServiceInterface preduzeceServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<MagacinDTO>> getMagacin(){
@@ -47,9 +52,10 @@ public class MagacinController {
 	
 	@PostMapping
 	public ResponseEntity<MagacinDTO> addMagacin(@RequestBody MagacinDTO magacinDTO){
+		Preduzece p = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
 		Magacin m = new Magacin();
 		m.setNazivMagacina(magacinDTO.getNaziv());	
-		m.setPreduzece(magacinDTO.getPreduzece());
+		m.setPreduzece(p);
 		
 		m = magacinServiceInterface.save(m);
 		return new ResponseEntity<MagacinDTO>(new MagacinDTO(m), HttpStatus.CREATED);

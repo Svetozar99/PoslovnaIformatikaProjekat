@@ -35,4 +35,9 @@ public class PreduzeceService implements PreduzeceServiceInterface {
 		preduzeceRepository.deleteById(id);
 	}
 
+	@Override
+	public Preduzece findById(Integer preduzeceId) {
+		return preduzeceRepository.findOneByIdPreduzeca(preduzeceId);
+	}
+
 }

@@ -6,5 +6,7 @@ import antlr.collections.List;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
 
 public interface PreduzeceRepository extends JpaRepository<Preduzece, Integer> {
+	
+	Preduzece findOneByIdPreduzeca(Integer preduzeceId); 
 
 }
