@@ -6,5 +6,5 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Jedini
 
 
 public interface JedinicaMereRepository extends JpaRepository<JedinicaMere, Integer>{
-
+	JedinicaMere findOneById(Integer id);
 }

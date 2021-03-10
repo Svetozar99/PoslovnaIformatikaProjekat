@@ -56,13 +56,11 @@ function selectPreduzeca(preduzeca){
 
 function submitRobaUsluga(){
 
-    var naziv = $("#inputNazivRobaUsluga");
-    var preduzece = $("#inputPreduzece");
+    var naziv = $("#nazivInputRobaUsluga");
     var jedinicaMere = $("#inputJedinicaMere");
     var formData = {
         "naziv": naziv.val(),
-        "preduzece": preduzece.val(),
-        "jedinicaMere": jedinicaMere.val()
+        "idJedinicaMere": jedinicaMere.val()
     }
 
     $.ajax({

@@ -4,6 +4,7 @@ public class RobaIliUslugaDTO {
 
 	private int sifra;
 	private String naziv;
+	private Integer idJedinicaMere;
 	private String jedinicaMere;
 	
 	public int getSifra() {
@@ -24,4 +25,17 @@ public class RobaIliUslugaDTO {
 	public void setJedinicaMere(String jedinicaMere) {
 		this.jedinicaMere = jedinicaMere;
 	}
+	public Integer getIdJedinicaMere() {
+		return idJedinicaMere;
+	}
+	public void setIdJedinicaMere(Integer idJedinicaMere) {
+		this.idJedinicaMere = idJedinicaMere;
+	}
+	@Override
+	public String toString() {
+		return "RobaIliUslugaDTO [sifra=" + sifra + ", naziv=" + naziv + ", idJedinicaMere=" + idJedinicaMere
+				+ ", jedinicaMere=" + jedinicaMere + "]";
+	}
+	
+	
 }

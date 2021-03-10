@@ -7,4 +7,5 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Jedini
 public interface JedinicaMereServiceInterface {
 
 	public List<JedinicaMere> findAll();
+	public JedinicaMere findOneById(Integer id);
 }

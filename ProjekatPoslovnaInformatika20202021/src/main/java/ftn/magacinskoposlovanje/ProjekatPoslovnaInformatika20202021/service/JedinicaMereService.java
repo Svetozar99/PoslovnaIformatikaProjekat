@@ -20,4 +20,8 @@ public class JedinicaMereService implements JedinicaMereServiceInterface{
 		return jedinicaMereRepository.findAll();
 	}
 
+	@Override
+	public JedinicaMere findOneById(Integer id) {
+		return jedinicaMereRepository.findOneById(id);
+	}
 }
