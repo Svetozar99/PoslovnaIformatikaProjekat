@@ -24,6 +24,9 @@ function prikazSvihPreduzeca() {
                             +'<td>'
                                 +'<button type="submit" class="btn btn-warning" onclick="editPreduzece('+result[preduzece].id+')">IZMENI</button>'
                             +'</td>'
+                            +'<td>'
+                                +'<button type="submit" class="btn btn-danger" onclick="deletePreduzece('+result[preduzece].id+')">OBRIŠI</button>'
+                            +'</td>'
                             +'</tr>'
                     )};
             },
@@ -138,3 +141,18 @@ function editPreduzece(id){
     prikaziPreduzece();
 }
 
+function deletePreduzece(id){
+    $.ajax({
+        url:'http://localhost:8080/api/preduzece/' + id,
+        type: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+            alert('Preduzece uspjesno obrisano');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+            
+    });
+}
