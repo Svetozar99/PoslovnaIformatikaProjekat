@@ -99,7 +99,7 @@ function prikazi(){
         prometniDokment.show();
         medjumagacinskiPromet.show();
     }else if(prikaziPreduzeca){
-        prikazSvihMagacina();
+        prikazSvihPreduzeca();
     }else if(dodavanjePreduzeca){
         dodajPreduzece.show();
     }else if(dodavanjeMagacina){
