@@ -76,12 +76,31 @@ function dajPreduzeca(text){
         success : function(result){
             if(text === "selectPreduzeca"){
                 selectPreduzeca(result);
-            }else if(text === "prometniDokument"){
-                console.log("Prometni dokument!");
+            }else if(text === "prijemnica"){
+                selectDobavljac_Kupac(result);
             }else if(text === "magacinPreduzece"){
             	selectPreduzecaMagacin(result);
             }
             
         }
     });
+}
+
+function selectDobavljac_Kupac(list){
+    var inputDobavljac = $('#inputDobavljac');
+    var inputKupac = $('#inputKupac');
+    var html = "";
+    //Pravljenje liste dobavljaca
+    inputDobavljac.empty();
+    list.forEach(preduzece => {
+        html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
+    });
+    inputDobavljac.append(html);
+    html = '';
+    //Pravljenje liste kupaca
+    inputKupac.empty();
+    list.forEach(preduzece => {
+        html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
+    });
+    inputKupac.append(html);
 }

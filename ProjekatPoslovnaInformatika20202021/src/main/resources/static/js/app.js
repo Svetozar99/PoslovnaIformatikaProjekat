@@ -90,6 +90,7 @@ function prikazi(){
         dajRobuIliUsluge();
     }   
     if(prikaziPrijemnicu){
+        dajPreduzeca("prijemnica");
         prometniDokment.show();
         prijemnica.show();
     }else if(prikaziOtpremnicu){
