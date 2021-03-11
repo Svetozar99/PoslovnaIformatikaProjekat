@@ -1,5 +1,6 @@
 var redovi = [];
 var counter = 0;
+var magacini = [];
 
 
 function ukloniRed(redId){
@@ -99,4 +100,36 @@ function postaviInformacijePreduzeca(){
             $('#inputKupacOtpremnicaTekuciRacun').val(preduzece.mIB);
         }
     });    
+}
+
+function selectMagacini(list){
+    magacini=list;
+    var inputMagacin1 = $('#inputMagacin1');
+    var inputMagacin2 = $('#inputMagacin2');
+    var html = "";
+    list.forEach(magacin => {
+        html += '<option value="' + magacin.id + '">' + magacin.naziv + '</option>';
+    });
+    //Pravljenje liste magacina za prvu listu
+    inputMagacin1.empty();
+    inputMagacin1.append(html);
+
+    //Pravljenje liste magacina za drugu listu
+    inputMagacin2.empty();
+    inputMagacin2.append(html);
+}
+
+function dajMagacine(text){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/preduzece",
+        success : function(result){
+            if(text === "selectMagacin"){
+                selectMagacini(result);
+            }else {
+            	magacini = result;
+            }
+        }
+    });
 }
