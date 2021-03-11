@@ -30,6 +30,7 @@
     <script src="js/preduzece.js"></script>
     <script src="js/prometMagacinskihKartica.js"></script>
     <script src="js/magacinskeKartice.js"></script>
+    <script src="js/poslovniPartner.js"></script>
   </head>
 
 <body>
@@ -93,6 +94,15 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('sveMagacinskeKartice')">Sve magacinske kartice</button>
                     </div>
                   </li>
+                  <li id="prikazPartneraDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazPartneraDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Poslovni partneri
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="odrediPrikaz('sviPartneri')">Svi poslovni partneri</button>
+                      <button class="dropdown-item" onclick="odrediPrikaz('dodajPartnera')">Dodaj poslovnog partnera</button>
+                    </div>
+                  </li>
               </div>
             </div>
           </nav>
@@ -106,21 +116,20 @@
                 <div class="row">
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
-                          <div class="card-body">
+                          <div class="card-body">Izaberite dobavljača:
                             <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputDobavljac">
                               <option value="">Dobavljac1</option>
                               <option value="">Dobavljac2</option>
                               <option value="">Dobavljac3</option>
                             </select>
                             <input class="form-control" id="inputDobavljacMestoIAdresa" readonly type="text",  placeholder="Mesto i adresa">
-                            <input class="form-control" id="inputDobavljacMestoIzdavajaRobe" type="text", placeholder="Mesto izdavanja robe">
                             <input class="form-control" id="inputDobavljacPIB" readonly type="text", placeholder="PIB dobavljača">
                           </div>
                         </div>
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
-                          <div class="card-body">
+                          <div class="card-body">Izaberite kupca:
                               <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputKupac">
                                 <option value="">Kupac1</option>
                                 <option value="">Kupac2</option>
@@ -132,6 +141,10 @@
                         </div>
                     </div>
                   </div>
+                  <p style="padding-top: 3%;">
+                    Mesto izdavanja robe:
+                    <input class="form-control col-sm-2" style="display: inline;" id="inputDobavljacMestoIzdavajaRobe" type="text">
+                  </p>
                   <p style="padding-top: 3%;">
                     Način otpreme: 
                   <input class="form-control col-sm-2" style="display: inline;" type="text">
@@ -145,7 +158,7 @@
                 <div class="row">
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
-                          <div class="card-body">
+                          <div class="card-body">Izaberite prodavca:
                             <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputProdavac">
                               <option value="">Prodavac1</option>
                               <option value="">Prodavac2</option>
@@ -158,7 +171,7 @@
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
-                          <div class="card-body">
+                          <div class="card-body">Izaberite kupca:
                             <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputKupacOtpremnica">
                               <option value="">Kupac1</option>
                               <option value="">Kupac2</option>
@@ -376,7 +389,7 @@
         </tbody>
         
       </table>
-<!-- Sve magacinske kartice -->
+      <!-- Sve magacinske kartice -->
       <table class="table" id="magacinskeKarticeTable" style="display: none;">
         <thead>
           <tr>
@@ -396,6 +409,59 @@
         </tbody>
         
       </table>
+      <!-- Svi partneri -->
+      <table class="table" id="poslovniPartneri" style="display: none;">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Sifra partnera</th>
+            <th style="text-align: center;">Naziv partnera</th>
+            <th style="text-align: center;">Adresa</th>
+            <th style="text-align: center;">Broj telefona</th>
+            <th style="text-align: center;">Email</th>
+            <th style="text-align: center;">PIB</th>
+            <th style="text-align: center;">MIB</th>
+            <th style="text-align: center;">Preduzece</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPoslovniPartneri">
+
+        </tbody>
+        
+      </table>
+      <!-- Forma za dodavanje poslovnog partnera -->
+      <form id="dodavanjePoslovnogPartnera" style="display: none;">
+        <div class="form-group">
+            <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
+                                                        class="form-control" id="nazivInputPoslovnogPartnera" placeholder="Unesite naziv">
+        </div>
+        <div class="form-group">
+          <label for="adresa">Adresa:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="adresaInputPoslovnogPartnera" placeholder="Unesite adresu">
+        </div>
+        <div class="form-group">
+          <label for="telefon">Broj telefona:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="telefonInputPoslovnogPartnera" placeholder="Unesite broj telefona">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="emailInputPoslovnogPartnera" placeholder="Unesite email">
+        </div>
+        <div class="form-group">
+          <label for="pib">PIB:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="pibInputPoslovnogPartnera" placeholder="Unesite PIB">
+        </div>
+        <div class="form-group">
+          <label for="mib">MIB:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="mibInputPoslovnogPartnera" placeholder="Unesite MIB">
+        </div>
+        <div id="selectPreduzece" class="form-group">
+          <label>Izaberite preduzece:
+            <select class="form-control" id="inputPreduzecePoslovnogPartnera">
+            </select>
+          </label>
+        </div>
+        <button onclick="submitPoslovnogPartnera()" type="submit" class="btn btn-secondary">Dodaj</button>
+      </form>
       </div>
 </body>
 </html>

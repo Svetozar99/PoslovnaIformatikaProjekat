@@ -36,9 +36,6 @@ public class RobaIliUsluga {
 	private List<MagacinskaKartica> magacinskeKartice = new ArrayList<MagacinskaKartica>();
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="robaIliUsluga")
-	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
-	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="robaIliUsluga")
 	private List<StavkaDokumenta> stavkeDokumenta = new ArrayList<StavkaDokumenta>();
 	
 	@ManyToOne
@@ -75,14 +72,6 @@ public class RobaIliUsluga {
 
 	public void setMagacinskeKartice(List<MagacinskaKartica> magacinskeKartice) {
 		this.magacinskeKartice = magacinskeKartice;
-	}
-
-	public List<PrometniDokument> getPrometniDokumenti() {
-		return prometniDokumenti;
-	}
-
-	public void setPrometniDokumenti(List<PrometniDokument> prometniDokumenti) {
-		this.prometniDokumenti = prometniDokumenti;
 	}
 
 	public List<StavkaDokumenta> getStavkeDokumenta() {

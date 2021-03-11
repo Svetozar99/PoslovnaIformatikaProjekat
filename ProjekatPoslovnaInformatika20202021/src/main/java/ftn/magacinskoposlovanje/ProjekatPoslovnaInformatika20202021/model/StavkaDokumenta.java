@@ -38,7 +38,7 @@ public class StavkaDokumenta {
 	public double vrednost; //racuna se kao kolicina * cena
 	
 	@ManyToOne
-	@JoinColumn(name="prometni_dokument", referencedColumnName="redni_broj", nullable=false)
+	@JoinColumn(name="prometni_dokument", referencedColumnName="id", nullable=false)
 	private PrometniDokument prometniDokument;
 	
 	@ManyToOne
