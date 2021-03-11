@@ -100,7 +100,6 @@ function prikazi(){
     }else if(prikaziMedjumagacinskiPromet){
         console.log("prikaziMedjumagacinskiPromet");
         dajPreduzeca("selectPreduzeca");
-        dajMagacine("selectMagacin");
         prometniDokment.show();
         medjumagacinskiPromet.show();
     }else if(prikaziPreduzeca){
@@ -238,4 +237,6 @@ function selectPreduzece(list){
     $('#inputKupacOtpremnicaMestoIAdresa').val(list[0].adresa);
     $('#inputKupacOtpremnicaPIB').val(list[0].pIB);
     $('#inputKupacOtpremnicaTekuciRacun').val(list[0].mIB);
+
+    promenaPreduzeca();
 }

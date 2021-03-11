@@ -120,11 +120,11 @@ function selectMagacini(list){
     inputMagacin2.append(html);
 }
 
-function dajMagacine(text){
+function dajMagacine(text,idPreduzeca){
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
-        url : "http://localhost:8080/api/magacin",
+        url : "http://localhost:8080/api/magacin/preduzece/"+idPreduzeca,
         success : function(result){
             if(text === "selectMagacin"){
                 selectMagacini(result);
@@ -137,12 +137,5 @@ function dajMagacine(text){
 
 function promenaPreduzeca(){
     var idPreduzeca = $('#inputMagacinPreduzece').val();
-    $.ajax({
-        type: "GET",
-        contentType : 'application/json; charset=utf-8',
-        url : "http://localhost:8080/api/magacin/preduzece/{id}",
-        success : function(result){
-            selectMagacini(result);
-        }
-    });
+    dajMagacine("selectMagacin",idPreduzeca);
 }
