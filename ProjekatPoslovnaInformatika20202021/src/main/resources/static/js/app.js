@@ -98,8 +98,9 @@ function prikazi(){
         prometniDokment.show();
         otpremnica.show();
     }else if(prikaziMedjumagacinskiPromet){
-        console.log("prikaziMedjumagacinskiPromet")
-        dajMagacine("selectMagacin")
+        console.log("prikaziMedjumagacinskiPromet");
+        dajPreduzeca("selectPreduzeca");
+        dajMagacine("selectMagacin");
         prometniDokment.show();
         medjumagacinskiPromet.show();
     }else if(prikaziPreduzeca){

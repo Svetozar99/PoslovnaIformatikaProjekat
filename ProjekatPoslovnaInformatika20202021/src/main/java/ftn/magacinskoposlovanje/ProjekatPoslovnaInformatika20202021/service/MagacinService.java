@@ -36,4 +36,9 @@ public class MagacinService implements MagacinServiceInterface{
 		
 	}
 
+	@Override
+	public List<Magacin> findByPreduzece_id(Integer id) {
+		return magacinRepository.findByPreduzece_idPreduzeca(id);
+	}
+
 }

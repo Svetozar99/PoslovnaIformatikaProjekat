@@ -103,6 +103,7 @@ function postaviInformacijePreduzeca(){
 }
 
 function selectMagacini(list){
+    console.log("selectMagacini")
     magacini=list;
     var inputMagacin1 = $('#inputMagacin1');
     var inputMagacin2 = $('#inputMagacin2');
@@ -123,13 +124,25 @@ function dajMagacine(text){
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
-        url : "http://localhost:8080/api/preduzece",
+        url : "http://localhost:8080/api/magacin",
         success : function(result){
             if(text === "selectMagacin"){
                 selectMagacini(result);
             }else {
             	magacini = result;
             }
+        }
+    });
+}
+
+function promenaPreduzeca(){
+    var idPreduzeca = $('#inputMagacinPreduzece').val();
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/magacin/preduzece/{id}",
+        success : function(result){
+            selectMagacini(result);
         }
     });
 }

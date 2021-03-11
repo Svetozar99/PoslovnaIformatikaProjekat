@@ -178,7 +178,7 @@
             <div id="medjumagacinskiPromet" style="display:none;">
               <div style="display: inline-flexbox; text-align: left;">Izaberite preduzeće:
                 <br>
-                <select onchange="prikazi()" class="form-control col-sm-2" id="inputMagacinPreduzece" style="display: inline; text-align: left;">
+                <select onchange="" class="form-control col-sm-2" id="inputMagacinPreduzece" style="display: inline; text-align: left;">
                   <option value="">Preduzeće1</option>
                   <option value="">Preduzeće2</option>
                   <option value="">Preduzeće3</option>
@@ -190,10 +190,7 @@
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
                             <label>Magacin iz kog se prebacuje roba:
-                            <select onchange="prikazi()" class="form-control" id="inputMagacin1">
-                              <option value="">Magacin1</option>
-                              <option value="">Magacin2</option>
-                              <option value="">Magacin3</option>
+                            <select onchange="" class="form-control" id="inputMagacin1">
                             </select>
                           </label>
                           </div>
@@ -204,9 +201,6 @@
                           <div class="card-body">
                             <label>Magacin u koji se prebacuje roba:
                             <select class="form-control" id="inputMagacin2">
-                              <option value="">Magacin1</option>
-                              <option value="">Magacin2</option>
-                              <option value="">Magacin3</option>
                             </select>
                           </label>
                           </div>
@@ -298,6 +292,7 @@
                                                                  class="form-control" id="mib" placeholder="Unesite MIB preduzeća">
           </div>
           <button onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
+          <button id="updatePreduzece" type="submit" class="btn btn-warning">Izmeni</button>
       </form>
       
       <!-- Prikaz svih magacina -->

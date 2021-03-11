@@ -41,13 +41,24 @@ public class MagacinController {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<MagacinDTO> getPreduzece(@PathVariable("id") Integer id){
+	public ResponseEntity<MagacinDTO> getMagacin(@PathVariable("id") Integer id){
 		Magacin magacin = magacinServiceInterface.findOne(id);
 		
 		if(magacin == null) {
 			return new ResponseEntity<MagacinDTO>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<MagacinDTO>(new MagacinDTO(magacin), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "preduzece/{id}")
+	public ResponseEntity<List<MagacinDTO>> getMagaciniByPreduzece(@PathVariable("id") Integer id){
+		List<Magacin> magacini = magacinServiceInterface.findByPreduzece_id(id);
+		List<MagacinDTO> dtos = new ArrayList<MagacinDTO>();
+		for (Magacin m : magacini) {
+			MagacinDTO dto = new MagacinDTO(m);
+			dtos.add(dto);
+		}
+		return new ResponseEntity<List<MagacinDTO>>(dtos, HttpStatus.OK);
 	}
 	
 	@PostMapping
