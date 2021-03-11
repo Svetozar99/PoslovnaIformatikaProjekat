@@ -27,7 +27,6 @@ function prikazSvihPreduzeca() {
                             +'</td>'
                         +'</tr>'
                     )};
-                    
             },
             error :function(e){
                 alert('ne valja nesto');
@@ -35,7 +34,6 @@ function prikazSvihPreduzeca() {
         });
     }
     prikaziPreduzeca();
-
     console.log('aaaaa');
 }
 
@@ -156,6 +154,6 @@ function deletePreduzece(id){
             alert('Doslo je do neke greške!')
             console.log("ERROR: ", e);
         }
-
     });
 }
+    
