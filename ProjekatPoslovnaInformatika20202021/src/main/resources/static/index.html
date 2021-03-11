@@ -146,26 +146,26 @@
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            <select onchange="prikazi()" class="form-control" id="inputProdavac">
+                            <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputProdavac">
                               <option value="">Prodavac1</option>
                               <option value="">Prodavac2</option>
                               <option value="">Prodavac3</option>
                             </select>
-                            <input class="form-control" readonly type="text", placeholder="Mesto i adresa">
-                            <input class="form-control" readonly type="text", placeholder="PIB prodavca">
+                            <input class="form-control" id="inputProdavacMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
+                            <input class="form-control" id="inputProdavacPIB" readonly type="text", placeholder="PIB prodavca">
                           </div>
                         </div>
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
-                            <select class="form-control" id="inputKupac">
+                            <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputKupacOtpremnica">
                               <option value="">Kupac1</option>
                               <option value="">Kupac2</option>
                               <option value="">Kupac3</option>
                             </select>
-                              <input class="form-control" readonly type="text", placeholder="Mesto i adresa">
-                              <input class="form-control" readonly type="text", placeholder="PIB kupca">
+                              <input class="form-control" id="inputKupacOtpremnicaMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
+                              <input class="form-control" id="inputKupacOtpremnicaPIB" readonly type="text", placeholder="PIB kupca">
                           </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
             <div id="medjumagacinskiPromet" style="display:none;">
               <div style="display: inline-flexbox; text-align: left;">Izaberite preduzeće:
                 <br>
-                <select onchange="prikazi()" class="form-control col-sm-2" id="inputMagacin" style="display: inline; text-align: left;">
+                <select onchange="prikazi()" class="form-control col-sm-2" id="inputMagacinPreduzece" style="display: inline; text-align: left;">
                   <option value="">Preduzeće1</option>
                   <option value="">Preduzeće2</option>
                   <option value="">Preduzeće3</option>
@@ -221,7 +221,7 @@
               
             <p style="padding-top: 3%;">
                 Datum izdavanja: 
-              <input class="form-control col-sm-2" style="display: inline;" type="text">
+              <input type="date" class="form-control col-sm-2" style="display: inline;">
             </p>
             <table class="table">
                 <thead >
@@ -334,7 +334,10 @@
           </div>
           
         <div id="selectPreduzeceMagacin" class="form-group">
-
+          <label>Izaberite preduzece:
+            <select class="form-control" id="preduzece">
+            </select>
+          </label>
         </div>
 
           <button onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
@@ -348,7 +351,10 @@
                                                         class="form-control" id="nazivInputRobaUsluga" placeholder="Unesite naziv robe/usluge">
         </div>
         <div id="selectPreduzece" class="form-group">
-
+          <label>Izaberite preduzece:
+            <select class="form-control" id="inputPreduzece">
+            </select>
+          </label>
         </div>
         <div id="selectJedinicaMere" class="form-group">
 

@@ -12,7 +12,7 @@ var dodajMagacin = false;
 var prikaziFormuZaDodavanjeRobeUsluge = false;
 var prikaziSveRobeUsluge = false;
 var prikaziPrometeMagacinskihKartica = false;
-
+var preduzeca = [];
 
 function odrediPrikaz(id){
     dodavanjePreduzeca = false;
@@ -90,10 +90,11 @@ function prikazi(){
         dajRobuIliUsluge();
     }   
     if(prikaziPrijemnicu){
-        dajPreduzeca("prijemnica");
+        dajPreduzeca("selectPreduzeca");
         prometniDokment.show();
         prijemnica.show();
     }else if(prikaziOtpremnicu){
+        dajPreduzeca("selectPreduzeca");
         prometniDokment.show();
         otpremnica.show();
     }else if(prikaziMedjumagacinskiPromet){
@@ -104,7 +105,7 @@ function prikazi(){
     }else if(dodavanjePreduzeca){
         dodajPreduzece.show();
     }else if(dodavanjeMagacina){
-    	dajPreduzeca("magacinPreduzece");
+    	dajPreduzeca("selectPreduzeca");
     	dodajMagacin.show();
     }else if(prikaziMagacine){
         prikazSvihMagacina();
@@ -163,3 +164,75 @@ function promeniIzgledTaba(dropdown){
     }
 }
 
+function dajPreduzeca(text){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/preduzece",
+        success : function(result){
+            if(text === "selectPreduzeca"){
+                selectPreduzece(result);
+            }else {
+            	preduzeca = result;
+            }
+        }
+    });
+}
+
+function selectPreduzece(list){
+    preduzeca=list;
+    var inputMagacinPreduzece = $('#inputMagacinPreduzece');
+    var inputDobavljac = $('#inputDobavljac');
+    var inputKupac = $('#inputKupac');
+    var inputProdavac = $('#inputProdavac');
+    var inputKupacOtpremnica = $('#inputKupacOtpremnica');
+    var inputPreduzece = $('#inputPreduzece');
+    var preduzece = $('#preduzece');
+    var html = "";
+    list.forEach(preduzece => {
+        html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
+    });
+    //Pravljenje liste dobavljaca
+    inputDobavljac.empty();
+    inputDobavljac.append(html);
+
+    //Pravljenje liste kupaca
+    inputKupac.empty();
+    inputKupac.append(html);
+
+    //Pravljenje liste prodavaca
+    inputProdavac.empty();
+    inputProdavac.append(html);
+
+    //Pravljenje liste kupaca-otpremnica
+    inputKupacOtpremnica.empty();
+    inputKupacOtpremnica.append(html);
+
+    //Pravljenje liste preduzeca za odabir magacina
+    inputMagacinPreduzece.empty();
+    inputMagacinPreduzece.append(html);
+
+    //Pravljenje liste preduzeca za kreiranje robeIliUsluge
+    inputPreduzece.empty();
+    inputPreduzece.append(html);
+
+    //Pravljenje liste preduzeca za kreiranje magacina
+    preduzece.empty();
+    preduzece.append(html);
+
+    $('#inputDobavljacMestoIAdresa').val(list[0].adresa);
+    $('#inputDobavljacPIB').val(list[0].pIB);
+    $('#inputDobavljacTekuciRacun').val(list[0].mIB);
+
+    $('#inputKupacMestoIAdresa').val(list[0].adresa);
+    $('#inputKupacPIB').val(list[0].pIB);
+    $('#inputKupacTekuciRacun').val(list[0].mIB);
+
+    $('#inputProdavacMestoIAdresa').val(list[0].adresa);
+    $('#inputProdavacPIB').val(list[0].pIB);
+    $('#inputProdavacTekuciRacun').val(list[0].mIB);
+
+    $('#inputKupacOtpremnicaMestoIAdresa').val(list[0].adresa);
+    $('#inputKupacOtpremnicaPIB').val(list[0].pIB);
+    $('#inputKupacOtpremnicaTekuciRacun').val(list[0].mIB);
+}

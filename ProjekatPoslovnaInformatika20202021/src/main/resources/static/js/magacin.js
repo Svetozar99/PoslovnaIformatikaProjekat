@@ -60,10 +60,10 @@ function submitMagacin(){
     });
 }
 
-function selectPreduzecaMagacin(preduzeca){
+/*function selectPreduzecaMagacin(preduzeca){
     var selectPreduzeceMagacin = $("#selectPreduzeceMagacin");
     selectPreduzeceMagacin.empty();
-    var html = '<label>Izaberite preduzece:';
+    var html = '<label>Izaberite preduzeceeee:';
     html += '<select class="form-control" id="preduzece">';
     preduzeca.forEach(preduzece => {
         html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>'
@@ -71,4 +71,4 @@ function selectPreduzecaMagacin(preduzeca){
     html += '</select>';
     html += '</label>';
     selectPreduzeceMagacin.append(html);
-}
+}*/

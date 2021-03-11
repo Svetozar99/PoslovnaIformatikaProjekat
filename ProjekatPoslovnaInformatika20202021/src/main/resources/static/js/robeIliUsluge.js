@@ -41,7 +41,7 @@ function dajJediniceMere(){
     });
 }
 
-function selectPreduzeca(preduzeca){
+/*function selectPreduzecaS(preduzeca){
     var selectPreduzece = $("#selectPreduzece");
     selectPreduzece.empty();
     var html = '<label>Izaberite preduzece:';
@@ -52,7 +52,7 @@ function selectPreduzeca(preduzeca){
     html += '</select>';
     html += '</label>';
     selectPreduzece.append(html);
-}
+}*/
 
 function submitRobaUsluga(){
 

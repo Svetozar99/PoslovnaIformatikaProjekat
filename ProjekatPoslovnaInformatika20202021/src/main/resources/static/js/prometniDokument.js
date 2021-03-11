@@ -1,6 +1,6 @@
 var redovi = [];
 var counter = 0;
-var preduzeca = [];
+
 
 function ukloniRed(redId){
     console.log("redId: "+redId);
@@ -68,67 +68,35 @@ function proknjizi(){
     console.log("Proknjizi!!!");
 }
 
-function dajPreduzeca(text){
-    $.ajax({
-        type: "GET",
-        contentType : 'application/json; charset=utf-8',
-        url : "http://localhost:8080/api/preduzece",
-        success : function(result){
-            if(text === "selectPreduzeca"){
-                selectPreduzeca(result);
-            }else if(text === "prijemnica"){
-                selectDobavljac_Kupac(result);
-            }else if(text === "magacinPreduzece"){
-            	selectPreduzecaMagacin(result);
-            }
-        }
-    });
-}
-
-function selectDobavljac_Kupac(list){
-    preduzeca=list;
-    var inputDobavljac = $('#inputDobavljac');
-    var inputKupac = $('#inputKupac');
-    var html = "";
-    //Pravljenje liste dobavljaca
-    inputDobavljac.empty();
-    list.forEach(preduzece => {
-        html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
-    });
-    inputDobavljac.append(html);
-    html = '';
-    //Pravljenje liste kupaca
-    inputKupac.empty();
-    list.forEach(preduzece => {
-        html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
-    });
-    inputKupac.append(html);
-    $('#inputDobavljacMestoIAdresa').val(list[0].adresa);
-    $('#inputDobavljacPIB').val(list[0].pIB);
-    $('#inputDobavljacTekuciRacun').val(list[0].mIB);
-
-    $('#inputKupacMestoIAdresa').val(list[0].adresa);
-    $('#inputKupacPIB').val(list[0].pIB);
-    $('#inputKupacTekuciRacun').val(list[0].mIB);
-}
-
 function postaviInformacijePreduzeca(){
     
     var idDobavljac = $('#inputDobavljac').val();
     var idKupac = $('#inputKupac').val();
+    var inputProdavac = $('#inputProdavac').val();
+    var inputKupacOtpremnica = $('#inputKupacOtpremnica').val();
     preduzeca.forEach(preduzece => {
         if(preduzece.id == idDobavljac){
             $('#inputDobavljacMestoIAdresa').val(preduzece.adresa);
             $('#inputDobavljacPIB').val(preduzece.pIB);
             $('#inputDobavljacTekuciRacun').val(preduzece.mIB);
         }
-    });
-    preduzeca.forEach(preduzece => {    
+
         if(preduzece.id == idKupac){
-            console.log("Else if! "+preduzece.naziv)
             $('#inputKupacMestoIAdresa').val(preduzece.adresa);
             $('#inputKupacPIB').val(preduzece.pIB);
             $('#inputKupacTekuciRacun').val(preduzece.mIB);
+        }
+
+        if(preduzece.id == inputProdavac){
+            $('#inputProdavacMestoIAdresa').val(preduzece.adresa);
+            $('#inputProdavacPIB').val(preduzece.pIB);
+            $('#inputProdavacTekuciRacun').val(preduzece.mIB);
+        }
+
+        if(preduzece.id == inputKupacOtpremnica){
+            $('#inputKupacOtpremnicaMestoIAdresa').val(preduzece.adresa);
+            $('#inputKupacOtpremnicaPIB').val(preduzece.pIB);
+            $('#inputKupacOtpremnicaTekuciRacun').val(preduzece.mIB);
         }
     });    
 }
