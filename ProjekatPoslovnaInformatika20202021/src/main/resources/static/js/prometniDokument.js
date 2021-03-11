@@ -81,12 +81,12 @@ function dajPreduzeca(text){
             }else if(text === "magacinPreduzece"){
             	selectPreduzecaMagacin(result);
             }
-            
         }
     });
 }
 
 function selectDobavljac_Kupac(list){
+    preduzeca=list;
     var inputDobavljac = $('#inputDobavljac');
     var inputKupac = $('#inputKupac');
     var html = "";
@@ -103,4 +103,32 @@ function selectDobavljac_Kupac(list){
         html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
     });
     inputKupac.append(html);
+    $('#inputDobavljacMestoIAdresa').val(list[0].adresa);
+    $('#inputDobavljacPIB').val(list[0].pIB);
+    $('#inputDobavljacTekuciRacun').val(list[0].mIB);
+
+    $('#inputKupacMestoIAdresa').val(list[0].adresa);
+    $('#inputKupacPIB').val(list[0].pIB);
+    $('#inputKupacTekuciRacun').val(list[0].mIB);
+}
+
+function postaviInformacijePreduzeca(){
+    
+    var idDobavljac = $('#inputDobavljac').val();
+    var idKupac = $('#inputKupac').val();
+    preduzeca.forEach(preduzece => {
+        if(preduzece.id == idDobavljac){
+            $('#inputDobavljacMestoIAdresa').val(preduzece.adresa);
+            $('#inputDobavljacPIB').val(preduzece.pIB);
+            $('#inputDobavljacTekuciRacun').val(preduzece.mIB);
+        }
+    });
+    preduzeca.forEach(preduzece => {    
+        if(preduzece.id == idKupac){
+            console.log("Else if! "+preduzece.naziv)
+            $('#inputKupacMestoIAdresa').val(preduzece.adresa);
+            $('#inputKupacPIB').val(preduzece.pIB);
+            $('#inputKupacTekuciRacun').val(preduzece.mIB);
+        }
+    });    
 }

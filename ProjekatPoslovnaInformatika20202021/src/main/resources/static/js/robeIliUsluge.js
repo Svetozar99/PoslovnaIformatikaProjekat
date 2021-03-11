@@ -84,7 +84,7 @@ function prikaziRobeIliUsluge(list){
     var html='';
     tbodyRobaUsluga.empty();
     list.forEach(ru => {
-        html='<tr>';
+        html += '<tr>';
         html +=     '<td align="center">'+ru.sifra+'</td>';
         html +=     '<td align="center">';
         html +=         '<a href="" id="prikaziJedno" result-prID="'+ru.sifra+'">';
@@ -93,6 +93,6 @@ function prikaziRobeIliUsluge(list){
         html +=     '</td>';
         html +=     '<td align="center">'+ru.jedinicaMere+'</td>';
         html +=   '</tr>';
-        tbodyRobaUsluga.append(html);
     });
+    tbodyRobaUsluga.append(html);
 }
