@@ -16,15 +16,16 @@ function prikazSvihPreduzeca() {
                 for(preduzece in result){
                     tbodyPred.append(
                         '<tr>'
-							+'<td align="center">'+'<a href="" id="prikaziJedno" result-prID="'+result[preduzece].id+'">'+result[preduzece].naziv+'</a>'+'</td>'
-							+'<td align="center">'+result[preduzece].adresa+'</td>'
-							+'<td align="center">'+result[preduzece].telefon+'</td>'
-							+'<td align="center">'+result[preduzece].pIB+'</td>'
-							+'<td align="center">'+result[preduzece].mIB+'</td>'
-						+'</tr>'
+							+'<td class="naziv" align="center">'+result[preduzece].naziv+'</td>'
+							+'<td class="adresa" align="center">'+result[preduzece].adresa+'</td>'
+							+'<td classs="brojTelefona" align="center">'+result[preduzece].telefon+'</td>'
+							+'<td class="pib" align="center">'+result[preduzece].pIB+'</td>'
+							+'<td class="mib" align="center">'+result[preduzece].mIB+'</td>'
+                            +'<td>'
+                                +'<button type="submit" class="btn btn-warning" onclick="editPreduzece('+result[preduzece].id+')">IZMENI</button>'
+                            +'</td>'
+                            +'</tr>'
                     )};
-                    selectedId = $(this).attr('result-prID');
-                    
             },
             error :function(e){
                 alert('ne valja nesto');
@@ -32,7 +33,6 @@ function prikazSvihPreduzeca() {
         });
     }
     prikaziPreduzeca();
-
     console.log('aaaaa');
 }
 
@@ -66,3 +66,75 @@ function submitPreduzece(){
         }
     });
 }
+
+function editPreduzece(id){
+    $("#preduzecaTable").hide();
+    $("#dodajPreduzece").show();
+    function prikaziPreduzece(){
+
+        
+
+        $.ajax({
+            url:'http://localhost:8080/api/preduzece/' + id,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            // data : JSON.stringify(formData),
+            success: function(result){
+                
+                
+                var nazivP = $('#naziv');
+                var adresaP = $('#adresa');
+                var brojTelefonaP = $('#brojTelefona');
+                var pibP = $('#pib');
+                var mibP = $('#mib');
+
+                nazivP.val(result.naziv);
+                adresaP.val(result.adresa);
+                brojTelefonaP.val(result.telefon);
+                pibP.val(result.pIB);
+                mibP.val(result.mIB);
+
+
+                $("#updatePreduzece").on('click', function(event){
+                    
+                    var naziv = nazivP.val();
+                    var adresa = adresaP.val();
+                    var telefon = brojTelefonaP.val();
+                    var pib = pibP.val();
+                    var mib = mibP.val();
+
+                    var formData = {
+                        'naziv': naziv,
+                        "adresa": adresa,
+                        "telefon": telefon,
+                        "pIB": pib,
+                        "mIB": mib
+                    }
+
+                    $.ajax({
+                        url:'http://localhost:8080/api/preduzece/' + id,
+                        type: 'PUT',
+                        contentType: 'application/json; charset=utf-8',
+                        data : JSON.stringify(formData),
+                        success: function(result){
+                            alert('Preduzece uspjesno izmjenjeno');
+                        },
+                        error : function(e){
+                            alert('Doslo je do neke greške!')
+                            console.log("ERROR: ", e);
+                        }
+                    });
+                });
+
+                },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+            
+        });
+    }
+
+    prikaziPreduzece();
+}
+
