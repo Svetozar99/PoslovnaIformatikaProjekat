@@ -22,9 +22,7 @@ function prikazSvihPreduzeca() {
                             +'<td class="pib" align="center">'+result[preduzece].pIB+'</td>'
                             +'<td class="mib" align="center">'+result[preduzece].mIB+'</td>'
                             +'<td>'
-                                +'<button type="submit" class="btn btn-warning" onclick="editPreduzece('+result[preduzece].id+')">IZMENI</button>'
-                            +'</td>'
-                            +'<td>'
+                                +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editPreduzece('+result[preduzece].id+')">IZMENI</button>'
                                 +'<button type="submit" class="btn btn-danger" onclick="deletePreduzece('+result[preduzece].id+')">OBRIŠI</button>'
                             +'</td>'
                         +'</tr>'
@@ -73,8 +71,10 @@ function submitPreduzece(){
 }
 
 function editPreduzece(id){
+    $('#btnDodajPreduzece').hide();
     $("#preduzecaTable").hide();
     $("#dodajPreduzece").show();
+    $('#updatePreduzece').show();
     function prikaziPreduzece(){
 
 
@@ -150,6 +150,7 @@ function deletePreduzece(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert('Preduzece uspjesno obrisano');
+            prikazSvihPreduzeca();
         },
         error : function(e){
             alert('Doslo je do neke greške!')

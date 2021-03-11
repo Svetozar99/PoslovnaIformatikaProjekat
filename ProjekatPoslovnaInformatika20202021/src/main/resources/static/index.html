@@ -255,7 +255,7 @@
             </footer>
         </div>
         <!-- Prikaz svih preduzeca -->
-        <table class="table" id="preduzecaTable" style="display: none;">
+        <table  class="table" id="preduzecaTable" style="display: none;">
           <thead>
             <tr>
               <th style="text-align: center;">Naziv</th>
@@ -263,6 +263,8 @@
               <th style="text-align: center;">Broj telefona</th>
               <th style="text-align: center;">PIB</th>
               <th style="text-align: center;">MIB</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="tbodyPreduzece">
@@ -291,8 +293,8 @@
               <label for="mib">MIB:</label> <input type="text"
                                                                  class="form-control" id="mib" placeholder="Unesite MIB preduzeća">
           </div>
-          <button onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
-          <button id="updatePreduzece" type="submit" class="btn btn-warning">Izmeni</button>
+          <button id="btnDodajPreduzece" onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
+          <button id="updatePreduzece" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </form>
       
       <!-- Prikaz svih magacina -->
