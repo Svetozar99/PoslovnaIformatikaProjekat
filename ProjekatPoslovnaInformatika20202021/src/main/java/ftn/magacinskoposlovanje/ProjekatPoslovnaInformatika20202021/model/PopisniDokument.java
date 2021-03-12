@@ -47,7 +47,7 @@ public class PopisniDokument {
 	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
 
 	@ManyToOne
-	@JoinColumn(name="poslovna_godina", referencedColumnName="broj_godine", nullable=false)
+	@JoinColumn(name="poslovna_godina", referencedColumnName="id_godine", nullable=false)
 	private PoslovnaGodina poslovnaGodina;
 	
 	@ManyToOne

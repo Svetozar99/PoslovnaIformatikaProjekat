@@ -6,6 +6,8 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Poslov
 
 public class PoslovnaGodinaDTO implements Serializable{
 
+	private Integer id;
+	
 	private Integer brojGodine;
 	
 	private Boolean zakljucena;
@@ -19,8 +21,9 @@ public class PoslovnaGodinaDTO implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public PoslovnaGodinaDTO(Integer brojGodine, Boolean zakljucena, Integer preduzece, String nazivPreduzeca) {
+	public PoslovnaGodinaDTO(Integer id, Integer brojGodine, Boolean zakljucena, Integer preduzece, String nazivPreduzeca) {
 		super();
+		this.id = id;
 		this.brojGodine = brojGodine;
 		this.zakljucena = zakljucena;
 		this.preduzece = preduzece;
@@ -28,7 +31,15 @@ public class PoslovnaGodinaDTO implements Serializable{
 	}
 
 	public PoslovnaGodinaDTO(PoslovnaGodina godina) {
-		this(godina.getBrojGodine(), godina.isZakljucena(), godina.getPreduzece().getIdPreduzeca(), godina.getPreduzece().getNazivPreduzeca());
+		this(godina.getId(),godina.getBrojGodine(), godina.isZakljucena(), godina.getPreduzece().getIdPreduzeca(), godina.getPreduzece().getNazivPreduzeca());
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	public Integer getBrojGodine() {
