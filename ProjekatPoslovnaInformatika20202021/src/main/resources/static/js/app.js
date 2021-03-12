@@ -105,10 +105,12 @@ function prikazi(){
         dajRobuIliUsluge();
     }   
     if(prikaziPrijemnicu){
+        dajPoslovnePartnere('selectPoslovniPartner');
         dajPreduzeca("selectPreduzeca");
         prometniDokment.show();
         prijemnica.show();
     }else if(prikaziOtpremnicu){
+        dajPoslovnePartnere('selectPoslovniPartner');
         dajPreduzeca("selectPreduzeca");
         prometniDokment.show();
         otpremnica.show();
@@ -212,10 +214,8 @@ function dajPreduzeca(text){
 function selectPreduzece(list){
     preduzeca=list;
     var inputMagacinPreduzece = $('#inputMagacinPreduzece');
-    var inputDobavljac = $('#inputDobavljac');
     var inputKupac = $('#inputKupac');
     var inputProdavac = $('#inputProdavac');
-    var inputKupacOtpremnica = $('#inputKupacOtpremnica');
     var inputPreduzece = $('#inputPreduzece');
     var preduzece = $('#preduzece');
     var inputPreduzecePoslovnogPartnera = $('#inputPreduzecePoslovnogPartnera');
@@ -223,9 +223,6 @@ function selectPreduzece(list){
     list.forEach(preduzece => {
         html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
     });
-    //Pravljenje liste dobavljaca
-    inputDobavljac.empty();
-    inputDobavljac.append(html);
 
     //Pravljenje liste kupaca
     inputKupac.empty();
@@ -234,10 +231,6 @@ function selectPreduzece(list){
     //Pravljenje liste prodavaca
     inputProdavac.empty();
     inputProdavac.append(html);
-
-    //Pravljenje liste kupaca-otpremnica
-    inputKupacOtpremnica.empty();
-    inputKupacOtpremnica.append(html);
 
     //Pravljenje liste preduzeca za odabir magacina
     inputMagacinPreduzece.empty();
@@ -255,10 +248,6 @@ function selectPreduzece(list){
     inputPreduzecePoslovnogPartnera.empty();
     inputPreduzecePoslovnogPartnera.append(html);
 
-    $('#inputDobavljacMestoIAdresa').val(list[0].adresa);
-    $('#inputDobavljacPIB').val(list[0].pIB);
-    $('#inputDobavljacTekuciRacun').val(list[0].mIB);
-
     $('#inputKupacMestoIAdresa').val(list[0].adresa);
     $('#inputKupacPIB').val(list[0].pIB);
     $('#inputKupacTekuciRacun').val(list[0].mIB);
@@ -266,10 +255,6 @@ function selectPreduzece(list){
     $('#inputProdavacMestoIAdresa').val(list[0].adresa);
     $('#inputProdavacPIB').val(list[0].pIB);
     $('#inputProdavacTekuciRacun').val(list[0].mIB);
-
-    $('#inputKupacOtpremnicaMestoIAdresa').val(list[0].adresa);
-    $('#inputKupacOtpremnicaPIB').val(list[0].pIB);
-    $('#inputKupacOtpremnicaTekuciRacun').val(list[0].mIB);
 
     promenaPreduzeca();
 }

@@ -1,6 +1,7 @@
 var redovi = [];
 var counter = 0;
 var magacini = [];
+var partneri = [];
 
 
 function ukloniRed(redId){
@@ -67,21 +68,56 @@ function racunaj(){
 
 function proknjizi(){
     console.log("Proknjizi!!!");
+    var idDobavljaca = $('#inputDobavljac').val();
+    var idProdavca = $('#inputProdavac').val();
+    var idMagacina1 = $('#inputMagacin1').val();
+    var idMagacina2 = $('#inputMagacin2').val();
+    var idKupca;
+    var vrstaDokumenta;
+    if(prikaziPrijemnicu){
+        idKupca = $('#inputKupac').val();
+        vrstaDokumenta = "PR";
+    }else if(prikaziOtpremnicu){
+        idKupca = $('#inputKupacOtpremnica').val();
+        vrstaDokumenta = "OT";
+    }else if(prikaziMedjumagacinskiPromet){
+        vrstaDokumenta = "MM";
+        idKupca = '';
+    }
+    var mestoIzdavanjaRobe = $('#inputDobavljacMestoIzdavajaRobe').val();
+    var nacinOtpreme = $('#inputNacinOtpreme').val();
+    var prijamnicaBr = $('#inputPrijemnicaBr').val();
+    var otpremnicaBr = $('#inputOtpremnicaBr').val();
+    var medjumagacinskiPrometBr = $('#inputMedjumagacinskiPrometBr').val();
+    var datumIzdavanja = $('#inputDatumIzdavanja').val();
+    
+    var robuIzdao = $('#inputRobuIzdao').val();
+    var robuPrimio = $('#inputRobuPrimio').val();
+
+    var formData = {
+        "idDobavljaca": idDobavljaca,
+        "idProdavca": idProdavca,
+        "idMagacina1": idMagacina1,
+        "idMagacina2": idMagacina2,
+        "idKupca": idKupca,
+        "vrstaDokumenta": vrstaDokumenta,
+        "mestoIzdavanjaRobe": mestoIzdavanjaRobe,
+        "nacinOtpreme": nacinOtpreme,
+        "prijamnicaBr": prijamnicaBr,
+        "otpremnicaBr": otpremnicaBr,
+        "medjumagacinskiPrometBr": medjumagacinskiPrometBr,
+        "datumIzdavanja": datumIzdavanja,
+        "robuIzdao": robuIzdao,
+        "robuPrimio": robuPrimio
+    }
+    console.log(JSON.stringify(formData));
 }
 
 function postaviInformacijePreduzeca(){
     
-    var idDobavljac = $('#inputDobavljac').val();
     var idKupac = $('#inputKupac').val();
     var inputProdavac = $('#inputProdavac').val();
-    var inputKupacOtpremnica = $('#inputKupacOtpremnica').val();
     preduzeca.forEach(preduzece => {
-        if(preduzece.id == idDobavljac){
-            $('#inputDobavljacMestoIAdresa').val(preduzece.adresa);
-            $('#inputDobavljacPIB').val(preduzece.pIB);
-            $('#inputDobavljacTekuciRacun').val(preduzece.mIB);
-        }
-
         if(preduzece.id == idKupac){
             $('#inputKupacMestoIAdresa').val(preduzece.adresa);
             $('#inputKupacPIB').val(preduzece.pIB);
@@ -93,11 +129,21 @@ function postaviInformacijePreduzeca(){
             $('#inputProdavacPIB').val(preduzece.pIB);
             $('#inputProdavacTekuciRacun').val(preduzece.mIB);
         }
+    });    
+}
 
-        if(preduzece.id == inputKupacOtpremnica){
-            $('#inputKupacOtpremnicaMestoIAdresa').val(preduzece.adresa);
-            $('#inputKupacOtpremnicaPIB').val(preduzece.pIB);
-            $('#inputKupacOtpremnicaTekuciRacun').val(preduzece.mIB);
+function postaviInformacijePartnera(){
+    var idDobavljac = $('#inputDobavljac').val();
+    var inputKupacOtpremnica = $('#inputKupacOtpremnica').val();
+    partneri.forEach(partner => {
+        if(partner.sifraPartnera == idDobavljac){
+            $('#inputDobavljacMestoIAdresa').val(partner.adresa);
+            $('#inputDobavljacPIB').val(partner.pib);
+        }
+
+        if(partner.sifraPartnera == inputKupacOtpremnica){
+            $('#inputKupacOtpremnicaMestoIAdresa').val(partner.adresa);
+            $('#inputKupacOtpremnicaPIB').val(partner.pib);
         }
     });    
 }
@@ -138,4 +184,41 @@ function dajMagacine(text,idPreduzeca){
 function promenaPreduzeca(){
     var idPreduzeca = $('#inputMagacinPreduzece').val();
     dajMagacine("selectMagacin",idPreduzeca);
+}
+
+function dajPoslovnePartnere(text){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/poslovni-partner",
+        success : function(result){
+            if(text === "selectPoslovniPartner"){
+                selectPoslovniPartner(result);
+            }
+        }
+    });
+}
+
+function selectPoslovniPartner(list){
+    partneri=list;
+
+    var inputDobavljac = $('#inputDobavljac');
+    var inputKupacOtpremnica = $('#inputKupacOtpremnica');
+    var html = "";
+    list.forEach(partner => {
+        html += '<option value="' + partner.sifraPartnera + '">' + partner.nazivPartnera + '</option>';
+    });
+    //Pravljenje liste dobavljaca
+    inputDobavljac.empty();
+    inputDobavljac.append(html);
+
+    //Pravljenje liste kupaca-otpremnica
+    inputKupacOtpremnica.empty();
+    inputKupacOtpremnica.append(html);
+
+    $('#inputDobavljacMestoIAdresa').val(list[0].adresa);
+    $('#inputDobavljacPIB').val(list[0].pib);
+
+    $('#inputKupacOtpremnicaMestoIAdresa').val(list[0].adresa);
+    $('#inputKupacOtpremnicaPIB').val(list[0].pib);
 }

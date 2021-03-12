@@ -117,13 +117,13 @@
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">Izaberite dobavljača:
-                            <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputDobavljac">
+                            <select onchange="postaviInformacijePartnera()" class="form-control" id="inputDobavljac">
                               <option value="">Dobavljac1</option>
                               <option value="">Dobavljac2</option>
                               <option value="">Dobavljac3</option>
                             </select>
-                            <input class="form-control" id="inputDobavljacMestoIAdresa" readonly type="text",  placeholder="Mesto i adresa">
-                            <input class="form-control" id="inputDobavljacPIB" readonly type="text", placeholder="PIB dobavljača">
+                            Mesto i adresa:<input class="form-control" id="inputDobavljacMestoIAdresa" readonly type="text",  placeholder="Mesto i adresa">
+                            PIB:<input class="form-control" id="inputDobavljacPIB" readonly type="text", placeholder="PIB dobavljača">
                           </div>
                         </div>
                     </div>
@@ -135,8 +135,8 @@
                                 <option value="">Kupac2</option>
                                 <option value="">Kupac3</option>
                               </select>
-                              <input class="form-control" id="inputKupacMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
-                              <input class="form-control" id="inputKupacPIB" readonly type="text", placeholder="PIB kupca">
+                              Mesto i adresa:<input class="form-control" id="inputKupacMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
+                              PIB:<input class="form-control" id="inputKupacPIB" readonly type="text", placeholder="PIB kupca">
                           </div>
                         </div>
                     </div>
@@ -147,11 +147,11 @@
                   </p>
                   <p style="padding-top: 3%;">
                     Način otpreme: 
-                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputNacinOtpreme" class="form-control col-sm-2" style="display: inline;" type="text">
                   </p>
                   <p style="padding-top: 3%; text-align: center;">
                     <b>PRIJEMNICA Br.</b>
-                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputPrijemnicaBr" class="form-control col-sm-2" style="display: inline;" type="text">
                 </p>
             </div>
             <div id="otpremnica" style="display:none;">
@@ -164,28 +164,28 @@
                               <option value="">Prodavac2</option>
                               <option value="">Prodavac3</option>
                             </select>
-                            <input class="form-control" id="inputProdavacMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
-                            <input class="form-control" id="inputProdavacPIB" readonly type="text", placeholder="PIB prodavca">
+                            Mesto i adresa:<input class="form-control" id="inputProdavacMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
+                            PIB:<input class="form-control" id="inputProdavacPIB" readonly type="text", placeholder="PIB prodavca">
                           </div>
                         </div>
                     </div>
                     <div class="col-sm">
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">Izaberite kupca:
-                            <select onchange="postaviInformacijePreduzeca()" class="form-control" id="inputKupacOtpremnica">
+                            <select onchange="postaviInformacijePartnera()" class="form-control" id="inputKupacOtpremnica">
                               <option value="">Kupac1</option>
                               <option value="">Kupac2</option>
                               <option value="">Kupac3</option>
                             </select>
-                              <input class="form-control" id="inputKupacOtpremnicaMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
-                              <input class="form-control" id="inputKupacOtpremnicaPIB" readonly type="text", placeholder="PIB kupca">
+                            Mesto i adresa:<input class="form-control" id="inputKupacOtpremnicaMestoIAdresa" readonly type="text", placeholder="Mesto i adresa">
+                              PIB:<input class="form-control" id="inputKupacOtpremnicaPIB" readonly type="text", placeholder="PIB kupca">
                           </div>
                         </div>
                     </div>
                   </div>
                   <p style="padding-top: 3%; text-align: center;">
                     <b>OTPREMNICA Br.</b>
-                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputOtpremnicaBr" class="form-control col-sm-2" style="display: inline;" type="text">
                 </p>
             </div>
             <div id="medjumagacinskiPromet" style="display:none;">
@@ -222,13 +222,13 @@
                   </div>
                   <p style="padding-top: 3%; text-align: center;">
                     <b>MEĐUMAGACINSKI PROMET Br.</b>
-                  <input class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputMedjumagacinskiPrometBr" class="form-control col-sm-2" style="display: inline;" type="text">
                 </p>
             </div>
               
             <p style="padding-top: 3%;">
                 Datum izdavanja: 
-              <input type="date" class="form-control col-sm-2" style="display: inline;">
+              <input id="inputDatumIzdavanja" type="date" class="form-control col-sm-2" style="display: inline;">
             </p>
             <table class="table">
                 <thead >
@@ -253,11 +253,11 @@
             <footer style="padding-top: 10%;">
                 <div style="float: left;">
                     Robu izdao:
-                    <input type="text", class="form-control col-sm-10">
+                    <input id="inputRobuIzdao" type="text", class="form-control col-sm-10">
                 </div>
                 <div style="float: right;">
                     Robu primio:
-                    <input type="text", class="form-control col-sm-10">
+                    <input id="inputRobuPrimio" type="text", class="form-control col-sm-10">
                 </div>
                 <br>
                 <br>
