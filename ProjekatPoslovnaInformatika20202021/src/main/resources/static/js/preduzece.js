@@ -69,7 +69,7 @@ function submitPreduzece(){
 }
 
 function editPreduzece(id){
-    $('#btnDodajPreduzece').hide();
+    $('#btnDodajPreduzece').show();
     $("#preduzecaTable").hide();
     $("#dodajPreduzece").show();
     $('#updatePreduzece').show();
