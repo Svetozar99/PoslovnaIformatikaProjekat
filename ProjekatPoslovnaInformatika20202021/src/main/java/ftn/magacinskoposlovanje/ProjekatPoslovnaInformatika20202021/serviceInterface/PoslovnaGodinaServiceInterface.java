@@ -17,4 +17,6 @@ public interface PoslovnaGodinaServiceInterface {
 	public List<PoslovnaGodina> findByPreduzece_id(Integer id);
 	
 	public PoslovnaGodina findByBrojGodine(Integer brojGodine);
+	
+	public PoslovnaGodina findById(Integer id);
 }

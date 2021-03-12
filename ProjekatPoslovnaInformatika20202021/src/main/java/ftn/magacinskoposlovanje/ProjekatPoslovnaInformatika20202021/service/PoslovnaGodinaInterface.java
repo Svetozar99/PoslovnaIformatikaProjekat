@@ -46,4 +46,9 @@ public class PoslovnaGodinaInterface implements PoslovnaGodinaServiceInterface {
 		return poslovnaGodinaRepository.findOneByBrojGodine(brojBodine);
 	}
 
+	@Override
+	public PoslovnaGodina findById(Integer id) {
+		return poslovnaGodinaRepository.findOneByIdGodine(id);
+	}
+
 }

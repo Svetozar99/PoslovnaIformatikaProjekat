@@ -11,4 +11,6 @@ public interface PoslovnaGodinaRepository extends JpaRepository<PoslovnaGodina, 
 	List<PoslovnaGodina> findByPreduzece_idPreduzeca(Integer id);
 	
 	PoslovnaGodina findOneByBrojGodine(Integer brojGodine);
+	
+	PoslovnaGodina findOneByIdGodine(Integer id);
 }

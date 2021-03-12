@@ -78,24 +78,25 @@ public class PoslovnaGodinaController {
 		return new ResponseEntity<PoslovnaGodinaDTO>(new PoslovnaGodinaDTO(po), HttpStatus.CREATED);
 	}
 	
-	@PutMapping(value = "/{brojGodine}", consumes = "application/json")
-	public ResponseEntity<PoslovnaGodinaDTO> updatePoslovnaGodina(@RequestBody PoslovnaGodinaDTO poslovnaGodinaDTO, @PathVariable("brojGodine") Integer brojGodine) throws ParseException{
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(brojGodine);
+	@PutMapping(value = "/{id}", consumes = "application/json")
+	public ResponseEntity<PoslovnaGodinaDTO> updatePoslovnaGodina(@RequestBody PoslovnaGodinaDTO poslovnaGodinaDTO, @PathVariable("id") Integer id) throws ParseException{
+		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findById(id);
 		Preduzece preduzece = preduzeceServiceInterface.findById(poslovnaGodinaDTO.getPreduzece());
 		
 		if(poslovnaGodina == null) {
 			return new ResponseEntity<PoslovnaGodinaDTO>(HttpStatus.BAD_REQUEST);
 		}
+		poslovnaGodina.setBrojGodine(poslovnaGodinaDTO.getBrojGodine());
 		poslovnaGodina.setZakljucena(poslovnaGodinaDTO.getZakljucena());
 		poslovnaGodina.setPreduzece(preduzece);
 		return new ResponseEntity<PoslovnaGodinaDTO>(new PoslovnaGodinaDTO(poslovnaGodina), HttpStatus.OK);
 	}
 	
-	@DeleteMapping(value = "/{brojGodine}")
-	public ResponseEntity<Void> deletePoslovnaGodina(@PathVariable("brojGodine") Integer brojGodine){
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(brojGodine);
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deletePoslovnaGodina(@PathVariable("id") Integer id){
+		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findById(id);
 		if(poslovnaGodina != null) {
-			poslovnaGodinaServiceInterface.remove(brojGodine);
+			poslovnaGodinaServiceInterface.remove(id);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);

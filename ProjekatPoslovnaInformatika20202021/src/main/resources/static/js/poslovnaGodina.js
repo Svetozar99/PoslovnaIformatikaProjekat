@@ -1,3 +1,5 @@
+var cekirana = $("#cekirana");
+
 function prikazSvihPoslovnihGodina() {
 
     var tabelaPoslovnihGodina = $("#poslovneGodineTable");
@@ -20,7 +22,7 @@ function prikazSvihPoslovnihGodina() {
 							+'<td align="center">'+result[pg].nazivPreduzeca+'</td>'
 							+'<td>'
                                 +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editPoslovnaGodina('+result[pg].id+')">IZMENI</button>'
-                                // +'<button type="submit" class="btn btn-danger" onclick="deletePreduzece('+result[preduzece].id+')">OBRIŠI</button>'
+                                +'<button type="submit" class="btn btn-danger" onclick="deletePoslovnaGodina('+result[pg].id+')">OBRIŠI</button>'
                             +'</td>'
 						+'</tr>'
                     )};
@@ -38,6 +40,8 @@ function prikazSvihPoslovnihGodina() {
 }
 
 function submitPoslovnaGodina(){
+    $("#cekirana").hide();
+    $("#nijeCekirana").show();
 
     var brojGodineInput = $("#brojGodine");
     var zakljucenaInput = $("#zakljucenaGod");
@@ -48,6 +52,8 @@ function submitPoslovnaGodina(){
         "zakljucena": zakljucenaInput.is(":checked"),
         "preduzece": preduzeceInput.val()
     }
+
+    alert(JSON.stringify(formData));
 
     $.ajax({
         url : 'http://localhost:8080/api/poslovna-godina',
@@ -80,31 +86,34 @@ function editPoslovnaGodina(id){
                 dajPreduzeca("selectPreduzeca");
 
                 var brojGodineP = $('#brojGodine');
-                var zakljucenaP = $('#zakljucena');
+                var zakljucenaP;
                 var preduzeceP = $('#preduzecePoslovnaGodina');
-
                 brojGodineP.val(result.brojGodine);
-                // zakljucenaP.val(result.zakljucena.is(":checked"));
                 preduzeceP.val(result.nazivPreduzeca);
-                zakljucenaP.prop('checked', result.zakljucena);
-
+                if (result.zakljucena == true)
+                {
+                    zakljucenaP = $("#cekirana")
+                    $("#nijeCekirana").hide();
+                    $("#cekirana").show();
+                }
+                else if (result.zakljucena == false)
+                {
+                    zakljucenaP = $("#nijeCekirana");
+                    $("#cekirana").hide();
+                    $("#nijeCekirana").show();
+                }   
+                
                 $("#updatePoslovnaGodina").on('click', function(event){
 
                     var brojGodine = brojGodineP.val();
                     var preduzece = preduzeceP.val();
-                    var zakljucena = zakljucenaP.is(":checked");
-                    
-
-                    // alert('broj godine ' + brojGodineP);
-                    // alert('zakljucena ' + result.zakljucena);
-                    // alert('preduzece '+ preduzeceP);
+                    var zakljucena = zakljucenaP;
 
                     var formData = {
-                        'brojGodine': brojGodine,
-                        "zakljucena": zakljucena,
-                        "preduzece": preduzece,
+                        'brojGodine': brojGodine.val(),
+                        "zakljucena": zakljucena.is(":checked"),
+                        "preduzece": preduzece.val(),
                     }
-
                     $.ajax({
                         url:'http://localhost:8080/api/poslovna-godina/' + id,
                         type: 'PUT',
@@ -114,7 +123,7 @@ function editPoslovnaGodina(id){
                             alert('Poslovna godina uspjesno izmjenjena');
                         },
                         error : function(e){
-                            alert('Doslo je do neke greške!')
+                            alert('Doslo je do neke greške u put-u!')
                             console.log("ERROR: ", e);
                         }
                     });
@@ -130,4 +139,20 @@ function editPoslovnaGodina(id){
     }
 
     prikaziPoslovnuGodinu();
+}
+
+function deletePoslovnaGodina(id){
+    $.ajax({
+        url:'http://localhost:8080/api/poslovna-godina/' + id,
+        type: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+            alert('Poslovna godina uspjesno obrisana');
+            prikazSvihPoslovnihGodina();
+        },
+        error : function(e){
+            alert('Doslo je do neke greške kod brisanja!')
+            console.log("ERROR: ", e);
+        }
+    });
 }
