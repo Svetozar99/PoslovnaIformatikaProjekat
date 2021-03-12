@@ -24,4 +24,9 @@ public class JedinicaMereService implements JedinicaMereServiceInterface{
 	public JedinicaMere findOneById(Integer id) {
 		return jedinicaMereRepository.findOneById(id);
 	}
+
+	@Override
+	public JedinicaMere save(JedinicaMere jedinicaMere) {
+		return jedinicaMereRepository.save(jedinicaMere);
+	}
 }

@@ -1,10 +1,5 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.JedinicaMere;
 
 public class JedinicaMereDTO {
@@ -12,6 +7,10 @@ public class JedinicaMereDTO {
 	public Integer id;
 	public String naziv;
 	public String skraceniNaziv;
+	
+	public JedinicaMereDTO() {
+		super();
+	}
 	
 	public JedinicaMereDTO(JedinicaMere jedinicaMere) {
 		super();

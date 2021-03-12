@@ -41,6 +41,18 @@ public class JedinicaMere {
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="jedinicaMere")
 	private List<RobaIliUsluga> robeIliUsluge = new ArrayList<RobaIliUsluga>();
+	
+	public JedinicaMere() {
+		super();
+	}
+	
+	public JedinicaMere(Integer id, String naziv, String skraceniNaziv, List<RobaIliUsluga> robeIliUsluge) {
+		super();
+		this.id = id;
+		this.naziv = naziv;
+		this.skraceniNaziv = skraceniNaziv;
+		this.robeIliUsluge = robeIliUsluge;
+	}
 
 	public Integer getId() {
 		return id;

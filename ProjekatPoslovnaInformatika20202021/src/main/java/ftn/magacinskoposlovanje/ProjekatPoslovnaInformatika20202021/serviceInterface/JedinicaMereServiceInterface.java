@@ -8,4 +8,5 @@ public interface JedinicaMereServiceInterface {
 
 	public List<JedinicaMere> findAll();
 	public JedinicaMere findOneById(Integer id);
+	public JedinicaMere save(JedinicaMere jedinicaMere);
 }
