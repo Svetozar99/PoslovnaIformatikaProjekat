@@ -30,7 +30,7 @@
     <script src="js/preduzece.js"></script>
     <script src="js/prometMagacinskihKartica.js"></script>
     <script src="js/magacinskeKartice.js"></script>
-
+	<script src="js/jedinicaMere.js"></script>
     <script src="js/poslovniPartner.js"></script>
 
     <script src="js/poslovnaGodina.js"></script>
@@ -62,6 +62,17 @@
                       <button class="dropdown-item" onclick="odrediPrikaz('dodavanjeRobeUsluge')">Dodavanje robe/usluge</button>
                     </div>
                   </li>
+                  
+                  <li class="nav-item dropdown" id="jedinicaMereDropdown" onclick="promeniIzgledTaba('jedinicaMereDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Jedinice mere
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="odrediPrikaz('sveJediniceMere')">Sve jedinice mere</button>
+                      <button class="dropdown-item" onclick="odrediPrikaz('dodajJedinicuMere')">Dodaj jedinicu mere</button>
+                    </div>
+                  </li>
+                  
                   <li class="nav-item dropdown" id="preduzeceDropdown" onclick="promeniIzgledTaba('preduzeceDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Preduzeće
@@ -351,6 +362,36 @@
 
         </tbody>
       </table>
+      
+        <!-- Prikaz svih jedinica mere -->
+        <table class="table" id="jedinicaMereTable" style="display: none;">
+          <thead>
+            <tr>
+              <th style="text-align: center;">Sifra</th>
+              <th style="text-align: center;">Naziv</th>
+              <th style="text-align: center;">Skreceni Naziv</th>
+            </tr>
+          </thead>
+          <tbody id="tbodyJedinicaMere">
+
+          </tbody>
+        </table>
+        
+        <!-- Forma za dodavanje jedinice mere -->
+        <form id="dodajJedinicuMere" style="display: none;">
+          <div class="form-group">
+              <label for="naziv">Naziv:</label> <input type="text"
+                                                          class="form-control" id="nazivJediniceMere" placeholder="Unesite naziv jedinice mere">
+          </div>
+          <div class="form-group">
+              <label for="adresa">Skraceni naziv:</label> <input type="text"
+                                                              class="form-control" id="skraceniNaziv" placeholder="Unesite skraceni naziv jedinice mere">
+          </div>
+
+          <button onclick="submitJedinicaMere()" type="submit" class="btn btn-secondary">Dodaj</button>
+
+      </form>
+        
         <!-- Forma za dodavanje magacina -->
         <form id="dodajMagacin" style="display: none;">
           <div class="form-group">
