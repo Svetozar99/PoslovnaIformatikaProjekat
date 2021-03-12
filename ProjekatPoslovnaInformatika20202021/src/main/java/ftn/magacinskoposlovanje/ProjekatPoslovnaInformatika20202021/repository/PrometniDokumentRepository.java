@@ -9,4 +9,6 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaD
 
 public interface PrometniDokumentRepository extends JpaRepository<PrometniDokument, Integer> {
 	List<PrometniDokument> findByVrstaDokumenta(VrstaDokumenta vrstaDokumenta);
+
+	PrometniDokument findOneById(Integer Id); 
 }

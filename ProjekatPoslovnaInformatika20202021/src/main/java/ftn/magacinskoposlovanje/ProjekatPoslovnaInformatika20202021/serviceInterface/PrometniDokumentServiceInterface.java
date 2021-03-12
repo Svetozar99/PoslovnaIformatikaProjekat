@@ -8,4 +8,5 @@ public interface PrometniDokumentServiceInterface {
 
 	List<PrometniDokument> findAll();
 	PrometniDokument save(PrometniDokument prometniDokument);
+	PrometniDokument findOneById(Integer id);
 }

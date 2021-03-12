@@ -25,4 +25,9 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 		return prometniDokumentRepository.save(prometniDokument);
 	}
 
+	@Override
+	public PrometniDokument findOneById(Integer id) {
+		return prometniDokumentRepository.findOneById(id);
+	}
+
 }

@@ -25,4 +25,9 @@ public class RobaIliUslugaService implements RobaIliUslugaServiceInterface{
 		return robaIliUslugaRepository.save(robaIliUsluga);
 	}
 
+	@Override
+	public RobaIliUsluga findOneBySifra(Integer id) {
+		return robaIliUslugaRepository.findOneBySifra(id);
+	}
+
 }

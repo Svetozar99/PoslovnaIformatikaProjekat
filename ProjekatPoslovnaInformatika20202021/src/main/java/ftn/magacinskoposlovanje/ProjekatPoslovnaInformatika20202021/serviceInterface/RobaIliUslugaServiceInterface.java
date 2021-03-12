@@ -9,4 +9,6 @@ public interface RobaIliUslugaServiceInterface {
 	public List<RobaIliUsluga> findAll();
 	
 	public RobaIliUsluga save(RobaIliUsluga robaIliUsluga);
+	
+	public RobaIliUsluga findOneBySifra(Integer id);
 }

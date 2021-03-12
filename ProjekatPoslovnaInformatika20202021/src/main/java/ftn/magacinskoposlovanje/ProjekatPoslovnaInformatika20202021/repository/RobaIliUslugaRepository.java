@@ -6,4 +6,5 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIl
 
 public interface RobaIliUslugaRepository extends JpaRepository<RobaIliUsluga, Integer>{
 
+	RobaIliUsluga findOneBySifra(Integer Id);
 }
