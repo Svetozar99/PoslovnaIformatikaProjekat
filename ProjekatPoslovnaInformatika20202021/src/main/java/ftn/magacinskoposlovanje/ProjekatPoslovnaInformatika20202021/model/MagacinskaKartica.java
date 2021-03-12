@@ -67,7 +67,7 @@ public class MagacinskaKartica {
 	private Magacin magacin;
 	
 	@ManyToOne
-	@JoinColumn(name="poslovna_godina", referencedColumnName="broj_godine", nullable=false)
+	@JoinColumn(name="poslovna_godina", referencedColumnName="id_godine", nullable=false)
 	private PoslovnaGodina poslovnaGodina;
 	
 	@ManyToOne

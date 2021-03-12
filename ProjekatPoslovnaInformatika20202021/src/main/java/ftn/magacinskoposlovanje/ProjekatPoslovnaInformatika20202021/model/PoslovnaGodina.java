@@ -32,6 +32,9 @@ public class PoslovnaGodina {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_godine", nullable = false, unique = true)
+	private Integer id;
+	
 	@Column(name = "broj_godine", nullable = false, unique = true)
 	private Integer brojGodine;
 	
@@ -59,9 +62,10 @@ public class PoslovnaGodina {
 	}
 
 
-	public PoslovnaGodina(int brojGodine, boolean zakljucena, List<PopisniDokument> popisniDokumenti,
+	public PoslovnaGodina(int id, int brojGodine, boolean zakljucena, List<PopisniDokument> popisniDokumenti,
 			List<MagacinskaKartica> magacinskeKartice, List<PrometniDokument> prometniDokumenti, Preduzece preduzece) {
 		super();
+		this.id = id;
 		this.brojGodine = brojGodine;
 		this.zakljucena = zakljucena;
 		this.popisniDokumenti = popisniDokumenti;
@@ -70,6 +74,13 @@ public class PoslovnaGodina {
 		this.preduzece = preduzece;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public int getBrojGodine() {
 		return brojGodine;

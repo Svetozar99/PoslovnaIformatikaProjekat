@@ -30,6 +30,7 @@
     <script src="js/preduzece.js"></script>
     <script src="js/prometMagacinskihKartica.js"></script>
     <script src="js/magacinskeKartice.js"></script>
+    <script src="js/poslovnaGodina.js"></script>
   </head>
 
 <body>
@@ -91,6 +92,16 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <button class="dropdown-item" onclick="odrediPrikaz('sveMagacinskeKartice')">Sve magacinske kartice</button>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown" id="poslovnaGodinaDropdown" onclick="promeniIzgledTaba('poslovnaGodinaDropdown')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Poslovna godina
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="odrediPrikaz('svePoslovneGodine')">Sve poslovne godine</button>
+                      <button class="dropdown-item" onclick="odrediPrikaz('dodajPoslovnuGodinu')">Dodaj poslovnu godinu</button>
                     </div>
                   </li>
               </div>
@@ -396,6 +407,40 @@
         </tbody>
         
       </table>
-      </div>
+
+      <!-- Prikaz svih poslovnih godina -->
+      <table class="table" id="poslovneGodineTable" style="display: none;">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Broj godine</th>
+            <th style="text-align: center;">Zaključena</th>
+            <th style="text-align: center;">Naziv preduzeća</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPoslovneGodine">
+
+        </tbody>
+      </table>
+
+      <!-- Forma za dodavanje poslovne godine -->
+      <form id="dodajPoslovnuGodinu" style="display: none;">
+        <div class="form-group">
+            <label for="brojGodine">Broj godine:</label> <input type="text"
+                                                        class="form-control" id="brojGodine" placeholder="Unesite broj godine">
+        </div>
+        <div class="form-group">
+          <label for="zakljucena">Zaključena</label>
+          <input type="checkbox" class="form-control" value="1" id="zakljucena">
+        </div>
+        <div id="selectPreduzecePoslovnaGodina" class="form-group">
+          <label>Izaberite preduzece:
+            <select class="form-control" id="preduzecePoslovnaGodina">
+            </select>
+          </label>
+        </div>
+
+        <button onclick="submitPoslovnaGodina()" type="submit" class="btn btn-secondary">Dodaj</button>
+      </form>
+    </div>
 </body>
 </html>
