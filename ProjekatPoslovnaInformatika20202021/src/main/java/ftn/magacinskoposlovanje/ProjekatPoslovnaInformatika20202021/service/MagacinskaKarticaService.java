@@ -25,4 +25,9 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 		return magacinskaKarticaRepository.save(magacinskaKartica);
 	}
 
+	@Override
+	public MagacinskaKartica findOneById(Integer id) {
+		return magacinskaKarticaRepository.findOneById(id);
+	}
+
 }

@@ -9,4 +9,5 @@ public interface MagacinskaKarticaServiceInterface {
 	public List<MagacinskaKartica> findAll();
 	
 	public MagacinskaKartica save(MagacinskaKartica magacinskaKartica);
+	public MagacinskaKartica findOneById(Integer id);
 }

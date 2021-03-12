@@ -67,7 +67,7 @@ function racunaj(){
 }
 
 function proknjizi(){
-    console.log("Proknjizi!!!");
+    
     var idDobavljaca = $('#inputDobavljac').val();
     var idProdavca = $('#inputProdavac').val();
     var idMagacina1 = $('#inputMagacin1').val();
@@ -110,7 +110,20 @@ function proknjizi(){
         "robuIzdao": robuIzdao,
         "robuPrimio": robuPrimio
     }
-    console.log(JSON.stringify(formData));
+    console.log("ajax!!!");
+    $.ajax({
+        url : 'http://localhost:8080/api/prometni-dokument',
+        type : "POST",
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Prometni dokument je uspesno dodat');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
 }
 
 function postaviInformacijePreduzeca(){

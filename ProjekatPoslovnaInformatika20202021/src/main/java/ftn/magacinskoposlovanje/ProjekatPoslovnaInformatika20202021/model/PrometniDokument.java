@@ -64,7 +64,7 @@ public class PrometniDokument {
 	private Preduzece preduzece;
 	
 	@ManyToOne
-	@JoinColumn(name="magacinska_kartica_id", referencedColumnName="id", nullable=false)
+	@JoinColumn(name="magacinska_kartica_id", referencedColumnName="id", nullable=true)
 	private MagacinskaKartica magacinskaKartica;
 	
 	public PrometniDokument() {

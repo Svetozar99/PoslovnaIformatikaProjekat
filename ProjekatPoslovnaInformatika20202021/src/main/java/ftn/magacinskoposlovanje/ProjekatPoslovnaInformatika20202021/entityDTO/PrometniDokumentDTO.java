@@ -2,39 +2,56 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO;
 
 import java.util.Date;
 
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
+
 public class PrometniDokumentDTO {
 
-	private Integer idDobavljaca;
-	private Integer idKupca;
-	private Integer idProdavca;
+	private Integer sifraPoslovnogPartnera;
+	private Integer idPreduzeca;
 	private Integer idMagacina1;
 	private Integer idMagacina2;
 	private String mestoIzdavanjaRobe;
 	private String nacinOtpreme;
-	private Integer prijamnicaBr;
-	private Integer otpremnicaBr;
-	private Integer medjumagacinskiPrometBr;
+	private Integer brojPrometnogDokumenta;
 	private Date datumIzdavanja;
 	private String vrstaDokumenta;
 	private String robuIzdao;
 	private String robuPrimio;
-	public Integer getIdDobavljaca() {
-		return idDobavljaca;
+	
+	public PrometniDokumentDTO(Integer idPoslovnogPartnera, Integer idPreduzeca, Integer idProdavca, Integer idMagacina1,
+			Integer idMagacina2, String mestoIzdavanjaRobe, String nacinOtpreme, Integer brojPrometnogDokumenta,
+			Integer otpremnicaBr, Integer medjumagacinskiPrometBr, Date datumIzdavanja, String vrstaDokumenta,
+			String robuIzdao, String robuPrimio) {
+		super();
+		this.sifraPoslovnogPartnera = idPoslovnogPartnera;
+		this.idPreduzeca = idPreduzeca;
+		this.idMagacina1 = idMagacina1;
+		this.idMagacina2 = idMagacina2;
+		this.mestoIzdavanjaRobe = mestoIzdavanjaRobe;
+		this.nacinOtpreme = nacinOtpreme;
+		this.brojPrometnogDokumenta = brojPrometnogDokumenta;
+		this.datumIzdavanja = datumIzdavanja;
+		this.vrstaDokumenta = vrstaDokumenta;
+		this.robuIzdao = robuIzdao;
+		this.robuPrimio = robuPrimio;
 	}
-	public void setIdDobavljaca(Integer idDobavljaca) {
-		this.idDobavljaca = idDobavljaca;
+	
+	public PrometniDokumentDTO(PrometniDokument prometniDokument) {
+		this(prometniDokument.getPoslovniPartner().getSifraPartnera(),prometniDokument.getPreduzece().getIdPreduzeca(),prometniDokument.getMagacin().getId,);
 	}
-	public Integer getIdKupca() {
-		return idKupca;
+	
+	public Integer getIdPoslovnogPartnera() {
+		return sifraPoslovnogPartnera;
 	}
-	public void setIdKupca(Integer idKupca) {
-		this.idKupca = idKupca;
+	public void setIdPoslovnogPartnera(Integer idPoslovnogPartnera) {
+		this.sifraPoslovnogPartnera = idPoslovnogPartnera;
 	}
-	public Integer getIdProdavca() {
-		return idProdavca;
+	public Integer getIdPreduzeca() {
+		return idPreduzeca;
 	}
-	public void setIdProdavca(Integer idProdavca) {
-		this.idProdavca = idProdavca;
+	public void setIdPreduzeca(Integer idPreduzeca) {
+		this.idPreduzeca = idPreduzeca;
 	}
 	public Integer getIdMagacina1() {
 		return idMagacina1;
