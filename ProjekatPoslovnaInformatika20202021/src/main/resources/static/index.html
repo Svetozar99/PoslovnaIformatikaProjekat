@@ -129,6 +129,8 @@
 
                     </div>
                   </li>
+                  <button class="btn btn-secondary" onclick="magacinskeKarticeTables()">Magacinske kartice</button>
+
               </div>
             </div>
           </nav>
@@ -408,7 +410,7 @@
 
         </div>
         <button onclick="submitRobaUsluga()" type="submit" class="btn btn-secondary">Dodaj</button>
-    </form>
+      </form>
       <!-- Prikaz svih prometa magacinskih kartica -->
 
       <table class="table" id="prometiMagacinskihKarticaTable" style="display: none;">
@@ -540,6 +542,106 @@
 
         <button id="btnDodajPoslovnuGodinu" onclick="submitPoslovnaGodina()" type="submit" class="btn btn-secondary">Dodaj</button>
         <button id="updatePoslovnaGodina" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
+      </form>
+
+      <!-- Prikaz magacinske kartice -->
+      <form id="magacinskeKarticeTables" style="display: none;">
+        <div class="form-group">
+          <label><b>Magacin:</b></label>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="nazivMagacinaMagKart">Naziv magacina</label>
+            <input type="text" class="form-control" id="nazivMagacinaMagKart" placeholder="Naziv magacina">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="preduzeceMagKart">Preduzece</label>
+            <input type="text" class="form-control" id="preduzeceMagKart" placeholder="Preduzece">
+          </div>
+        </div>
+        <div class="form-group">
+          <label><b>Poslovna godina:</b></label>
+          <input type="text" class="form-control" id="poslovnaGodina" placeholder="Poslovna godina">
+        </div>
+        <div class="form-group">
+          <label><b>Roba ili usluga:</b></label>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="sifraRobeUsluge">Sifra</label>
+            <input type="text" class="form-control" id="sifraRobeUsluge" placeholder="Sifra robe ili usluge" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="nazivRobeUsluge">Naziv</label>
+            <input type="text" class="form-control" id="nazivRobeUsluge" placeholder="Naziv robe ili usluge" value="Naziv robe ili usluge" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="jedinicaMere">Jedinica mere</label>
+            <input type="text" class="form-control" id="jedinicaMere" placeholder="Jedinica mere" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="prosecnaCena">Prosecna cena</label>
+            <input type="text" class="form-control" id="prosecnaCena"  placeholder="Prosecna cena">
+          </div>
+        </div>
+        <div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="pocetnoStanjeKolicnski">Pocetno stanje kolicinski</label>
+              <input type="text" class="form-control" id="pocetnoStanjeKolicnski" placeholder="Pocetno stanje kolicinski">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="pocetnoStanjeVrednosno">Pocetno stanje vrednosno</label>
+              <input type="text" class="form-control" id="pocetnoStanjeVrednosno" placeholder="Pocetno stanje vrednosno">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="prometUlazaKolicnski">Promet ulaza kolicinski</label>
+              <input type="text" class="form-control" id="prometUlazaKolicnski" placeholder="Promet ulaza kolicinski">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="prometUlazaVrednosno">Promet ulaza vrednosno</label>
+              <input type="text" class="form-control" id="prometUlazaVrednosno" placeholder="Promet ulaza vrednosno">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="prometIzlazaKolicnski">Promet izlaza kolicinski</label>
+              <input type="text" class="form-control" id="prometIzlazaKolicnski" placeholder="Promet izlaza kolicinski">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="prometIzlazaVrednosno">Promet izlaza vrednosno</label>
+              <input type="text" class="form-control" id="prometIzlazaVrednosno" placeholder="Promet izalaza vrednosno">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="ukupnaKorekcijaKolicine">Ukupna korekcija kolicine</label>
+              <input type="text" class="form-control" id="ukupnaKorekcijaKolicine" placeholder="Ukupna korekcija kolicine">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="ukupnaKorekcijaVrednosno">Ukupna korekcija vrednosno</label>
+              <input type="text" class="form-control" id="ukupnaKorekcijaVrednosno" placeholder="Ukupna korekcija vrednosno">
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="ukupnaKolicina">Ukupna kolicina</label>
+            <input type="text" class="form-control" id="ukupnaKolicina" placeholder="Ukupna kolicina">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="ukupnaVrednost">Ukupna vrednost</label>
+            <input type="text" class="form-control" id="ukupnaVrednost" placeholder="Ukupna vrednost">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Detail</button>
       </form>
     </div>
 </body>

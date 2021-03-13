@@ -38,3 +38,10 @@ function prikazSvihMagacinskihKartica() {
 
     console.log('aaaaa');
 }
+
+function magacinskeKarticeTables(){
+
+    var magacinskeKarticeTables = $("#magacinskeKarticeTables");
+
+    magacinskeKarticeTables.show();
+}
