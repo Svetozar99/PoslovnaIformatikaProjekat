@@ -39,13 +39,13 @@ public class Magacin {
 	private String nazivMagacina;
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
-	private List<PopisniDokument> popisniDokumenti = new ArrayList<PopisniDokument>();
-	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
 	private List<MagacinskaKartica> magacinskeKartice = new ArrayList<MagacinskaKartica>();
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
-	private List<PrometniDokument> prometniDokumenti = new ArrayList<PrometniDokument>();
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="ulazniMagacin")
+	private List<PrometniDokument> prometniDokumentiUlaz = new ArrayList<PrometniDokument>();
+	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="izlazniMagacin")
+	private List<PrometniDokument> prometniDokumentiIzlaz = new ArrayList<PrometniDokument>();
 	
 	@ManyToOne
 	@JoinColumn(name="preduzece", referencedColumnName="id_preduzeca", nullable=false)
@@ -55,14 +55,10 @@ public class Magacin {
 		super();
 	}
 
-	public Magacin(int sifraMagacina, String nazivMagacina, List<PopisniDokument> popisniDokumenti,
-			List<MagacinskaKartica> magacinskeKartice, List<PrometniDokument> prometniDokumenti, Preduzece preduzece) {
+	public Magacin(int sifraMagacina, String nazivMagacina, Preduzece preduzece) {
 		super();
 		this.sifraMagacina = sifraMagacina;
 		this.nazivMagacina = nazivMagacina;
-		this.popisniDokumenti = popisniDokumenti;
-		this.magacinskeKartice = magacinskeKartice;
-		this.prometniDokumenti = prometniDokumenti;
 		this.preduzece = preduzece;
 	}
 
@@ -82,14 +78,6 @@ public class Magacin {
 		this.nazivMagacina = nazivMagacina;
 	}
 
-	public List<PopisniDokument> getPopisniDokumenti() {
-		return popisniDokumenti;
-	}
-
-	public void setPopisniDokumenti(List<PopisniDokument> popisniDokumenti) {
-		this.popisniDokumenti = popisniDokumenti;
-	}
-
 	public List<MagacinskaKartica> getMagacinskeKartice() {
 		return magacinskeKartice;
 	}
@@ -98,12 +86,20 @@ public class Magacin {
 		this.magacinskeKartice = magacinskeKartice;
 	}
 
-	public List<PrometniDokument> getPrometniDokumenti() {
-		return prometniDokumenti;
+	public List<PrometniDokument> getPrometniDokumentiUlaz() {
+		return prometniDokumentiUlaz;
 	}
 
-	public void setPrometniDokumenti(List<PrometniDokument> prometniDokumenti) {
-		this.prometniDokumenti = prometniDokumenti;
+	public void setPrometniDokumentiUlaz(List<PrometniDokument> prometniDokumentiUlaz) {
+		this.prometniDokumentiUlaz = prometniDokumentiUlaz;
+	}
+
+	public List<PrometniDokument> getPrometniDokumentiIzlaz() {
+		return prometniDokumentiIzlaz;
+	}
+
+	public void setPrometniDokumentiIzlaz(List<PrometniDokument> prometniDokumentiIzlaz) {
+		this.prometniDokumentiIzlaz = prometniDokumentiIzlaz;
 	}
 
 	public Preduzece getPreduzece() {

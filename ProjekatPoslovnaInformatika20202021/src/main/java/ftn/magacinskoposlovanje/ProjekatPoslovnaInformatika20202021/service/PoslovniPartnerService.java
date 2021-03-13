@@ -25,4 +25,9 @@ public class PoslovniPartnerService implements PoslovniPartnerServiceInterface {
 		return poslovniPartnerRepository.save(poslovniPartner);
 	}
 
+	@Override
+	public PoslovniPartner findOneBySifraPartnera(Integer id) {
+		return poslovniPartnerRepository.findOneBySifraPartnera(id);
+	}
+
 }

@@ -25,8 +25,8 @@ function prikazSvihPartnera() {
                     html +=     '<td align="center">'+partner.mib+'</td>';
                     html +=     '<td align="center">'+partner.nazivPreduzeca+'</td>';
                     html += '</tr>';
-                	tbodyPartneri.append(html)
                 };
+                tbodyPartneri.append(html)
                     
             },
             error :function(e){
