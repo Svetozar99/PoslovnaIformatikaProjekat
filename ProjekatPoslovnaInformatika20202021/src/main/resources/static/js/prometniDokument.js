@@ -68,49 +68,38 @@ function racunaj(){
 
 function proknjizi(){
     
-    var idDobavljaca = $('#inputDobavljac').val();
-    var idProdavca = $('#inputProdavac').val();
-    var idMagacina1 = $('#inputMagacin1').val();
-    var idMagacina2 = $('#inputMagacin2').val();
-    var idKupca;
+    var sifraPoslovnogPartnera;
+    var sifraMagacina1 = $('#inputMagacin1').val();
+    var sifraMagacina2 = $('#inputMagacin2').val();
+    var idPreduzeca;
     var vrstaDokumenta;
+    var brojPrometnogDokumenta;
     if(prikaziPrijemnicu){
-        idKupca = $('#inputKupac').val();
+        idPreduzeca = $('#inputKupac').val();
         vrstaDokumenta = "PR";
+        sifraPoslovnogPartnera = $('#inputDobavljac').val();
+        brojPrometnogDokumenta = $('#inputPrijemnicaBr').val();
     }else if(prikaziOtpremnicu){
-        idKupca = $('#inputKupacOtpremnica').val();
+        idPreduzeca = $('#inputProdavac').val();
         vrstaDokumenta = "OT";
+        sifraPoslovnogPartnera = $('#inputKupacOtpremnica').val();
+        brojPrometnogDokumenta = $('#inputOtpremnicaBr').val();
     }else if(prikaziMedjumagacinskiPromet){
         vrstaDokumenta = "MM";
-        idKupca = '';
+        brojPrometnogDokumenta = $('#inputMedjumagacinskiPrometBr').val();
     }
-    var mestoIzdavanjaRobe = $('#inputDobavljacMestoIzdavajaRobe').val();
-    var nacinOtpreme = $('#inputNacinOtpreme').val();
-    var prijamnicaBr = $('#inputPrijemnicaBr').val();
-    var otpremnicaBr = $('#inputOtpremnicaBr').val();
-    var medjumagacinskiPrometBr = $('#inputMedjumagacinskiPrometBr').val();
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
-    
-    var robuIzdao = $('#inputRobuIzdao').val();
-    var robuPrimio = $('#inputRobuPrimio').val();
 
     var formData = {
-        "idDobavljaca": idDobavljaca,
-        "idProdavca": idProdavca,
-        "idMagacina1": idMagacina1,
-        "idMagacina2": idMagacina2,
-        "idKupca": idKupca,
+        "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
+        "sifraMagacina1": sifraMagacina1,
+        "sifraMagacina2": sifraMagacina2,
         "vrstaDokumenta": vrstaDokumenta,
-        "mestoIzdavanjaRobe": mestoIzdavanjaRobe,
-        "nacinOtpreme": nacinOtpreme,
-        "prijamnicaBr": prijamnicaBr,
-        "otpremnicaBr": otpremnicaBr,
-        "medjumagacinskiPrometBr": medjumagacinskiPrometBr,
+        "brojPrometnogDokumenta":brojPrometnogDokumenta,
         "datumIzdavanja": datumIzdavanja,
-        "robuIzdao": robuIzdao,
-        "robuPrimio": robuPrimio
+        "idPreduzeca":idPreduzeca
     }
-    console.log("ajax!!!");
+    console.log("ajax!!! "+JSON.stringify(formData));
     $.ajax({
         url : 'http://localhost:8080/api/prometni-dokument',
         type : "POST",

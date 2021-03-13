@@ -56,36 +56,34 @@ public class PrometniDokument {
 	private PoslovnaGodina poslovnaGodina;
 	
 	@ManyToOne
-	@JoinColumn(name="sifra_magacina", referencedColumnName="sifra_magacina", nullable=true)
-	private Magacin magacin;
+	@JoinColumn(name="sifra_magacina_izlaz", referencedColumnName="sifra_magacina", nullable=true)
+	private Magacin izlazniMagacin;
+	
+	@ManyToOne
+	@JoinColumn(name="sifra_magacina_ulaz", referencedColumnName="sifra_magacina", nullable=true)
+	private Magacin ulazniMagacin;
 	
 	@ManyToOne
 	@JoinColumn(name="id_preduzeca", referencedColumnName="id_preduzeca", nullable=true)
 	private Preduzece preduzece;
 	
-	@ManyToOne
-	@JoinColumn(name="magacinska_kartica_id", referencedColumnName="id", nullable=true)
-	private MagacinskaKartica magacinskaKartica;
-	
 	public PrometniDokument() {
 		super();
 	}
 
-	public PrometniDokument(int id, int redniBroj, VrstaDokumenta vrstaDokumenta, Date datum, Status status,
-			List<StavkaDokumenta> stavkaDokumenta, PoslovniPartner poslovniPartner, PoslovnaGodina poslovnaGodina,
-			RobaIliUsluga robaIliUsluga, Magacin magacin, Preduzece preduzece, MagacinskaKartica magacinskaKartica) {
+	public PrometniDokument(int id, int redniBroj, VrstaDokumenta vrstaDokumenta, Date datum, Status status, PoslovniPartner poslovniPartner, PoslovnaGodina poslovnaGodina,
+			Magacin izlazniMagacin, Magacin ulazniMagacin, Preduzece preduzece) {
 		super();
 		this.id = id;
 		this.redniBroj = redniBroj;
 		this.vrstaDokumenta = vrstaDokumenta;
 		this.datum = datum;
 		this.status = status;
-		this.stavkaDokumenta = stavkaDokumenta;
 		this.poslovniPartner = poslovniPartner;
 		this.poslovnaGodina = poslovnaGodina;
-		this.magacin = magacin;
+		this.izlazniMagacin = izlazniMagacin;
+		this.ulazniMagacin = ulazniMagacin;
 		this.preduzece = preduzece;
-		this.magacinskaKartica = magacinskaKartica;
 	}
 
 	public int getId() {
@@ -152,12 +150,20 @@ public class PrometniDokument {
 		this.poslovnaGodina = poslovnaGodina;
 	}
 
-	public Magacin getMagacin() {
-		return magacin;
+	public Magacin getIzlazniMagacin() {
+		return izlazniMagacin;
 	}
 
-	public void setMagacin(Magacin magacin) {
-		this.magacin = magacin;
+	public void setIzlazniMagacin(Magacin izlazniMagacin) {
+		this.izlazniMagacin = izlazniMagacin;
+	}
+
+	public Magacin getUlazniMagacin() {
+		return ulazniMagacin;
+	}
+
+	public void setUlazniMagacin(Magacin ulazniMagacin) {
+		this.ulazniMagacin = ulazniMagacin;
 	}
 
 	public Preduzece getPreduzece() {
@@ -166,13 +172,5 @@ public class PrometniDokument {
 
 	public void setPreduzece(Preduzece preduzece) {
 		this.preduzece = preduzece;
-	}
-
-	public MagacinskaKartica getMagacinskaKartica() {
-		return magacinskaKartica;
-	}
-
-	public void setMagacinskaKartica(MagacinskaKartica magacinskaKartica) {
-		this.magacinskaKartica = magacinskaKartica;
 	}
 }

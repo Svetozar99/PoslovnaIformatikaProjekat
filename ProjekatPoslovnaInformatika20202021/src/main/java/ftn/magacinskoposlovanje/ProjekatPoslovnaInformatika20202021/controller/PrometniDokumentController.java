@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.JedinicaMereDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometniDokumentDTO;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovniPartner;
@@ -19,6 +20,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduz
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Status;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovnaGodinaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovniPartnerServiceInterface;
@@ -39,25 +41,48 @@ public class PrometniDokumentController {
 	private PoslovnaGodinaServiceInterface poslovnaGodinaServiceInterface;
 	
 	@Autowired
-	private MagacinskaKarticaServiceInterface magacinskaKarticaServiceInterface;
+	private PreduzeceServiceInterface preduzeceServiceInterface;
+	
+	@Autowired
+	private MagacinServiceInterface magacinServiceInterface;
 	
 	@PostMapping
 	public ResponseEntity<PrometniDokumentDTO> addPrometniDokument(@RequestBody PrometniDokumentDTO dto){
 		System.out.println("\n\tPost!");
-		PrometniDokument prometniDokument = new PrometniDokument();
-		PoslovniPartner poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getIdDobavljaca());
+		System.out.println(dto.toString());
+		
+		PoslovniPartner poslovniPartner = new PoslovniPartner();
 		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(1);
-		MagacinskaKartica magacinskaKartica = magacinskaKarticaServiceInterface.findOneById(1);
+		Preduzece preduzece = new Preduzece();
+		Magacin ulazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina1());
+		Magacin izlazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina2());
+		
+		PrometniDokument prometniDokument = new PrometniDokument();
+		prometniDokument.setRedniBroj(dto.getBrojPrometnogDokumenta());
+		prometniDokument.setDatum(dto.getDatumIzdavanja());
+		prometniDokument.setStatus(Status.P);
+		prometniDokument.setPoslovnaGodina(poslovnaGodina);
+		
 		if(dto.getVrstaDokumenta().equals(VrstaDokumenta.PR.toString())) {
-			prometniDokument.setRedniBroj(dto.getPrijamnicaBr());
+			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
+			preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
 			prometniDokument.setVrstaDokumenta(VrstaDokumenta.PR);
-			prometniDokument.setDatum(dto.getDatumIzdavanja());
-			prometniDokument.setStatus(Status.P);
 			prometniDokument.setPoslovniPartner(poslovniPartner);
-			prometniDokument.setPoslovnaGodina(poslovnaGodina);
-			prometniDokument.setMagacinskaKartica(magacinskaKartica);
+			prometniDokument.setPreduzece(preduzece);
+		}else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.OT.toString())) {
+			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
+			preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
+			prometniDokument.setVrstaDokumenta(VrstaDokumenta.OT);
+			prometniDokument.setPoslovniPartner(poslovniPartner);
+			prometniDokument.setPreduzece(preduzece);
+		}
+		else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.MM.toString())) {
+			prometniDokument.setVrstaDokumenta(VrstaDokumenta.MM);
+			prometniDokument.setIzlazniMagacin(izlazniMagacin);
+			prometniDokument.setUlazniMagacin(ulazniMagacin);
 		}
 		prometniDokument = prometniDokumentServiceInterface.save(prometniDokument);
-		return new ResponseEntity<JedinicaMereDTO>(new PrometniDokumentDTO(prometniDokument), HttpStatus.OK);
+		dto.setBrojPrometnogDokumenta(prometniDokument.getRedniBroj());
+		return new ResponseEntity<PrometniDokumentDTO>(dto, HttpStatus.OK);
 	}
 }
