@@ -82,7 +82,7 @@ public class PrometniDokumentController {
 			prometniDokument.setUlazniMagacin(ulazniMagacin);
 		}
 		prometniDokument = prometniDokumentServiceInterface.save(prometniDokument);
-		dto.setBrojPrometnogDokumenta(prometniDokument.getRedniBroj());
+		dto.setId(prometniDokument.getId());
 		return new ResponseEntity<PrometniDokumentDTO>(dto, HttpStatus.OK);
 	}
 }

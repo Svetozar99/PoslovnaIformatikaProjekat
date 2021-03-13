@@ -22,7 +22,9 @@ function dodajRed(){
 	var red = {
 					'id':counter,
 					'naziv':nazivInput,
-					'kolicina':kolicinaInput
+					'kolicina':kolicinaInput,
+                    'cena':cenaInput,
+                    'vrednost':inputIznos
 				}
     redovi.push(red);
 	var html = '';
@@ -67,7 +69,7 @@ function racunaj(){
 }
 
 function proknjizi(){
-    
+    var idPrometnogDokumenta;
     var sifraPoslovnogPartnera;
     var sifraMagacina1 = $('#inputMagacin1').val();
     var sifraMagacina2 = $('#inputMagacin2').val();
@@ -107,6 +109,33 @@ function proknjizi(){
         data : JSON.stringify(formData),
         success: function(result){
             alert('Prometni dokument je uspesno dodat');
+
+            var stavke = [];
+            redovi.forEach(red => {
+                var stavka = {
+                    'kolicina':$('#'+red.kolicina).val(),
+                    'cena':$('#'+red.cena).val(),
+                    'vrednost':$('#'+red.vrednost).val(),
+                    'prometniDokument':result.id,
+                    'robaUsluga':$('#'+red.naziv).val()
+                }
+                stavke.push(stavka)
+            });
+            console.log(JSON.stringify(stavke));
+            $.ajax({
+                url : 'http://localhost:8080/api/stavka-dokumenta',
+                type : "POST",
+                contentType: 'application/json; charset=utf-8',
+                data : JSON.stringify(stavke),
+                success: function(result){
+                    alert('Stavke dokumenta je uspesno dodat');
+                    
+                },
+                error : function(e){
+                    alert('Doslo je do neke greške!')
+                    console.log("ERROR: ", e);
+                }
+            });
         },
         error : function(e){
             alert('Doslo je do neke greške!')

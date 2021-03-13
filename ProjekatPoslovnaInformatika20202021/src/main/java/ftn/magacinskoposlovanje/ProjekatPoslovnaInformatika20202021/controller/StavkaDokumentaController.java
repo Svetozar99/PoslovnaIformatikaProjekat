@@ -58,16 +58,16 @@ public class StavkaDokumentaController {
 		return new ResponseEntity<StavkaDokumentaDTO>(new StavkaDokumentaDTO(stavkaDokumenta), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "prometni-dokumet/{id}")
-	public ResponseEntity<List<StavkaDokumentaDTO>> getstavkeDocByPromDoc(@PathVariable("id") Integer id){
-		List<StavkaDokumenta> stavkeDokumenta = stavkaDokumentaServiceInterface.findByPrometniDokument_id(id);
-		List<StavkaDokumentaDTO> sdtos = new ArrayList<StavkaDokumentaDTO>();
-		for (StavkaDokumenta sdto : stavkeDokumenta) {
-			StavkaDokumentaDTO s = new StavkaDokumentaDTO(sdto);
-			sdtos.add(s);
-		}
-		return new ResponseEntity<List<StavkaDokumentaDTO>>(sdtos, HttpStatus.OK);
-	}
+//	@GetMapping(value = "prometni-dokumet/{id}")
+//	public ResponseEntity<List<StavkaDokumentaDTO>> getstavkeDocByPromDoc(@PathVariable("id") Integer id){
+//		List<StavkaDokumenta> stavkeDokumenta = stavkaDokumentaServiceInterface.findByPrometniDokument_id(id);
+//		List<StavkaDokumentaDTO> sdtos = new ArrayList<StavkaDokumentaDTO>();
+//		for (StavkaDokumenta sdto : stavkeDokumenta) {
+//			StavkaDokumentaDTO s = new StavkaDokumentaDTO(sdto);
+//			sdtos.add(s);
+//		}
+//		return new ResponseEntity<List<StavkaDokumentaDTO>>(sdtos, HttpStatus.OK);
+//	}
 	
 	@GetMapping(value = "roba-ili-usluga/{id}")
 	public ResponseEntity<List<StavkaDokumentaDTO>> getStavkeDocByRobaIliUsluga(@PathVariable("id") Integer id){
@@ -81,18 +81,22 @@ public class StavkaDokumentaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<StavkaDokumentaDTO> addMagacin(@RequestBody StavkaDokumentaDTO stavkaDokumentaDTO){
-		PrometniDokument pd = prometniDokumentServiceInterface.findOneById(stavkaDokumentaDTO.getPrometniDokument());
-		RobaIliUsluga ru = robaIliUslugaServiceInterface.findOneBySifra(stavkaDokumentaDTO.getRobaUsluga());
-		StavkaDokumenta stavkaDokumenta = new StavkaDokumenta();
-		
-		stavkaDokumenta.setKolicina(stavkaDokumentaDTO.getKolicina());
-		stavkaDokumenta.setCena(stavkaDokumentaDTO.getCena());
-		stavkaDokumenta.setVrednost(stavkaDokumentaDTO.getVrednost());
-		stavkaDokumenta.setPrometniDokument(pd);
-		stavkaDokumenta.setRobaIliUsluga(ru);
-		
-		stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
-		return new ResponseEntity<StavkaDokumentaDTO>(new StavkaDokumentaDTO(stavkaDokumenta), HttpStatus.CREATED);
+	public ResponseEntity<List<StavkaDokumentaDTO>> addStavke(@RequestBody List<StavkaDokumentaDTO> dtos){
+		System.out.println("\n\taddStavke");
+		for (StavkaDokumentaDTO stavkaDokumentaDTO : dtos) {
+			PrometniDokument pd = prometniDokumentServiceInterface.findOneById(stavkaDokumentaDTO.getPrometniDokument());
+			RobaIliUsluga ru = robaIliUslugaServiceInterface.findOneBySifra(stavkaDokumentaDTO.getRobaUsluga());
+			StavkaDokumenta stavkaDokumenta = new StavkaDokumenta();
+			System.out.println("Posle kreiranja objekta StavkaDokumenta");
+			stavkaDokumenta.setIdStavke(0);
+			stavkaDokumenta.setKolicina(stavkaDokumentaDTO.getKolicina());
+			stavkaDokumenta.setCena(stavkaDokumentaDTO.getCena());
+			stavkaDokumenta.setVrednost(stavkaDokumentaDTO.getVrednost());
+			stavkaDokumenta.setPrometniDokument(pd);
+			stavkaDokumenta.setRobaIliUsluga(ru);
+			System.out.println("Setovali sve vrednoosti");
+			stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
+		}
+		return new ResponseEntity<List<StavkaDokumentaDTO>>(dtos, HttpStatus.CREATED);
 	}
 }

@@ -323,6 +323,10 @@ function selectPreduzece(list){
     preduzece.empty();
     preduzece.append(html);
 
+    //Pravljenje liste preduzeca za poslovnu godinu
+    preduzecePoslovnaGodina.empty();
+    preduzecePoslovnaGodina.append(html);
+
     $('#inputKupacMestoIAdresa').val(list[0].adresa);
     $('#inputKupacPIB').val(list[0].pIB);
     $('#inputKupacTekuciRacun').val(list[0].mIB);
