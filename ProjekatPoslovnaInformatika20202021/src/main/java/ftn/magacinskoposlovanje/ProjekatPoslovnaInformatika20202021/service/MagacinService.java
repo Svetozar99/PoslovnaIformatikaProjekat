@@ -41,4 +41,9 @@ public class MagacinService implements MagacinServiceInterface{
 		return magacinRepository.findByPreduzece_idPreduzeca(id);
 	}
 
+	@Override
+	public Magacin findById(Integer id) {
+		return magacinRepository.findOneBySifraMagacina(id);
+	}
+
 }

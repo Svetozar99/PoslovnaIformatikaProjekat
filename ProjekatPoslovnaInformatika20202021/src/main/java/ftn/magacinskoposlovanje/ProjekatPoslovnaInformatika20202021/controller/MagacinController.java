@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,4 +74,27 @@ public class MagacinController {
 		return new ResponseEntity<MagacinDTO>(new MagacinDTO(m), HttpStatus.CREATED);
 	}
 
+	@PutMapping(value = "/{id}", consumes = "application/json")
+	public ResponseEntity<MagacinDTO> updateMagacin(@RequestBody MagacinDTO magacinDTO, @PathVariable("id") Integer id){
+		Magacin magacin = magacinServiceInterface.findById(id);
+		Preduzece preduzece = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
+		
+		if(magacin == null) {
+			return new ResponseEntity<MagacinDTO>(HttpStatus.OK);
+		}
+		magacin.setNazivMagacina(magacinDTO.getNaziv());	
+		magacin.setPreduzece(preduzece);
+		return new ResponseEntity<MagacinDTO>(new MagacinDTO(magacin), HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<Void> deleteMagacin(@PathVariable("id") Integer id){
+		Magacin magacin = magacinServiceInterface.findById(id);
+		if(magacin != null) {
+			magacinServiceInterface.remove(id);
+			
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
 }
