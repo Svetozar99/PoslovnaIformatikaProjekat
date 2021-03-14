@@ -17,6 +17,12 @@ var prikaziSveRobeUsluge = false;
 var prikaziPrometeMagacinskihKartica = false;
 var preduzeca = [];
 
+//podaci za prikaz magacinske kartice
+var magacinskeKarticeTablesPrikazi = false;
+
+//podaci za prikaz prometa magacinske kartice
+var prikazPromMagaKartPrikazi = false;
+
 
 //Podaci za prikaz partnera
 var prikazSvihPoslovnihPartnera = false;
@@ -48,6 +54,8 @@ function odrediPrikaz(id){
     prikaziPoslovneGodine = false;
     dodavanjePoslovneGodine = false;
 
+    magacinskeKarticeTablesPrikazi = false;
+    prikazPromMagaKartPrikazi = false;
 
     if(id === "otpremnica"){
         prikaziOtpremnicu = true;
@@ -87,10 +95,13 @@ function odrediPrikaz(id){
     }else if(id === "sveJediniceMere"){
     	prikaziJediniceMere = true;
     	
-    }else if(id === "dodajJedinicuMere"){
-    	dodavanjeJediniceMere = true;
-
+    }else if(id === "magacinskeKarticeTablesPrikazi"){
+    	magacinskeKarticeTablesPrikazi = true;
     }
+    else if(id === "prikazPromMagaKart"){
+    	prikazPromMagaKartPrikazi = true;
+    }
+
         
     prikazi();
 }
@@ -123,6 +134,9 @@ function prikazi(){
     var poslovneGodineTable = $("#poslovneGodineTable");
     var dodajPoslovnuGodinu = $("#dodajPoslovnuGodinu");
 
+    var prikazPromMagaKart = $("#prikazPromMagaKart");
+    var magacinskeKarticeTables = $("#magacinskeKarticeTables");
+
 
     otpremnica.hide();
     prijemnica.hide();
@@ -146,6 +160,8 @@ function prikazi(){
     poslovneGodineTable.hide();
     dodajPoslovnuGodinu.hide();
 
+    prikazPromMagaKart.hide();
+    magacinskeKarticeTables.hide();
 
     if(prikaziPrijemnicu || prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
         dajRobuIliUsluge();
@@ -203,6 +219,10 @@ function prikazi(){
     	dodajJedinicuMere.show();
     }else if(prikaziJediniceMere){       
     	prikazSvihJedinicaMere();
+    }else if(prikazPromMagaKartPrikazi){       
+    	prikazMagacinskeKarticeTables();
+    }else if(magacinskeKarticeTablesPrikazi){       
+    	magacinskeKarticeTablesP();
     }
 }
 
@@ -220,6 +240,10 @@ function promeniIzgledTaba(dropdown){
     
     var jedinicaMereDropdown = $("#jedinicaMereDropdown");
 
+    var prikaziMagacKartice = $("#prikaziMagacKartice");
+    var prikaziPrometeMagacKartica = $("#prikaziPrometeMagacKartica");
+    
+
     prometniDokumentDropdown.removeClass("active");
     preduzeceDropdown.removeClass("active");
     robeUslugeDropdown.removeClass("active");
@@ -231,6 +255,9 @@ function promeniIzgledTaba(dropdown){
     prikazPartneraDropdown.removeClass("active");
 
     poslovnaGodinaDropdown.removeClass("active");
+
+    prikaziMagacKartice.removeClass("active");
+    prikaziPrometeMagacKartica.removeClass("active");
 
     if(dropdown === "prometniDokumentDropdown"){
         console.log("prometniDokumentDropdown")
@@ -267,6 +294,12 @@ function promeniIzgledTaba(dropdown){
     }else if(dropdown === "jedinicaMereDropdown"){
         console.log("jedinicaMereDropdown")
         jedinicaMereDropdown.addClass("active");
+    }else if(dropdown === "prikaziMagacKartice"){
+        console.log("prikaziMagacKartice")
+        prikaziMagacKartice.addClass("active");
+    }else if(dropdown === "prikaziPrometeMagacKartica"){
+        console.log("prikaziPrometeMagacKartica")
+        prikaziPrometeMagacKartica.addClass("active");
     }
 }
 

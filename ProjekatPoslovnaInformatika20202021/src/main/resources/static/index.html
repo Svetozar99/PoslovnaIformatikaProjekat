@@ -132,8 +132,24 @@
 
                     </div>
                   </li>
-                  <button class="btn btn-secondary" onclick="magacinskeKarticeTables()">Magacinske kartice</button>
-                  <button class="btn btn-secondary" onclick="prikazMagacinskeKarticeTables()">Prometi magacinske kartice</button>
+
+                  <li class="nav-item dropdown" id="prikaziMagacKartice" onclick="promeniIzgledTaba('prikaziMagacKartice')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Magacinske kartice
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="odrediPrikaz('magacinskeKarticeTablesPrikazi')">Magacinska kartica</button>
+                    </div>
+                  </li>
+
+                  <li class="nav-item dropdown" id="prikaziPrometeMagacKartica" onclick="promeniIzgledTaba('prikaziPrometeMagacKartica')">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Promet magacinske kartice
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <button class="dropdown-item" onclick="odrediPrikaz('prikazPromMagaKart')">Promet magacinske kartice</button>
+                    </div>
+                  </li>
               </div>
             </div>
           </nav>

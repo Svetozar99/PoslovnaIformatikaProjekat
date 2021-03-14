@@ -39,7 +39,7 @@ function prikazSvihMagacinskihKartica() {
     console.log('aaaaa');
 }
 
-function magacinskeKarticeTables(){
+function magacinskeKarticeTablesP(){
 
     var magacinskeKarticeTables = $("#magacinskeKarticeTables");
 
