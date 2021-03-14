@@ -22,10 +22,15 @@ INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (1, 'Magac
 INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (2, 'Magacin 2', 2);
 INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (3, 'Magacin 3', 1);
 
-INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUES (1, 2020, 1, 1);
+INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUES (1, 2020, 0, 1);
+INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUES (2, 2021, 1, 1);
 
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
 VALUE (1, 1.1, 1.1, 1.1, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 1, 1);
+INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
+VALUE (2, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 1);
+INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
+VALUE (3, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 3);
 
 INSERT INTO promet_magacinske_kartice(id_prometa, vrsta_prometa, smer, kolicina, cena,vrednost, dokument, datum_prometa, magacinska_kartica) VALUES(1, 1, 1, 1.7, 117.1, 4.5, 'document1', '2020-12-15', 1);
 

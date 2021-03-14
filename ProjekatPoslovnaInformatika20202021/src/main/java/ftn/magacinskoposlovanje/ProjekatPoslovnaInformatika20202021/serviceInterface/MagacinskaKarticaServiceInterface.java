@@ -10,4 +10,6 @@ public interface MagacinskaKarticaServiceInterface {
 	
 	public MagacinskaKartica save(MagacinskaKartica magacinskaKartica);
 	public MagacinskaKartica findOneById(Integer id);
+	
+	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodina(Integer robaIliUslugaId, Integer poslovnaGodinaId);
 }

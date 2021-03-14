@@ -32,7 +32,7 @@ public class RobaIliUsluga {
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="popisniDokument")
 	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="magacin")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="robaIliUsluga")
 	private List<MagacinskaKartica> magacinskeKartice = new ArrayList<MagacinskaKartica>();
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="robaIliUsluga")
