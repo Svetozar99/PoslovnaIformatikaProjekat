@@ -45,3 +45,12 @@ function formatDate(date) {
     return year + "-" + months[monthIndex] + "-" + day;
 
 }
+
+
+
+function prikazMagacinskeKarticeTables(){
+
+    var prikazMagacinskeKarticeTables = $("#prikazPromMagaKart");
+
+    prikazMagacinskeKarticeTables.show();
+}
