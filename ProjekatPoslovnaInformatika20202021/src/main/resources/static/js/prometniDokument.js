@@ -69,11 +69,10 @@ function racunaj(){
 }
 
 function proknjizi(){
-    var idPrometnogDokumenta;
-    var sifraPoslovnogPartnera;
-    var sifraMagacina1 = $('#inputMagacin1').val();
-    var sifraMagacina2 = $('#inputMagacin2').val();
-    var idPreduzeca;
+    var sifraPoslovnogPartnera = 0;
+    var sifraMagacinaUlaz = 0;
+    var sifraMagacinaIzlaz = 0;
+    var idPreduzeca = 0;
     var vrstaDokumenta;
     var brojPrometnogDokumenta;
     if(prikaziPrijemnicu){
@@ -81,21 +80,26 @@ function proknjizi(){
         vrstaDokumenta = "PR";
         sifraPoslovnogPartnera = $('#inputDobavljac').val();
         brojPrometnogDokumenta = $('#inputPrijemnicaBr').val();
+        sifraMagacinaUlaz = $('#magacinPrijemnica').val();
+
     }else if(prikaziOtpremnicu){
         idPreduzeca = $('#inputProdavac').val();
         vrstaDokumenta = "OT";
         sifraPoslovnogPartnera = $('#inputKupacOtpremnica').val();
         brojPrometnogDokumenta = $('#inputOtpremnicaBr').val();
+        sifraMagacinaIzlaz = $('#magacinOtpremnica').val();
     }else if(prikaziMedjumagacinskiPromet){
         vrstaDokumenta = "MM";
         brojPrometnogDokumenta = $('#inputMedjumagacinskiPrometBr').val();
+        sifraMagacinaUlaz = $('#inputMagacin1').val();
+        sifraMagacinaIzlaz = $('#inputMagacin2').val();
     }
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
 
     var formData = {
         "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
-        "sifraMagacina1": sifraMagacina1,
-        "sifraMagacina2": sifraMagacina2,
+        "sifraMagacina1": sifraMagacinaUlaz,
+        "sifraMagacina2": sifraMagacinaIzlaz,
         "vrstaDokumenta": vrstaDokumenta,
         "brojPrometnogDokumenta":brojPrometnogDokumenta,
         "datumIzdavanja": datumIzdavanja,

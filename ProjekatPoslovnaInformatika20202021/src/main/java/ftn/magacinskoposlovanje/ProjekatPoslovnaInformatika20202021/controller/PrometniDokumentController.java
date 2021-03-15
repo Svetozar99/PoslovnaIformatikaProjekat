@@ -69,12 +69,14 @@ public class PrometniDokumentController {
 			prometniDokument.setVrstaDokumenta(VrstaDokumenta.PR);
 			prometniDokument.setPoslovniPartner(poslovniPartner);
 			prometniDokument.setPreduzece(preduzece);
+			prometniDokument.setUlazniMagacin(ulazniMagacin);
 		}else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.OT.toString())) {
 			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
 			preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
 			prometniDokument.setVrstaDokumenta(VrstaDokumenta.OT);
 			prometniDokument.setPoslovniPartner(poslovniPartner);
 			prometniDokument.setPreduzece(preduzece);
+			prometniDokument.setIzlazniMagacin(izlazniMagacin);
 		}
 		else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.MM.toString())) {
 			prometniDokument.setVrstaDokumenta(VrstaDokumenta.MM);
