@@ -124,7 +124,7 @@ function proknjizi(){
 
             var stavke = [];
             redovi.forEach(red => {
-                console.log(JSON.stringify(red))
+                //console.log(JSON.stringify(red))
                 var stavka = {
                     'kolicina':$('#'+red.kolicina).val(),
                     'cena':$('#'+red.cena).val(),
@@ -141,7 +141,7 @@ function proknjizi(){
                 contentType: 'application/json; charset=utf-8',
                 data : JSON.stringify(stavke),
                 success: function(result){
-                    alert('Stavke dokumenta je uspesno dodat');
+                    alert('Stavke dokumenta su uspesno dodate');
                     
                 },
                 error : function(e){
