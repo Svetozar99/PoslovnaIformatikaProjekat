@@ -36,7 +36,7 @@ public class MagacinskaKarticaController {
 	@GetMapping(value = "roba-ili-usluga/{idRobeIliUsluge}/poslovna-godina/{idPoslovneGodine}/magacin/{idMagacina}")
 	public ResponseEntity<MagacinskaKarticaDTO> getMagKartByRobaIliUslua(@PathVariable("idRobeIliUsluge") Integer idRobeIliUsluge, 
 			@PathVariable("idPoslovneGodine") Integer idPoslovneGodine, @PathVariable("idMagacina") Integer idMagacina){
-		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodina(idRobeIliUsluge, idPoslovneGodine,idMagacina);
+		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(idRobeIliUsluge, idPoslovneGodine,idMagacina);
 		return ResponseEntity.ok(new MagacinskaKarticaDTO(magacinskaKartica));
 	}
 }

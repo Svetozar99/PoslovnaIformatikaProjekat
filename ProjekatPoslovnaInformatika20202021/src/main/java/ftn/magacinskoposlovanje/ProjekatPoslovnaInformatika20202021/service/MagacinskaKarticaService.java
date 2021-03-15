@@ -51,14 +51,14 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	}
 
 	@Override
-	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodina(Integer robaIliUslugaId,
+	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
 			Integer poslovnaGodinaId, Integer sifraMagacina){
 		RobaIliUsluga robaIliUsluga = robaIliUslugaRepository.findOneBySifra(robaIliUslugaId);
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaRepository.findOneByIdGodine(poslovnaGodinaId);
+		PoslovnaGodina poslovnaGodina = poslovnaGodinaRepository.findOneByBrojGodine(poslovnaGodinaId);
 
 		Magacin magacin = magacinRepository.findOneBySifraMagacina(sifraMagacina);
 		
-		MagacinskaKartica kartica = magacinskaKarticaRepository.findOneByRobaIliUsluga_sifraAndPoslovnaGodina_idGodineAndMagacin_sifraMagacina(robaIliUslugaId, poslovnaGodinaId, sifraMagacina);
+		MagacinskaKartica kartica = magacinskaKarticaRepository.findOneByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(robaIliUslugaId, poslovnaGodinaId, sifraMagacina);
 		
 		if(kartica == null) {
 			

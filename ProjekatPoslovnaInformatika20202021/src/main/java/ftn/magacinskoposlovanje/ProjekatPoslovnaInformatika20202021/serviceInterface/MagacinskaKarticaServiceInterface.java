@@ -11,5 +11,5 @@ public interface MagacinskaKarticaServiceInterface {
 	public MagacinskaKartica save(MagacinskaKartica magacinskaKartica);
 	public MagacinskaKartica findOneById(Integer id);
 	
-	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodina(Integer robaIliUslugaId, Integer poslovnaGodinaId,Integer sifraMagacina);
+	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId, Integer poslovnaGodinaId,Integer sifraMagacina);
 }

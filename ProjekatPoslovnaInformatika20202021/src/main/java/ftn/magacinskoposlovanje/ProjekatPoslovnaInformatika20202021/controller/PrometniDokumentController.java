@@ -1,5 +1,7 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +54,10 @@ public class PrometniDokumentController {
 		System.out.println(dto.toString());
 		
 		PoslovniPartner poslovniPartner = new PoslovniPartner();
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(2020);
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR));
 		Preduzece preduzece = new Preduzece();
 		Magacin ulazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina1());
 		Magacin izlazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina2());

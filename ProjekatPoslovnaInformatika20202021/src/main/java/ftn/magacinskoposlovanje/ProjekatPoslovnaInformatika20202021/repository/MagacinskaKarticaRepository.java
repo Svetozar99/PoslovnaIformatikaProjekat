@@ -9,5 +9,5 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magaci
 public interface MagacinskaKarticaRepository extends JpaRepository<MagacinskaKartica, Integer>{
 
 	MagacinskaKartica findOneById(Integer id);
-	MagacinskaKartica findOneByRobaIliUsluga_sifraAndPoslovnaGodina_idGodineAndMagacin_sifraMagacina(Integer sifraRobeUsluge,Integer idGodine, Integer sifraMagacina);
+	MagacinskaKartica findOneByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(Integer sifraRobeUsluge,Integer brojGodine, Integer sifraMagacina);
 }
