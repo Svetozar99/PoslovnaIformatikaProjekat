@@ -147,6 +147,7 @@ function proknjizi(){
 function postaviInformacijePreduzeca(){
     
     var idKupac = $('#inputKupac').val();
+    dajMagacine("selectMagacin",idKupac);
     var inputProdavac = $('#inputProdavac').val();
     preduzeca.forEach(preduzece => {
         if(preduzece.id == idKupac){
