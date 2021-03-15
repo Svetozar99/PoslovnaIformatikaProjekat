@@ -95,21 +95,20 @@ public class StavkaDokumentaController {
 			PrometniDokument pd = prometniDokumentServiceInterface.findOneById(stavkaDokumentaDTO.getPrometniDokument());
 			RobaIliUsluga ru = robaIliUslugaServiceInterface.findOneBySifra(stavkaDokumentaDTO.getRobaUsluga());
 			StavkaDokumenta stavkaDokumenta = new StavkaDokumenta();
-			System.out.println("Posle kreiranja objekta StavkaDokumenta");
+			System.out.println(stavkaDokumentaDTO.toString());
 			stavkaDokumenta.setIdStavke(0);
 			stavkaDokumenta.setKolicina(stavkaDokumentaDTO.getKolicina());
 			stavkaDokumenta.setCena(stavkaDokumentaDTO.getCena());
 			stavkaDokumenta.setVrednost(stavkaDokumentaDTO.getVrednost());
 			stavkaDokumenta.setPrometniDokument(pd);
 			stavkaDokumenta.setRobaIliUsluga(ru);
-			System.out.println("Setovali sve vrednoosti");
 			stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
 			if(pd.getVrstaDokumenta().equals(VrstaDokumenta.PR)) {
 				//Trazenje kartice
 				kartica = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getUlazniMagacin().getSifraMagacina());
 				
 				//Postavljanje ukupne cene
-				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost()*stavkaDokumenta.getCena())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
+				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
 				kartica.setCena(ukupnaCena);
 				
 				//Postavljanje kolicine
@@ -129,7 +128,7 @@ public class StavkaDokumentaController {
 				kartica = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getIzlazniMagacin().getSifraMagacina());
 				
 				//Postavljanje ukupne cene
-				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost()*stavkaDokumenta.getCena())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
+				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
 				kartica.setCena(ukupnaCena);
 				
 				//Postavljanje kolicine
@@ -152,9 +151,9 @@ public class StavkaDokumentaController {
 				kartica2 = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getIzlazniMagacin().getSifraMagacina());
 				
 				//Postavljanje ukupne cene
-				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost()*stavkaDokumenta.getCena())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
+				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
 				kartica.setCena(ukupnaCena);
-				double ukupnaCena2 = (kartica2.getUkupnaVrednost()+stavkaDokumenta.getVrednost()*stavkaDokumenta.getCena())/(kartica2.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
+				double ukupnaCena2 = (kartica2.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica2.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
 				kartica2.setCena(ukupnaCena2);
 				
 				//Postavljenje kolicine za magacine

@@ -5,8 +5,16 @@ var partneri = [];
 
 
 function ukloniRed(redId){
-    console.log("redId: "+redId);
-    $("#"+redId).remove();
+    //console.log(redId)
+    $("#red"+redId).remove();
+    redovi.forEach(element => {
+        if(element.id == redId){
+           // console.log("U ifu sam!")
+            const index = redovi.indexOf(element)
+            redovi.splice(index,1);
+        }
+    });
+    //console.log("redovi: "+JSON.stringify(redovi));
 }
 
 function dodajRed(){
@@ -18,7 +26,7 @@ function dodajRed(){
     var inputSifraArtikla = 'inputSifraArtikla'+counter;
     var inputJedinicaMere = 'inputJedinicaMere'+counter;
     var inputIznos = 'inputIznos'+counter;
-    var redId = "red"+counter;
+    var redId = counter;
 	var red = {
 					'id':counter,
 					'naziv':nazivInput,
@@ -28,7 +36,7 @@ function dodajRed(){
 				}
     redovi.push(red);
 	var html = '';
-	html += '<tr id="'+ redId + '">';
+	html += '<tr id="'+ "red"+redId + '">';
     html += '<td style="text-align: center; width: 10%"><input readonly class="form-control" type="text"></td>';
     html += '<td style="text-align: center; width: 10%">' + 
             '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputSifraArtikla + '" value="' + robeUsluge[0].sifra + '">'+
@@ -116,6 +124,7 @@ function proknjizi(){
 
             var stavke = [];
             redovi.forEach(red => {
+                console.log(JSON.stringify(red))
                 var stavka = {
                     'kolicina':$('#'+red.kolicina).val(),
                     'cena':$('#'+red.cena).val(),

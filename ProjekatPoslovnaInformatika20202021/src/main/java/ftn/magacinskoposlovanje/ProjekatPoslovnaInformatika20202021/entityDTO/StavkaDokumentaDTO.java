@@ -94,4 +94,13 @@ public class StavkaDokumentaDTO {
 	public void setNazivRobeUsluge(String nazivRobeUsluge) {
 		this.nazivRobeUsluge = nazivRobeUsluge;
 	}
+
+	@Override
+	public String toString() {
+		return "StavkaDokumentaDTO [id=" + id + ", kolicina=" + kolicina + ", cena=" + cena + ", vrednost=" + vrednost
+				+ ", prometniDokument=" + prometniDokument + ", robaUsluga=" + robaUsluga + ", nazivRobeUsluge="
+				+ nazivRobeUsluge + "]";
+	}
+	
+	
 }
