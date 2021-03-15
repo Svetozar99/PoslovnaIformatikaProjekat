@@ -144,19 +144,26 @@ function proknjizi(){
     });
 }
 
-function postaviInformacijePreduzeca(){
+function postaviInformacijePreduzecaPrijemnica(){
     
     var idKupac = $('#inputKupac').val();
     dajMagacine("selectMagacin",idKupac);
-    var inputProdavac = $('#inputProdavac').val();
     preduzeca.forEach(preduzece => {
         if(preduzece.id == idKupac){
             $('#inputKupacMestoIAdresa').val(preduzece.adresa);
             $('#inputKupacPIB').val(preduzece.pIB);
             $('#inputKupacTekuciRacun').val(preduzece.mIB);
         }
+    });    
+}
 
-        if(preduzece.id == inputProdavac){
+function postaviInformacijePreduzecaOtpremnica(){
+    
+    var idProdavac = $('#inputProdavac').val();
+    dajMagacine("selectMagacin",idProdavac);
+    preduzeca.forEach(preduzece => {
+
+        if(preduzece.id == idProdavac){
             $('#inputProdavacMestoIAdresa').val(preduzece.adresa);
             $('#inputProdavacPIB').val(preduzece.pIB);
             $('#inputProdavacTekuciRacun').val(preduzece.mIB);
@@ -186,6 +193,8 @@ function selectMagacini(list){
     var inputMagacin1 = $('#inputMagacin1');
     var inputMagacin2 = $('#inputMagacin2');
     var inputMagacinForMagKart = $("#inputMagacinForMagKart");
+    var magacinPrijemnica = $("#magacinPrijemnica");
+    var magacinOtpremnica = $("#magacinOtpremnica");
     var html = "";
     list.forEach(magacin => {
         html += '<option value="' + magacin.id + '">' + magacin.naziv + '</option>';
@@ -201,6 +210,14 @@ function selectMagacini(list){
     //Pravljenje liste magacina za drugu listu
     inputMagacinForMagKart.empty();
     inputMagacinForMagKart.append(html);
+
+    //Pravljenje liste magacina za prijemnicu
+    magacinPrijemnica.empty();
+    magacinPrijemnica.append(html);
+
+    //Pravljenje liste magacina za otpremnicu
+    magacinOtpremnica.empty();
+    magacinOtpremnica.append(html);
 
 }
 

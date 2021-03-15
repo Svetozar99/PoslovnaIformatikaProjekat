@@ -171,11 +171,13 @@ function prikazi(){
     if(prikaziPrijemnicu){
         dajPoslovnePartnere('selectPoslovniPartner');
         dajPreduzeca("selectPreduzeca");
+        dajMagacine("selectMagacin",1);
         prometniDokment.show();
         prijemnica.show();
     }else if(prikaziOtpremnicu){
         dajPoslovnePartnere('selectPoslovniPartner');
         dajPreduzeca("selectPreduzeca");
+        dajMagacine("selectMagacin",1);
         prometniDokment.show();
         otpremnica.show();
     }else if(prikaziMedjumagacinskiPromet){
