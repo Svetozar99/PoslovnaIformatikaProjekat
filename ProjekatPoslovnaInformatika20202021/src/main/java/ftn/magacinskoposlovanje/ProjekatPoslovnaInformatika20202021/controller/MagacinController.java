@@ -33,6 +33,7 @@ public class MagacinController {
 	
 	@GetMapping
 	public ResponseEntity<List<MagacinDTO>> getMagacin(){
+		System.out.println("pozvana f-ja");
 		List<Magacin> magacini = magacinServiceInterface.findAll();
 		
 		List<MagacinDTO> magacinDTO = new ArrayList<MagacinDTO>();

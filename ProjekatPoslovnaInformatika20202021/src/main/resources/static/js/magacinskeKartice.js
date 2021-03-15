@@ -4,6 +4,7 @@ function prikazSvihMagacinskihKartica() {
     var tbodyMK = $("#tbodyMagacinskeKartice");
     
     function prikaziMagKart(){
+        dajMagacine('selectMagacin', 0);
         $.ajax({
             type: "GET",
             contentType : 'application/json; charset=utf-8',
@@ -12,6 +13,7 @@ function prikazSvihMagacinskihKartica() {
                 tabelaMK.show();
                 tbodyMK.empty();
                 for(p in result){
+                    
                     tbodyMK.append(
                         '<tr>'
 							+'<td align="center">'+'<a href="" id="prikaziJedno" result-prID="'+result[p].id+'">'+result[p].pocetnoStanjeKolicinski+'</a>'+'</td>'

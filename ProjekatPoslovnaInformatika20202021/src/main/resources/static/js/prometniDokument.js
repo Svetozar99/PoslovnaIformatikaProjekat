@@ -184,6 +184,7 @@ function selectMagacini(list){
     magacini=list;
     var inputMagacin1 = $('#inputMagacin1');
     var inputMagacin2 = $('#inputMagacin2');
+    var inputMagacinForMagKart = $("#inputMagacinForMagKart");
     var html = "";
     list.forEach(magacin => {
         html += '<option value="' + magacin.id + '">' + magacin.naziv + '</option>';
@@ -195,13 +196,24 @@ function selectMagacini(list){
     //Pravljenje liste magacina za drugu listu
     inputMagacin2.empty();
     inputMagacin2.append(html);
+
+    //Pravljenje liste magacina za drugu listu
+    inputMagacinForMagKart.empty();
+    inputMagacinForMagKart.append(html);
+
 }
 
 function dajMagacine(text,idPreduzeca){
+    var u = "";
+    if(idPreduzeca == 0){
+        u = "http://localhost:8080/api/magacin";
+    }else{
+        u = "http://localhost:8080/api/magacin/preduzece/"+idPreduzeca;
+    }
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
-        url : "http://localhost:8080/api/magacin/preduzece/"+idPreduzeca,
+        url : u,
         success : function(result){
             if(text === "selectMagacin"){
                 selectMagacini(result);
