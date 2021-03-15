@@ -48,7 +48,7 @@ function formatDate(date) {
 
 
 
-function prikazMagacinskeKarticeTables(){
+function prikazPromMagacinskeKarticeTables(){
 
     var prikazMagacinskeKarticeTables = $("#prikazPromMagaKart");
 

@@ -233,7 +233,7 @@ function prikazi(){
     }else if(prikaziJediniceMere){       
     	prikazSvihJedinicaMere();
     }else if(prikazPromMagaKartPrikazi){       
-    	prikazMagacinskeKarticeTables();
+    	prikazPromMagacinskeKarticeTables();
     }else if(magacinskeKarticeTablesPrikazi){       
     	magacinskeKarticeTablesP();
     }
