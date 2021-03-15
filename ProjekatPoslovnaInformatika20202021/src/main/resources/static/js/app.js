@@ -192,7 +192,7 @@ function prikazi(){
         
         prikazSvihMagacina();
     }else if(prikaziSveRobeUsluge){
-        //dajRobuIliUsluge("svaRobaIliUsluge");
+        dajRobuIliUsluge("svaRobaIliUsluge");
         robeUslugeTable.show();
     }else if(prikaziFormuZaDodavanjeRobeUsluge){
         dajPreduzeca("selectPreduzeca");
