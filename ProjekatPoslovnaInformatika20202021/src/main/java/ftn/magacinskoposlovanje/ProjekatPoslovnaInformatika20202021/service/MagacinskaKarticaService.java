@@ -1,7 +1,11 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.crypto.spec.PSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,72 +52,43 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 
 	@Override
 	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodina(Integer robaIliUslugaId,
-			Integer poslovnaGodinaId){
+			Integer poslovnaGodinaId, Integer sifraMagacina){
 		RobaIliUsluga robaIliUsluga = robaIliUslugaRepository.findOneBySifra(robaIliUslugaId);
 		PoslovnaGodina poslovnaGodina = poslovnaGodinaRepository.findOneByIdGodine(poslovnaGodinaId);
 
-		Magacin magacin = magacinRepository.findOneBySifraMagacina(1);
+		Magacin magacin = magacinRepository.findOneBySifraMagacina(sifraMagacina);
 		
-		List<MagacinskaKartica> getAllMagKart = magacinskaKarticaRepository.findAll();
+		MagacinskaKartica kartica = magacinskaKarticaRepository.findOneByRobaIliUsluga_sifraAndPoslovnaGodina_idGodineAndMagacin_sifraMagacina(robaIliUslugaId, poslovnaGodinaId, sifraMagacina);
 		
-		List<MagacinskaKartica> magacinskeKarticeRiliL = robaIliUsluga.getMagacinskeKartice();
-		List<MagacinskaKartica> magacinskeKarticePg = poslovnaGodina.getMagacinskeKartice();
-
-		int i = getAllMagKart.size();
-		System.out.println(i + "broj magacinskih kartica u bazi");
-		
-		if(magacinskeKarticeRiliL.isEmpty()) {
-			System.out.println("za ovu robu ili uslugu ne postoji ni jedna magacinska kartica");
-			MagacinskaKartica m = new MagacinskaKartica();
-//			m.setId(i+1);
-			m.setPocetnoStanjeKolicinski(0);
-			m.setPrometUlazaKolicinski(0);
-			m.setPrometIzlazaKolicinski(0);
-			m.setUkupnaKolicina(0);
-			m.setPocetnoStanjeVrednosno(0);
-			m.setPrometIzlazaKolicinski(0);
-			m.setPrometUlazaVrednosno(0);
-			m.setUkupnaVrednost(0);
-			m.setCena(120);
-			m.setMagacin(magacin);
-			m.setRobaIliUsluga(robaIliUsluga);
-			m.setPoslovnaGodina(poslovnaGodina);
+		if(kartica == null) {
 			
-			magacinskeKarticeRiliL.add(m);
-			magacinskaKarticaRepository.save(m);
-		}
-		if(magacinskeKarticePg.isEmpty()) {
-			System.out.println("za ovu poslovnu godinu ne postoji nijedna magacinska kartica");
-			MagacinskaKartica m = new MagacinskaKartica();
-//			m.setId(i+1);
-			m.setPocetnoStanjeKolicinski(0);
-			m.setPrometUlazaKolicinski(0);
-			m.setPrometIzlazaKolicinski(0);
-			m.setUkupnaKolicina(0);
-			m.setPocetnoStanjeVrednosno(0);
-			m.setPrometIzlazaKolicinski(0);
-			m.setPrometUlazaVrednosno(0);
-			m.setUkupnaVrednost(0);
-			m.setCena(120);
-			m.setMagacin(magacin);
-			m.setRobaIliUsluga(robaIliUsluga);
-			m.setPoslovnaGodina(poslovnaGodina);
-			
-			magacinskeKarticePg.add(m);
-			magacinskaKarticaRepository.save(m);
-		}
-		
-		for(MagacinskaKartica mkpg: magacinskeKarticePg) {
-			for(MagacinskaKartica mkru: magacinskeKarticeRiliL) {
-				if(mkpg.getId() == mkru.getId()) {
-					System.out.println(mkpg.getId() + "---- magacinske kartice u poslovnoj godini");
-					System.out.println(mkru.getId() + "---- magacinske kartice od robe ili usluge");
-					return mkru;
-					
-				}
+			System.out.println("za ovu robu ili uslugu i poslovnu godinu ne postoji ni jedna magacinska kartica");
+			kartica = new MagacinskaKartica();
+			kartica.setPocetnoStanjeKolicinski(0);
+			kartica.setPrometUlazaKolicinski(0);
+			kartica.setPrometIzlazaKolicinski(0);
+			kartica.setUkupnaKolicina(0);
+			kartica.setPocetnoStanjeVrednosno(0);
+			kartica.setPrometIzlazaKolicinski(0);
+			kartica.setPrometUlazaVrednosno(0);
+			kartica.setUkupnaVrednost(0);
+			kartica.setCena(0);
+			kartica.setMagacin(magacin);
+			kartica.setRobaIliUsluga(robaIliUsluga);
+			if(poslovnaGodina == null) {
+				poslovnaGodina = new PoslovnaGodina();
+				Date date = new Date();
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(date);
+				poslovnaGodina.setBrojGodine(calendar.get(Calendar.YEAR));
+				poslovnaGodina.setPreduzece(magacin.getPreduzece());
+				poslovnaGodina.setZakljucena(false);
+				poslovnaGodina = poslovnaGodinaRepository.save(poslovnaGodina);
 			}
+			kartica.setPoslovnaGodina(poslovnaGodina);
+			kartica = magacinskaKarticaRepository.save(kartica);
 		}
-		return null;
+		return kartica;
 	}
 
 }

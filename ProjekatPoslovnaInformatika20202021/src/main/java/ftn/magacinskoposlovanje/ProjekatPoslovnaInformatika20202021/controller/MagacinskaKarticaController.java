@@ -33,9 +33,10 @@ public class MagacinskaKarticaController {
 		return new ResponseEntity<List<MagacinskaKarticaDTO>>(karicaDTOs, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "roba-ili-usluga/{idRobeIliUsluge}/poslovna-godina/{idPoslovneGodine}")
-	public ResponseEntity<MagacinskaKarticaDTO> getMagKartByRobaIliUslua(@PathVariable("idRobeIliUsluge") Integer idRobeIliUsluge, @PathVariable("idPoslovneGodine") Integer idPoslovneGodine){
-		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodina(idRobeIliUsluge, idPoslovneGodine);
+	@GetMapping(value = "roba-ili-usluga/{idRobeIliUsluge}/poslovna-godina/{idPoslovneGodine}/magacin/{idMagacina}")
+	public ResponseEntity<MagacinskaKarticaDTO> getMagKartByRobaIliUslua(@PathVariable("idRobeIliUsluge") Integer idRobeIliUsluge, 
+			@PathVariable("idPoslovneGodine") Integer idPoslovneGodine, @PathVariable("idMagacina") Integer idMagacina){
+		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodina(idRobeIliUsluge, idPoslovneGodine,idMagacina);
 		return ResponseEntity.ok(new MagacinskaKarticaDTO(magacinskaKartica));
 	}
 }
