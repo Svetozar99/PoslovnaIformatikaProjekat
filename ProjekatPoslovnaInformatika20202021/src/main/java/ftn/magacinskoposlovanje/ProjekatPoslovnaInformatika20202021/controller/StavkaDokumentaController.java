@@ -146,7 +146,6 @@ public class StavkaDokumentaController {
 			}else if(pd.getVrstaDokumenta().equals(VrstaDokumenta.MM)){
 				//Trazenje kartice za prvi magacin
 				kartica = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getUlazniMagacin().getSifraMagacina());
-				
 				//Trazenje kartice za drugi magacin
 				kartica2 = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getIzlazniMagacin().getSifraMagacina());
 				
@@ -157,22 +156,26 @@ public class StavkaDokumentaController {
 				kartica2.setCena(ukupnaCena2);
 				
 				//Postavljenje kolicine za magacine
-				kartica.setPrometUlazaKolicinski(kartica.getPrometUlazaKolicinski()+stavkaDokumenta.getKolicina());
-				kartica2.setPrometIzlazaKolicinski(kartica.getPrometIzlazaKolicinski()+stavkaDokumenta.getKolicina());
+				double izlazKolicinski = kartica.getPrometIzlazaKolicinski()+stavkaDokumenta.getKolicina();
+				kartica.setPrometIzlazaKolicinski(izlazKolicinski);
+				double ulazKolicinski = kartica2.getPrometUlazaKolicinski()+stavkaDokumenta.getKolicina();
+				kartica2.setPrometUlazaKolicinski(ulazKolicinski);
 				double ukupnaKolicina = kartica.getPocetnoStanjeKolicinski()+kartica.getPrometUlazaKolicinski()-kartica.getPrometIzlazaKolicinski();
 				kartica.setUkupnaKolicina(ukupnaKolicina);
 				double ukupnaKolicina2 = kartica2.getPocetnoStanjeKolicinski()+kartica2.getPrometUlazaKolicinski()-kartica2.getPrometIzlazaKolicinski();
 				kartica2.setUkupnaKolicina(ukupnaKolicina2);
 				
 				//Postavljenje vrednosti za magacine
-				kartica.setPrometUlazaVrednosno(kartica.getPrometUlazaVrednosno()+stavkaDokumenta.getVrednost());
-				kartica2.setPrometIzlazaVrednosno(kartica.getPrometIzlazaVrednosno()+stavkaDokumenta.getVrednost());
+				double izlazVrednosno = kartica.getPrometIzlazaVrednosno()+stavkaDokumenta.getVrednost();
+				kartica.setPrometIzlazaVrednosno(izlazVrednosno);
+				double ulazVrednosno = kartica2.getPrometUlazaVrednosno()+stavkaDokumenta.getVrednost();
+				kartica2.setPrometUlazaVrednosno(ulazVrednosno);
 				double ukupnaVrednost = kartica.getPocetnoStanjeVrednosno()+kartica.getPrometUlazaVrednosno()-kartica.getPrometIzlazaVrednosno();
 				kartica.setUkupnaVrednost(ukupnaVrednost);
 				double ukupnaVrednost2 = kartica2.getPocetnoStanjeVrednosno()+kartica2.getPrometUlazaVrednosno()-kartica2.getPrometIzlazaVrednosno();
 				kartica2.setUkupnaVrednost(ukupnaVrednost2);
 				
-				//Pisanje magacina u bazu
+				//Pisanje magacinski kartica u bazu
 				kartica = magacinskaKarticaServiceInterface.save(kartica);
 				kartica2 = magacinskaKarticaServiceInterface.save(kartica2);
 			}
