@@ -137,6 +137,9 @@ function prikazi(){
     var prikazPromMagaKart = $("#prikazPromMagaKart");
     var magacinskeKarticeTables = $("#magacinskeKarticeTables");
     var selectMagacinForMagKart = $("#selectMagacinForMagKart")
+    // proba
+    var selectRobaForMagKart = $("#selectRobaForMagKart");
+    var selectGodinaForMagKart = $("#selectGodinaForMagKart");
 
 
     otpremnica.hide();
@@ -165,6 +168,9 @@ function prikazi(){
     magacinskeKarticeTables.hide();
 
     selectMagacinForMagKart.hide();
+
+    selectRobaForMagKart.hide();
+    selectGodinaForMagKart.hide();
     if(prikaziPrijemnicu || prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
         dajRobuIliUsluge();
     }   
@@ -207,6 +213,8 @@ function prikazi(){
         prikazSvihPrometaMagKartica();
     }else if(prikaziMagacinskeKartice){
         selectMagacinForMagKart.show();
+        selectRobaForMagKart.show();
+        selectGodinaForMagKart.show();
         prikazSvihMagacinskihKartica();
     }else if(prikaziPoslovneGodine){
         prikazSvihPoslovnihGodina();

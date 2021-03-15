@@ -18,6 +18,39 @@ function dajRobuIliUsluge(text){
     });
 }
 
+function dajRobuIliU(text){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/roba-ili-usluga",
+        success : function(result){
+            if(text === "svaRobaU"){
+                selectRobaIliUsluga(result);
+            }else{
+                robeUsluge = result;
+            }
+        },
+        error :function(e){
+            console.log("Greska!!!");
+        }
+    });
+}
+
+function selectRobaIliUsluga(list){
+    console.log("selectRobe")
+    roba=list;
+   
+    var inputRobaForMagKart = $("#inputRobaForMagKart");
+    var html = "";
+    list.forEach(roba => {
+        html += '<option value="' + roba.sifra + '">' + roba.naziv + '</option>';
+    });
+
+    inputRobaForMagKart.empty();
+    inputRobaForMagKart.append(html);
+
+}
+
 function dajJediniceMere(){
     var selectJedinicaMere = $("#selectJedinicaMere");
     selectJedinicaMere.empty();

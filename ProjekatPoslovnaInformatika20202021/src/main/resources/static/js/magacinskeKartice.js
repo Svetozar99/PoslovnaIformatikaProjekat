@@ -5,6 +5,8 @@ function prikazSvihMagacinskihKartica() {
     
     function prikaziMagKart(){
         dajMagacine('selectMagacin', 0);
+        dajRobuIliU('svaRobaU');
+        dajPoslGod('svePoslGodine');
         $.ajax({
             type: "GET",
             contentType : 'application/json; charset=utf-8',
