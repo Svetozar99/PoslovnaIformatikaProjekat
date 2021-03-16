@@ -21,7 +21,7 @@ function prikazSvihMagacinskihKartica() {
                     
                     tbodyMK.append(
                         '<tr>'
-							+'<td align="center">'+'<a href="" id="prikaziJedno" onclick="prikaziOdredjenuMagacinskuKarticu('+result[p].id+')">'+result[p].nazivMagacina+'</a>'+'</td>'
+							+'<td align="center">'+'<button class="btn btn-link" onclick="prikaziOdredjenuMagacinskuKarticu('+result[p].id+')">'+result[p].nazivMagacina+'</button>'+'</td>'
 							+'<td align="center">'+result[p].nazivRobeIliUsluge+'</td>'
 							+'<td align="center">'+result[p].brojPoslovneGodine+'</td>'
 							// +'<td align="center">'+result[p].ukupnaKolicina+'</td>'
@@ -54,17 +54,16 @@ function magacinskeKarticeTablesP(){
 
 function prikaziOdredjenuMagacinskuKarticu(id){
 
-    alert('evo ga !!!!!');
+   // alert('evo ga !!!!!');
     var magacinSifra = 0;
     var robaSifra = 0;
     var godinaSifra = 0;
 
-    magacinSifra = $("#inputMagacinForMagKart").val();
+    /*magacinSifra = $("#inputMagacinForMagKart").val();
     robaSifra = $("#inputRobaForMagKart").val();
-    godinaSifra = $("#inputGodinaForMagKart").val();
+    godinaSifra = $("#inputGodinaForMagKart").val();*/
 
-    console.log(magacinSifra + " magacinSifra");
-    magacinskeKarticeTablesP();
+    console.log("Funckija: "+id);
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
@@ -100,15 +99,16 @@ function prikaziOdredjenuMagacinskuKarticu(id){
             pocetnoStanjeVrednosnoMk.val(result.pocetnoStanjeVrednosno);
             prometUlazaKolicnskiMk.val(result.prometUlazaKolicinski);
             prometUlazaVrednosnoMk.val(result.prometUlazaVrednosno);
-            prometIzlazaKolicnskiMk.val(result.prometUlazaKolicinski);
+            prometIzlazaKolicnskiMk.val(result.prometIzlazaKolicinski);
             prometIzlazaVrednosnoMk.val(result.prometIzlazaVrednosno);
-            ukupnaKorekcijaKolicineMk.val((result.pocetnoStanjeKolicinski + result.prometUlazaKolicinski - result.prometUlazaKolicinski) - result.pocetnoStanjeKolicinski);
+            ukupnaKorekcijaKolicineMk.val((result.pocetnoStanjeKolicinski + result.prometUlazaKolicinski - result.prometIzlazaKolicinski) - result.pocetnoStanjeKolicinski);
             ukupnaKorekcijaVrednosnoMk.val((result.pocetnoStanjeVrednosno + result.prometUlazaVrednosno - result.prometIzlazaVrednosno) - result.pocetnoStanjeVrednosno);
             ukupnaKolicinaMk.val(result.ukupnaKolicina);
             ukupnaVrednostMk.val(result.ukupnaVrednost);
 
             console.log(result.id + ' result');
             console.log(result.nazivPreduzeca + ' nazivPreduuzeca');
+            odrediPrikaz("prikaziOvuKarticu");
             
                         
         },

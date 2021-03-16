@@ -107,8 +107,8 @@ function proknjizi(){
     }else if(prikaziMedjumagacinskiPromet){
         vrstaDokumenta = "MM";
         brojPrometnogDokumenta = $('#inputMedjumagacinskiPrometBr').val();
-        sifraMagacinaUlaz = $('#inputMagacin2').val();
-        sifraMagacinaIzlaz = $('#inputMagacin1').val();
+        sifraMagacinaUlaz = $('#inputMagacin1').val();
+        sifraMagacinaIzlaz = $('#inputMagacin2').val();
     }
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
 
