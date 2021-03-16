@@ -1,10 +1,23 @@
 var robeUsluge = [];
 
 function dajRobuIliUsluge(text){
+    var sifraMagacinaIzlaz = 0;
+    if(prikaziOtpremnicu){
+        sifraMagacinaIzlaz = $('#magacinOtpremnica').val();
+    }else if(prikaziMedjumagacinskiPromet){
+        sifraMagacinaIzlaz = $('#inputMagacin1').val();
+    }
+    
+    var u = "";
+    if(prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
+        u = "http://localhost:8080/api/roba-ili-usluga/"+sifraMagacinaIzlaz
+    }else{
+        u = "http://localhost:8080/api/roba-ili-usluga";
+    }
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
-        url : "http://localhost:8080/api/roba-ili-usluga",
+        url : u,
         success : function(result){
             if(text === "svaRobaIliUsluge"){
                 prikaziRobeIliUsluge(result);

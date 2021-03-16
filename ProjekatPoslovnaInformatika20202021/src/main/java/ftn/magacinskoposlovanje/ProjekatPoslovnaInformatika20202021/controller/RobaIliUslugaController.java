@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PreduzeceDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.RobaIliUslugaDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.JedinicaMere;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.JedinicaMereServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.RobaIliUslugaServiceInterface;
 
 @RestController
@@ -30,6 +33,9 @@ public class RobaIliUslugaController {
 	@Autowired
 	private JedinicaMereServiceInterface jedinicaMereServiceInterface;
 	
+	@Autowired
+	private MagacinskaKarticaServiceInterface magacinskaKarticaServiceInterface;
+	
 	@GetMapping
 	public ResponseEntity<List<RobaIliUslugaDTO>> getRobeIliUsluge(){
 		List<RobaIliUsluga> robaIliUsluga = robaIliUslugaServiceInterface.findAll();
@@ -41,6 +47,25 @@ public class RobaIliUslugaController {
 			dto.setNaziv(ru.getNaziv());
 			dto.setJedinicaMere(ru.getJedinicaMere().getSkraceniNaziv());
 			dtos.add(dto);
+		}
+		return new ResponseEntity<List<RobaIliUslugaDTO>>(dtos, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{sifraMagacina}")
+	public ResponseEntity<List<RobaIliUslugaDTO>> getRobeIliUslugeByMagacin(@PathVariable("sifraMagacina") Integer sifraMagacina){
+		List<RobaIliUsluga> robaIliUsluga = robaIliUslugaServiceInterface.findAll();
+		
+		List<RobaIliUslugaDTO> dtos = new ArrayList<RobaIliUslugaDTO>();
+		for(RobaIliUsluga ru: robaIliUsluga) {
+			MagacinskaKartica kartica = magacinskaKarticaServiceInterface.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina,ru.getSifra());
+			RobaIliUslugaDTO dto = new RobaIliUslugaDTO();
+			dto.setSifra(ru.getSifra());
+			dto.setNaziv(ru.getNaziv());
+			dto.setJedinicaMere(ru.getJedinicaMere().getSkraceniNaziv());
+			if(kartica != null) {
+				dto.setCena(kartica.getCena());
+				dtos.add(dto);
+			}
 		}
 		return new ResponseEntity<List<RobaIliUslugaDTO>>(dtos, HttpStatus.OK);
 	}

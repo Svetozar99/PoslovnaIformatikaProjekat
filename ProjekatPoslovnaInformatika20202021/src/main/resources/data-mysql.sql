@@ -15,7 +15,7 @@ INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Pivo',5);
 INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Crep',6);
 INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Plocice',4);
 INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Stol',6);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Cement',2);
+INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Dzak cementa',6);
 INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Ogrev',3);
 
 INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (1, 'Magacin 1', 1);
@@ -26,9 +26,9 @@ INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUE
 INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUES (2, 2021, 1, 1);
 
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
-VALUE (1, 1.1, 1.1, 1.1, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 1, 1);
+VALUE (1, 200, 70, 30, 240,500000, 171000, 78000, 593000, 2471, 1, 2, 8);
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
-VALUE (2, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 1);
+VALUE (2, 500, 350, 400, 450,375000, 259000, 304000, 330000, 734, 1, 2, 7);
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
 VALUE (3, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 3);
 

@@ -273,45 +273,45 @@ function promeniIzgledTaba(dropdown){
     prikaziPrometeMagacKartica.removeClass("active");
 
     if(dropdown === "prometniDokumentDropdown"){
-        console.log("prometniDokumentDropdown")
+        //console.log("prometniDokumentDropdown")
         prometniDokumentDropdown.addClass("active");
     }
     else if(dropdown === "robeUslugeDropdown"){
-        console.log("robeUslugeDropdown")
+        //console.log("robeUslugeDropdown")
         robeUslugeDropdown.addClass("active");
     }
     else if(dropdown === "preduzeceDropdown"){
-        console.log("preduzeceDropdown")
+        //console.log("preduzeceDropdown")
         preduzeceDropdown.addClass("active");
     }
     else if(dropdown === "magacinDropdown"){
-        console.log("magacinDropdown")
+        //console.log("magacinDropdown")
         magacinDropdown.addClass("active");
     }
     else if(dropdown === "prikazMagKartDropdown"){
-        console.log("prikazMagKartDropdown")
+        //console.log("prikazMagKartDropdown")
         prikazMagKartDropdown.addClass("active");
     }
     else if(dropdown === "prikazMagacinskihKarticaDropdown"){
-        console.log("prikazMagacinskihKarticaDropdown");
+        //console.log("prikazMagacinskihKarticaDropdown");
         prikazMagacinskeKartice.addClass("active");
 
     }else if(dropdown === "prikazPartneraDropdown"){
-        console.log("prikazPartneraDropdown");
+        //console.log("prikazPartneraDropdown");
         prikazPartneraDropdown.addClass("active");
 
     }else if(dropdown === "poslovnaGodinaDropdown"){
-        console.log("poslovnaGodinaDropdown")
+        //console.log("poslovnaGodinaDropdown")
         poslovnaGodinaDropdown.addClass("active");
 
     }else if(dropdown === "jedinicaMereDropdown"){
-        console.log("jedinicaMereDropdown")
+        //console.log("jedinicaMereDropdown")
         jedinicaMereDropdown.addClass("active");
     }else if(dropdown === "prikaziMagacKartice"){
-        console.log("prikaziMagacKartice")
+        //console.log("prikaziMagacKartice")
         prikaziMagacKartice.addClass("active");
     }else if(dropdown === "prikaziPrometeMagacKartica"){
-        console.log("prikaziPrometeMagacKartica")
+        //console.log("prikaziPrometeMagacKartica")
         prikaziPrometeMagacKartica.addClass("active");
     }
 }

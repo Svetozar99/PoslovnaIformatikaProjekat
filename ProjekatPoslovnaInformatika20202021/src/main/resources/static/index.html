@@ -191,7 +191,7 @@
                       <div class="card-body">
                         <label>Magacin u koji se smešta roba:
                         <select class="form-control" id="magacinPrijemnica">
-                          <option value="1">Magacin1</option>
+                          <option value="0">Magacin1</option>
                         </select>
                       </label>
                       </div>
@@ -233,8 +233,8 @@
                     <div class="card" style="width: 18rem; height: 5%;">
                       <div class="card-body">
                         <label>Magacin iz kog se roba prodaje:
-                        <select class="form-control" id="magacinOtpremnica">
-                          <option value="1">Magacin1</option>
+                        <select class="form-control" id="magacinOtpremnica" onchange="dajRobuIliUsluge()">
+                          <option value="0">Magacin5</option>
                         </select>
                       </label>
                       </div>
@@ -260,7 +260,8 @@
                       <div class="card" style="width: 18rem;">
                           <div class="card-body">
                             <label>Magacin iz kog se prebacuje roba:
-                            <select onchange="" class="form-control" id="inputMagacin1">
+                            <select onchange="dajRobuIliUsluge()" class="form-control" id="inputMagacin1">
+                              <option value="0">Magacin5</option>
                             </select>
                           </label>
                           </div>
@@ -290,7 +291,6 @@
             <table class="table">
                 <thead >
                     <tr>
-                        <th style="text-align: center;">Redni broj</th> 
                         <th style="text-align: center;">Šifra artikla</th> 
                         <th style="text-align: center;">Naziv</th> 
                         <th style="text-align: center;">Jed. mere</th> 

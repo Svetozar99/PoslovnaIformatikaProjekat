@@ -214,4 +214,16 @@ public class MagacinskaKartica {
 	public void setPrometMagacinskeKartice(List<PrometMagacinskeKartice> prometMagacinskeKartice) {
 		this.prometMagacinskeKartice = prometMagacinskeKartice;
 	}
+
+	@Override
+	public String toString() {
+		return "MagacinskaKartica [id=" + id + ", pocetnoStanjeKolicinski=" + pocetnoStanjeKolicinski
+				+ ", prometUlazaKolicinski=" + prometUlazaKolicinski + ", prometIzlazaKolicinski="
+				+ prometIzlazaKolicinski + ", ukupnaKolicina=" + ukupnaKolicina + ", pocetnoStanjeVrednosno="
+				+ pocetnoStanjeVrednosno + ", prometUlazaVrednosno=" + prometUlazaVrednosno + ", prometIzlazaVrednosno="
+				+ prometIzlazaVrednosno + ", ukupnaVrednost=" + ukupnaVrednost + ", cena=" + cena + ", magacin="
+				+ magacin + ", poslovnaGodina=" + poslovnaGodina + ", robaIliUsluga=" + robaIliUsluga + "]";
+	}
+	
+	
 }
