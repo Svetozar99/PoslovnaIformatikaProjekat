@@ -91,4 +91,9 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 		return kartica;
 	}
 
+	@Override
+	public MagacinskaKartica findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,Integer sifraRobeIliUsluge) {
+		return magacinskaKarticaRepository.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina,sifraRobeIliUsluge);
+	}
+
 }

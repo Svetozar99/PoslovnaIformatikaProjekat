@@ -10,4 +10,5 @@ public interface MagacinskaKarticaRepository extends JpaRepository<MagacinskaKar
 
 	MagacinskaKartica findOneById(Integer id);
 	MagacinskaKartica findOneByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(Integer sifraRobeUsluge,Integer brojGodine, Integer sifraMagacina);
+	MagacinskaKartica findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,Integer sifraRobeIliUsluge);
 }

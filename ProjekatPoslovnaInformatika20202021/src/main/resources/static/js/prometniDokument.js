@@ -37,7 +37,6 @@ function dodajRed(){
     redovi.push(red);
 	var html = '';
 	html += '<tr id="'+ "red"+redId + '">';
-    html += '<td style="text-align: center; width: 10%"><input readonly class="form-control" type="text"></td>';
     html += '<td style="text-align: center; width: 10%">' + 
             '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputSifraArtikla + '" value="' + robeUsluge[0].sifra + '">'+
             '</td>';
@@ -51,13 +50,20 @@ function dodajRed(){
     html += '<td style="text-align: center; width: 10%">'  + 
             '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputJedinicaMere + '" value="' + robeUsluge[0].jedinicaMere + '">'+
             '</td>';
-    html += '<td style="text-align: center; width: 10%;"><input onchange="racunaj()" style="text-align: center;" id="' + kolicinaInput + '" class="form-control" type="text"></td>';
-    html += '<td style="text-align: center; width: 10%;"><input onchange="racunaj()" style="text-align: center;" id="' + cenaInput + '" class="form-control" type="text"></td>';
+    html += '<td style="text-align: center; width: 10%;"><input onkeyup="racunaj()" style="text-align: center;" id="' + kolicinaInput + '" class="form-control" type="text"></td>';
+    if(prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
+        html += '<td style="text-align: center; width: 10%;">'
+                    +'<input readonly style="text-align: center;" id="' + cenaInput + '" value="' + robeUsluge[0].cena + '" class="form-control" type="text">'
+                +'</td>';
+    }else{
+        html += '<td style="text-align: center; width: 10%;"><input onkeyup="racunaj()" style="text-align: center;" id="' + cenaInput + '" class="form-control" type="text"></td>';
+    }
     html += '<td style="text-align: center; width: 10%;"><input readonly id="'+inputIznos+'" class="form-control" type="text"></td>';
     html += '<td style="text-align: center;"><button onclick="ukloniRed(\'' + redId + '\')" class="btn btn-danger">Ukloni</button></td>';
     html += '</tr>';
 
 	$('#sadrzajTabele').append(html);
+    
 }
 
 function postaviOstaleKolone(counter){
@@ -66,6 +72,7 @@ function postaviOstaleKolone(counter){
         if(sifra==element.sifra){
             $('#inputSifraArtikla'+counter).val(element.sifra);
             $('#inputJedinicaMere'+counter).val(element.jedinicaMere);
+            $('#cenaInput'+counter).val(element.cena);
         }
     });
 }
