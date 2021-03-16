@@ -1,5 +1,8 @@
+var selectedId;
+
 function prikazSvihMagacinskihKartica() {
 
+    
     var tabelaMK = $("#magacinskeKarticeTable");
     var tbodyMK = $("#tbodyMagacinskeKartice");
     
@@ -18,20 +21,19 @@ function prikazSvihMagacinskihKartica() {
                     
                     tbodyMK.append(
                         '<tr>'
-							+'<td align="center">'+'<a href="" id="prikaziJedno" result-prID="'+result[p].id+'">'+result[p].pocetnoStanjeKolicinski+'</a>'+'</td>'
-							+'<td align="center">'+result[p].prometUlazaKolicinski+'</td>'
-							+'<td align="center">'+result[p].prometIzlazaKolicinski+'</td>'
-							+'<td align="center">'+result[p].ukupnaKolicina+'</td>'
-							+'<td align="center">'+result[p].pocetnoStanjeVrednosno+'</td>'
-							+'<td align="center">'+result[p].prometUlazaVrednosno+'</td>'
-							+'<td align="center">'+result[p].prometIzlazaVrednosno+'</td>'
-							+'<td align="center">'+result[p].ukupnaVrednost+'</td>'
-							+'<td align="center">'+result[p].cena+'</td>'
+							+'<td align="center">'+'<a href="" id="prikaziJedno" onclick="prikaziOdredjenuMagacinskuKarticu('+result[p].id+')">'+result[p].nazivMagacina+'</a>'+'</td>'
+							+'<td align="center">'+result[p].nazivRobeIliUsluge+'</td>'
+							+'<td align="center">'+result[p].brojPoslovneGodine+'</td>'
+							// +'<td align="center">'+result[p].ukupnaKolicina+'</td>'
+							// +'<td align="center">'+result[p].pocetnoStanjeVrednosno+'</td>'
+							// +'<td align="center">'+result[p].prometUlazaVrednosno+'</td>'
+							// +'<td align="center">'+result[p].prometIzlazaVrednosno+'</td>'
+							// +'<td align="center">'+result[p].ukupnaVrednost+'</td>'
+							// +'<td align="center">'+result[p].cena+'</td>'
 							+'<td/>'
 						+'</tr>'
                     )};
-                    selectedId = $(this).attr('result-prID');
-                    
+                   
             },
             error :function(e){
                 alert('ne valja nesto');
@@ -50,7 +52,9 @@ function magacinskeKarticeTablesP(){
     magacinskeKarticeTables.show();
 }
 
-function prikaziOdredjenuMagacinskuKarticu(){
+function prikaziOdredjenuMagacinskuKarticu(id){
+
+    alert('evo ga !!!!!');
     var magacinSifra = 0;
     var robaSifra = 0;
     var godinaSifra = 0;
@@ -59,10 +63,13 @@ function prikaziOdredjenuMagacinskuKarticu(){
     robaSifra = $("#inputRobaForMagKart").val();
     godinaSifra = $("#inputGodinaForMagKart").val();
 
+    console.log(magacinSifra + " magacinSifra");
+    magacinskeKarticeTablesP();
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
-        url : 'http://localhost:8080/api/magacinska-kartica/roba-ili-usluga/'+robaSifra+'/poslovna-godina/'+godinaSifra+'/magacin/'+magacinSifra,
+        // url : 'http://localhost:8080/api/magacinska-kartica/roba-ili-usluga/'+robaSifra+'/magacin/'+magacinSifra,
+        url: 'http://localhost:8080/api/magacinska-kartica/'+id,
         success : function(result){
             var nazivMagacinaMk = $("#nazivMagacinaMagKart");
             var nazivPreduzecaMk = $("#preduzeceMagKart");
@@ -102,7 +109,8 @@ function prikaziOdredjenuMagacinskuKarticu(){
 
             console.log(result.id + ' result');
             console.log(result.nazivPreduzeca + ' nazivPreduuzeca');
-            odrediPrikaz('magacinskeKarticeTablesPrikazi');               
+            
+                        
         },
         error :function(e){
             alert('ne valja nesto');

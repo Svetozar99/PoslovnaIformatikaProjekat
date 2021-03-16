@@ -93,7 +93,7 @@ function odrediPrikaz(id){
     }else if(id === "sveJediniceMere"){
     	prikaziJediniceMere = true;
     	
-    }else if(id === "magacinskeKarticeTablesPrikazi"){
+    }else if(id === "prikaziOvuKarticu"){
     	magacinskeKarticeTablesPrikazi = true;
     }
     else if(id === "prikazPromMagaKart"){
@@ -235,8 +235,9 @@ function prikazi(){
         // prikazPromMagaKart.show(); 
         // prikazPromMagaKartice.show();   
     	prikazPromMagacinskeKarticeTables();
-    }else if(magacinskeKarticeTablesPrikazi){       
-    	magacinskeKarticeTablesP();
+    }else if(magacinskeKarticeTablesPrikazi){ 
+        magacinskeKarticeTables.show();      
+    	// magacinskeKarticeTablesP();
     }
 }
 

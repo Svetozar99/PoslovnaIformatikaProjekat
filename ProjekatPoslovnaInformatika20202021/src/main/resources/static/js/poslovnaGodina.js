@@ -182,7 +182,7 @@ function selectPoslGod(list){
     var inputGodinaForMagKart = $("#inputGodinaForMagKart");
     var html = "";
     list.forEach(posG => {
-        html += '<option value="' + posG.id + '">' + posG.brojGodine + '</option>';
+        html += '<option value="' + posG.brojGodine + '">' + posG.brojGodine + '</option>';
     });
 
     inputGodinaForMagKart.empty();
