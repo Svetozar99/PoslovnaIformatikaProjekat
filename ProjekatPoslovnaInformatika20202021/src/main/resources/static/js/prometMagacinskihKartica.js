@@ -50,7 +50,8 @@ function formatDate(date) {
 
 function prikazPromMagacinskeKarticeTables(){
 
-    var prikazMagacinskeKarticeTables = $("#prikazPromMagaKart");
+    console.log('evo me sad u funkciji u prometMagacinskihKartica');
+    var prikazPrometaM = $("#prikazPromMagaKartice");
 
-    prikazMagacinskeKarticeTables.show();
+    prikazPrometaM.show();
 }
