@@ -5,10 +5,11 @@ function dajRobuIliUsluge(text){
     if(prikaziOtpremnicu){
         sifraMagacinaIzlaz = $('#magacinOtpremnica').val();
     }else if(prikaziMedjumagacinskiPromet){
-        sifraMagacinaIzlaz = $('#inputMagacin2').val();
+        sifraMagacinaIzlaz = $('#inputMagacin1').val();
     }
+    
     var u = "";
-    if(prikaziOtpremnicu){
+    if(prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
         u = "http://localhost:8080/api/roba-ili-usluga/"+sifraMagacinaIzlaz
     }else{
         u = "http://localhost:8080/api/roba-ili-usluga";

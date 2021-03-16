@@ -35,6 +35,7 @@ function dodajRed(){
                     'vrednost':inputIznos
 				}
     redovi.push(red);
+    console.log(JSON.stringify(robeUsluge))
 	var html = '';
 	html += '<tr id="'+ "red"+redId + '">';
     html += '<td style="text-align: center; width: 10%">' + 
@@ -106,8 +107,8 @@ function proknjizi(){
     }else if(prikaziMedjumagacinskiPromet){
         vrstaDokumenta = "MM";
         brojPrometnogDokumenta = $('#inputMedjumagacinskiPrometBr').val();
-        sifraMagacinaUlaz = $('#inputMagacin1').val();
-        sifraMagacinaIzlaz = $('#inputMagacin2').val();
+        sifraMagacinaUlaz = $('#inputMagacin2').val();
+        sifraMagacinaIzlaz = $('#inputMagacin1').val();
     }
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
 
@@ -208,7 +209,7 @@ function postaviInformacijePartnera(){
 }
 
 function selectMagacini(list){
-    console.log("selectMagacini")
+    //console.log("selectMagacini")
     magacini=list;
     var inputMagacin1 = $('#inputMagacin1');
     var inputMagacin2 = $('#inputMagacin2');
@@ -216,6 +217,7 @@ function selectMagacini(list){
     var magacinPrijemnica = $("#magacinPrijemnica");
     var magacinOtpremnica = $("#magacinOtpremnica");
     var html = "";
+    html += '<option value="0"></option>';
     list.forEach(magacin => {
         html += '<option value="' + magacin.id + '">' + magacin.naziv + '</option>';
     });
