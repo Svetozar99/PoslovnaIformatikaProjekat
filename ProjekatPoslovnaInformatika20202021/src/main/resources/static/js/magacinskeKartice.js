@@ -83,7 +83,7 @@ function prikaziOdredjenuMagacinskuKarticu(){
             var ukupnaVrednostMk = $("#ukupnaVrednost");
 
             nazivMagacinaMk.val(result.nazivMagacina);
-            nazivPreduzecaMk.val(); //kupi se iz prometnog doc
+            nazivPreduzecaMk.val(result.nazivPreduzeca);
             poslovnaGodinaMk.val(result.brojPoslovneGodine);
             sifraRobeUslugeMk.val(result.robaIliUsluga);
             nazivRobeUslugeMk.val(result.nazivRobeIliUsluge);
@@ -101,6 +101,7 @@ function prikaziOdredjenuMagacinskuKarticu(){
             ukupnaVrednostMk.val(result.ukupnaVrednost);
 
             console.log(result.id + ' result');
+            console.log(result.nazivPreduzeca + ' nazivPreduuzeca');
             odrediPrikaz('magacinskeKarticeTablesPrikazi');               
         },
         error :function(e){

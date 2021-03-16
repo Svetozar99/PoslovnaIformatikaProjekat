@@ -42,6 +42,7 @@ public class MagacinskaKarticaDTO implements Serializable{
 	
 	public String jedinicaMereDto;
 
+	public String nazivPreduzeca;
 	public MagacinskaKarticaDTO() {
 		super();
 	}
@@ -52,7 +53,7 @@ public class MagacinskaKarticaDTO implements Serializable{
 			double prometIzlazaKolicinski, double ukupnaKolicina, double pocetnoStanjeVrednosno,
 			double prometUlazaVrednosno, double prometIzlazaVrednosno, double ukupnaVrednost, double cena,
 			Integer magacin, String nazivMagacina, Integer poslovnaGodina, Integer brojPoslovneGodine,
-			Integer robaIliUsluga, String nazivRobeIliUsluge, String jedinicaMereDto) {
+			Integer robaIliUsluga, String nazivRobeIliUsluge, String jedinicaMereDto, String nazivPreduzeca) {
 		super();
 		this.id = id;
 		this.pocetnoStanjeKolicinski = pocetnoStanjeKolicinski;
@@ -71,6 +72,7 @@ public class MagacinskaKarticaDTO implements Serializable{
 		this.robaIliUsluga = robaIliUsluga;
 		this.nazivRobeIliUsluge = nazivRobeIliUsluge;
 		this.jedinicaMereDto = jedinicaMereDto;
+		this.nazivPreduzeca = nazivPreduzeca;
 	}
 
 	public MagacinskaKarticaDTO(MagacinskaKartica kartica) {
@@ -79,7 +81,8 @@ public class MagacinskaKarticaDTO implements Serializable{
 				kartica.getPrometUlazaVrednosno(), kartica.getPrometIzlazaVrednosno(),
 				kartica.getUkupnaVrednost(), kartica.getCena(), kartica.getMagacin().getSifraMagacina(), kartica.getMagacin().getNazivMagacina(),
 				kartica.getPoslovnaGodina().getId(), kartica.getPoslovnaGodina().getBrojGodine(),
-				kartica.getRobaIliUsluga().getSifra(), kartica.getRobaIliUsluga().getNaziv(), kartica.getRobaIliUsluga().getJedinicaMere().getNaziv());
+				kartica.getRobaIliUsluga().getSifra(), kartica.getRobaIliUsluga().getNaziv(), kartica.getRobaIliUsluga().getJedinicaMere().getNaziv(),
+				kartica.getMagacin().getPreduzece().getNazivPreduzeca());
 	}
 
 
@@ -282,6 +285,18 @@ public class MagacinskaKarticaDTO implements Serializable{
 
 	public void setJedinicaMereDto(String jedinicaMereDto) {
 		this.jedinicaMereDto = jedinicaMereDto;
+	}
+
+
+
+	public String getNazivPreduzeca() {
+		return nazivPreduzeca;
+	}
+
+
+
+	public void setNazivPreduzeca(String nazivPreduzeca) {
+		this.nazivPreduzeca = nazivPreduzeca;
 	}
 	
 	

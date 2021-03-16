@@ -79,8 +79,6 @@ function odrediPrikaz(id){
         prikaziPrometeMagacinskihKartica = true;
     }else if(id === "sveMagacinskeKartice"){
         prikaziMagacinskeKartice = true;
-        
-
     }else if(id === "sviPartneri"){
         
         prikazSvihPoslovnihPartnera = true;
@@ -134,7 +132,7 @@ function prikazi(){
     var poslovneGodineTable = $("#poslovneGodineTable");
     var dodajPoslovnuGodinu = $("#dodajPoslovnuGodinu");
 
-    var prikazPromMagaKart = $("#prikazPromMagaKart");
+    var prikazPromMagaKartice = $("#prikazPromMagaKartice");
     var magacinskeKarticeTables = $("#magacinskeKarticeTables");
     var selectMagacinForMagKart = $("#selectMagacinForMagKart")
     // proba
@@ -164,7 +162,7 @@ function prikazi(){
     poslovneGodineTable.hide();
     dodajPoslovnuGodinu.hide();
 
-    prikazPromMagaKart.hide();
+    prikazPromMagaKartice.hide();
     magacinskeKarticeTables.hide();
 
     selectMagacinForMagKart.hide();
@@ -208,9 +206,9 @@ function prikazi(){
         dajPreduzeca("selectPreduzeca");
         dajJediniceMere();
         dodavanjeRobeUsluge.show();
-    }else if(prikaziPrometeMagacinskihKartica){
-        //console.log("prikazSvihPrometaMagKartica")
-        prikazSvihPrometaMagKartica();
+    // }else if(prikaziPrometeMagacinskihKartica){
+    //     //console.log("prikazSvihPrometaMagKartica")
+    //     prikazSvihPrometaMagKartica();
     }else if(prikaziMagacinskeKartice){
         selectMagacinForMagKart.show();
         selectRobaForMagKart.show();
@@ -232,7 +230,10 @@ function prikazi(){
     	dodajJedinicuMere.show();
     }else if(prikaziJediniceMere){       
     	prikazSvihJedinicaMere();
-    }else if(prikazPromMagaKartPrikazi){       
+    }else if(prikazPromMagaKartPrikazi){
+        console.log('evo me sad u else if-u kad je prikazPromMagaKartPrikazi = true');
+        // prikazPromMagaKart.show(); 
+        // prikazPromMagaKartice.show();   
     	prikazPromMagacinskeKarticeTables();
     }else if(magacinskeKarticeTablesPrikazi){       
     	magacinskeKarticeTablesP();
