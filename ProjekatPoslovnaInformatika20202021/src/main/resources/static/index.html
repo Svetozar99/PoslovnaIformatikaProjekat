@@ -364,6 +364,7 @@
               <th style="text-align: center;">Sifra</th>
               <th style="text-align: center;">Naziv magacina</th>
               <th style="text-align: center;">Naziv preduzeca</th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="tbodyMagacin">
@@ -427,7 +428,8 @@
           </label>
         </div>
 
-          <button onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
+          <button id="btnDodajMagacin" onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
+          <button id="izmeniMagacin" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </form>
 
 
