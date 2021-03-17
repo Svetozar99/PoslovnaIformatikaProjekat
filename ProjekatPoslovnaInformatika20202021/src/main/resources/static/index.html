@@ -22,6 +22,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
       
     
 
@@ -287,6 +288,9 @@
             <p style="padding-top: 3%;">
                 Datum izdavanja: 
               <input id="inputDatumIzdavanja" type="date" class="form-control col-sm-2" style="display: inline;">
+              <script>
+                document.getElementById('inputDatumIzdavanja').value = new Date().toISOString().substring(0, 10);
+              </script>
             </p>
             <table class="table">
                 <thead >

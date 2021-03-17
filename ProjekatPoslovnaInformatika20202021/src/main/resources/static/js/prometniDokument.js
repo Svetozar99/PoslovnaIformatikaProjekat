@@ -85,12 +85,13 @@ function racunaj(){
 }
 
 function proknjizi(){
+    var greska = "";
     var sifraPoslovnogPartnera = 0;
     var sifraMagacinaUlaz = 0;
     var sifraMagacinaIzlaz = 0;
     var idPreduzeca = 0;
     var vrstaDokumenta;
-    var brojPrometnogDokumenta;
+    var brojPrometnogDokumenta = "";
     if(prikaziPrijemnicu){
         idPreduzeca = $('#inputKupac').val();
         vrstaDokumenta = "PR";
@@ -111,7 +112,12 @@ function proknjizi(){
         sifraMagacinaIzlaz = $('#inputMagacin2').val();
     }
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
-
+    if(sifraMagacinaUlaz == 0){
+        greska += "\nIzaberite magacin!"
+    }
+    if(brojPrometnogDokumenta == ""){
+        greska += "\nUnesite broj dokumenta!"
+    }
     var formData = {
         "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
         "sifraMagacina1": sifraMagacinaUlaz,
@@ -159,8 +165,7 @@ function proknjizi(){
             });
         },
         error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+            alert(greska);
         }
     });
 }
