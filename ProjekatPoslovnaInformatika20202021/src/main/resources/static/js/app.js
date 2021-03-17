@@ -131,7 +131,6 @@ function prikazi(){
 
     var poslovneGodineTable = $("#poslovneGodineTable");
     var dodajPoslovnuGodinu = $("#dodajPoslovnuGodinu");
-
     var prikazPromMagaKartice = $("#prikazPromMagaKartice");
     var magacinskeKarticeTables = $("#magacinskeKarticeTables");
     var selectMagacinForMagKart = $("#selectMagacinForMagKart")
@@ -206,9 +205,10 @@ function prikazi(){
         dajPreduzeca("selectPreduzeca");
         dajJediniceMere();
         dodavanjeRobeUsluge.show();
-    // }else if(prikaziPrometeMagacinskihKartica){
-    //     //console.log("prikazSvihPrometaMagKartica")
-    //     prikazSvihPrometaMagKartica();
+    }else if(prikaziPrometeMagacinskihKartica){
+         console.log("prikazSvihPrometaMagKartica")
+         prikazPromMagaKartice.show();
+         prikazSvihPrometaMagKartica();
     }else if(prikaziMagacinskeKartice){
         selectMagacinForMagKart.show();
         selectRobaForMagKart.show();

@@ -70,6 +70,7 @@ function prikaziOdredjenuMagacinskuKarticu(id){
         // url : 'http://localhost:8080/api/magacinska-kartica/roba-ili-usluga/'+robaSifra+'/magacin/'+magacinSifra,
         url: 'http://localhost:8080/api/magacinska-kartica/'+id,
         success : function(result){
+            var idMk = $("#idMagacinskeKartice");
             var nazivMagacinaMk = $("#nazivMagacinaMagKart");
             var nazivPreduzecaMk = $("#preduzeceMagKart");
             var poslovnaGodinaMk = $("#poslovnaGodina");
@@ -88,6 +89,7 @@ function prikaziOdredjenuMagacinskuKarticu(id){
             var ukupnaKolicinaMk = $("#ukupnaKolicina");
             var ukupnaVrednostMk = $("#ukupnaVrednost");
 
+            idMk.val(result.id);
             nazivMagacinaMk.val(result.nazivMagacina);
             nazivPreduzecaMk.val(result.nazivPreduzeca);
             poslovnaGodinaMk.val(result.brojPoslovneGodine);

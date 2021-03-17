@@ -13,4 +13,6 @@ public List<PrometMagacinskeKartice> findAll();
 	public PrometMagacinskeKartice save(PrometMagacinskeKartice prometMagacinskeKartice);
 	
 	public void remove(Integer id);
+	
+	public List<PrometMagacinskeKartice> findByMagacinskaKartica(Integer id);
 }

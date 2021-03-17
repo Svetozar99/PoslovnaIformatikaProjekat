@@ -96,14 +96,14 @@
                     </div>
                   </li>
 
-                  <li id="prikazMagKartDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagKartDropdown')">
+                  <!-- <li id="prikazMagKartDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagKartDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Promet magacinske kartice
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <button class="dropdown-item" onclick="odrediPrikaz('sviPrometiMagKart')">Svi prometi magacinskih kartica</button>
                     </div>
-                  </li>
+                  </li> -->
                   <li id="prikazMagacinskihKarticaDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagacinskihKarticaDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Magacinske kartice
@@ -133,14 +133,14 @@
                     </div>
                   </li>
 
-                  <li class="nav-item dropdown" id="prikaziMagacKartice" onclick="promeniIzgledTaba('prikaziMagacKartice')">
+                  <!-- <li class="nav-item dropdown" id="prikaziMagacKartice" onclick="promeniIzgledTaba('prikaziMagacKartice')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Magacinske kartice
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <button class="dropdown-item" onclick="odrediPrikaz('prikaziOvuKarticu')">Magacinska kartica</button>
                     </div>
-                  </li>
+                  </li> -->
 
                   <!-- <li class="nav-item dropdown" id="prikaziPrometeMagacKartica" onclick="promeniIzgledTaba('prikaziPrometeMagacKartica')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -610,7 +610,7 @@
       </form>
 
       <!-- Prikaz magacinske kartice -->
-      <form id="magacinskeKarticeTables" style="display: none; margin: 5%;">
+      <div id="magacinskeKarticeTables" style="display: none; margin: 5%;">
         <div class="form-group">
           <label><h1>Magacinske kartice:</h1></label>
           <div style="float: right;">
@@ -625,6 +625,7 @@
           <div class="form-group col-md-6">
             <label for="nazivMagacinaMagKart">Naziv magacina</label>
             <input type="text" class="form-control" id="nazivMagacinaMagKart" readonly>
+            <input type="hidden" class="form-control" id="idMagacinskeKartice" readonly>
           </div>
           <div class="form-group col-md-6">
             <label for="preduzeceMagKart">Preduzece</label>
@@ -714,11 +715,11 @@
             <input type="text" class="form-control" id="ukupnaVrednost" readonly>
           </div>
         </div>
-        <button class="btn btn-info" onclick="odrediPrikaz('prikazPromMagaKart')">Detalji</button>
-      </form>
+        <button class="btn btn-info" onclick="odrediPrikaz('sviPrometiMagKart')">Detalji</button>
+      </div>
 
       <!-- Prometi magacinskih kartica -->
-      <form id="prikazPromMagaKartice" style="display: none; margin: 5%;">
+      <div id="prikazPromMagaKartice" style="display: none; margin: 5%;">
         <div class="form-group">
           <label><h1>Prometi magacinske kartice:</h1></label>
         </div>
@@ -755,11 +756,10 @@
               <th style="text-align: center;"></th>
             </tr>
           </thead>
-          <tbody id="sadrzajTabele">
-            
+          <tbody id="tBodyPrometi">
           </tbody>
         </table>
-      </form>
+      </div>
     </div>
 </body>
 </html>
