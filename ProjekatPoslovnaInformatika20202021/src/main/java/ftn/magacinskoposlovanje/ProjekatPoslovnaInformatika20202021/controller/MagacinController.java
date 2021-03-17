@@ -81,10 +81,11 @@ public class MagacinController {
 		Preduzece preduzece = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
 		
 		if(magacin == null) {
-			return new ResponseEntity<MagacinDTO>(HttpStatus.OK);
+			return new ResponseEntity<MagacinDTO>(HttpStatus.BAD_REQUEST);
 		}
 		magacin.setNazivMagacina(magacinDTO.getNaziv());	
 		magacin.setPreduzece(preduzece);
+		magacin = magacinServiceInterface.save(magacin);
 		return new ResponseEntity<MagacinDTO>(new MagacinDTO(magacin), HttpStatus.OK);
 	}
 	

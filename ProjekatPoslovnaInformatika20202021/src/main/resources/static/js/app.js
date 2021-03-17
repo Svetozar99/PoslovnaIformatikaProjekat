@@ -34,9 +34,9 @@ var dodajPoslovnunGodinu = false;
 
 function odrediPrikaz(id){
     dodavanjePreduzeca = false;
-    prikaziPreduzeca = false;
+    prikaziPreduzeca = false;   
     dodavanjeMagacina = false;
-    prikaziMagacine = false;
+    prikaziMagacine = false;   
     prikaziMagacinskeKartice = false;
     prikaziOtpremnicu = false;
     prikaziPrijemnicu = false;
@@ -44,7 +44,7 @@ function odrediPrikaz(id){
     dodavanjeRobeUsluge = false;
     prikaziPrometeMagacinskihKartica = false;
     prikaziSveRobeUsluge = false;
-    prikaziFormuZaDodavanjeRobeUsluge = false;
+    prikaziFormuZaDodavanjeRobeUsluge = false;    
     prikaziJediniceMere = false;
     dodavanjeJediniceMere = false;
 
@@ -66,11 +66,11 @@ function odrediPrikaz(id){
     }else if(id === "svaPreduzeca"){
         prikaziPreduzeca = true; 
     }else if(id === "dodajPreduzece"){
-        dodavanjePreduzeca = true;
+        dodavanjePreduzeca = true;        
     }else if(id === "sviMagacini"){
         prikaziMagacine = true;
     }else if(id === "dodajMagacin"){
-    	dodavanjeMagacina = true;
+    	dodavanjeMagacina = true;    	
     }else if(id === "sveRobeUsluge"){
         prikaziSveRobeUsluge = true;
     }else if(id === "dodavanjeRobeUsluge"){
@@ -91,8 +91,9 @@ function odrediPrikaz(id){
     	dodavanjePoslovneGodine = true;
 
     }else if(id === "sveJediniceMere"){
-    	prikaziJediniceMere = true;
-    	
+    	prikaziJediniceMere = true;    	
+    }else if(id === "dodajJedinicuMere"){
+    	dodavanjeJediniceMere = true;   	    	
     }else if(id === "prikaziOvuKarticu"){
     	magacinskeKarticeTablesPrikazi = true;
     }
