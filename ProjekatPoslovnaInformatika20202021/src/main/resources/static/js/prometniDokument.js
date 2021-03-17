@@ -147,6 +147,7 @@ function proknjizi(){
                     'robaUsluga':$('#'+red.naziv).val()
                 }
                 stavke.push(stavka)
+                // formatirajBroj();
             });
             console.log(JSON.stringify(stavke));
             $.ajax({
@@ -309,4 +310,17 @@ function selectPoslovniPartner(list){
 
     $('#inputKupacOtpremnicaMestoIAdresa').val(list[0].adresa);
     $('#inputKupacOtpremnicaPIB').val(list[0].pib);
+}
+
+function formatirajBroj(){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/prometni-dokument",
+        success : function(result){
+            $("#inputPrijemnicaBr").val(result);
+            $("#inputOtpremnicaBr").val(result);
+            $("#inputMedjumagacinskiPrometBr").val(result);
+        }
+    });
 }

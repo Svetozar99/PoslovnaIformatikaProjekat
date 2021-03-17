@@ -100,8 +100,6 @@ function odrediPrikaz(id){
     else if(id === "prikazPromMagaKart"){
     	prikazPromMagaKartPrikazi = true;
     }
-
-        
     prikazi();
 }
 
@@ -138,7 +136,6 @@ function prikazi(){
     // proba
     var selectRobaForMagKart = $("#selectRobaForMagKart");
     var selectGodinaForMagKart = $("#selectGodinaForMagKart");
-
 
     otpremnica.hide();
     prijemnica.hide();
@@ -178,6 +175,7 @@ function prikazi(){
         dajMagacine("selectMagacin",1);
         prometniDokment.show();
         prijemnica.show();
+        formatirajBroj();
     }else if(prikaziOtpremnicu){
         dajPoslovnePartnere('selectPoslovniPartner');
         dajPreduzeca("selectPreduzeca");
