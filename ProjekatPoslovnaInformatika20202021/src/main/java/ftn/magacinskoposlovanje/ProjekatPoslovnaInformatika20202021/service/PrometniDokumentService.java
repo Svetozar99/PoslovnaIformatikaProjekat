@@ -30,4 +30,10 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 		return prometniDokumentRepository.findOneById(id);
 	}
 
+	@Override
+	public Integer findByMaxid() {
+		// TODO Auto-generated method stub
+		return prometniDokumentRepository.najveciID();
+	}
+
 }

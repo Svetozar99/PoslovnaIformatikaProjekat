@@ -2,20 +2,18 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.JedinicaMereDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometniDokumentDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovniPartner;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
@@ -23,7 +21,6 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Promet
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Status;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinServiceInterface;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovnaGodinaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovniPartnerServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
@@ -47,7 +44,7 @@ public class PrometniDokumentController {
 	
 	@Autowired
 	private MagacinServiceInterface magacinServiceInterface;
-	
+
 	@PostMapping
 	public ResponseEntity<PrometniDokumentDTO> addPrometniDokument(@RequestBody PrometniDokumentDTO dto){
 		System.out.println("\n\tPost!");
@@ -91,5 +88,23 @@ public class PrometniDokumentController {
 		prometniDokument = prometniDokumentServiceInterface.save(prometniDokument);
 		dto.setId(prometniDokument.getId());
 		return new ResponseEntity<PrometniDokumentDTO>(dto, HttpStatus.OK);
+	}
+	
+	@GetMapping
+	public ResponseEntity<String> getFormatBroj(){
+		
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		
+		Integer id = prometniDokumentServiceInterface.findByMaxid();
+		
+		if(id == null) {
+			id = 0;
+		}
+		String brojDokumenta = "";
+		int trenutnaGodina = calendar.get(Calendar.YEAR);
+		brojDokumenta = id+1 + "/" + trenutnaGodina;
+		return new ResponseEntity<String>(brojDokumenta, HttpStatus.OK);
 	}
 }
