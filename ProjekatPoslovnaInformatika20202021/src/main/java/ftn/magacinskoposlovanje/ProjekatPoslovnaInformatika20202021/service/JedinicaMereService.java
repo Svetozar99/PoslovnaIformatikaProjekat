@@ -29,4 +29,10 @@ public class JedinicaMereService implements JedinicaMereServiceInterface{
 	public JedinicaMere save(JedinicaMere jedinicaMere) {
 		return jedinicaMereRepository.save(jedinicaMere);
 	}
+
+	@Override
+	public void remove(Integer idJediniceMere) {
+		jedinicaMereRepository.deleteById(idJediniceMere);
+		
+	}
 }

@@ -392,6 +392,8 @@
               <th style="text-align: center;">Sifra</th>
               <th style="text-align: center;">Naziv</th>
               <th style="text-align: center;">Skreceni Naziv</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="tbodyJedinicaMere">
@@ -410,8 +412,8 @@
                                                               class="form-control" id="skraceniNaziv" placeholder="Unesite skraceni naziv jedinice mere">
           </div>
 
-          <button onclick="submitJedinicaMere()" type="submit" class="btn btn-secondary">Dodaj</button>
-
+          <button id="btnDodajJedinicuMere" onclick="submitJedinicaMere()" type="submit" class="btn btn-secondary">Dodaj</button>
+		  <button id="izmeniJedinicuMere" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </form>
         
         <!-- Forma za dodavanje magacina -->

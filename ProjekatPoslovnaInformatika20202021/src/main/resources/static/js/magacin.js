@@ -106,8 +106,8 @@ function editMagacin(id){
                     var preduzece = preduzeceM.val();
 
                     var formData = {
-                        "naziv": naziv.val(),
-                        "preduzece": preduzece.val()
+                        "naziv": naziv,
+                        "preduzece": preduzece
                     }
 
                     $.ajax({
