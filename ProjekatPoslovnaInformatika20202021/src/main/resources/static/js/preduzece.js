@@ -38,34 +38,71 @@ function prikazSvihPreduzeca() {
 }
 
 function submitPreduzece(){
+    var greska = "";
+    var nazivInput = "";
+    var adresaInput = "";
+    var brojTelefonaInput = "";
+    var pibInput = "";
+    var mibInput = "";
+    nazivInput = $("#naziv").val();
+    adresaInput = $("#adresa").val();
+    brojTelefonaInput = $("#brojTelefona").val();
+    pibInput = $("#pib").val();
+    mibInput = $("#mib").val();
 
-    var nazivInput = $("#naziv");
-    var adresaInput = $("#adresa");
-    var brojTelefonaInput = $("#brojTelefona");
-    var pibInput = $("#pib");
-    var mibInput = $("#mib");
+    var nazivGreska;
+    var adresaGreska;
+    var brojTelGreska;
+    var pibGreska;
+    var mibGreska;
+    
 
-    var formData = {
-        "naziv": nazivInput.val(),
-        "adresa": adresaInput.val(),
-        "telefon": brojTelefonaInput.val(),
-        "pIB": pibInput.val(),
-        "mIB": mibInput.val()
+    if(nazivInput === ""){
+        nazivGreska = true;
+        greska += "\nMorate uneti naziv preduzeca";
     }
-
-    $.ajax({
-        url : 'http://localhost:8080/api/preduzece',
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(result){
-            alert('Preduzece uspjesno dodato');
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+    if(adresaInput === ""){
+        adresaGreska = true;
+        greska += "\nMorate uneti adresu preduzeca";
+    }
+    if(brojTelefonaInput === ""){
+        brojTelGreska = true;
+        greska += "\nMorate uneti broj telefona preduzeca";
+    }
+    if(pibInput === ""){
+        pibGreska = true;
+        greska += "\nMorate uneti pib preduzeca";
+    }
+    if(mibInput === ""){
+        mibGreska = true;
+        greska += "\nMorate uneti mib preduzeca";
+    }
+    if(nazivGreska || adresaGreska || brojTelGreska || pibGreska || mibGreska){
+        alert(greska);
+    }
+    else{
+        var formData = {
+            "naziv": nazivInput,
+            "adresa": adresaInput,
+            "telefon": brojTelefonaInput,
+            "pIB": pibInput,
+            "mIB": mibInput
         }
-    });
+    
+        $.ajax({
+            url : 'http://localhost:8080/api/preduzece',
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(result){
+                alert('Preduzece uspjesno dodato');
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 }
 
 function editPreduzece(id){

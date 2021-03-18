@@ -38,29 +38,46 @@ function prikazSvihJedinicaMere() {
 }
 
 function submitJedinicaMere(){
+    var greska = "";
+    var nazivInput = "";
+    var skraceniNazivInput = "";
+    var nazivGreska;
+    var skrNazivGreska;
+    nazivInput = $("#nazivJediniceMere").val();
+    skraceniNazivInput = $("#skraceniNaziv").val();
 
-    var nazivInput = $("#nazivJediniceMere");
-    var skraceniNazivInput = $("#skraceniNaziv");
-
-    var formData = {
-        "naziv": nazivInput.val(),
-        "skraceniNaziv": skraceniNazivInput.val()
-        
+    if(nazivInput === ""){
+        nazivGreska = true;
+        greska += "\nMorate uneti naziv jedinice mere";
     }
-
-    $.ajax({
-        url : 'http://localhost:8080/api/jedinica-mere',
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(result){
-            alert('Jedinica mere je uspesno dodata');
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+    if(skraceniNazivInput === ""){
+        skrNazivGreska = true;
+        greska += "\nMorate uneti skraceni naziv jedinice mere";
+    }
+    if(nazivGreska || skrNazivGreska){
+        alert(greska);
+    }
+    else{
+        var formData = {
+            "naziv": nazivInput,
+            "skraceniNaziv": skraceniNazivInput
+            
         }
-    });
+    
+        $.ajax({
+            url : 'http://localhost:8080/api/jedinica-mere',
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(result){
+                alert('Jedinica mere je uspesno dodata');
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 }
 
 function editJedinicaMere(id){

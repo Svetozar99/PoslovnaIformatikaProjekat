@@ -60,7 +60,6 @@ function prikazPromMagacinskeKarticeTables(){
 }
 
 function storniranje(redniBroj){
-    alert('kliknuo si dugme ' + redniBroj);
 
     $.ajax({
         type: "GET",
