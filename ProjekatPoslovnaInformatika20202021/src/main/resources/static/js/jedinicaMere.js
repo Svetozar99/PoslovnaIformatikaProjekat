@@ -16,7 +16,7 @@ function prikazSvihJedinicaMere() {
                         '<tr>'
                 			
                 			+'<td align="center">'+result[jedinicaMere].id+'</td>'
-							+'<td align="center">'+'<a href="" id="prikaziJedno" result-jedMerID="'+result[jedinicaMere].id+'">'+result[jedinicaMere].naziv+'</a>'+'</td>'
+							+'<td align="center">'+result[jedinicaMere].naziv+'</a>'+'</td>'
 							+'<td align="center">'+result[jedinicaMere].skraceniNaziv+'</td>'
                             +'<td>'
 	                            +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editJedinicaMere('+result[jedinicaMere].id+')">IZMENI</button>'

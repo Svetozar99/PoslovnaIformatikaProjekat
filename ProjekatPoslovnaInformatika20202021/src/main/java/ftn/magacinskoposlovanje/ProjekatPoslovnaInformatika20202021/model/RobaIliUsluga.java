@@ -29,6 +29,9 @@ public class RobaIliUsluga {
 	@Column(name = "naziv", nullable = false)
 	private String naziv;
 	
+	@Column(name = "cena", nullable = false)
+	private double cena;
+	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="popisniDokument")
 	private List<StavkePopisa> stavkePopisa = new ArrayList<StavkePopisa>();
 	
@@ -41,6 +44,28 @@ public class RobaIliUsluga {
 	@ManyToOne
 	@JoinColumn(name="jedinica_mere", referencedColumnName="id_jedinice_mere", nullable=false)
 	private JedinicaMere jedinicaMere;
+
+	
+	
+	
+	public RobaIliUsluga(Integer sifra, String naziv, double cena, List<StavkePopisa> stavkePopisa,
+			List<MagacinskaKartica> magacinskeKartice, List<StavkaDokumenta> stavkeDokumenta,
+			JedinicaMere jedinicaMere) {
+		super();
+		this.sifra = sifra;
+		this.naziv = naziv;
+		this.cena = cena;
+		this.stavkePopisa = stavkePopisa;
+		this.magacinskeKartice = magacinskeKartice;
+		this.stavkeDokumenta = stavkeDokumenta;
+		this.jedinicaMere = jedinicaMere;
+		this.cena = cena;
+	}
+
+	public RobaIliUsluga() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Integer getSifra() {
 		return sifra;
@@ -88,5 +113,13 @@ public class RobaIliUsluga {
 
 	public void setJedinicaMere(JedinicaMere jedinicaMere) {
 		this.jedinicaMere = jedinicaMere;
+	}
+
+	public double getCena() {
+		return cena;
+	}
+
+	public void setCena(double cena) {
+		this.cena = cena;
 	}
 }

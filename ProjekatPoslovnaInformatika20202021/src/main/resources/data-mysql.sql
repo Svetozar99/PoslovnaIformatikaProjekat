@@ -9,14 +9,14 @@ INSERT INTO jedinica_mere(naziv,skraceni_naziv) VALUES ('Metar kvadratni','m2');
 INSERT INTO jedinica_mere(naziv,skraceni_naziv) VALUES ('Litar','l');
 INSERT INTO jedinica_mere(naziv,skraceni_naziv) VALUES ('Komad','kom');
 
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Hleb',6);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Sok',5);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Pivo',5);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Crep',6);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Plocice',4);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Stol',6);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Dzak cementa',6);
-INSERT INTO roba_usluga(naziv,jedinica_mere) VALUES ('Ogrev',3);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Hleb',6,50);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Sok',5,120);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Pivo',5,120);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Crep',6,500);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Plocice',4,300);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Stol',6,1500);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Dzak cementa',6,1000);
+INSERT INTO roba_usluga(naziv,jedinica_mere,cena) VALUES ('Ogrev',3,2500);
 
 INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (1, 'Magacin 1', 1);
 INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (2, 'Magacin 2', 2);

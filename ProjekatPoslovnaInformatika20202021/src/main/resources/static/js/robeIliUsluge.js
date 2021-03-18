@@ -142,7 +142,86 @@ function prikaziRobeIliUsluge(list){
         // html +=         '</a>';
         html +=     '</td>';
         html +=     '<td align="center">'+ru.jedinicaMere+'</td>';
+        html +=     '<td align="center">';
+	    html +=         '<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editRobeIliUsluge('+ru.sifra+')">IZMENI</button>';
+	    html +=         '<button type="submit" class="btn btn-danger" onclick="deleteRobaIliUsluga('+ru.sifra+')">OBRIŠI</button>';
+        html +=      '</td>';
         html +=   '</tr>';
     });
     tbodyRobaUsluga.append(html);
+}
+
+function editRobeIliUsluge(id){
+    $('#dodavanjeRobeUsluge').show();
+    $("#robeUslugeTable").hide();
+    $("#dodavanjeRobeUsluge").show();
+    $('#izmeniRobuIliUslugu').show();
+    
+    function prikaziRobuIliUslugu(){
+        $.ajax({
+            url:'http://localhost:8080/api/roba-ili-usluga/jedna-roba-ili-usluga/' + id,
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+
+            success: function(result){
+            	dajPreduzeca("selectPreduzeca");
+                dajJediniceMere();
+                var nazivR = $("#nazivInputRobaUsluga");
+                var preduzeceR = $("#inputPreduzece");
+                var jedinicaMereR = $("#selectJedinicaMere");
+                nazivR.val(result.naziv);
+                preduzeceR.val(result.nazivPreduzeca);
+                jedinicaMereR.val(result.idJedinicaMere);
+
+                $("#izmeniRobuIliUslugu").on('click', function(event){
+                        
+                    var naziv = nazivR.val();
+                    var preduzece = preduzeceR.val();
+                    var jedMerR = jedinicaMereR.val();
+
+                    var formData = {
+                        "naziv": naziv,
+                        "idJedinicaMere": jedMerR
+                    }
+
+                    $.ajax({
+                        url:'http://localhost:8080/api/roba-ili-usluga/' + id,
+                        type: 'PUT',
+                        contentType: 'application/json; charset=utf-8',
+                        data : JSON.stringify(formData),
+                        success: function(result){
+                            alert('Roba ili usluga je uspesno izmenjena!');
+                        },
+                        error : function(e){
+                            alert('Doslo je do neke greške!')
+                            console.log("ERROR: ", e);
+                        }
+                    });
+                });
+
+                },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+
+        });
+    }
+
+    prikaziRobuIliUslugu();
+}
+
+function deleteRobaIliUsluga(id){
+    $.ajax({
+        url:'http://localhost:8080/api/roba-ili-usluga/' + id,
+        type: 'DELETE',
+        contentType: 'application/json; charset=utf-8',
+        success: function(result){
+            alert('Uspjesno obrsana roba ili usluga');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
 }

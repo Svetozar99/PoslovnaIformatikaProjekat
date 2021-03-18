@@ -16,7 +16,7 @@ function prikazSvihMagacina() {
                         '<tr>'
                 			
                 			+'<td align="center">'+result[magacin].id+'</td>'
-							+'<td align="center">'+'<a href="" id="prikaziJedno" result-magID="'+result[magacin].id+'">'+result[magacin].naziv+'</a>'+'</td>'
+							+'<td align="center">'+result[magacin].naziv+'</a>'+'</td>'
 							+'<td align="center">'+result[magacin].nazivPreduzeca+'</td>'
                             +'<td>'
 	                            +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editMagacin('+result[magacin].id+')">IZMENI</button>'

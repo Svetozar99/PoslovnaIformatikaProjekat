@@ -11,4 +11,8 @@ public interface RobaIliUslugaServiceInterface {
 	public RobaIliUsluga save(RobaIliUsluga robaIliUsluga);
 	
 	public RobaIliUsluga findOneBySifra(Integer id);
+	
+	public RobaIliUsluga getOne(Integer id);
+	
+	public void delete(Integer i);
 }

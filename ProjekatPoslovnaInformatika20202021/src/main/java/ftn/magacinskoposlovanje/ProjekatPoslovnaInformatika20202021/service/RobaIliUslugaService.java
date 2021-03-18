@@ -30,4 +30,16 @@ public class RobaIliUslugaService implements RobaIliUslugaServiceInterface{
 		return robaIliUslugaRepository.findOneBySifra(id);
 	}
 
+	@Override
+	public void delete(Integer i) {
+		// TODO Auto-generated method stub
+		robaIliUslugaRepository.deleteById(i);
+	}
+
+	@Override
+	public RobaIliUsluga getOne(Integer id) {
+		// TODO Auto-generated method stub
+		return robaIliUslugaRepository.getOne(id);
+	}
+
 }

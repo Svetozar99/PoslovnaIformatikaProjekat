@@ -17,7 +17,7 @@ function prikazSvihPoslovnihGodina() {
                 	tbodyPoslovnaGodina.append(
                         '<tr>'
                 			
-                			+'<td align="center">'+'<a href="" id="prikaziJednu" result-pgID="'+result[pg].id+'">'+result[pg].brojGodine+'</td>'
+                			+'<td align="center">'+result[pg].brojGodine+'</td>'
 							+'<td align="center">'+result[pg].zakljucena+'</a>'+'</td>'
 							+'<td align="center">'+result[pg].nazivPreduzeca+'</td>'
 							+'<td>'
