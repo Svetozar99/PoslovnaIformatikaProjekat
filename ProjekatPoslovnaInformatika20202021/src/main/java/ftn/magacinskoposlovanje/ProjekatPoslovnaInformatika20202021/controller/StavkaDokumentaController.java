@@ -3,6 +3,7 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -146,7 +147,7 @@ public class StavkaDokumentaController {
 				
 				//Postavljanje ukupne cene
 				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
-				kartica.setCena(ukupnaCena);
+				kartica.setCena(DoubleRounder.round(ukupnaCena, 2));
 				
 				//Postavljanje kolicine
 				kartica.setPrometUlazaKolicinski(kartica.getPrometUlazaKolicinski()+stavkaDokumenta.getKolicina());
@@ -186,7 +187,7 @@ public class StavkaDokumentaController {
 				
 				//Postavljanje ukupne cene
 				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
-				kartica.setCena(ukupnaCena);
+				kartica.setCena(DoubleRounder.round(ukupnaCena, 2));
 				
 				//Postavljanje kolicine
 				kartica.setPrometIzlazaKolicinski(kartica.getPrometIzlazaKolicinski()+stavkaDokumenta.getKolicina());
@@ -227,9 +228,9 @@ public class StavkaDokumentaController {
 				
 				//Postavljanje ukupne cene
 				double ukupnaCena = (kartica.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
-				kartica.setCena(ukupnaCena);
+				kartica.setCena(DoubleRounder.round(ukupnaCena, 2));
 				double ukupnaCena2 = (kartica2.getUkupnaVrednost()+stavkaDokumenta.getVrednost())/(kartica2.getUkupnaKolicina()+stavkaDokumenta.getKolicina());
-				kartica2.setCena(ukupnaCena2);
+				kartica2.setCena(DoubleRounder.round(ukupnaCena2, 2));
 				
 				//Postavljenje kolicine za magacine
 				double izlazKolicinski = kartica.getPrometIzlazaKolicinski()+stavkaDokumenta.getKolicina();
