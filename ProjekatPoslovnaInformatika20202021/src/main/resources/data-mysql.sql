@@ -36,7 +36,7 @@ INSERT INTO magacinska_kartica(id, cena, pocetno_stanje_kolicinski, pocetno_stan
 VALUES(4, 20, 0, 0, 0, 0, 200, 4000, 200, 4000, 1, 2, 4);
 
 
-INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner1','Adresa1','123456789','email@example1.com',123123,321321,1);
+INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner1','Adresa1','123456789','email@example1.com',123124,321321,1);
 INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner2','Adresa2','234234234','email@example2.com',235232,457454,2);
 INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner3','Adresa3','346346436','email@example3.com',235542,745745,1);
 
