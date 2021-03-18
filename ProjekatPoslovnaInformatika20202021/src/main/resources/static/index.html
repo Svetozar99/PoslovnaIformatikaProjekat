@@ -336,7 +336,7 @@
           </tbody>
         </table>
         <!-- Forma za dodavanje preduzeca -->
-        <form id="dodajPreduzece" style="display: none;">
+        <div id="dodajPreduzece" style="display: none;">
           <div class="form-group">
               <label for="naziv">Naziv:</label> <input type="text"
                                                           class="form-control" id="naziv" placeholder="Unesite naziv preduzeća">
@@ -359,7 +359,7 @@
           </div>
           <button id="btnDodajPreduzece" onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
           <button id="updatePreduzece" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
-      </form>
+        </div>
       
       <!-- Prikaz svih magacina -->
         <table class="table" id="magaciniTable" style="display: none;">
@@ -406,7 +406,7 @@
         </table>
         
         <!-- Forma za dodavanje jedinice mere -->
-        <form id="dodajJedinicuMere" style="display: none;">
+        <div id="dodajJedinicuMere" style="display: none;">
           <div class="form-group">
               <label for="naziv">Naziv:</label> <input type="text"
                                                           class="form-control" id="nazivJediniceMere" placeholder="Unesite naziv jedinice mere">
@@ -417,8 +417,8 @@
           </div>
 
           <button id="btnDodajJedinicuMere" onclick="submitJedinicaMere()" type="submit" class="btn btn-secondary">Dodaj</button>
-		  <button id="izmeniJedinicuMere" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
-      </form>
+		      <button id="izmeniJedinicuMere" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
+        </div>
         
         <!-- Forma za dodavanje magacina -->
         <form id="dodajMagacin" style="display: none;">
@@ -440,7 +440,7 @@
 
 
       <!-- Forma za dodavanje robe/usluge -->
-      <form id="dodavanjeRobeUsluge" style="display: none;">
+      <div id="dodavanjeRobeUsluge" style="display: none;">
         <div class="form-group">
             <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
                                                         class="form-control" id="nazivInputRobaUsluga" placeholder="Unesite naziv robe/usluge">
@@ -455,7 +455,7 @@
 
         </div>
         <button onclick="submitRobaUsluga()" type="submit" class="btn btn-secondary">Dodaj</button>
-      </form>
+      </div>
       <!-- Prikaz svih prometa magacinskih kartica -->
 
       <table class="table" id="prometiMagacinskihKarticaTable" style="display: none;">

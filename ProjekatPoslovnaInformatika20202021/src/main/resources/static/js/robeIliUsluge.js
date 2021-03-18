@@ -101,28 +101,31 @@ function dajJediniceMere(){
 }*/
 
 function submitRobaUsluga(){
-
-    var naziv = $("#nazivInputRobaUsluga");
+    var naziv = "";
+    naziv = $("#nazivInputRobaUsluga").val();
     var jedinicaMere = $("#inputJedinicaMere");
-    var formData = {
-        "naziv": naziv.val(),
-        "idJedinicaMere": jedinicaMere.val()
-    }
-
-    $.ajax({
-        url : 'http://localhost:8080/api/roba-ili-usluga',
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(){
-            alert('Roba ili usluga uspesno dodata');
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+    if(naziv===""){
+        alert("Morate uneti naziv robe ili usluge");
+    }else {
+        var formData = {
+            "naziv": naziv,
+            "idJedinicaMere": jedinicaMere.val()
         }
-    });
-
+        
+        $.ajax({
+            url : 'http://localhost:8080/api/roba-ili-usluga',
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(){
+                alert('Roba ili usluga uspesno dodata');
+            },
+            error : function(e){
+                alert('greska se desila');
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 }
 
 function prikaziRobeIliUsluge(list){
@@ -133,9 +136,9 @@ function prikaziRobeIliUsluge(list){
         html += '<tr>';
         html +=     '<td align="center">'+ru.sifra+'</td>';
         html +=     '<td align="center">';
-        html +=         '<a href="" id="prikaziJedno" result-prID="'+ru.sifra+'">';
+        // html +=         '<a href="" id="prikaziJedno" result-prID="'+ru.sifra+'">';
         html +=             ru.naziv;
-        html +=         '</a>';
+        // html +=         '</a>';
         html +=     '</td>';
         html +=     '<td align="center">'+ru.jedinicaMere+'</td>';
         html +=   '</tr>';
