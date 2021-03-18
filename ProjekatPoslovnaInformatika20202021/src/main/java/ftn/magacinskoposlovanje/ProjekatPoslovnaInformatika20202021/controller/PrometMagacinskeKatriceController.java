@@ -55,5 +55,31 @@ public class PrometMagacinskeKatriceController {
 		}
 		return new ResponseEntity<List<PrometMagacinskeKarticeDTO>>(karticeDTOs, HttpStatus.OK);
 	}
-
+	
+	@GetMapping(value = "storniraj/{id}")
+	public ResponseEntity<PrometMagacinskeKarticeDTO> getOnePromet(@PathVariable("id") Integer id) throws Exception{
+		PrometMagacinskeKartice promMK = prometMagacinskeKarticeService.findOne(id);
+		if(promMK == null) {
+			return new ResponseEntity<PrometMagacinskeKarticeDTO>(HttpStatus.NOT_FOUND);
+		}
+		
+		MagacinskaKartica mk = promMK.getMagacinskaKartica();
+		
+		mk.setUkupnaKolicina(mk.getUkupnaKolicina() - promMK.getKolicina());
+		mk.setUkupnaVrednost(mk.getUkupnaVrednost() - promMK.getVrednost());
+		mk = magacinskaKarticaServiceInterface.save(mk);
+		PrometMagacinskeKartice prmkst = new PrometMagacinskeKartice();
+		prmkst.setVrstaPrometa(promMK.getVrstaPrometa());
+		prmkst.setSmer(promMK.getSmer());
+		prmkst.setKolicina(-promMK.getKolicina());
+		prmkst.setCena(promMK.getCena());
+		prmkst.setVrednost(-promMK.getVrednost());
+		prmkst.setMagacinskaKartica(mk);
+		prmkst.setDatumPrometa(promMK.getDatumPrometa());
+		prmkst.setDokument(promMK.getDokument());
+		prmkst = prometMagacinskeKarticeService.save(prmkst);
+		return new ResponseEntity<PrometMagacinskeKarticeDTO>(new PrometMagacinskeKarticeDTO(prmkst), HttpStatus.OK);
+	}
+	
+	
 }
