@@ -182,11 +182,13 @@ function prikazi(){
         dajMagacine("selectMagacin",1);
         prometniDokment.show();
         otpremnica.show();
+        formatirajBroj();
     }else if(prikaziMedjumagacinskiPromet){
         //console.log("prikaziMedjumagacinskiPromet");
         dajPreduzeca("selectPreduzeca");
         prometniDokment.show();
         medjumagacinskiPromet.show();
+        formatirajBroj();
     }else if(prikaziPreduzeca){
         prikazSvihPreduzeca();
     }else if(dodavanjePreduzeca){

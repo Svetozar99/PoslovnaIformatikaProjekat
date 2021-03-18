@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,7 @@ public class MagacinskaKartica {
 	@Column(name = "promet_izlaza_kolicinski", nullable = false)
 	private double prometIzlazaKolicinski;
 	
+	@Size(min=0,message="nemate dovoljno robe u magacinu")
 	@Column(name = "ukupna_kolicina", nullable = false)
 	private double ukupnaKolicina;
 	
@@ -139,7 +141,10 @@ public class MagacinskaKartica {
 		return ukupnaKolicina;
 	}
 
-	public void setUkupnaKolicina(double ukupnaKolicina) {
+	public void setUkupnaKolicina(double ukupnaKolicina) throws Exception {
+		if(ukupnaKolicina < 0) {
+			throw new Exception("Nemate dovoljno robe u magacinu!");
+		}
 		this.ukupnaKolicina = ukupnaKolicina;
 	}
 

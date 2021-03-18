@@ -52,7 +52,7 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 
 	@Override
 	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
-			Integer poslovnaGodinaId, Integer sifraMagacina){
+			Integer poslovnaGodinaId, Integer sifraMagacina) throws Exception{
 		RobaIliUsluga robaIliUsluga = robaIliUslugaRepository.findOneBySifra(robaIliUslugaId);
 		PoslovnaGodina poslovnaGodina = poslovnaGodinaRepository.findOneByBrojGodine(poslovnaGodinaId);
 

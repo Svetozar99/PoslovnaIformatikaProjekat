@@ -94,7 +94,7 @@ public class StavkaDokumentaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<List<StavkaDokumentaDTO>> addStavke(@RequestBody List<StavkaDokumentaDTO> dtos){
+	public ResponseEntity<List<StavkaDokumentaDTO>> addStavke(@RequestBody List<StavkaDokumentaDTO> dtos) throws Exception{
 		System.out.println("\n\taddStavke");
 		MagacinskaKartica kartica = new MagacinskaKartica();
 		MagacinskaKartica kartica2 = new MagacinskaKartica();
