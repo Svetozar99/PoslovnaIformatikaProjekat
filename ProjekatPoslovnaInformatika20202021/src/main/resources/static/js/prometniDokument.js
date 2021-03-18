@@ -157,7 +157,7 @@ function proknjizi(){
                 var greskaKolicina = false;
                 var stavke = [];
                 var greska2=""
-               // console.log("Redovi: "+JSON.stringify(redovi));
+                console.log("Redovi: "+JSON.stringify(redovi));
                // var i =0;
                 redovi.forEach(red => {
                     //console.log(JSON.stringify(red))
@@ -186,7 +186,7 @@ function proknjizi(){
                     alert(greska2);
                 }
                 else{
-                    //console.log(JSON.stringify(stavke));
+                    console.log(JSON.stringify(stavke));
                     $.ajax({
                         url : 'http://localhost:8080/api/stavka-dokumenta',
                         type : "POST",
