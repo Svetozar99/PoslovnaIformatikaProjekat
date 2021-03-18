@@ -120,6 +120,7 @@ public class StavkaDokumentaController {
 			stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
 			
 			//Postavljanje id za promet magacinske kartice
+			System.out.println("Redni broj: "+pd.getRedniBroj());
 			prometKartice.setRedniBroj(pd.getRedniBroj());
 			prometKartice2.setRedniBroj(pd.getRedniBroj());
 			

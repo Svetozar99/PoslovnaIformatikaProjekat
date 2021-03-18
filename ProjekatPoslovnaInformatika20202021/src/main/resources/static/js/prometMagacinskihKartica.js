@@ -14,18 +14,31 @@ function prikazSvihPrometaMagKartica() {
             success : function(result){
                 sadrzajTabele.empty();
                 for(p in result){
-                    sadrzajTabele.append(
-                        '<tr>'
-                            +'<td align="center">'+result[p].redniBroj+'</td>'
-							+'<td align="center">'+result[p].vrstaPrometa+'</td>'
-							+'<td align="center">'+result[p].smer+'</td>'
-							+'<td align="center">'+result[p].kolicina+'</td>'
-							+'<td align="center">'+result[p].jedinicaMere+'</td>'
-                            +'<td align="center">'+result[p].vrednost+'</td>'
-                            +'<td align="center">'+result[p].cena+'</td>'
-                            +'<td align="center"><button onclick="storniranje(\''+result[p].redniBroj+'\')" class="btn btn-outline-warning">Storniraj</button></td>'
-						+'</tr>'
-                    )};
+                    var html="";
+                    if(result[p].redniBroj.startsWith("0") || result[p].kolicina<0){
+                        html = '<tr>'
+                                +'<td align="center">'+result[p].redniBroj+'</td>'
+                                +'<td align="center">'+result[p].vrstaPrometa+'</td>'
+                                +'<td align="center">'+result[p].smer+'</td>'
+                                +'<td align="center">'+result[p].kolicina+'</td>'
+                                +'<td align="center">'+result[p].jedinicaMere+'</td>'
+                                +'<td align="center">'+result[p].vrednost+'</td>'
+                                +'<td align="center">'+result[p].cena+'</td>'
+                                +'<td align="center"></td>'
+                            +'</tr>'
+                    }else{
+                        html = '<tr>'
+                                +'<td align="center">'+result[p].redniBroj+'</td>'
+                                +'<td align="center">'+result[p].vrstaPrometa+'</td>'
+                                +'<td align="center">'+result[p].smer+'</td>'
+                                +'<td align="center">'+result[p].kolicina+'</td>'
+                                +'<td align="center">'+result[p].jedinicaMere+'</td>'
+                                +'<td align="center">'+result[p].vrednost+'</td>'
+                                +'<td align="center">'+result[p].cena+'</td>'
+                                +'<td align="center"><button onclick="storniranje(\''+result[p].redniBroj+'\')" class="btn btn-outline-warning">Storniraj</button></td>'
+                            +'</tr>'
+                    }
+                    sadrzajTabele.append(html)};
                     
             },
             error :function(e){
@@ -67,6 +80,7 @@ function storniranje(redniBroj){
         url : 'http://localhost:8080/api/promet-magacinske-kartice/storniraj/'+redniBroj,
         success : function(result){
             alert('stornirano');
+            prikazSvihPrometaMagKartica();
         },
         error :function(e){
             alert('ne valja nesto kod storniranja');

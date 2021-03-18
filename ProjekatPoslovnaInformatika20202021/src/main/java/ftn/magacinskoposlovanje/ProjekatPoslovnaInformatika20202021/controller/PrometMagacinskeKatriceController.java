@@ -79,9 +79,9 @@ public class PrometMagacinskeKatriceController {
 		prmkst.setRedniBroj(redniBroj);
 		prmkst.setVrstaPrometa(promMK.getVrstaPrometa());
 		prmkst.setSmer(promMK.getSmer());
-		prmkst.setKolicina(mk.getUkupnaKolicina()-promMK.getKolicina());
+		prmkst.setKolicina(-promMK.getKolicina());
 		prmkst.setCena(promMK.getCena());
-		prmkst.setVrednost(mk.getUkupnaVrednost()-promMK.getVrednost());
+		prmkst.setVrednost(-promMK.getVrednost());
 		prmkst.setMagacinskaKartica(mk);
 		prmkst.setDatumPrometa(promMK.getDatumPrometa());
 		prmkst.setDokument(promMK.getDokument());

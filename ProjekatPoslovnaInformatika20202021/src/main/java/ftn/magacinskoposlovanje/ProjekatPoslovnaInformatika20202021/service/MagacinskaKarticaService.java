@@ -14,8 +14,11 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magaci
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Smer;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Status;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaPrometa;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.MagacinRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.MagacinskaKarticaRepository;
@@ -24,6 +27,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.R
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovnaGodinaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometniDokumentServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.RobaIliUslugaServiceInterface;
 
 @Service
@@ -43,6 +47,9 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	
 	@Autowired
 	PrometMagacinskeKarticeServiceInterface prometMagacinskeKarticeServiceInterface;
+	
+	@Autowired
+	PrometniDokumentServiceInterface prometniDokumentServiceInterface;
 	
 	@Override
 	public List<MagacinskaKartica> findAll() {
@@ -91,8 +98,13 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 				kartica.setPocetnoStanjeVrednosno(kartica2.getPocetnoStanjeVrednosno());
 				
 				kartica = magacinskaKarticaRepository.save(kartica);
+				Date date = new Date();
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(date);
+				
 				
 				PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
+				promet.setRedniBroj(0+"-"+calendar.get(Calendar.YEAR));
 				promet.setVrstaPrometa(VrstaPrometa.PS);
 				promet.setSmer(Smer.U);
 				promet.setKolicina(kartica.getPocetnoStanjeKolicinski());

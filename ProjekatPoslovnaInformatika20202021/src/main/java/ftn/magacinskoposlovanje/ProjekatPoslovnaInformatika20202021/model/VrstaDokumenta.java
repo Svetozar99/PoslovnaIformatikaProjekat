@@ -4,7 +4,8 @@ public enum VrstaDokumenta {
 
 	PR("Primka"),
 	OT("Otpremnica"),
-	MM("Medjumagacinski promet");
+	MM("Medjumagacinski promet"),
+	NN("Nedodeljena");
 	
 	public final String label;
 
