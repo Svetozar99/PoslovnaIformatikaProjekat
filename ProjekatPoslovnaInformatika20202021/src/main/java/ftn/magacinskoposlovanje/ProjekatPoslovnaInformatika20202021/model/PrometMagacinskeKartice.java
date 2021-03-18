@@ -144,4 +144,13 @@ public class PrometMagacinskeKartice {
 	public void setMagacinskaKartica(MagacinskaKartica magacinskaKartica) {
 		this.magacinskaKartica = magacinskaKartica;
 	}
+
+	@Override
+	public String toString() {
+		return "PrometMagacinskeKartice [idPrometa=" + idPrometa + ", vrstaPrometa=" + vrstaPrometa + ", smer=" + smer
+				+ ", kolicina=" + kolicina + ", cena=" + cena + ", vrednost=" + vrednost + ", dokument=" + dokument
+				+ ", datumPrometa=" + datumPrometa + ", magacinskaKartica=" + magacinskaKartica + "]";
+	}
+	
+	
 }

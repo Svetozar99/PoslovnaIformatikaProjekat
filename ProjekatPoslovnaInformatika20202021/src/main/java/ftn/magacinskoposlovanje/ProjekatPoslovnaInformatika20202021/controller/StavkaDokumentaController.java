@@ -18,10 +18,14 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.St
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Smer;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.StavkaDokumenta;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaPrometa;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.service.PrometMagacinskeKarticeInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometniDokumentServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.RobaIliUslugaServiceInterface;
@@ -42,6 +46,9 @@ public class StavkaDokumentaController {
 	
 	@Autowired
 	private MagacinskaKarticaServiceInterface magacinskaKarticaServiceInterface;
+	
+	@Autowired
+	private PrometMagacinskeKarticeInterface prometMagacinskeKarticeInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<StavkaDokumentaDTO>> getStavkeDokumenta(){
@@ -92,7 +99,11 @@ public class StavkaDokumentaController {
 		MagacinskaKartica kartica = new MagacinskaKartica();
 		MagacinskaKartica kartica2 = new MagacinskaKartica();
 		for (StavkaDokumentaDTO stavkaDokumentaDTO : dtos) {
+			PrometMagacinskeKartice prometKartice = new PrometMagacinskeKartice();
+			PrometMagacinskeKartice prometKartice2 = new PrometMagacinskeKartice();
+			
 			PrometniDokument pd = prometniDokumentServiceInterface.findOneById(stavkaDokumentaDTO.getPrometniDokument());
+			
 			RobaIliUsluga ru = robaIliUslugaServiceInterface.findOneBySifra(stavkaDokumentaDTO.getRobaUsluga());
 			StavkaDokumenta stavkaDokumenta = new StavkaDokumenta();
 			System.out.println(stavkaDokumentaDTO.toString());
@@ -103,6 +114,23 @@ public class StavkaDokumentaController {
 			stavkaDokumenta.setPrometniDokument(pd);
 			stavkaDokumenta.setRobaIliUsluga(ru);
 			stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
+			
+			//Postavljanje kolicine za promet magacinske kartice
+			prometKartice.setKolicina(stavkaDokumenta.getKolicina());
+			prometKartice2.setKolicina(stavkaDokumenta.getKolicina());
+			
+			//Postavljanje cene za promet magacinske kartice
+			prometKartice.setCena(stavkaDokumenta.getCena());
+			prometKartice2.setCena(stavkaDokumenta.getCena());
+			
+			//Postavljanje vrednost za promet magacinske kartice
+			prometKartice.setVrednost(stavkaDokumenta.getVrednost());
+			prometKartice2.setVrednost(stavkaDokumenta.getVrednost());
+			
+			//Postavljanje vrednost za promet magacinske kartice
+			prometKartice.setDatumPrometa(pd.getDatum());
+			prometKartice2.setDatumPrometa(pd.getDatum());
+			
 			if(pd.getVrstaDokumenta().equals(VrstaDokumenta.PR)) {
 				//Trazenje kartice
 				kartica = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getUlazniMagacin().getSifraMagacina());
@@ -121,8 +149,24 @@ public class StavkaDokumentaController {
 				double ukupnaVrednost = kartica.getPocetnoStanjeVrednosno()+kartica.getPrometUlazaVrednosno()-kartica.getPrometIzlazaVrednosno();
 				kartica.setUkupnaVrednost(ukupnaVrednost);
 				
+				//Postavljanje vrste prometa za promet magacinske kartice
+				prometKartice.setVrstaPrometa(VrstaPrometa.PR);
+				
+				//Postavljanje smera za promet magacinske kartice
+				prometKartice.setSmer(Smer.U);
+				
+				//Postavljanje naziva dokumenta za promet magacinske kartice
+				prometKartice.setDokument(pd.getVrstaDokumenta().label);
+				
 				//Pisanje u bazu
 				kartica = magacinskaKarticaServiceInterface.save(kartica);
+				
+				//Postavljanje magacinske kartice za promet
+				prometKartice.setMagacinskaKartica(kartica);
+				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice.toString()+"\n");
+
+				//Cuvanje prometa
+				prometMagacinskeKarticeInterface.save(prometKartice);
 			}else if(pd.getVrstaDokumenta().equals(VrstaDokumenta.OT)) {
 				//Trazenje kartice
 				kartica = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getIzlazniMagacin().getSifraMagacina());
@@ -140,9 +184,24 @@ public class StavkaDokumentaController {
 				kartica.setPrometIzlazaVrednosno(kartica.getPrometIzlazaVrednosno()+stavkaDokumenta.getVrednost());
 				double ukupnaVrednost = kartica.getPocetnoStanjeVrednosno()+kartica.getPrometUlazaVrednosno()-kartica.getPrometIzlazaVrednosno();
 				kartica.setUkupnaVrednost(ukupnaVrednost);
+
+				//Postavljanje vrste prometa za promet magacinske kartice
+				prometKartice.setVrstaPrometa(VrstaPrometa.OT);
+				
+				//Postavljanje smera za promet magacinske kartice
+				prometKartice.setSmer(Smer.I);
+				
+				//Postavljanje naziva dokumenta za promet magacinske kartice
+				prometKartice.setDokument(pd.getVrstaDokumenta().label);
 				
 				//Pisanje u bazu
 				kartica = magacinskaKarticaServiceInterface.save(kartica);
+				
+				//Postavljanje magacinske kartice za promet
+				prometKartice.setMagacinskaKartica(kartica);
+				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice.toString()+"\n");
+				//Cuvanje prometa
+				prometMagacinskeKarticeInterface.save(prometKartice);
 			}else if(pd.getVrstaDokumenta().equals(VrstaDokumenta.MM)){
 				//Trazenje kartice za prvi magacin
 				kartica = magacinskaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(ru.getSifra(), pd.getPoslovnaGodina().getBrojGodine(), pd.getUlazniMagacin().getSifraMagacina());
@@ -175,9 +234,31 @@ public class StavkaDokumentaController {
 				double ukupnaVrednost2 = kartica2.getPocetnoStanjeVrednosno()+kartica2.getPrometUlazaVrednosno()-kartica2.getPrometIzlazaVrednosno();
 				kartica2.setUkupnaVrednost(ukupnaVrednost2);
 				
+				//Postavljanje vrste prometa za promet magacinske kartice
+				prometKartice.setVrstaPrometa(VrstaPrometa.MM);
+				prometKartice2.setVrstaPrometa(VrstaPrometa.MM);
+				
+				//Postavljanje smera za promet magacinske kartice
+				prometKartice.setSmer(Smer.I);
+				prometKartice2.setSmer(Smer.U);
+				
+				//Postavljanje naziva dokumenta za promet magacinske kartice
+				prometKartice.setDokument(pd.getVrstaDokumenta().label);
+				prometKartice2.setDokument(pd.getVrstaDokumenta().label);
+				
 				//Pisanje magacinski kartica u bazu
 				kartica = magacinskaKarticaServiceInterface.save(kartica);
 				kartica2 = magacinskaKarticaServiceInterface.save(kartica2);
+				
+				//Postavljanje magacinske kartice za promet
+				prometKartice.setMagacinskaKartica(kartica);
+				prometKartice2.setMagacinskaKartica(kartica2);
+				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice.toString()+"\n");
+				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice2.toString()+"\n");
+
+				//Cuvanje prometa
+				prometMagacinskeKarticeInterface.save(prometKartice);
+				prometMagacinskeKarticeInterface.save(prometKartice2);
 			}
 		}
 		return new ResponseEntity<List<StavkaDokumentaDTO>>(dtos, HttpStatus.CREATED);
