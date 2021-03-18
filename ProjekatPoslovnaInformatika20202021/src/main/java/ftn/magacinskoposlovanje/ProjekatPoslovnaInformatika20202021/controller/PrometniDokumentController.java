@@ -58,7 +58,17 @@ public class PrometniDokumentController {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR));
-		Preduzece preduzece = new Preduzece();
+		Preduzece preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
+		if(poslovnaGodina == null) {
+			PoslovnaGodina godina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR)-1);
+			godina.setZakljucena(true);
+			poslovnaGodinaServiceInterface.save(godina);
+			poslovnaGodina = new PoslovnaGodina();
+			poslovnaGodina.setBrojGodine(calendar.get(Calendar.YEAR));
+			poslovnaGodina.setPreduzece(preduzece);
+			poslovnaGodina.setZakljucena(false);
+			poslovnaGodina = poslovnaGodinaServiceInterface.save(poslovnaGodina);
+		}
 		Magacin ulazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina1());
 		Magacin izlazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina2());
 		
@@ -70,14 +80,14 @@ public class PrometniDokumentController {
 		
 		if(dto.getVrstaDokumenta().equals(VrstaDokumenta.PR.toString())) {
 			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
-			preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
+			
 			prometniDokument.setVrstaDokumenta(VrstaDokumenta.PR);
 			prometniDokument.setPoslovniPartner(poslovniPartner);
 			prometniDokument.setPreduzece(preduzece);
 			prometniDokument.setUlazniMagacin(ulazniMagacin);
 		}else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.OT.toString())) {
 			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
-			preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
+			
 			prometniDokument.setVrstaDokumenta(VrstaDokumenta.OT);
 			prometniDokument.setPoslovniPartner(poslovniPartner);
 			prometniDokument.setPreduzece(preduzece);
