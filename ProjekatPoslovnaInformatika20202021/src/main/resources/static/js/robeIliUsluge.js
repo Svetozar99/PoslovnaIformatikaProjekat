@@ -55,6 +55,7 @@ function selectRobaIliUsluga(list){
    
     var inputRobaForMagKart = $("#inputRobaForMagKart");
     var html = "";
+    html += '<option value="0"></option>';
     list.forEach(roba => {
         html += '<option value="' + roba.sifra + '">' + roba.naziv + '</option>';
     });

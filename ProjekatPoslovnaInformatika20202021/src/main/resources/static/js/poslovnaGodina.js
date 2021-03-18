@@ -181,6 +181,7 @@ function selectPoslGod(list){
    
     var inputGodinaForMagKart = $("#inputGodinaForMagKart");
     var html = "";
+    html += '<option value="0"></option>';
     list.forEach(posG => {
         html += '<option value="' + posG.brojGodine + '">' + posG.brojGodine + '</option>';
     });

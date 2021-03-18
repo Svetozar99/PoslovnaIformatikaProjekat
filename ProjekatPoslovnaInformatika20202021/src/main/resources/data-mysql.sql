@@ -25,12 +25,12 @@ INSERT INTO magacin(sifra_magacina, naziv_magacina, preduzece) VALUES (3, 'Magac
 INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUES (1, 2020, 0, 1);
 INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUES (2, 2021, 1, 1);
 
---INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
---VALUE (1, 200, 70, 30, 240,500000, 171000, 78000, 593000, 2471, 1, 2, 8);
---INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
---VALUE (2, 500, 350, 400, 450,375000, 259000, 304000, 330000, 734, 1, 1, 7);
---INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
---VALUE (3, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 3);
+INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
+VALUE (1, 200, 70, 30, 240,500000, 171000, 78000, 593000, 2471, 1, 2, 8);
+INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
+VALUE (2, 500, 350, 400, 450,375000, 259000, 304000, 330000, 734, 1, 1, 7);
+INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
+VALUE (3, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 3);
 
 INSERT INTO magacinska_kartica(id, cena, pocetno_stanje_kolicinski, pocetno_stanje_vrednosno, promet_izlaza_kolicinski, promet_izlaza_vrednosno, promet_ulaza_kolicinski, promet_ulaza_vrednosno, ukupna_kolicina, ukupna_vrednost, magacin, poslovna_godina, roba_ili_usluga)
 VALUES(4, 20, 0, 0, 0, 0, 200, 4000, 200, 4000, 1, 2, 4);

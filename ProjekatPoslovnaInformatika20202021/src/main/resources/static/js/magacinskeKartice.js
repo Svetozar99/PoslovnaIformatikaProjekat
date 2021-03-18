@@ -2,18 +2,17 @@ var selectedId;
 
 function prikazSvihMagacinskihKartica() {
 
-    
+    var sifraMagacina = $('#inputMagacinForMagKart').val();
+    var sifraRobeIliUsluge = $('#inputRobaForMagKart').val();
+    var brojPoslovneGodine = $('#inputGodinaForMagKart').val();
     var tabelaMK = $("#magacinskeKarticeTable");
     var tbodyMK = $("#tbodyMagacinskeKartice");
     
     function prikaziMagKart(){
-        dajMagacine('selectMagacin', 0);
-        dajRobuIliU('svaRobaU');
-        dajPoslGod('svePoslGodine');
         $.ajax({
             type: "GET",
             contentType : 'application/json; charset=utf-8',
-            url : "http://localhost:8080/api/magacinska-kartica",
+            url : "http://localhost:8080/api/magacinska-kartica/"+sifraMagacina+"/"+sifraRobeIliUsluge+"/"+brojPoslovneGodine,
             success : function(result){
                 tabelaMK.show();
                 tbodyMK.empty();

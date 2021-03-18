@@ -96,4 +96,49 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 		return magacinskaKarticaRepository.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina,sifraRobeIliUsluge);
 	}
 
+	@Override
+	public List<MagacinskaKartica> findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(
+			Integer sifraRobeUsluge, Integer brojGodine, Integer sifraMagacina) {// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(sifraRobeUsluge, brojGodine, sifraMagacina);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,
+			Integer sifraRobeIliUsluge) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, sifraRobeIliUsluge);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByMagacin_sifraMagacinaAndPoslovnaGodina_brojGodine(Integer sifraMagacina,
+			Integer brojGodine) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndPoslovnaGodina_brojGodine(sifraMagacina, brojGodine);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByPoslovnaGodina_brojGodineAndRobaIliUsluga_sifra(Integer brojGodine,
+			Integer sifraRobeIliUsluge) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByPoslovnaGodina_brojGodineAndRobaIliUsluga_sifra(brojGodine, sifraRobeIliUsluge);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByMagacin_sifraMagacina(Integer sifraMagacina) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByMagacin_sifraMagacina(sifraMagacina);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByPoslovnaGodina_brojGodine(Integer brojGodine) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByPoslovnaGodina_brojGodine(brojGodine);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByRobaIliUsluga_sifra(Integer sifraRobeIliUsluge) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByRobaIliUsluga_sifra(sifraRobeIliUsluge);
+	}
+
 }

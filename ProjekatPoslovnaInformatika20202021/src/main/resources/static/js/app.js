@@ -214,6 +214,9 @@ function prikazi(){
         selectMagacinForMagKart.show();
         selectRobaForMagKart.show();
         selectGodinaForMagKart.show();
+        dajMagacine('selectMagacin', 0);
+        dajRobuIliU('svaRobaU');
+        dajPoslGod('svePoslGodine');
         prikazSvihMagacinskihKartica();
     }else if(prikaziPoslovneGodine){
         prikazSvihPoslovnihGodina();

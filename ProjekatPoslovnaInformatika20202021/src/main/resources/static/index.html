@@ -482,7 +482,8 @@
             <td>
             <div id="selectMagacinForMagKart" class="form-group" style="display: none;">
               <label>Izaberite magacin:
-                <select class="form-control" id="inputMagacinForMagKart">
+                <select onchange="prikazSvihMagacinskihKartica()" class="form-control" id="inputMagacinForMagKart">
+                  <option value="0"></option>
                 </select>
               </label>
             </div>
@@ -490,7 +491,8 @@
             <td>
             <div id="selectRobaForMagKart" class="form-group">
               <label>Izaberite robu:
-                <select class="form-control" id="inputRobaForMagKart">
+                <select onchange="prikazSvihMagacinskihKartica()" class="form-control" id="inputRobaForMagKart">
+                  <option value="0"></option>
                 </select>
               </label>
             </div>
@@ -498,11 +500,12 @@
             <td>
             <div id="selectGodinaForMagKart" class="form-group">
               <label>Izaberite poslovnu godinu:
-                <select class="form-control" id="inputGodinaForMagKart">
+                <select onchange="prikazSvihMagacinskihKartica()" class="form-control" id="inputGodinaForMagKart">
+                  <option value="0"></option>
                 </select>
               </label>
             </div>
-            <button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="prikaziOdredjenuMagacinskuKarticu()">aaaa</button>
+            <!-- <button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="prikaziOdredjenuMagacinskuKarticu()">aaaa</button> -->
             </div>
           </td>
           </tr>
