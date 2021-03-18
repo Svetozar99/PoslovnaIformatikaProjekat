@@ -111,4 +111,13 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return "PrometMagacinskeKarticeDTO [id=" + id + ", redniBroj=" + redniBroj + ", vrstaPrometa=" + vrstaPrometa
+				+ ", smer=" + smer + ", kolicina=" + kolicina + ", cena=" + cena + ", vrednost=" + vrednost
+				+ ", jedinicaMere=" + jedinicaMere + "]";
+	}
+	
+	
 }
