@@ -43,38 +43,81 @@ function prikazSvihPartnera() {
 
 function submitPoslovnogPartnera(){
     console.log("submitPartner")
-    var naziv = $("#nazivInputPoslovnogPartnera");
-    var adresa = $("#adresaInputPoslovnogPartnera");
-    var telefon = $("#telefonInputPoslovnogPartnera");
-    var email = $("#emailInputPoslovnogPartnera");
-    var pib = $("#pibInputPoslovnogPartnera");
-    var mib = $("#mibInputPoslovnogPartnera");
-    var preduzece = $("#inputPreduzecePoslovnogPartnera");
+    var greska = "";
+    var nazivInput = "";
+    var adresaInput = "";
+    var brojTelefonaInput = "";
+    var email = "";
+    var pibInput = "";
+    var mibInput = "";
+    nazivInput = $("#nazivInputPoslovnogPartnera").val();
+    adresaInput = $("#adresaInputPoslovnogPartnera").val();
+    brojTelefonaInput = $("#telefonInputPoslovnogPartnera").val();
+    email = $("#emailInputPoslovnogPartnera").val();
+    pibInput = $("#pibInputPoslovnogPartnera").val();
+    mibInput = $("#mibInputPoslovnogPartnera").val();
+    var preduzece = $("#inputPreduzecePoslovnogPartnera").val();
 
-    var formData = {
-        "nazivPartnera": naziv.val(),
-        "adresa": adresa.val(),
-        "brojTelefona": telefon.val(),
-        "email": email.val(),
-        "pIB": pib.val(),
-        "mIB": mib.val(),
-        "idPreduzeca": preduzece.val()
-        
+    var nazivGreska;
+    var adresaGreska;
+    var brojTelGreska;
+    var eadresaGreska;
+    var pibGreska;
+    var mibGreska;
+
+    if(nazivInput === ""){
+        nazivGreska = true;
+        greska += "\nMorate uneti naziv poslovnog partnera";
     }
-
-    $.ajax({
-        url : 'http://localhost:8080/api/poslovni-partner',
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(result){
-            alert('Partner je uspesno dodat');
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+    if(adresaInput === ""){
+        adresaGreska = true;
+        greska += "\nMorate uneti adresu poslovnog partnera";
+    }
+    if(brojTelefonaInput === ""){
+        brojTelGreska = true;
+        greska += "\nMorate uneti broj telefona poslovnog partnera";
+    }
+    if(email === ""){
+        eadresaGreska = true;
+        greska += "\nMorate uneti email poslovnog partnera";
+    }
+    if(pibInput === ""){
+        pibGreska = true;
+        greska += "\nMorate uneti pib poslovnog partnera";
+    }
+    if(mibInput === ""){
+        mibGreska = true;
+        greska += "\nMorate uneti mib poslovnog partnera";
+    }
+    if(nazivGreska || adresaGreska || brojTelGreska || eadresaGreska || pibGreska || mibGreska){
+        alert(greska);
+    }
+    else{
+        var formData = {
+            "nazivPartnera": naziv.val(),
+            "adresa": adresa.val(),
+            "brojTelefona": telefon.val(),
+            "email": email.val(),
+            "pIB": pib.val(),
+            "mIB": mib.val(),
+            "idPreduzeca": preduzece.val()
+            
         }
-    });
+    
+        $.ajax({
+            url : 'http://localhost:8080/api/poslovni-partner',
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(result){
+                alert('Partner je uspesno dodat');
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 }
 
 function editPoslovniPartner(id){

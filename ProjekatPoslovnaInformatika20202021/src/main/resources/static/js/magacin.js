@@ -39,29 +39,38 @@ function prikazSvihMagacina() {
 }
 
 function submitMagacin(){
-
-    var nazivInput = $("#nazivMagacina");
+    var greska = "";
+    var nazivInput = "";
+    nazivInput = $("#nazivMagacina").val();
     var preduzeceInput = $("#preduzece");
 
-    var formData = {
-        "naziv": nazivInput.val(),
-        "preduzece": preduzeceInput.val()
-        
-    }
+    var nazivGreska;
 
-    $.ajax({
-        url : 'http://localhost:8080/api/magacin',
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(result){
-            alert('Magacin je uspesno dodat');
-        },
-        error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+    if(nazivInput === ""){
+        nazivGreska = true;
+        greska += "\nMorate uneti naziv magacina";
+    }
+    if(nazivGreska){
+        alert(greska);
+    }else{
+        var formData = {
+            "naziv": nazivInput,
+            "preduzece": preduzeceInput.val()
         }
-    });
+        $.ajax({
+            url : 'http://localhost:8080/api/magacin',
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(result){
+                alert('Magacin je uspesno dodat');
+            },
+            error : function(e){
+                alert('Doslo je do neke greške!')
+                console.log("ERROR: ", e);
+            }
+        });
+    }
 }
 
 /*function selectPreduzecaMagacin(preduzeca){
