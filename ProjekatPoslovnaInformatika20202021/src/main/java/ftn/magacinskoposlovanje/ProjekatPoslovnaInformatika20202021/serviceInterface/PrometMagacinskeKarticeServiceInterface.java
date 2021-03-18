@@ -8,7 +8,7 @@ public interface PrometMagacinskeKarticeServiceInterface {
 
 public List<PrometMagacinskeKartice> findAll();
 	
-	public PrometMagacinskeKartice findOne(Integer id);
+	public PrometMagacinskeKartice findOne(String redniBroj);
 	
 	public PrometMagacinskeKartice save(PrometMagacinskeKartice prometMagacinskeKartice);
 	

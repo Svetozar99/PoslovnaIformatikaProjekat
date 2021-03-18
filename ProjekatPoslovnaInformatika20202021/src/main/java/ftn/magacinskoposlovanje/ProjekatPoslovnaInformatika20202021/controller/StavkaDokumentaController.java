@@ -116,6 +116,10 @@ public class StavkaDokumentaController {
 			stavkaDokumenta.setRobaIliUsluga(ru);
 			stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
 			
+			//Postavljanje id za promet magacinske kartice
+			prometKartice.setRedniBroj(pd.getRedniBroj());
+			prometKartice2.setRedniBroj(pd.getRedniBroj());
+			
 			//Postavljanje kolicine za promet magacinske kartice
 			prometKartice.setKolicina(stavkaDokumenta.getKolicina());
 			prometKartice2.setKolicina(stavkaDokumenta.getKolicina());

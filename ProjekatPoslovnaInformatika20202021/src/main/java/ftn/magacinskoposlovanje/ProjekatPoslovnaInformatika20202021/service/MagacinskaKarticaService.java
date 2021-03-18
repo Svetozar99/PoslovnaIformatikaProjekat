@@ -105,7 +105,7 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 				promet.setVrstaPrometa(VrstaPrometa.PS);
 				promet.setSmer(Smer.U);
 				promet.setKolicina(kartica.getPocetnoStanjeKolicinski());
-				promet.setCena(0);
+				promet.setCena(kartica.getCena());
 				promet.setVrednost(kartica.getPocetnoStanjeVrednosno());
 				promet.setDokument(VrstaPrometa.PS.label);
 				promet.setDatumPrometa(new Date());

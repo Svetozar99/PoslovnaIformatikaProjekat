@@ -23,8 +23,11 @@ public class PrometMagacinskeKartice {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_prometa", nullable = false, unique = true)
-	private Integer idPrometa;
+	@Column(name = "id", nullable = false, unique = true)
+	private int id;
+	
+	@Column(name = "redni_broj", nullable = false)
+	private String redniBroj;
 	
 	@Column(name = "vrsta_prometa", nullable = false)
 	private VrstaPrometa vrstaPrometa;//mozda treba enumeracija // prepravljeno da bude enumeracija
@@ -55,10 +58,11 @@ public class PrometMagacinskeKartice {
 		super();
 	}
 
-	public PrometMagacinskeKartice(Integer idPrometa, VrstaPrometa vrstaPrometa, Smer smer, double kolicina,
+	public PrometMagacinskeKartice(int id, String redniBroj, VrstaPrometa vrstaPrometa, Smer smer, double kolicina,
 			double cena, double vrednost, String dokument, Date datumPrometa, MagacinskaKartica magacinskaKartica) {
 		super();
-		this.idPrometa = idPrometa;
+		this.id = id;
+		this.redniBroj = redniBroj;
 		this.vrstaPrometa = vrstaPrometa;
 		this.smer = smer;
 		this.kolicina = kolicina;
@@ -69,12 +73,12 @@ public class PrometMagacinskeKartice {
 		this.magacinskaKartica = magacinskaKartica;
 	}
 
-	public Integer getIdPrometa() {
-		return idPrometa;
+	public String getRedniBroj() {
+		return redniBroj;
 	}
 
-	public void setIdPrometa(Integer idPrometa) {
-		this.idPrometa = idPrometa;
+	public void setRedniBroj(String redniBroj) {
+		this.redniBroj = redniBroj;
 	}
 
 	public VrstaPrometa getVrstaPrometa() {
@@ -141,12 +145,11 @@ public class PrometMagacinskeKartice {
 		this.magacinskaKartica = magacinskaKartica;
 	}
 
-	@Override
-	public String toString() {
-		return "PrometMagacinskeKartice [idPrometa=" + idPrometa + ", vrstaPrometa=" + vrstaPrometa + ", smer=" + smer
-				+ ", kolicina=" + kolicina + ", cena=" + cena + ", vrednost=" + vrednost + ", dokument=" + dokument
-				+ ", datumPrometa=" + datumPrometa + ", magacinskaKartica=" + magacinskaKartica + "]";
+	public int getId() {
+		return id;
 	}
-	
-	
+
+	public void setId(int id) {
+		this.id = id;
+	}	
 }

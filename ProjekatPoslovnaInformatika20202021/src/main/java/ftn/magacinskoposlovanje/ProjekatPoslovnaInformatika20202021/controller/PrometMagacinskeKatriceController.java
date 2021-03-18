@@ -17,8 +17,11 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.Pr
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Status;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometniDokumentServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/promet-magacinske-kartice")
@@ -29,6 +32,9 @@ public class PrometMagacinskeKatriceController {
 	
 	@Autowired
 	private MagacinskaKarticaServiceInterface magacinskaKarticaServiceInterface;
+	
+	@Autowired
+	private PrometniDokumentServiceInterface prometniDokumentServiceInterface;
 	
 	@GetMapping
 	public ResponseEntity<List<PrometMagacinskeKarticeDTO>> getPrometiMagKart(){
@@ -56,9 +62,10 @@ public class PrometMagacinskeKatriceController {
 		return new ResponseEntity<List<PrometMagacinskeKarticeDTO>>(karticeDTOs, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "storniraj/{id}")
-	public ResponseEntity<PrometMagacinskeKarticeDTO> getOnePromet(@PathVariable("id") Integer id) throws Exception{
-		PrometMagacinskeKartice promMK = prometMagacinskeKarticeService.findOne(id);
+	@GetMapping(value = "storniraj/{redniBroj}")
+	public ResponseEntity<PrometMagacinskeKarticeDTO> getOnePromet(@PathVariable("redniBroj") String redniBroj) throws Exception{
+		System.out.println("\n\n\tRedni broj: "+redniBroj);
+		PrometMagacinskeKartice promMK = prometMagacinskeKarticeService.findOne(redniBroj);
 		if(promMK == null) {
 			return new ResponseEntity<PrometMagacinskeKarticeDTO>(HttpStatus.NOT_FOUND);
 		}
@@ -69,15 +76,20 @@ public class PrometMagacinskeKatriceController {
 		mk.setUkupnaVrednost(mk.getUkupnaVrednost() - promMK.getVrednost());
 		mk = magacinskaKarticaServiceInterface.save(mk);
 		PrometMagacinskeKartice prmkst = new PrometMagacinskeKartice();
+		prmkst.setRedniBroj(redniBroj);
 		prmkst.setVrstaPrometa(promMK.getVrstaPrometa());
 		prmkst.setSmer(promMK.getSmer());
-		prmkst.setKolicina(-promMK.getKolicina());
+		prmkst.setKolicina(mk.getUkupnaKolicina()-promMK.getKolicina());
 		prmkst.setCena(promMK.getCena());
-		prmkst.setVrednost(-promMK.getVrednost());
+		prmkst.setVrednost(mk.getUkupnaVrednost()-promMK.getVrednost());
 		prmkst.setMagacinskaKartica(mk);
 		prmkst.setDatumPrometa(promMK.getDatumPrometa());
 		prmkst.setDokument(promMK.getDokument());
 		prmkst = prometMagacinskeKarticeService.save(prmkst);
+		
+		PrometniDokument prometniDokument = prometniDokumentServiceInterface.findOneByRedniBroj(redniBroj);
+		prometniDokument.setStatus(Status.S);
+		prometniDokumentServiceInterface.save(prometniDokument);
 		return new ResponseEntity<PrometMagacinskeKarticeDTO>(new PrometMagacinskeKarticeDTO(prmkst), HttpStatus.OK);
 	}
 	

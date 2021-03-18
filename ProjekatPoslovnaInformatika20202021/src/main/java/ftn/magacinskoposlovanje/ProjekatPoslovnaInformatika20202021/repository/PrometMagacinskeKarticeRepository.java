@@ -8,4 +8,6 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Promet
 
 public interface PrometMagacinskeKarticeRepository extends JpaRepository<PrometMagacinskeKartice, Integer>{
 	List<PrometMagacinskeKartice> findByMagacinskaKartica_id(Integer id);
+	
+	PrometMagacinskeKartice findOneByRedniBroj(String redniBroj);
 }

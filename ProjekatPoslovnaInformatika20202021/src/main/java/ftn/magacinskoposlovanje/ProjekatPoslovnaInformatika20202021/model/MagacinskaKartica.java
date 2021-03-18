@@ -75,7 +75,7 @@ public class MagacinskaKartica {
 	@JoinColumn(name="roba_ili_usluga", referencedColumnName="sifra", nullable=false)
 	private RobaIliUsluga robaIliUsluga;
 
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="idPrometa")
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="redniBroj")
 	private List<PrometMagacinskeKartice> prometMagacinskeKartice = new ArrayList<PrometMagacinskeKartice>();
 
 	public MagacinskaKartica() {

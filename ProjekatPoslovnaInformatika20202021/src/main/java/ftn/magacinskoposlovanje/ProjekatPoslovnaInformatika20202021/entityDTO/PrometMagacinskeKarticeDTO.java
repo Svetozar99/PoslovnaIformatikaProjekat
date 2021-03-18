@@ -9,7 +9,9 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaP
 
 public class PrometMagacinskeKarticeDTO implements Serializable{
 
-	private Integer id;
+	private int id;
+	
+	private String redniBroj;
 	
 	private VrstaPrometa vrstaPrometa;
 	
@@ -21,39 +23,37 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 	
 	private double vrednost;
 	
-	private String redniBr;
-	
 	private String jedinicaMere;
 	
 	public PrometMagacinskeKarticeDTO() {
 		super();
 	}
 	
-	public PrometMagacinskeKarticeDTO(Integer id, VrstaPrometa vrstaPrometa, Smer smer, double kolicina, double cena,
-			double vrednost, String redniBr) {
+	public PrometMagacinskeKarticeDTO(int id, String redniBroj, VrstaPrometa vrstaPrometa, Smer smer, double kolicina, double cena,
+			double vrednost) {
 		super();
 		this.id = id;
+		this.redniBroj = redniBroj;
 		this.vrstaPrometa = vrstaPrometa;
 		this.smer = smer;
 		this.kolicina = kolicina;
 		this.cena = cena;
 		this.vrednost = vrednost;
-		this.redniBr = redniBr;
 	}
 
 	public PrometMagacinskeKarticeDTO(PrometMagacinskeKartice prometMagacinskeKartice) {
-		this(prometMagacinskeKartice.getIdPrometa(), prometMagacinskeKartice.getVrstaPrometa(),
+		this(prometMagacinskeKartice.getId(), prometMagacinskeKartice.getRedniBroj(), prometMagacinskeKartice.getVrstaPrometa(),
 				prometMagacinskeKartice.getSmer(), prometMagacinskeKartice.getKolicina(),
-				prometMagacinskeKartice.getCena(),prometMagacinskeKartice.getVrednost(),"1/2021");
+				prometMagacinskeKartice.getCena(),prometMagacinskeKartice.getVrednost());
 		
 	}
 
-	public Integer getId() {
-		return id;
+	public String getRedniBroj() {
+		return redniBroj;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRedniBroj(String redniBroj) {
+		this.redniBroj = redniBroj;
 	}
 
 	public VrstaPrometa getVrstaPrometa() {
@@ -104,11 +104,11 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 		this.vrednost = vrednost;
 	}
 
-	public String getRedniBr() {
-		return redniBr;
+	public int getId() {
+		return id;
 	}
 
-	public void setRedniBr(String redniBr) {
-		this.redniBr = redniBr;
+	public void setId(int id) {
+		this.id = id;
 	}
 }

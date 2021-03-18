@@ -107,7 +107,7 @@ public class PrometniDokumentController {
 		}
 		String brojDokumenta = "";
 		int trenutnaGodina = calendar.get(Calendar.YEAR);
-		brojDokumenta = id+1 + "/" + trenutnaGodina;
+		brojDokumenta = id+1 + "-" + trenutnaGodina;
 		return new ResponseEntity<String>(brojDokumenta, HttpStatus.OK);
 	}
 }
