@@ -34,4 +34,6 @@ VALUE (3, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 3);
 
 INSERT INTO promet_magacinske_kartice(id_prometa, vrsta_prometa, smer, kolicina, cena,vrednost, dokument, datum_prometa, magacinska_kartica) VALUES(1, 1, 1, 1.7, 117.1, 4.5, 'document1', '2020-12-15', 1);
 
-INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner1','Adresa1','123456789','email@example.com',123123,321321,1)
+INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner1','Adresa1','123456789','email@example1.com',123123,321321,1);
+INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner2','Adresa2','234234234','email@example2.com',235232,457454,2);
+INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner3','Adresa3','346346436','email@example3.com',235542,745745,1);

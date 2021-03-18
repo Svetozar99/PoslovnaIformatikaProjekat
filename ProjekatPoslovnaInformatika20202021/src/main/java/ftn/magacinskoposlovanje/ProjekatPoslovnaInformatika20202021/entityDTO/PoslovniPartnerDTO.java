@@ -13,7 +13,7 @@ public class PoslovniPartnerDTO {
 	private String email;
 	private int pIB;
 	private int mIB;
-	private int idPreduzeca;
+	private Integer idPreduzeca;
 	private String nazivPreduzeca;
 	
 	public PoslovniPartnerDTO() {
@@ -21,7 +21,7 @@ public class PoslovniPartnerDTO {
 	}
 	
 	public PoslovniPartnerDTO(int sifraPartnera, String nazivPartnera, String adresa, String brojTelefona, String email,
-			int pIB, int mIB, int idPreduzeca, String nazivPreduzeca) {
+			int pIB, int mIB, Integer idPreduzeca, String nazivPreduzeca) {
 		super();
 		this.sifraPartnera = sifraPartnera;
 		this.nazivPartnera = nazivPartnera;
@@ -96,11 +96,11 @@ public class PoslovniPartnerDTO {
 		this.mIB = mIB;
 	}
 
-	public int getIdPreduzeca() {
+	public Integer getIdPreduzeca() {
 		return idPreduzeca;
 	}
 
-	public void setIdPreduzeca(int idPreduzeca) {
+	public void setIdPreduzeca(Integer idPreduzeca) {
 		this.idPreduzeca = idPreduzeca;
 	}
 

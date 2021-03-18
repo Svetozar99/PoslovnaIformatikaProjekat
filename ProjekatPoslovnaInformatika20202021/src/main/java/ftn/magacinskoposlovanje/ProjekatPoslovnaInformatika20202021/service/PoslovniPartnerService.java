@@ -30,4 +30,10 @@ public class PoslovniPartnerService implements PoslovniPartnerServiceInterface {
 		return poslovniPartnerRepository.findOneBySifraPartnera(id);
 	}
 
+	@Override
+	public void remove(Integer sifraPartnera) {
+		poslovniPartnerRepository.deleteById(sifraPartnera);
+		
+	}
+
 }

@@ -9,4 +9,5 @@ public interface PoslovniPartnerServiceInterface {
 	List<PoslovniPartner> findAll();
 	PoslovniPartner save(PoslovniPartner poslovniPartner);
 	PoslovniPartner findOneBySifraPartnera(Integer id);
+	public void remove(Integer sifraPartnera);
 }
