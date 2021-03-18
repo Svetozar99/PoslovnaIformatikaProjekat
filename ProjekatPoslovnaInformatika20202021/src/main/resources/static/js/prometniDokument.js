@@ -36,35 +36,47 @@ function dodajRed(){
 				}
     redovi.push(red);
     console.log(JSON.stringify(robeUsluge))
-	var html = '';
-	html += '<tr id="'+ "red"+redId + '">';
-    html += '<td style="text-align: center; width: 10%">' + 
-            '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputSifraArtikla + '" value="' + robeUsluge[0].sifra + '">'+
-            '</td>';
-    html += '<td style="text-align: center;">';
-    html += '<select onchange="postaviOstaleKolone('+counter+')" class="form-control" name="nazivRobe" id="' + nazivInput + '">';
-    robeUsluge.forEach(element => {
-        html += '<option value="' + element.sifra + '">' + element.naziv + '</option>';
-    });
-    html += '</select>';
-    html += '</td>';
-    html += '<td style="text-align: center; width: 10%">'  + 
-            '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputJedinicaMere + '" value="' + robeUsluge[0].jedinicaMere + '">'+
-            '</td>';
-    html += '<td style="text-align: center; width: 10%;"><input onkeyup="racunaj()" style="text-align: center;" id="' + kolicinaInput + '" class="form-control" type="text"></td>';
-    if(prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
-        html += '<td style="text-align: center; width: 10%;">'
-                    +'<input readonly style="text-align: center;" id="' + cenaInput + '" value="' + robeUsluge[0].cena + '" class="form-control" type="text">'
-                +'</td>';
-    }else{
-        html += '<td style="text-align: center; width: 10%;"><input onkeyup="racunaj()" style="text-align: center;" id="' + cenaInput + '" class="form-control" type="text"></td>';
-    }
-    html += '<td style="text-align: center; width: 10%;"><input readonly id="'+inputIznos+'" class="form-control" type="text"></td>';
-    html += '<td style="text-align: center;"><button onclick="ukloniRed(\'' + redId + '\')" class="btn btn-danger">Ukloni</button></td>';
-    html += '</tr>';
-
-	$('#sadrzajTabele').append(html);
     
+    if($('#magacinPrijemnica').val() == 0 && prikaziPrijemnicu){
+        alert("Izaberite magacin!");
+    }
+    else if($('#magacinOtpremnica').val() == 0 && prikaziOtpremnicu){
+        alert("Izaberite magacin!");
+    }
+    else if(prikaziMedjumagacinskiPromet && ($('#inputMagacin1').val() == 0 || $('#inputMagacin2').val() == 0)){
+        alert("Izaberite magacin!");
+    }else if(robeUsluge.length ==0){
+        alert("Magacin iz koga zelite uzeti robu je prazan!");
+    }else{
+        var html = '';
+        html += '<tr id="'+ "red"+redId + '">';
+        html += '<td style="text-align: center; width: 10%">' + 
+                '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputSifraArtikla + '" value="' + robeUsluge[0].sifra + '">'+
+                '</td>';
+        html += '<td style="text-align: center;">';
+        html += '<select onchange="postaviOstaleKolone('+counter+')" class="form-control" name="nazivRobe" id="' + nazivInput + '">';
+        robeUsluge.forEach(element => {
+            html += '<option value="' + element.sifra + '">' + element.naziv + '</option>';
+        });
+        html += '</select>';
+        html += '</td>';
+        html += '<td style="text-align: center; width: 10%">'  + 
+                '<input readonly style="text-align: center;" class="form-control" type="text" id="' + inputJedinicaMere + '" value="' + robeUsluge[0].jedinicaMere + '">'+
+                '</td>';
+        html += '<td style="text-align: center; width: 10%;"><input onkeyup="racunaj()" style="text-align: center;" id="' + kolicinaInput + '" class="form-control" type="text"></td>';
+        if(prikaziOtpremnicu || prikaziMedjumagacinskiPromet){
+            html += '<td style="text-align: center; width: 10%;">'
+                        +'<input readonly style="text-align: center;" id="' + cenaInput + '" value="' + robeUsluge[0].cena + '" class="form-control" type="text">'
+                    +'</td>';
+        }else{
+            html += '<td style="text-align: center; width: 10%;"><input onkeyup="racunaj()" style="text-align: center;" id="' + cenaInput + '" class="form-control" type="text"></td>';
+        }
+        html += '<td style="text-align: center; width: 10%;"><input readonly id="'+inputIznos+'" class="form-control" type="text"></td>';
+        html += '<td style="text-align: center;"><button onclick="ukloniRed(\'' + redId + '\')" class="btn btn-danger">Ukloni</button></td>';
+        html += '</tr>';
+    
+        $('#sadrzajTabele').append(html);
+    }
 }
 
 function postaviOstaleKolone(counter){
@@ -118,6 +130,9 @@ function proknjizi(){
     if(brojPrometnogDokumenta == ""){
         greska += "\nUnesite broj dokumenta!"
     }
+    if(sifraMagacinaIzlaz == 0){
+        greska += "\nIzaberite magacin!"
+    }
     var formData = {
         "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
         "sifraMagacina1": sifraMagacinaUlaz,
@@ -127,48 +142,72 @@ function proknjizi(){
         "datumIzdavanja": datumIzdavanja,
         "idPreduzeca":idPreduzeca
     }
-    console.log("ajax!!! "+JSON.stringify(formData));
-    $.ajax({
-        url : 'http://localhost:8080/api/prometni-dokument',
-        type : "POST",
-        contentType: 'application/json; charset=utf-8',
-        data : JSON.stringify(formData),
-        success: function(result){
-            alert('Prometni dokument je uspesno dodat');
-
-            var stavke = [];
-            redovi.forEach(red => {
-                //console.log(JSON.stringify(red))
-                var stavka = {
-                    'kolicina':$('#'+red.kolicina).val(),
-                    'cena':$('#'+red.cena).val(),
-                    'vrednost':$('#'+red.vrednost).val(),
-                    'prometniDokument':result.id,
-                    'robaUsluga':$('#'+red.naziv).val()
+    if(redovi.length == 0){
+        alert("Morate dodati robu ili uslugu za prometni dokument!");
+    }else{
+        console.log("ajax!!! "+JSON.stringify(formData));
+        $.ajax({
+            url : 'http://localhost:8080/api/prometni-dokument',
+            type : "POST",
+            contentType: 'application/json; charset=utf-8',
+            data : JSON.stringify(formData),
+            success: function(result){
+                
+                var greskaCena = false;
+                var greskaKolicina = false;
+                var stavke = [];
+                var greska2=""
+                console.log("Redovi: "+JSON.stringify(redovi));
+               // var i =0;
+                redovi.forEach(red => {
+                    //console.log(JSON.stringify(red))
+                    // i++
+                    // console.log("I: "+i)
+                    if($('#'+red.cena).val()==="" || $('#'+red.cena).val()==0){
+                        greskaCena = true;
+                        greska2 += "\nMorate uneti cenu za robu ili uslugu!";
+                    }
+                    if($('#'+red.kolicina).val()==="" || $('#'+red.kolicina).val()==0){
+                        greskaKolicina = true;
+                        greska2 += "\nMorate uneti kolicinu za robu ili uslugu!";
+                    }
+                    if(!greskaCena && !greskaKolicina){
+                        var stavka = {
+                            'kolicina':$('#'+red.kolicina).val(),
+                            'cena':$('#'+red.cena).val(),
+                            'vrednost':$('#'+red.vrednost).val(),
+                            'prometniDokument':result.id,
+                            'robaUsluga':$('#'+red.naziv).val()
+                        }
+                        stavke.push(stavka)
+                    }
+                });
+                if(greskaCena || greskaKolicina){
+                    alert(greska2);
                 }
-                stavke.push(stavka)
-                // formatirajBroj();
-            });
-            console.log(JSON.stringify(stavke));
-            $.ajax({
-                url : 'http://localhost:8080/api/stavka-dokumenta',
-                type : "POST",
-                contentType: 'application/json; charset=utf-8',
-                data : JSON.stringify(stavke),
-                success: function(result){
-                    alert('Stavke dokumenta su uspesno dodate');
-                    
-                },
-                error : function(e){
-                    alert('Doslo je do neke greške!')
-                    console.log("ERROR: ", e);
+                else{
+                    console.log(JSON.stringify(stavke));
+                    $.ajax({
+                        url : 'http://localhost:8080/api/stavka-dokumenta',
+                        type : "POST",
+                        contentType: 'application/json; charset=utf-8',
+                        data : JSON.stringify(stavke),
+                        success: function(result){
+                            alert('Prometni dokument i stavke dokumenta su uspesno dodati');
+                            redovi=[];
+                            location.reload();
+                        },
+                        error : function(e){
+                            alert(JSON.stringify(e.responseJSON.message));
+                        }
+                    });
                 }
-            });
-        },
-        error : function(e){
-            alert(greska);
-        }
-    });
+            },
+            error : function(e){
+                alert(greska);
+            }
+        });
+    }
 }
 
 function postaviInformacijePreduzecaPrijemnica(){

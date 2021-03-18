@@ -77,7 +77,7 @@ public class MagacinController {
 
 	@PutMapping(value = "/{id}", consumes = "application/json")
 	public ResponseEntity<MagacinDTO> updateMagacin(@RequestBody MagacinDTO magacinDTO, @PathVariable("id") Integer id){
-		Magacin magacin = magacinServiceInterface.findById(id);
+		Magacin magacin = magacinServiceInterface.findBySifra(id);
 		Preduzece preduzece = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
 		
 		if(magacin == null) {
@@ -91,7 +91,7 @@ public class MagacinController {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteMagacin(@PathVariable("id") Integer id){
-		Magacin magacin = magacinServiceInterface.findById(id);
+		Magacin magacin = magacinServiceInterface.findBySifra(id);
 		if(magacin != null) {
 			magacinServiceInterface.remove(id);
 			

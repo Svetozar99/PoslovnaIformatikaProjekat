@@ -36,4 +36,10 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 		return prometniDokumentRepository.najveciID();
 	}
 
+	@Override
+	public PrometniDokument findOneByRedniBroj(String redniBroj) {
+		// TODO Auto-generated method stub
+		return prometniDokumentRepository.findOneByRedniBroj(redniBroj);
+	}
+
 }

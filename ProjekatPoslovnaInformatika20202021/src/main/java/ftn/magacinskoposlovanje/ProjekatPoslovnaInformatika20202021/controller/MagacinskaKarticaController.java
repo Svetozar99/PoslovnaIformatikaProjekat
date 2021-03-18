@@ -33,11 +33,34 @@ public class MagacinskaKarticaController {
 		return new ResponseEntity<List<MagacinskaKarticaDTO>>(karicaDTOs, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "roba-ili-usluga/{idRobeIliUsluge}/magacin/{idMagacina}")
-	public ResponseEntity<MagacinskaKarticaDTO> getMagKartByRobaIliUslua(@PathVariable("idRobeIliUsluge") Integer idRobeIliUsluge, 
-			 @PathVariable("idMagacina") Integer idMagacina){
-		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(idMagacina,idRobeIliUsluge);
-		return ResponseEntity.ok(new MagacinskaKarticaDTO(magacinskaKartica));
+	@GetMapping(value = "{sifraMagacina}/{sifraRobeIliUsluge}/{brojPoslovneGodine}")
+	public ResponseEntity<List<MagacinskaKarticaDTO>> getMagKartByRobaIliUslua(@PathVariable("sifraMagacina") Integer sifraMagacina, @PathVariable("sifraRobeIliUsluge") Integer sifraRobeIliUsluge, 
+			@PathVariable("brojPoslovneGodine") Integer brojPoslovneGodine){
+		List<MagacinskaKartica> kartice = new ArrayList<MagacinskaKartica>();
+		List<MagacinskaKarticaDTO> dtos = new ArrayList<MagacinskaKarticaDTO>();
+		if(sifraMagacina==0 && sifraRobeIliUsluge==0 && brojPoslovneGodine==0) {
+			kartice = magaKarticaServiceInterface.findAll();
+		}else if(sifraMagacina!=0 && sifraRobeIliUsluge!=0 && brojPoslovneGodine!=0) {
+			kartice = magaKarticaServiceInterface.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(sifraRobeIliUsluge, brojPoslovneGodine, sifraMagacina);
+		}else if(sifraMagacina!=0 && sifraRobeIliUsluge!=0) {
+			kartice = magaKarticaServiceInterface.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, sifraRobeIliUsluge);
+		}else if(sifraRobeIliUsluge!=0 && brojPoslovneGodine!=0) {
+			kartice = magaKarticaServiceInterface.findByPoslovnaGodina_brojGodineAndRobaIliUsluga_sifra(brojPoslovneGodine, sifraRobeIliUsluge);
+		}else if(sifraMagacina!=0 &&brojPoslovneGodine!=0) {
+			kartice = magaKarticaServiceInterface.findByMagacin_sifraMagacinaAndPoslovnaGodina_brojGodine(sifraMagacina, brojPoslovneGodine);
+		}else if(sifraMagacina!=0) {
+			kartice = magaKarticaServiceInterface.findByMagacin_sifraMagacina(sifraMagacina);
+		}
+		else if(sifraRobeIliUsluge!=0) {
+			kartice = magaKarticaServiceInterface.findByRobaIliUsluga_sifra(sifraRobeIliUsluge);
+		}
+		else if(brojPoslovneGodine!=0) {
+			kartice = magaKarticaServiceInterface.findByPoslovnaGodina_brojGodine(brojPoslovneGodine);
+		}
+		for (MagacinskaKartica k : kartice) {
+			dtos.add(new MagacinskaKarticaDTO(k));
+		}
+		return ResponseEntity.ok(dtos);
 	}
 	
 	@GetMapping(value = "/{id}")

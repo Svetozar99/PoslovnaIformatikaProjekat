@@ -21,8 +21,8 @@ public class PrometMagacinskeKarticeInterface implements PrometMagacinskeKartice
 	}
 
 	@Override
-	public PrometMagacinskeKartice findOne(Integer id) {
-		return prometMagacinskeKarticeRepository.getOne(id);
+	public PrometMagacinskeKartice findOne(String redniBroj) {
+		return prometMagacinskeKarticeRepository.findOneByRedniBroj(redniBroj);
 	}
 
 	@Override

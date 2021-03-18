@@ -12,5 +12,5 @@ public interface MagacinServiceInterface {
 	public void remove(Integer magacinId);
 	public List<Magacin> findByPreduzece_id(Integer id);
 	
-	public Magacin findById(Integer id);
+	public Magacin findBySifra(Integer id);
 }

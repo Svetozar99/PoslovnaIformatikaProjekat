@@ -13,12 +13,18 @@ import org.springframework.stereotype.Service;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Smer;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaPrometa;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.MagacinRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.MagacinskaKarticaRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.PoslovnaGodinaRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.RobaIliUslugaRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovnaGodinaServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.RobaIliUslugaServiceInterface;
 
 @Service
 public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterface {
@@ -27,13 +33,16 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	MagacinskaKarticaRepository magacinskaKarticaRepository;
 	
 	@Autowired
-	RobaIliUslugaRepository robaIliUslugaRepository;
+	RobaIliUslugaServiceInterface robaIliUslugaServiceInterface;
 	
 	@Autowired
-	PoslovnaGodinaRepository poslovnaGodinaRepository;
+	PoslovnaGodinaServiceInterface poslovnaGodinaServiceInterface;
 	
 	@Autowired
-	MagacinRepository magacinRepository;
+	MagacinService magacinServiceInterface;
+	
+	@Autowired
+	PrometMagacinskeKarticeServiceInterface prometMagacinskeKarticeServiceInterface;
 	
 	@Override
 	public List<MagacinskaKartica> findAll() {
@@ -53,22 +62,18 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	@Override
 	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
 			Integer poslovnaGodinaId, Integer sifraMagacina) throws Exception{
-		RobaIliUsluga robaIliUsluga = robaIliUslugaRepository.findOneBySifra(robaIliUslugaId);
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaRepository.findOneByBrojGodine(poslovnaGodinaId);
+		RobaIliUsluga robaIliUsluga = robaIliUslugaServiceInterface.findOneBySifra(robaIliUslugaId);
+		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(poslovnaGodinaId);
 
-		Magacin magacin = magacinRepository.findOneBySifraMagacina(sifraMagacina);
+		Magacin magacin = magacinServiceInterface.findBySifra(sifraMagacina);
 		
 		MagacinskaKartica kartica = magacinskaKarticaRepository.findOneByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(robaIliUslugaId, poslovnaGodinaId, sifraMagacina);
 		
 		if(kartica == null) {
-			
-			System.out.println("za ovu robu ili uslugu i poslovnu godinu ne postoji ni jedna magacinska kartica");
 			kartica = new MagacinskaKartica();
-			kartica.setPocetnoStanjeKolicinski(0);
 			kartica.setPrometUlazaKolicinski(0);
 			kartica.setPrometIzlazaKolicinski(0);
 			kartica.setUkupnaKolicina(0);
-			kartica.setPocetnoStanjeVrednosno(0);
 			kartica.setPrometIzlazaKolicinski(0);
 			kartica.setPrometUlazaVrednosno(0);
 			kartica.setUkupnaVrednost(0);
@@ -83,10 +88,39 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 				poslovnaGodina.setBrojGodine(calendar.get(Calendar.YEAR));
 				poslovnaGodina.setPreduzece(magacin.getPreduzece());
 				poslovnaGodina.setZakljucena(false);
-				poslovnaGodina = poslovnaGodinaRepository.save(poslovnaGodina);
+				poslovnaGodina = poslovnaGodinaServiceInterface.save(poslovnaGodina);
 			}
 			kartica.setPoslovnaGodina(poslovnaGodina);
-			kartica = magacinskaKarticaRepository.save(kartica);
+			List<MagacinskaKartica> kartice = magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, robaIliUslugaId);
+			if(kartice.size()!=0) {
+				System.out.println("Postoji pocetno stanje za ovu robu ili uslugu!");
+				MagacinskaKartica kartica2 = kartice.get(kartice.size()-1);
+				
+				kartica.setPocetnoStanjeKolicinski(kartica2.getUkupnaKolicina());
+				kartica.setPocetnoStanjeVrednosno(kartica2.getPocetnoStanjeVrednosno());
+				
+				kartica = magacinskaKarticaRepository.save(kartica);
+				
+				PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
+				promet.setVrstaPrometa(VrstaPrometa.PS);
+				promet.setSmer(Smer.U);
+				promet.setKolicina(kartica.getPocetnoStanjeKolicinski());
+				promet.setCena(kartica.getCena());
+				promet.setVrednost(kartica.getPocetnoStanjeVrednosno());
+				promet.setDokument(VrstaPrometa.PS.label);
+				promet.setDatumPrometa(new Date());
+				promet.setMagacinskaKartica(kartica);
+				
+				prometMagacinskeKarticeServiceInterface.save(promet);
+			}else {
+				System.out.println("za ovu robu ili uslugu ili poslovnu godinu ne postoji ni jedna magacinska kartica");
+				
+				kartica.setPocetnoStanjeKolicinski(0);
+				kartica.setPocetnoStanjeVrednosno(0);
+				kartica = magacinskaKarticaRepository.save(kartica);
+			}
+			
+			
 		}
 		return kartica;
 	}
@@ -94,6 +128,51 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	@Override
 	public MagacinskaKartica findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,Integer sifraRobeIliUsluge) {
 		return magacinskaKarticaRepository.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina,sifraRobeIliUsluge);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(
+			Integer sifraRobeUsluge, Integer brojGodine, Integer sifraMagacina) {// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(sifraRobeUsluge, brojGodine, sifraMagacina);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,
+			Integer sifraRobeIliUsluge) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, sifraRobeIliUsluge);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByMagacin_sifraMagacinaAndPoslovnaGodina_brojGodine(Integer sifraMagacina,
+			Integer brojGodine) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndPoslovnaGodina_brojGodine(sifraMagacina, brojGodine);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByPoslovnaGodina_brojGodineAndRobaIliUsluga_sifra(Integer brojGodine,
+			Integer sifraRobeIliUsluge) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByPoslovnaGodina_brojGodineAndRobaIliUsluga_sifra(brojGodine, sifraRobeIliUsluge);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByMagacin_sifraMagacina(Integer sifraMagacina) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByMagacin_sifraMagacina(sifraMagacina);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByPoslovnaGodina_brojGodine(Integer brojGodine) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByPoslovnaGodina_brojGodine(brojGodine);
+	}
+
+	@Override
+	public List<MagacinskaKartica> findByRobaIliUsluga_sifra(Integer sifraRobeIliUsluge) {
+		// TODO Auto-generated method stub
+		return magacinskaKarticaRepository.findByRobaIliUsluga_sifra(sifraRobeIliUsluge);
 	}
 
 }

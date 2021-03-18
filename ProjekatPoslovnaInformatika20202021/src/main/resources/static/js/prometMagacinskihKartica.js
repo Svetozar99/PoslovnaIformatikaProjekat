@@ -16,20 +16,20 @@ function prikazSvihPrometaMagKartica() {
                 for(p in result){
                     sadrzajTabele.append(
                         '<tr>'
-                            +'<td align="center">'+result[p].redniBr+'</td>'
+                            +'<td align="center">'+result[p].redniBroj+'</td>'
 							+'<td align="center">'+result[p].vrstaPrometa+'</td>'
 							+'<td align="center">'+result[p].smer+'</td>'
 							+'<td align="center">'+result[p].kolicina+'</td>'
 							+'<td align="center">'+result[p].jedinicaMere+'</td>'
                             +'<td align="center">'+result[p].vrednost+'</td>'
                             +'<td align="center">'+result[p].cena+'</td>'
-                            +'<td align="center"><button onclick="" class="btn btn-outline-warning">Storniraj</button></td>'
+                            +'<td align="center"><button onclick="storniranje(\''+result[p].redniBroj+'\')" class="btn btn-outline-warning">Storniraj</button></td>'
 						+'</tr>'
                     )};
                     
             },
             error :function(e){
-                alert('ne valja nesto');
+                alert('ne valja nesto u prikazu svih prometa');
             }
         });
     }
@@ -57,4 +57,20 @@ function prikazPromMagacinskeKarticeTables(){
     var prikazPrometaM = $("#prikazPromMagaKartice");
 
     prikazPrometaM.show();
+}
+
+function storniranje(redniBroj){
+    alert('kliknuo si dugme ' + redniBroj);
+
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : 'http://localhost:8080/api/promet-magacinske-kartice/storniraj/'+redniBroj,
+        success : function(result){
+            alert('stornirano');
+        },
+        error :function(e){
+            alert('ne valja nesto kod storniranja');
+        }
+    });
 }

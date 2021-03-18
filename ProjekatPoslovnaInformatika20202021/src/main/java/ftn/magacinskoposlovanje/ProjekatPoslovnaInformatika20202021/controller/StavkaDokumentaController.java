@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.StavkaDokumentaDTO;
@@ -115,6 +116,10 @@ public class StavkaDokumentaController {
 			stavkaDokumenta.setRobaIliUsluga(ru);
 			stavkaDokumenta = stavkaDokumentaServiceInterface.save(stavkaDokumenta);
 			
+			//Postavljanje id za promet magacinske kartice
+			prometKartice.setRedniBroj(pd.getRedniBroj());
+			prometKartice2.setRedniBroj(pd.getRedniBroj());
+			
 			//Postavljanje kolicine za promet magacinske kartice
 			prometKartice.setKolicina(stavkaDokumenta.getKolicina());
 			prometKartice2.setKolicina(stavkaDokumenta.getKolicina());
@@ -142,7 +147,12 @@ public class StavkaDokumentaController {
 				//Postavljanje kolicine
 				kartica.setPrometUlazaKolicinski(kartica.getPrometUlazaKolicinski()+stavkaDokumenta.getKolicina());
 				double ukupnaKolicina = kartica.getPocetnoStanjeKolicinski()+kartica.getPrometUlazaKolicinski()-kartica.getPrometIzlazaKolicinski();
-				kartica.setUkupnaKolicina(ukupnaKolicina);
+				try {
+					kartica.setUkupnaKolicina(ukupnaKolicina);
+				} catch (Exception e) {
+					throw new ResponseStatusException(
+					          HttpStatus.NOT_FOUND, "Nema dovoljno robe u magacinu", e);
+				}
 				
 				//Postavljanje vrednosti
 				kartica.setPrometUlazaVrednosno(kartica.getPrometUlazaVrednosno()+stavkaDokumenta.getVrednost());
@@ -178,7 +188,12 @@ public class StavkaDokumentaController {
 				//Postavljanje kolicine
 				kartica.setPrometIzlazaKolicinski(kartica.getPrometIzlazaKolicinski()+stavkaDokumenta.getKolicina());
 				double ukupnaKolicina = kartica.getPocetnoStanjeKolicinski()+kartica.getPrometUlazaKolicinski()-kartica.getPrometIzlazaKolicinski();
-				kartica.setUkupnaKolicina(ukupnaKolicina);
+				try {
+					kartica.setUkupnaKolicina(ukupnaKolicina);
+				} catch (Exception e) {
+					throw new ResponseStatusException(
+					          HttpStatus.NOT_FOUND, "Nema dovoljno robe u magacinu", e);
+				}
 				
 				//Postavljanje vrednosti
 				kartica.setPrometIzlazaVrednosno(kartica.getPrometIzlazaVrednosno()+stavkaDokumenta.getVrednost());
@@ -220,7 +235,12 @@ public class StavkaDokumentaController {
 				double ulazKolicinski = kartica2.getPrometUlazaKolicinski()+stavkaDokumenta.getKolicina();
 				kartica2.setPrometUlazaKolicinski(ulazKolicinski);
 				double ukupnaKolicina = kartica.getPocetnoStanjeKolicinski()+kartica.getPrometUlazaKolicinski()-kartica.getPrometIzlazaKolicinski();
-				kartica.setUkupnaKolicina(ukupnaKolicina);
+				try {
+					kartica.setUkupnaKolicina(ukupnaKolicina);
+				} catch (Exception e) {
+					throw new ResponseStatusException(
+					          HttpStatus.NOT_FOUND, "Nema dovoljno robe u magacinu", e);
+				}
 				double ukupnaKolicina2 = kartica2.getPocetnoStanjeKolicinski()+kartica2.getPrometUlazaKolicinski()-kartica2.getPrometIzlazaKolicinski();
 				kartica2.setUkupnaKolicina(ukupnaKolicina2);
 				
