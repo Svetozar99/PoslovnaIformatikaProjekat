@@ -42,7 +42,7 @@ public class MagacinService implements MagacinServiceInterface{
 	}
 
 	@Override
-	public Magacin findById(Integer id) {
+	public Magacin findBySifra(Integer id) {
 		return magacinRepository.findOneBySifraMagacina(id);
 	}
 
