@@ -80,16 +80,7 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 			kartica.setCena(0);
 			kartica.setMagacin(magacin);
 			kartica.setRobaIliUsluga(robaIliUsluga);
-			if(poslovnaGodina == null) {
-				poslovnaGodina = new PoslovnaGodina();
-				Date date = new Date();
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(date);
-				poslovnaGodina.setBrojGodine(calendar.get(Calendar.YEAR));
-				poslovnaGodina.setPreduzece(magacin.getPreduzece());
-				poslovnaGodina.setZakljucena(false);
-				poslovnaGodina = poslovnaGodinaServiceInterface.save(poslovnaGodina);
-			}
+			
 			kartica.setPoslovnaGodina(poslovnaGodina);
 			List<MagacinskaKartica> kartice = magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, robaIliUslugaId);
 			if(kartice.size()!=0) {

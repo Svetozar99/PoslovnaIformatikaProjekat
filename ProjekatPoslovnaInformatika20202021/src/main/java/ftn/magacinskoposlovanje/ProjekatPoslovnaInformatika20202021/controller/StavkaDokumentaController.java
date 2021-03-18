@@ -100,6 +100,9 @@ public class StavkaDokumentaController {
 		MagacinskaKartica kartica = new MagacinskaKartica();
 		MagacinskaKartica kartica2 = new MagacinskaKartica();
 		for (StavkaDokumentaDTO stavkaDokumentaDTO : dtos) {
+			if(stavkaDokumentaDTO.getRobaUsluga()==null) {
+				continue;
+			}
 			PrometMagacinskeKartice prometKartice = new PrometMagacinskeKartice();
 			PrometMagacinskeKartice prometKartice2 = new PrometMagacinskeKartice();
 			
@@ -173,7 +176,6 @@ public class StavkaDokumentaController {
 				
 				//Postavljanje magacinske kartice za promet
 				prometKartice.setMagacinskaKartica(kartica);
-				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice.toString()+"\n");
 
 				//Cuvanje prometa
 				prometMagacinskeKarticeInterface.save(prometKartice);
@@ -214,7 +216,6 @@ public class StavkaDokumentaController {
 				
 				//Postavljanje magacinske kartice za promet
 				prometKartice.setMagacinskaKartica(kartica);
-				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice.toString()+"\n");
 				//Cuvanje prometa
 				prometMagacinskeKarticeInterface.save(prometKartice);
 			}else if(pd.getVrstaDokumenta().equals(VrstaDokumenta.MM)){
@@ -273,8 +274,6 @@ public class StavkaDokumentaController {
 				//Postavljanje magacinske kartice za promet
 				prometKartice.setMagacinskaKartica(kartica);
 				prometKartice2.setMagacinskaKartica(kartica2);
-				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice.toString()+"\n");
-				System.out.println("\n\n\tCuvam sledeci promet:\n"+prometKartice2.toString()+"\n");
 
 				//Cuvanje prometa
 				prometMagacinskeKarticeInterface.save(prometKartice);
