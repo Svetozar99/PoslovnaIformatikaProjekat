@@ -22,6 +22,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
       
     
 
@@ -96,14 +97,14 @@
                     </div>
                   </li>
 
-                  <li id="prikazMagKartDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagKartDropdown')">
+                  <!-- <li id="prikazMagKartDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagKartDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Promet magacinske kartice
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <button class="dropdown-item" onclick="odrediPrikaz('sviPrometiMagKart')">Svi prometi magacinskih kartica</button>
                     </div>
-                  </li>
+                  </li> -->
                   <li id="prikazMagacinskihKarticaDropdown" class="nav-item dropdown" onclick="promeniIzgledTaba('prikazMagacinskihKarticaDropdown')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Magacinske kartice
@@ -133,14 +134,14 @@
                     </div>
                   </li>
 
-                  <li class="nav-item dropdown" id="prikaziMagacKartice" onclick="promeniIzgledTaba('prikaziMagacKartice')">
+                  <!-- <li class="nav-item dropdown" id="prikaziMagacKartice" onclick="promeniIzgledTaba('prikaziMagacKartice')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Magacinske kartice
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <button class="dropdown-item" onclick="odrediPrikaz('magacinskeKarticeTablesPrikazi')">Magacinska kartica</button>
+                      <button class="dropdown-item" onclick="odrediPrikaz('prikaziOvuKarticu')">Magacinska kartica</button>
                     </div>
-                  </li>
+                  </li> -->
 
                   <!-- <li class="nav-item dropdown" id="prikaziPrometeMagacKartica" onclick="promeniIzgledTaba('prikaziPrometeMagacKartica')">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -199,7 +200,7 @@
                   </div>
                   <p style="padding-top: 3%; text-align: center;">
                     <b>PRIJEMNICA Br.</b>
-                  <input id="inputPrijemnicaBr" class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputPrijemnicaBr" class="form-control col-sm-2" style="display: inline;" type="text" readonly>
                 </p>
             </div>
             <div id="otpremnica" style="display:none;">
@@ -242,7 +243,7 @@
                   </div>
                   <p style="padding-top: 3%; text-align: center;">
                     <b>OTPREMNICA Br.</b>
-                  <input id="inputOtpremnicaBr" class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputOtpremnicaBr" class="form-control col-sm-2" style="display: inline;" type="text" readonly>
                 </p>
             </div>
             <div id="medjumagacinskiPromet" style="display:none;">
@@ -280,13 +281,16 @@
                   </div>
                   <p style="padding-top: 3%; text-align: center;">
                     <b>MEĐUMAGACINSKI PROMET Br.</b>
-                  <input id="inputMedjumagacinskiPrometBr" class="form-control col-sm-2" style="display: inline;" type="text">
+                  <input id="inputMedjumagacinskiPrometBr" class="form-control col-sm-2" style="display: inline;" type="text" readonly>
                 </p>
             </div>
               
             <p style="padding-top: 3%;">
                 Datum izdavanja: 
               <input id="inputDatumIzdavanja" type="date" class="form-control col-sm-2" style="display: inline;">
+              <script>
+                document.getElementById('inputDatumIzdavanja').value = new Date().toISOString().substring(0, 10);
+              </script>
             </p>
             <table class="table">
                 <thead >
@@ -364,6 +368,7 @@
               <th style="text-align: center;">Sifra</th>
               <th style="text-align: center;">Naziv magacina</th>
               <th style="text-align: center;">Naziv preduzeca</th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="tbodyMagacin">
@@ -391,6 +396,8 @@
               <th style="text-align: center;">Sifra</th>
               <th style="text-align: center;">Naziv</th>
               <th style="text-align: center;">Skreceni Naziv</th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody id="tbodyJedinicaMere">
@@ -409,8 +416,8 @@
                                                               class="form-control" id="skraceniNaziv" placeholder="Unesite skraceni naziv jedinice mere">
           </div>
 
-          <button onclick="submitJedinicaMere()" type="submit" class="btn btn-secondary">Dodaj</button>
-
+          <button id="btnDodajJedinicuMere" onclick="submitJedinicaMere()" type="submit" class="btn btn-secondary">Dodaj</button>
+		  <button id="izmeniJedinicuMere" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </form>
         
         <!-- Forma za dodavanje magacina -->
@@ -427,7 +434,8 @@
           </label>
         </div>
 
-          <button onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
+          <button id="btnDodajMagacin" onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
+          <button id="izmeniMagacin" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </form>
 
 
@@ -471,27 +479,46 @@
       <table class="table" id="magacinskeKarticeTable" style="display: none;">
         <thead>
           <tr>
+            <td>
             <div id="selectMagacinForMagKart" class="form-group" style="display: none;">
               <label>Izaberite magacin:
                 <select class="form-control" id="inputMagacinForMagKart">
                 </select>
               </label>
             </div>
+            </td>
+            <td>
+            <div id="selectRobaForMagKart" class="form-group">
+              <label>Izaberite robu:
+                <select class="form-control" id="inputRobaForMagKart">
+                </select>
+              </label>
+            </div>
+            </td>
+            <td>
+            <div id="selectGodinaForMagKart" class="form-group">
+              <label>Izaberite poslovnu godinu:
+                <select class="form-control" id="inputGodinaForMagKart">
+                </select>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="prikaziOdredjenuMagacinskuKarticu()">aaaa</button>
+            </div>
+          </td>
           </tr>
           <tr>
-            <th style="text-align: center;">Pocetno Stanje Kolicinski</th>
-            <th style="text-align: center;">Promet Ulaza Kolicinski</th>
-            <th style="text-align: center;">Promet Izlaza Kolicinski</th>
-            <th style="text-align: center;">Ukupna Kolicina</th>
+            <th style="text-align: center;">Naziv magacina</th>
+            <th style="text-align: center;">Roba</th>
+            <th style="text-align: center;">Poslovna godina</th>
+            <!-- <th style="text-align: center;">Ukupna Kolicina</th>
             <th style="text-align: center;">Pocetno Stanje Vrednosno</th>
             <th style="text-align: center;">Promet Ulaza Vrednosno</th>
             <th style="text-align: center;">Promet Izlaza Vrednosno</th>
             <th style="text-align: center;">Ukupna Vrednost</th>
-            <th style="text-align: center;">Cena</th>
+            <th style="text-align: center;">Cena</th> -->
           </tr>
         </thead>
         <tbody id="tbodyMagacinskeKartice">
-
         </tbody>
         
       </table>
@@ -591,7 +618,7 @@
       </form>
 
       <!-- Prikaz magacinske kartice -->
-      <form id="magacinskeKarticeTables" style="display: none; margin: 5%;">
+      <div id="magacinskeKarticeTables" style="display: none; margin: 5%;">
         <div class="form-group">
           <label><h1>Magacinske kartice:</h1></label>
           <div style="float: right;">
@@ -606,6 +633,7 @@
           <div class="form-group col-md-6">
             <label for="nazivMagacinaMagKart">Naziv magacina</label>
             <input type="text" class="form-control" id="nazivMagacinaMagKart" readonly>
+            <input type="hidden" class="form-control" id="idMagacinskeKartice" readonly>
           </div>
           <div class="form-group col-md-6">
             <label for="preduzeceMagKart">Preduzece</label>
@@ -695,11 +723,11 @@
             <input type="text" class="form-control" id="ukupnaVrednost" readonly>
           </div>
         </div>
-        <button class="btn btn-info" onclick="odrediPrikaz('prikazPromMagaKart')">Detalji</button>
-      </form>
+        <button class="btn btn-info" onclick="odrediPrikaz('sviPrometiMagKart')">Detalji</button>
+      </div>
 
       <!-- Prometi magacinskih kartica -->
-      <form id="prikazPromMagaKart" style="display: none; margin: 5%;">
+      <div id="prikazPromMagaKartice" style="display: none; margin: 5%;">
         <div class="form-group">
           <label><h1>Prometi magacinske kartice:</h1></label>
         </div>
@@ -736,11 +764,10 @@
               <th style="text-align: center;"></th>
             </tr>
           </thead>
-          <tbody id="sadrzajTabele">
-            
+          <tbody id="tBodyPrometi">
           </tbody>
         </table>
-      </form>
+      </div>
     </div>
 </body>
 </html>

@@ -156,3 +156,36 @@ function deletePoslovnaGodina(id){
         }
     });
 }
+poslovneGodine = [];
+function dajPoslGod(text){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/poslovna-godina",
+        success : function(result){
+            if(text === "svePoslGodine"){
+                selectPoslGod(result);
+            }else{
+                poslovneGodine = result;
+            }
+        },
+        error :function(e){
+            console.log("Greska!!!");
+        }
+    });
+}
+
+function selectPoslGod(list){
+    console.log("selectPoslGod")
+    posG=list;
+   
+    var inputGodinaForMagKart = $("#inputGodinaForMagKart");
+    var html = "";
+    list.forEach(posG => {
+        html += '<option value="' + posG.brojGodine + '">' + posG.brojGodine + '</option>';
+    });
+
+    inputGodinaForMagKart.empty();
+    inputGodinaForMagKart.append(html);
+
+}

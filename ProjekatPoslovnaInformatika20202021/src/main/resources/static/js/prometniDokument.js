@@ -85,12 +85,13 @@ function racunaj(){
 }
 
 function proknjizi(){
+    var greska = "";
     var sifraPoslovnogPartnera = 0;
     var sifraMagacinaUlaz = 0;
     var sifraMagacinaIzlaz = 0;
     var idPreduzeca = 0;
     var vrstaDokumenta;
-    var brojPrometnogDokumenta;
+    var brojPrometnogDokumenta = "";
     if(prikaziPrijemnicu){
         idPreduzeca = $('#inputKupac').val();
         vrstaDokumenta = "PR";
@@ -107,11 +108,16 @@ function proknjizi(){
     }else if(prikaziMedjumagacinskiPromet){
         vrstaDokumenta = "MM";
         brojPrometnogDokumenta = $('#inputMedjumagacinskiPrometBr').val();
-        sifraMagacinaUlaz = $('#inputMagacin2').val();
-        sifraMagacinaIzlaz = $('#inputMagacin1').val();
+        sifraMagacinaUlaz = $('#inputMagacin1').val();
+        sifraMagacinaIzlaz = $('#inputMagacin2').val();
     }
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
-
+    if(sifraMagacinaUlaz == 0){
+        greska += "\nIzaberite magacin!"
+    }
+    if(brojPrometnogDokumenta == ""){
+        greska += "\nUnesite broj dokumenta!"
+    }
     var formData = {
         "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
         "sifraMagacina1": sifraMagacinaUlaz,
@@ -141,6 +147,7 @@ function proknjizi(){
                     'robaUsluga':$('#'+red.naziv).val()
                 }
                 stavke.push(stavka)
+                // formatirajBroj();
             });
             console.log(JSON.stringify(stavke));
             $.ajax({
@@ -159,8 +166,7 @@ function proknjizi(){
             });
         },
         error : function(e){
-            alert('Doslo je do neke greške!')
-            console.log("ERROR: ", e);
+            alert(greska);
         }
     });
 }
@@ -304,4 +310,17 @@ function selectPoslovniPartner(list){
 
     $('#inputKupacOtpremnicaMestoIAdresa').val(list[0].adresa);
     $('#inputKupacOtpremnicaPIB').val(list[0].pib);
+}
+
+function formatirajBroj(){
+    $.ajax({
+        type: "GET",
+        contentType : 'application/json; charset=utf-8',
+        url : "http://localhost:8080/api/prometni-dokument",
+        success : function(result){
+            $("#inputPrijemnicaBr").val(result);
+            $("#inputOtpremnicaBr").val(result);
+            $("#inputMedjumagacinskiPrometBr").val(result);
+        }
+    });
 }

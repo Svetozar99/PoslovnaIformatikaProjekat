@@ -19,31 +19,32 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 	
 	private double cena;
 	
-	private String dokument;
+	private double vrednost;
 	
-	private Date date;
+	private String redniBr;
+	
+	private String jedinicaMere;
 	
 	public PrometMagacinskeKarticeDTO() {
 		super();
 	}
-
+	
 	public PrometMagacinskeKarticeDTO(Integer id, VrstaPrometa vrstaPrometa, Smer smer, double kolicina, double cena,
-			String dokument, Date date) {
+			double vrednost, String redniBr) {
 		super();
 		this.id = id;
 		this.vrstaPrometa = vrstaPrometa;
 		this.smer = smer;
 		this.kolicina = kolicina;
 		this.cena = cena;
-		this.dokument = dokument;
-		this.date = date;
+		this.vrednost = vrednost;
+		this.redniBr = redniBr;
 	}
-	
+
 	public PrometMagacinskeKarticeDTO(PrometMagacinskeKartice prometMagacinskeKartice) {
 		this(prometMagacinskeKartice.getIdPrometa(), prometMagacinskeKartice.getVrstaPrometa(),
 				prometMagacinskeKartice.getSmer(), prometMagacinskeKartice.getKolicina(),
-				prometMagacinskeKartice.getCena(), prometMagacinskeKartice.getDokument(),
-				prometMagacinskeKartice.getDatumPrometa());
+				prometMagacinskeKartice.getCena(),prometMagacinskeKartice.getVrednost(),"1/2021");
 		
 	}
 
@@ -87,20 +88,27 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 		this.cena = cena;
 	}
 
-	public String getDokument() {
-		return dokument;
+	public String getJedinicaMere() {
+		return jedinicaMere;
 	}
 
-	public void setDokument(String dokument) {
-		this.dokument = dokument;
+	public void setJedinicaMere(String jedinicaMere) {
+		this.jedinicaMere = jedinicaMere;
 	}
 
-	public Date getDate() {
-		return date;
+	public double getVrednost() {
+		return vrednost;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setVrednost(double vrednost) {
+		this.vrednost = vrednost;
 	}
 
+	public String getRedniBr() {
+		return redniBr;
+	}
+
+	public void setRedniBr(String redniBr) {
+		this.redniBr = redniBr;
+	}
 }

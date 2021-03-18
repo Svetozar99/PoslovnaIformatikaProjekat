@@ -12,7 +12,7 @@ public class PrometniDokumentDTO {
 	private Integer idPreduzeca;
 	private Integer sifraMagacina1;
 	private Integer sifraMagacina2;
-	private Integer brojPrometnogDokumenta;
+	private String brojPrometnogDokumenta;
 	private Date datumIzdavanja;
 	private String vrstaDokumenta;
 	public Integer getId() {
@@ -45,10 +45,10 @@ public class PrometniDokumentDTO {
 	public void setSifraMagacina2(Integer sifraMagacina2) {
 		this.sifraMagacina2 = sifraMagacina2;
 	}
-	public Integer getBrojPrometnogDokumenta() {
+	public String getBrojPrometnogDokumenta() {
 		return brojPrometnogDokumenta;
 	}
-	public void setBrojPrometnogDokumenta(Integer brojPrometnogDokumenta) {
+	public void setBrojPrometnogDokumenta(String brojPrometnogDokumenta) {
 		this.brojPrometnogDokumenta = brojPrometnogDokumenta;
 	}
 	public Date getDatumIzdavanja() {

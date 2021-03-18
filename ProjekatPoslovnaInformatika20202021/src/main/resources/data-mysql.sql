@@ -28,7 +28,7 @@ INSERT INTO poslovna_godina(id_godine, broj_godine, zakljucena, preduzece) VALUE
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
 VALUE (1, 200, 70, 30, 240,500000, 171000, 78000, 593000, 2471, 1, 2, 8);
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
-VALUE (2, 500, 350, 400, 450,375000, 259000, 304000, 330000, 734, 1, 2, 7);
+VALUE (2, 500, 350, 400, 450,375000, 259000, 304000, 330000, 734, 1, 1, 7);
 INSERT INTO magacinska_kartica(id, pocetno_stanje_kolicinski, promet_ulaza_kolicinski, promet_izlaza_kolicinski, ukupna_kolicina, pocetno_stanje_vrednosno, promet_ulaza_vrednosno, promet_izlaza_vrednosno, ukupna_vrednost, cena, magacin, poslovna_godina, roba_ili_usluga)
 VALUE (3, 1.2, 1.6, 1.8, 1.1,1.1, 1.1, 1.1, 1.1, 1.1, 1, 2, 3);
 

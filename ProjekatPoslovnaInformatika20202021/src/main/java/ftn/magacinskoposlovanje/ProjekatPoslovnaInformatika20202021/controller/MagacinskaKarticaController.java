@@ -33,10 +33,18 @@ public class MagacinskaKarticaController {
 		return new ResponseEntity<List<MagacinskaKarticaDTO>>(karicaDTOs, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "roba-ili-usluga/{idRobeIliUsluge}/poslovna-godina/{idPoslovneGodine}/magacin/{idMagacina}")
+	@GetMapping(value = "roba-ili-usluga/{idRobeIliUsluge}/magacin/{idMagacina}")
 	public ResponseEntity<MagacinskaKarticaDTO> getMagKartByRobaIliUslua(@PathVariable("idRobeIliUsluge") Integer idRobeIliUsluge, 
-			@PathVariable("idPoslovneGodine") Integer idPoslovneGodine, @PathVariable("idMagacina") Integer idMagacina){
-		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(idRobeIliUsluge, idPoslovneGodine,idMagacina);
+			 @PathVariable("idMagacina") Integer idMagacina){
+		MagacinskaKartica magacinskaKartica = magaKarticaServiceInterface.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(idMagacina,idRobeIliUsluge);
 		return ResponseEntity.ok(new MagacinskaKarticaDTO(magacinskaKartica));
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<MagacinskaKarticaDTO> getOneMagKar(@PathVariable("id") Integer id){
+		
+		MagacinskaKartica mk = magaKarticaServiceInterface.findOneById(id);
+		
+		return new ResponseEntity<MagacinskaKarticaDTO>(new MagacinskaKarticaDTO(mk),HttpStatus.OK);
 	}
 }

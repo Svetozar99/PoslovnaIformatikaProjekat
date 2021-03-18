@@ -33,7 +33,7 @@ public class PrometniDokument {
 	private int id;
 	
 	@Column(name = "redni_broj", nullable = false)
-	private int redniBroj;
+	private String redniBroj;
 	
 	@Column(name = "vrsta_dokumenta", nullable = false)
 	private VrstaDokumenta vrstaDokumenta; //prepravio da bude enumeracija
@@ -71,7 +71,7 @@ public class PrometniDokument {
 		super();
 	}
 
-	public PrometniDokument(int id, int redniBroj, VrstaDokumenta vrstaDokumenta, Date datum, Status status, PoslovniPartner poslovniPartner, PoslovnaGodina poslovnaGodina,
+	public PrometniDokument(int id, String redniBroj, VrstaDokumenta vrstaDokumenta, Date datum, Status status, PoslovniPartner poslovniPartner, PoslovnaGodina poslovnaGodina,
 			Magacin izlazniMagacin, Magacin ulazniMagacin, Preduzece preduzece) {
 		super();
 		this.id = id;
@@ -94,11 +94,11 @@ public class PrometniDokument {
 		this.id = id;
 	}
 
-	public int getRedniBroj() {
+	public String getRedniBroj() {
 		return redniBroj;
 	}
 
-	public void setRedniBroj(int redniBroj) {
+	public void setRedniBroj(String redniBroj) {
 		this.redniBroj = redniBroj;
 	}
 

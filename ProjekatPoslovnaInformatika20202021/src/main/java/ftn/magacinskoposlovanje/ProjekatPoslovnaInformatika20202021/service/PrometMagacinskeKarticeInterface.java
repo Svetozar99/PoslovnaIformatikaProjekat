@@ -35,4 +35,9 @@ public class PrometMagacinskeKarticeInterface implements PrometMagacinskeKartice
 		prometMagacinskeKarticeRepository.deleteById(id);
 	}
 
+	@Override
+	public List<PrometMagacinskeKartice> findByMagacinskaKartica(Integer id) {
+		return prometMagacinskeKarticeRepository.findByMagacinskaKartica_id(id);
+	}
+
 }

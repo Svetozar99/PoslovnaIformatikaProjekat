@@ -1,28 +1,31 @@
 function prikazSvihPrometaMagKartica() {
-
-    var tabelaPrometaMK = $("#prometiMagacinskihKarticaTable");
-    var tbodyPro = $("#tbodyProm");
+    
+    var idMk = $("#idMagacinskeKartice").val();
+    var sadrzajTabele = $("#tBodyPrometi");
+    $("#preduzecePromMagKart").val($("#preduzeceMagKart").val());
+    $("#proslovnaGodinaPromMagKart").val($("#poslovnaGodina").val());
+    $("#sifraRobeIliUslugePromMagKart").val($("#sifraRobeUsluge").val());
+    $("#nazivRobeIliUslugePromMagKart").val($("#nazivRobeUsluge").val());
     function prikaziPromete(){
         $.ajax({
             type: "GET",
             contentType : 'application/json; charset=utf-8',
-            url : "http://localhost:8080/api/promet-magacinske-kartice",
+            url : "http://localhost:8080/api/promet-magacinske-kartice/"+idMk,
             success : function(result){
-                tabelaPrometaMK.show();
-                tbodyPro.empty();
+                sadrzajTabele.empty();
                 for(p in result){
-                    tbodyPro.append(
+                    sadrzajTabele.append(
                         '<tr>'
-							+'<td align="center">'+'<a href="" id="prikaziJedno" result-prID="'+result[p].id+'">'+result[p].vrstaPrometa+'</a>'+'</td>'
+                            +'<td align="center">'+result[p].redniBr+'</td>'
+							+'<td align="center">'+result[p].vrstaPrometa+'</td>'
 							+'<td align="center">'+result[p].smer+'</td>'
 							+'<td align="center">'+result[p].kolicina+'</td>'
-							+'<td align="center">'+result[p].cena+'</td>'
-							+'<td align="center">'+result[p].dokument+'</td>'
-							+'<td align="center">'+formatDate(new Date(result[p].date))+'</td>'
-							+'<td/>'
+							+'<td align="center">'+result[p].jedinicaMere+'</td>'
+                            +'<td align="center">'+result[p].vrednost+'</td>'
+                            +'<td align="center">'+result[p].cena+'</td>'
+                            +'<td align="center"><button onclick="" class="btn btn-outline-warning">Storniraj</button></td>'
 						+'</tr>'
                     )};
-                    selectedId = $(this).attr('result-prID');
                     
             },
             error :function(e){
@@ -48,9 +51,10 @@ function formatDate(date) {
 
 
 
-function prikazMagacinskeKarticeTables(){
+function prikazPromMagacinskeKarticeTables(){
 
-    var prikazMagacinskeKarticeTables = $("#prikazPromMagaKart");
+    console.log('evo me sad u funkciji u prometMagacinskihKartica');
+    var prikazPrometaM = $("#prikazPromMagaKartice");
 
-    prikazMagacinskeKarticeTables.show();
+    prikazPrometaM.show();
 }
