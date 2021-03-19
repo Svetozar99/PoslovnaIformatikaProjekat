@@ -46,7 +46,7 @@ public class Preduzece {
 	@Column(name = "telefon", nullable = false)
 	private String telefon;
 	
-	@Column(name = "PIB", nullable = false)
+	@Column(name = "PIB", nullable = false, unique = true)
 	private int PIB;
 	
 	@Column(name = "MIB", nullable = false)

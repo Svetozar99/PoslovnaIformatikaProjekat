@@ -100,36 +100,13 @@ function editJedinicaMere(id){
 
                 var nazivJM = $('#nazivJediniceMere');
                 var skraceniNazivJM = $('#skraceniNaziv');
+                var idJediniceMereUpdate = $('#idJediniceMereUpdate');
 
+                idJediniceMereUpdate.val(result.id);
                 nazivJM.val(result.naziv);
                 skraceniNazivJM.val(result.skraceniNaziv);
 
-                $("#izmeniJedinicuMere").on('click', function(event){
-
-                    var naziv = nazivJM.val();
-                    var skraceniNaziv = skraceniNazivJM.val();
-
-                    var formData = {
-                        "naziv": naziv,
-                        "skraceniNaziv": skraceniNaziv
-
-                    }
-
-                    $.ajax({
-                        url:'http://localhost:8080/api/jedinica-mere/' + id,
-                        type: 'PUT',
-                        contentType: 'application/json; charset=utf-8',
-                        data : JSON.stringify(formData),
-                        success: function(result){
-                            alert('Jedinica mere je uspesno izmenjena!');
-                            odrediPrikaz('sveJediniceMere');
-                        },
-                        error : function(e){
-                            alert('Doslo je do neke greške!')
-                            console.log("ERROR: ", e);
-                        }
-                    });
-                });
+                
 
                 },
             error : function(e){
@@ -141,6 +118,35 @@ function editJedinicaMere(id){
     }
 
     prikaziJedinicuMere();
+}
+
+function submitUpdateJedinicaMere(){
+
+    var naziv = $('#nazivJediniceMere').val();
+    var skraceniNaziv = $('#skraceniNaziv').val();
+    var id = $('#idJediniceMereUpdate').val();
+    
+
+    var formData = {
+        "naziv": naziv,
+        "skraceniNaziv": skraceniNaziv
+
+    }
+
+    $.ajax({
+        url:'http://localhost:8080/api/jedinica-mere/' + id,
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Jedinica mere je uspesno izmenjena!');
+            odrediPrikaz('sveJediniceMere');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
 }
 
 function deleteJedinicaMere(id){
