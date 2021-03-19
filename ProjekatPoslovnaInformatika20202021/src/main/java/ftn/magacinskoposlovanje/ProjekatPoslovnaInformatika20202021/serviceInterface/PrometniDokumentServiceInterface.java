@@ -13,4 +13,5 @@ public interface PrometniDokumentServiceInterface {
 	PrometniDokument findOneById(Integer id);
 	PrometniDokument findOneByRedniBroj(String redniBroj);
 	Integer findByMaxid();
+	List<PrometniDokument> findByRedniBroj(String redniBroj);
 }

@@ -40,4 +40,9 @@ public class PrometMagacinskeKarticeInterface implements PrometMagacinskeKartice
 		return prometMagacinskeKarticeRepository.findByMagacinskaKartica_id(id);
 	}
 
+	@Override
+	public List<PrometMagacinskeKartice> findByRedniBroj(String redniBroj) {
+		return prometMagacinskeKarticeRepository.findByRedniBroj(redniBroj);
+	}
+
 }

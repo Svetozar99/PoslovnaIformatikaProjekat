@@ -32,7 +32,7 @@ public class PrometniDokument {
 	@Column(name = "id", nullable = false, unique = true)
 	private int id;
 	
-	@Column(name = "redni_broj", nullable = false, unique = true)
+	@Column(name = "redni_broj", nullable = false)
 	private String redniBroj;
 	
 	@Column(name = "vrsta_dokumenta", nullable = false)

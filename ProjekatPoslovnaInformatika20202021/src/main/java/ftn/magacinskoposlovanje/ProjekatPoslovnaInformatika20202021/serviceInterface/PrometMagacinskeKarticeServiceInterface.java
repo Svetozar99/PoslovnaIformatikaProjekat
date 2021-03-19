@@ -15,4 +15,6 @@ public List<PrometMagacinskeKartice> findAll();
 	public void remove(Integer id);
 	
 	public List<PrometMagacinskeKartice> findByMagacinskaKartica(Integer id);
+	
+	public List<PrometMagacinskeKartice> findByRedniBroj(String redniBroj);
 }

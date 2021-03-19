@@ -42,4 +42,10 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 		return prometniDokumentRepository.findOneByRedniBroj(redniBroj);
 	}
 
+	@Override
+	public List<PrometniDokument> findByRedniBroj(String redniBroj) {
+		// TODO Auto-generated method stub
+		return prometniDokumentRepository.findByRedniBroj(redniBroj);
+	}
+
 }

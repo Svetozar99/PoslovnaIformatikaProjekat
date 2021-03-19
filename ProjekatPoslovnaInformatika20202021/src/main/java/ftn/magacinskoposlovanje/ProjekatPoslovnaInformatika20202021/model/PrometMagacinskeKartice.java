@@ -151,5 +151,14 @@ public class PrometMagacinskeKartice {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "PrometMagacinskeKartice [id=" + id + ", redniBroj=" + redniBroj + ", vrstaPrometa=" + vrstaPrometa
+				+ ", smer=" + smer + ", kolicina=" + kolicina + ", cena=" + cena + ", vrednost=" + vrednost
+				+ ", dokument=" + dokument + ", datumPrometa=" + datumPrometa + ", magacinskaKartica="
+				+ magacinskaKartica + "]";
 	}	
+	
 }
