@@ -43,8 +43,6 @@ INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,
 INSERT INTO promet_magacinske_kartice(redni_broj, cena, datum_prometa, dokument, kolicina, smer, vrednost, vrsta_prometa, magacinska_kartica)
 VALUES('1-2021', 20, '2021-03-18', 'Primka', 200, 0, 4000, 0, 4);
 
-INSERT INTO poslovni_partner(naziv_partnera,adresa_partnera,broj_telefona,email,PIB,MIB,preduzece) VALUES ('Partner1','Adresa1','123456789','email@example.com',123123,321321,1);
-
 INSERT INTO prometni_dokument(id, datum, redni_broj, status, vrsta_dokumenta, sifra_magacina_izlaz, poslovna_godina, poslovni_partner, id_preduzeca, sifra_magacina_ulaz) 
 VALUES(1, '2021-03-18', '1-2021', 1, 0, NULL, 2, 1, 1, 1);
 
