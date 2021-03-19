@@ -96,13 +96,13 @@ function submitPoslovnogPartnera(){
     }
     else{
         var formData = {
-            "nazivPartnera": naziv.val(),
-            "adresa": adresa.val(),
-            "brojTelefona": telefon.val(),
-            "email": email.val(),
-            "pIB": pib.val(),
-            "mIB": mib.val(),
-            "idPreduzeca": preduzece.val()
+            "nazivPartnera": nazivInput,
+            "adresa": adresaInput,
+            "brojTelefona": brojTelefonaInput,
+            "email": email,
+            "pIB": pibInput,
+            "mIB": mibInput,
+            "idPreduzeca": preduzece
             
         }
     
@@ -123,73 +123,63 @@ function submitPoslovnogPartnera(){
 }
 
 function editPoslovniPartner(id){
+    // alert('prva f-ja');
     $('#btnDodajPoslovnogPartnera').show();
     $("#poslovniPartneri").hide();
     $("#dodavanjePoslovnogPartnera").show();
     $('#izmeniPoslovnogPartnera').show();
+    $('#btnDodajPoslovnogPartnera').hide();
     
     function prikaziPoslovnogPartnera(){
-
+        // alert('f-ja u prvoj f-ji');
         $.ajax({
             url:'http://localhost:8080/api/poslovni-partner/' + id,
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
-
             success: function(result){
-            	dajPreduzeca("selectPreduzece");
-                
-                var nazivPP = $("#nazivInputPoslovnogPartnera");
-                var adresaPP = $("#adresaInputPoslovnogPartnera");
-                var telefonPP = $("#telefonInputPoslovnogPartnera");
-                var emailPP = $("#emailInputPoslovnogPartnera");
-                var pibPP = $("#pibInputPoslovnogPartnera");
-                var mibPP = $("#mibInputPoslovnogPartnera");
-                var preduzecPP = $("#inputPreduzecePoslovnogPartnera");
+                alert('success u prvoj f-ji');
+                dajPreduzeca("",result.idPreduzeca);
+                // dajPreduzeca("selectPreduzece");
+                var nazivP = $('#nazivInputPoslovnogPartnera');
+                var adresaP = $('#adresaInputPoslovnogPartnera');
+                var brojTelefonaP = $('#telefonInputPoslovnogPartnera');
+                var emailP = $('#emailInputPoslovnogPartnera');
+                var pibP = $('#pibPP');
+                var mibP = $('#mibPP');
+                var idPreduzecaUpdate = $('#idupdatePoslPartner');
 
-                nazivPP.val(result.nazivPartnera);
-                adresaPP.val(result.adresa);
-                telefonPP.val(result.brojTelefona);
-                emailPP.val(result.email);
-                pibPP.val(result.pIB);
-                mibPP.val(result.mIB);
-                preduzecPP.val(result.nazivPreduzeca);
+                idPreduzecaUpdate.val(result.sifraPartnera);
+                nazivP.val(result.nazivPartnera);
+                adresaP.val(result.adresa);
+                emailP.val(result.email);
+                brojTelefonaP.val(result.brojTelefona);
+                pibP.val(result.pib);
+                mibP.val(result.mib);
+                console.log(JSON.stringify(result));
 
 
-                $("#izmeniPoslovnogPartnera").on('click', function(event){
-                        
-                    var naziv = nazivPP.val();
-                    var adresa = adresaPP.val();
-                    var telefon = telefonPP.val()
-                    var email = emailPP.val();
-                    var pib = pibPP.val();
-                    var mib = mibPP.val();
-                    var preduzece = preduzecePP.val();
 
-                    var formData = {
-                        "nazivPartnera": naziv,
-                        "adresa": adresa,
-                        "brojTelefona": telefon,
-                        "email": email,
-                        "pIB": pib,
-                        "mIB": mib,
-                        "idPreduzeca": preduzece
-                    }
+            	
+                // dajPreduzeca("",result.idPreduzeca);
 
-                    $.ajax({
-                        url:'http://localhost:8080/api/poslovni-partner/' + id,
-                        type: 'PUT',
-                        contentType: 'application/json; charset=utf-8',
-                        data : JSON.stringify(formData),
-                        success: function(result){
-                            alert('Poslovni partner je uspesno izmenjen!');
-                        },
-                        error : function(e){
-                            alert('Doslo je do neke greške!')
-                            console.log("ERROR: ", e);
-                        }
-                    });
-                });
+                // var idPoslPartn = $("#idupdatePoslPartner");
+                // var nazivPP = $("#nazivInputPoslovnogPartnera");
+                // var adresaPP = $("#adresaInputPoslovnogPartnera");
+                // var telefonPP = $("#telefonInputPoslovnogPartnera");
+                // var emailPP = $("#emailInputPoslovnogPartnera");
+                // var pibPP = $("#pibPP");
+                // var mibPP = $("#mibPP");
+                // var preduzecPP = $("#preduzecePP");
 
+                // idPoslPartn.val(result.sifraPartnera);
+                // // alert(idPoslPartn.val());
+                // nazivPP.val(result.nazivPartnera);
+                // adresaPP.val(result.adresa);
+                // telefonPP.val(result.brojTelefona);
+                // emailPP.val(result.email);
+                // pibPP.val(result.pIB);
+                // mibPP.val(result.mIB);
+                // preduzecPP.val(result.idPreduzeca);
                 },
             error : function(e){
                 alert('Doslo je do neke greške!')
@@ -201,6 +191,43 @@ function editPoslovniPartner(id){
 
     prikaziPoslovnogPartnera();
 }
+
+function submitUpdatePoslPartner(){
+    alert('druga f-ja');
+    var naziv = $("#nazivInputPoslovnogPartnera").val();
+    var adresa = $("#adresaInputPoslovnogPartnera").val();
+    var telefon = $("#telefonInputPoslovnogPartnera").val()
+    var email = $("#emailInputPoslovnogPartnera").val();
+    var pib = $("#pibPP").val();
+    var mib = $("#mibPP").val();
+    var preduzeceP = $("#preduzecePP").val();
+
+    var id = $("#idupdatePoslPartner").val();
+    var formData = {
+        "nazivPartnera": naziv,
+        "adresa": adresa,
+        "brojTelefona": telefon,
+        "email": email,
+        "pib": pib,
+        "m": mib,
+        "idPreduzeca": preduzeceP
+    }
+    alert(JSON.stringify(formData));
+    $.ajax({
+        url:'http://localhost:8080/api/poslovni-partner/' + id,
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Poslovni partner je uspesno izmenjen!');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
 
 function deletePoslovniPartner(id){
     $.ajax({

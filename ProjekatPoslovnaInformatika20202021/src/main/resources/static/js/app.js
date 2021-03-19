@@ -241,12 +241,20 @@ function prikazi(){
         prikazSvihPartnera();
     }
     else if(prikazFormeZaDodavanjePoslovnogPartnera){
+        $("#nazivInputPoslovnogPartnera").val("");
+        $("#adresaInputPoslovnogPartnera").val("");
+        $("#telefonInputPoslovnogPartnera").val("");
+        $("#emailInputPoslovnogPartnera").val("");
+        $("#pibInputPoslovnogPartnera").val("");
+        $("#mibInputPoslovnogPartnera").val("");
+        $('#btnDodajMagacin').show();
+        $('#izmeniMagacin').hide();
         dajPreduzeca("selectPreduzeca");
         dodavanjePoslovnogPartnera.show();
     }else if(dodavanjeJediniceMere){
         $('#nazivJediniceMere').val("");
-        $('#btnDodajJedinicuMere').show();
-        $('#izmeniJedinicuMere').hide();
+        $('#btnDodajPoslovnogPartnera').show();
+        $('#izmeniPoslovnogPartnera').hide();
     	dodajJedinicuMere.show();
     }else if(prikaziJediniceMere){       
     	prikazSvihJedinicaMere();
@@ -383,7 +391,7 @@ function selectPreduzece(list){
     var inputProdavac = $('#inputProdavac');
     var preduzece = $('#preduzece');
 
-    var inputPreduzecePoslovnogPartnera = $('#inputPreduzecePoslovnogPartnera');
+    var preduzecePP = $('#preduzecePP');
 
     var preduzecePoslovnaGodina = $("#preduzecePoslovnaGodina");
 
@@ -406,8 +414,8 @@ function selectPreduzece(list){
     inputMagacinPreduzece.append(html);
 
     //Pravljenje liste preduzeca za kreiranje poslovnog partnera
-    inputPreduzecePoslovnogPartnera.empty();
-    inputPreduzecePoslovnogPartnera.append(html);
+    preduzecePP.empty();
+    preduzecePP.append(html);
 
     //Pravljenje liste preduzeca za kreiranje magacina
     preduzece.empty();

@@ -1,7 +1,5 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO;
 
-import javax.persistence.Column;
-
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovniPartner;
 
 public class PoslovniPartnerDTO {

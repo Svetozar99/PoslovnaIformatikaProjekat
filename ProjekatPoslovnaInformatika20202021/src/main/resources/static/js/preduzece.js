@@ -120,7 +120,6 @@ function editPreduzece(id){
             // data : JSON.stringify(formData),
             success: function(result){
 
-
                 var nazivP = $('#naziv');
                 var adresaP = $('#adresa');
                 var brojTelefonaP = $('#brojTelefona');

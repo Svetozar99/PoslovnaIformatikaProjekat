@@ -562,10 +562,11 @@
       </table>
 
       <!-- Forma za dodavanje poslovnog partnera -->
-      <form id="dodavanjePoslovnogPartnera" style="display: none;">
+      <div id="dodavanjePoslovnogPartnera" style="display: none;">
         <div class="form-group">
             <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
                                                         class="form-control" id="nazivInputPoslovnogPartnera" placeholder="Unesite naziv">
+                                                        <input type="hidden" id="idupdatePoslPartner">
         </div>
         <div class="form-group">
           <label for="adresa">Adresa:</label> <input style="width: 40%;" type="text"
@@ -580,24 +581,23 @@
                                                       class="form-control" id="emailInputPoslovnogPartnera" placeholder="Unesite email">
         </div>
         <div class="form-group">
-          <label for="pib">PIB:</label> <input style="width: 40%;" type="text"
-                                                      class="form-control" id="pibInputPoslovnogPartnera" placeholder="Unesite PIB">
+          <label for="pibPP">PIB:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="pibPP" placeholder="Unesite PIB">
         </div>
         <div class="form-group">
-          <label for="mib">MIB:</label> <input style="width: 40%;" type="text"
-                                                      class="form-control" id="mibInputPoslovnogPartnera" placeholder="Unesite MIB">
+          <label for="mibPP">MIB:</label> <input style="width: 40%;" type="text"
+                                                      class="form-control" id="mibPP" placeholder="Unesite MIB">
         </div>
         <div id="selectPreduzece" class="form-group">
           <label>Izaberite preduzece:
-            <select class="form-control" id="inputPreduzecePoslovnogPartnera">
+            <select class="form-control" id="preduzecePP">
             </select>
           </label>
         </div>
         
         <button id="btnDodajPoslovnogPartnera" onclick="submitPoslovnogPartnera()" type="submit" class="btn btn-secondary">Dodaj</button>
-        <button id="izmeniPoslovnogPartnera" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
-      </form>
-    </div>
+        <button id="izmeniPoslovnogPartnera" onclick="submitUpdatePoslPartner()" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
+      </div>
 
       <!-- Forma za dodavanje poslovne godine -->
       <form id="dodajPoslovnuGodinu" style="display: none;">

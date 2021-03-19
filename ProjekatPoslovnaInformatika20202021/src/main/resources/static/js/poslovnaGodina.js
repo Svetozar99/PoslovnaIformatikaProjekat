@@ -79,7 +79,7 @@ function editPoslovnaGodina(id){
             contentType: 'application/json; charset=utf-8',
             // data : JSON.stringify(formData),
             success: function(result){
-                dajPreduzeca("selectPreduzeca");
+                dajPreduzeca("",result.idPreduzeca);
 
                 var brojGodineP = $('#brojGodine');
                 var zakljucenaP;
