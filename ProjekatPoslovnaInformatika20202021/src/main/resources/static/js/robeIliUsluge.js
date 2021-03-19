@@ -65,7 +65,9 @@ function selectRobaIliUsluga(list){
 
 }
 
-function dajJediniceMere(){
+function dajJediniceMere(id){
+    var glavnaJedinicaMere = "";
+    var ostaleMere = "";
     var selectJedinicaMere = $("#selectJedinicaMere");
     selectJedinicaMere.empty();
     var html = '<label>Izaberite jedinicu mere:';
@@ -75,9 +77,22 @@ function dajJediniceMere(){
         contentType : 'application/json; charset=utf-8',
         url : "http://localhost:8080/api/jedinica-mere",
         success : function(result){
-            result.forEach(jedinicaMere => {
-                html += '<option value="' + jedinicaMere.id + '">' + jedinicaMere.naziv + '</option>'
-            });
+            if(id != undefined){
+                result.forEach(jedinicaMere => {
+                    if(id == jedinicaMere.id){
+                        glavnaJedinicaMere = '<option value="' + jedinicaMere.id + '">' + jedinicaMere.naziv + '</option>';
+                    }else{
+                        ostaleMere += '<option value="' + jedinicaMere.id + '">' + jedinicaMere.naziv + '</option>';
+                    }
+                });
+                html += glavnaJedinicaMere;
+                html += ostaleMere;
+            }
+            else{
+                result.forEach(jedinicaMere => {
+                    html += '<option value="' + jedinicaMere.id + '">' + jedinicaMere.naziv + '</option>';
+                }); 
+            }
             html += '</select>';
             html += '</label>';
             selectJedinicaMere.append(html);
@@ -87,19 +102,6 @@ function dajJediniceMere(){
         }
     });
 }
-
-/*function selectPreduzecaS(preduzeca){
-    var selectPreduzece = $("#selectPreduzece");
-    selectPreduzece.empty();
-    var html = '<label>Izaberite preduzece:';
-    html += '<select class="form-control" id="inputPreduzece">';
-    preduzeca.forEach(preduzece => {
-        html += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>'
-    });
-    html += '</select>';
-    html += '</label>';
-    selectPreduzece.append(html);
-}*/
 
 function submitRobaUsluga(){
     var naziv = "";
@@ -167,40 +169,14 @@ function editRobeIliUsluge(id){
 
             success: function(result){
             	dajPreduzeca("selectPreduzeca");
-                dajJediniceMere();
+                dajJediniceMere(result.idJedinicaMere);
                 var nazivR = $("#nazivInputRobaUsluga");
-                var preduzeceR = $("#inputPreduzece");
-                var jedinicaMereR = $("#selectJedinicaMere");
+                var jedinicaMereR = $("#inputJedinicaMere");
+                var idRobeUpdate = $('#idRobeIliUslugeUpdate');
+
+                idRobeUpdate.val(result.sifra);
                 nazivR.val(result.naziv);
-                preduzeceR.val(result.nazivPreduzeca);
-                jedinicaMereR.val(result.idJedinicaMere);
-
-                $("#izmeniRobuIliUslugu").on('click', function(event){
-                        
-                    var naziv = nazivR.val();
-                    var preduzece = preduzeceR.val();
-                    var jedMerR = jedinicaMereR.val();
-
-                    var formData = {
-                        "naziv": naziv,
-                        "idJedinicaMere": jedMerR
-                    }
-
-                    $.ajax({
-                        url:'http://localhost:8080/api/roba-ili-usluga/' + id,
-                        type: 'PUT',
-                        contentType: 'application/json; charset=utf-8',
-                        data : JSON.stringify(formData),
-                        success: function(result){
-                            alert('Roba ili usluga je uspesno izmenjena!');
-                            odrediPrikaz('sveRobeUsluge');
-                        },
-                        error : function(e){
-                            alert('Doslo je do neke greške!')
-                            console.log("ERROR: ", e);
-                        }
-                    });
-                });
+                // jedinicaMereR.val(result.idJedinicaMere);
 
                 },
             error : function(e){
@@ -212,6 +188,34 @@ function editRobeIliUsluge(id){
     }
 
     prikaziRobuIliUslugu();
+}
+
+function submitUpdateRobaIliUsluga(){
+    var id = $("#idRobeIliUslugeUpdate").val();
+    var naziv = $("#nazivInputRobaUsluga").val();
+    var jedMerR = $("#inputJedinicaMere").val();
+
+    var formData = {
+        "naziv": naziv,
+        "idJedinicaMere": jedMerR
+    }
+
+    console.log(JSON.stringify(formData));
+
+    $.ajax({
+        url:'http://localhost:8080/api/roba-ili-usluga/' + id,
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Roba ili usluga je uspesno izmenjena!');
+            odrediPrikaz('sveRobeUsluge');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
 }
 
 function deleteRobaIliUsluga(id){

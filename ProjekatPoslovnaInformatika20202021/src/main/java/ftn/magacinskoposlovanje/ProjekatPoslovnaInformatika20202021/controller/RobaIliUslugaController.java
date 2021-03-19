@@ -102,10 +102,12 @@ public class RobaIliUslugaController {
 		if(rilil == null) {
 			return new ResponseEntity<RobaIliUslugaDTO>(HttpStatus.BAD_REQUEST);
 		}
-		rilil.setNaziv(robaIliUslugaDTO.getNaziv());	
+		rilil.setNaziv(robaIliUslugaDTO.getNaziv());
 		rilil.setJedinicaMere(jm);
 		rilil.setCena(robaIliUslugaDTO.getCena());
 		rilil = robaIliUslugaServiceInterface.save(rilil);
+//		robaIliUslugaDTO.setJedinicaMere(rilil.getJedinicaMere().getSkraceniNaziv());
+		System.out.println(robaIliUslugaDTO.getIdJedinicaMere()+ " id jedinice mere");
 		return new ResponseEntity<RobaIliUslugaDTO>(new RobaIliUslugaDTO(rilil), HttpStatus.OK);
 	}
 	

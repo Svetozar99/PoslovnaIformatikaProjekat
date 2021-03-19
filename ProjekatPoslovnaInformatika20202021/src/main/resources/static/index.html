@@ -445,12 +445,13 @@
         <div class="form-group">
             <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
                                                         class="form-control" id="nazivInputRobaUsluga" placeholder="Unesite naziv robe/usluge">
+                                              <input type="hidden" id = "idRobeIliUslugeUpdate">
         </div>
         <div id="selectJedinicaMere" class="form-group">
-
+          
         </div>
         <button id="dodajRobuIliUslugu" onclick="submitRobaUsluga()" type="submit" class="btn btn-secondary">Dodaj</button>
-        <button id="izmeniRobuIliUslugu" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
+        <button id="izmeniRobuIliUslugu" onclick="submitUpdateRobaIliUsluga()" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </div>
       <!-- Prikaz svih prometa magacinskih kartica -->
 
