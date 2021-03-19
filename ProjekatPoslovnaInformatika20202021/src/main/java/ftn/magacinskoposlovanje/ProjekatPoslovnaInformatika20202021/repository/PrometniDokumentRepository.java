@@ -17,4 +17,6 @@ public interface PrometniDokumentRepository extends JpaRepository<PrometniDokume
  
 	@Query("SELECT max(id) FROM PrometniDokument")
 	Integer najveciID();
+	
+	List<PrometniDokument> findByRedniBroj(String redniBroj); 
 }

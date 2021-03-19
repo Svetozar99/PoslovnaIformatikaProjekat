@@ -10,4 +10,6 @@ public interface PrometMagacinskeKarticeRepository extends JpaRepository<PrometM
 	List<PrometMagacinskeKartice> findByMagacinskaKartica_id(Integer id);
 	
 	PrometMagacinskeKartice findOneByRedniBroj(String redniBroj);
+	
+	List<PrometMagacinskeKartice> findByRedniBroj(String redniBroj);
 }
