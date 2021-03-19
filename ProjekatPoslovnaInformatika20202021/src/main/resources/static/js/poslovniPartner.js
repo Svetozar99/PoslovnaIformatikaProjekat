@@ -24,10 +24,12 @@ function prikazSvihPartnera() {
                     html +=     '<td align="center">'+partner.pib+'</td>';
                     html +=     '<td align="center">'+partner.mib+'</td>';
                     html +=     '<td align="center">'+partner.nazivPreduzeca+'</td>';
-	                html +=		'<td>'
-	            	html +=			'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editPoslovniPartner('+partner.sifraPartnera+')">IZMENI</button>'
-	            	html +=			'<button type="submit" class="btn btn-danger" onclick="deletePoslovniPartner('+ partner.sifraPartnera+')">OBRIŠI</button>'
-	            	html +=		'</td>'
+	                html +=		'<td>';
+	            	html +=			'<button type="submit" class="btn btn-warning" onclick="editPoslovniPartner('+partner.sifraPartnera+')">IZMENI</button>';
+	            	html +=		'</td>';
+                    html +=		'<td>';
+                    html +=			'<button type="submit" class="btn btn-danger" onclick="deletePoslovniPartner('+ partner.sifraPartnera+')">OBRIŠI</button>';
+	            	html +=		'</td>';
                     html += '</tr>';
                 };
                 tbodyPartneri.append(html)
