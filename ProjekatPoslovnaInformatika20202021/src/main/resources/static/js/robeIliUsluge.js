@@ -120,6 +120,7 @@ function submitRobaUsluga(){
             data : JSON.stringify(formData),
             success: function(){
                 alert('Roba ili usluga uspesno dodata');
+                odrediPrikaz('sveRobeUsluge');
             },
             error : function(e){
                 alert('greska se desila');
@@ -156,6 +157,7 @@ function editRobeIliUsluge(id){
     $("#robeUslugeTable").hide();
     $("#dodavanjeRobeUsluge").show();
     $('#izmeniRobuIliUslugu').show();
+    $("#dodajRobuIliUslugu").hide();
     
     function prikaziRobuIliUslugu(){
         $.ajax({
@@ -191,6 +193,7 @@ function editRobeIliUsluge(id){
                         data : JSON.stringify(formData),
                         success: function(result){
                             alert('Roba ili usluga je uspesno izmenjena!');
+                            odrediPrikaz('sveRobeUsluge');
                         },
                         error : function(e){
                             alert('Doslo je do neke greške!')
@@ -218,6 +221,7 @@ function deleteRobaIliUsluga(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             alert('Uspjesno obrsana roba ili usluga');
+            odrediPrikaz('sveRobeUsluge');
         },
         error : function(e){
             alert('Doslo je do neke greške!')

@@ -71,6 +71,7 @@ function submitJedinicaMere(){
             data : JSON.stringify(formData),
             success: function(result){
                 alert('Jedinica mere je uspesno dodata');
+                odrediPrikaz('sveJediniceMere');
             },
             error : function(e){
                 alert('Doslo je do neke greške!')
@@ -85,6 +86,7 @@ function editJedinicaMere(id){
     $("#jedinicaMereTable").hide();
     $("#dodajJedinicuMere").show();
     $('#izmeniJedinicuMere').show();
+    $('#btnDodajJedinicuMere').hide();
     
     function prikaziJedinicuMere(){
 
@@ -120,6 +122,7 @@ function editJedinicaMere(id){
                         data : JSON.stringify(formData),
                         success: function(result){
                             alert('Jedinica mere je uspesno izmenjena!');
+                            odrediPrikaz('sveJediniceMere');
                         },
                         error : function(e){
                             alert('Doslo je do neke greške!')
@@ -147,6 +150,7 @@ function deleteJedinicaMere(id){
         contentType: 'application/json; charset=utf-8',
         success: function(result){
             prikazSvihJedinicaMere();
+            odrediPrikaz('sveJediniceMere');
         },
         error : function(e){
             alert('Doslo je do neke greške!')

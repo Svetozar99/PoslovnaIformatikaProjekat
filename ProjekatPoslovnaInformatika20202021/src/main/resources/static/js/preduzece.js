@@ -110,10 +110,9 @@ function editPreduzece(id){
     $("#preduzecaTable").hide();
     $("#dodajPreduzece").show();
     $('#updatePreduzece').show();
+    $('#btnDodajPreduzece').hide();
     function prikaziPreduzece(){
-
-
-
+        
         $.ajax({
             url:'http://localhost:8080/api/preduzece/' + id,
             type: 'GET',
@@ -127,44 +126,16 @@ function editPreduzece(id){
                 var brojTelefonaP = $('#brojTelefona');
                 var pibP = $('#pib');
                 var mibP = $('#mib');
+                var idPreduzecaUpdate = $('#idPreduzecaUpdate');
 
+                idPreduzecaUpdate.val(result.id);
                 nazivP.val(result.naziv);
                 adresaP.val(result.adresa);
                 brojTelefonaP.val(result.telefon);
                 pibP.val(result.pIB);
                 mibP.val(result.mIB);
+                console.log(JSON.stringify(result));
 
-
-                $("#updatePreduzece").on('click', function(event){
-
-                    var naziv = nazivP.val();
-                    var adresa = adresaP.val();
-                    var telefon = brojTelefonaP.val();
-                    var pib = pibP.val();
-                    var mib = mibP.val();
-
-                    var formData = {
-                        'naziv': naziv,
-                        "adresa": adresa,
-                        "telefon": telefon,
-                        "pIB": pib,
-                        "mIB": mib
-                    }
-
-                    $.ajax({
-                        url:'http://localhost:8080/api/preduzece/' + id,
-                        type: 'PUT',
-                        contentType: 'application/json; charset=utf-8',
-                        data : JSON.stringify(formData),
-                        success: function(result){
-                            alert('Preduzece uspjesno izmjenjeno');
-                        },
-                        error : function(e){
-                            alert('Doslo je do neke greške!')
-                            console.log("ERROR: ", e);
-                        }
-                    });
-                });
 
                 },
             error : function(e){
@@ -176,6 +147,39 @@ function editPreduzece(id){
     }
 
     prikaziPreduzece();
+}
+
+function submitUpdatePreduzece(){
+
+    var id = $('#idPreduzecaUpdate').val();
+    var naziv = $('#naziv').val();
+    var adresa = $('#adresa').val();
+    var telefon = $('#brojTelefona').val();
+    var pib = $('#pib').val();
+    var mib = $('#mib').val();
+
+    var formData = {
+        'naziv': naziv,
+        "adresa": adresa,
+        "telefon": telefon,
+        "pIB": pib,
+        "mIB": mib
+    }
+    console.log("Ajax zahtev------------")
+    $.ajax({
+        url:'http://localhost:8080/api/preduzece/' + id,
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Preduzece uspjesno izmjenjeno');
+            odrediPrikaz('svaPreduzeca')
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
 }
 
 function deletePreduzece(id){

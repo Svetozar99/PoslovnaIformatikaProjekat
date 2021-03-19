@@ -340,6 +340,7 @@
           <div class="form-group">
               <label for="naziv">Naziv:</label> <input type="text"
                                                           class="form-control" id="naziv" placeholder="Unesite naziv preduzeća">
+                                                <input type="hidden" id = "idPreduzecaUpdate">
           </div>
           <div class="form-group">
               <label for="adresa">Adresa:</label> <input type="text"
@@ -358,7 +359,7 @@
                                                                  class="form-control" id="mib" placeholder="Unesite MIB preduzeća">
           </div>
           <button id="btnDodajPreduzece" onclick="submitPreduzece()" type="submit" class="btn btn-secondary">Dodaj</button>
-          <button id="updatePreduzece" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
+          <button id="updatePreduzece" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdatePreduzece()">Izmeni</button>
         </div>
       
       <!-- Prikaz svih magacina -->
@@ -382,6 +383,7 @@
             <th style="text-align: center;">Sifra</th>
             <th style="text-align: center;">Naziv</th>
             <th style="text-align: center;">Jedinica mere</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="tbodyRobaUsluga">
@@ -396,7 +398,6 @@
               <th style="text-align: center;">Sifra</th>
               <th style="text-align: center;">Naziv</th>
               <th style="text-align: center;">Skreceni Naziv</th>
-              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -445,17 +446,11 @@
             <label for="naziv">Naziv:</label> <input style="width: 40%;" type="text"
                                                         class="form-control" id="nazivInputRobaUsluga" placeholder="Unesite naziv robe/usluge">
         </div>
-        <div id="selectPreduzece" class="form-group">
-          <label>Izaberite preduzece:
-            <select class="form-control" id="inputPreduzece">
-            </select>
-          </label>
-        </div>
         <div id="selectJedinicaMere" class="form-group">
 
         </div>
         <button id="dodajRobuIliUslugu" onclick="submitRobaUsluga()" type="submit" class="btn btn-secondary">Dodaj</button>
-        <button id="izmeniRobuIliUslugu" type="submit" class="btn btn-warning">Izmeni</button>
+        <button id="izmeniRobuIliUslugu" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </div>
       <!-- Prikaz svih prometa magacinskih kartica -->
 

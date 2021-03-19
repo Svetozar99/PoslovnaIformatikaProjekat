@@ -64,6 +64,7 @@ public class PreduzeceController {
 	@PutMapping(value = "/{id}", consumes = "application/json")
 	public ResponseEntity<PreduzeceDTO> updatePreduzece(@RequestBody PreduzeceDTO preduzeceDTO, @PathVariable("id") Integer id) throws ParseException{
 		Preduzece preduzece = preduzeceService.findById(id);
+		System.out.println("\n\tPoziva se funkcija POST");
 		if(preduzece == null) {
 			return new ResponseEntity<PreduzeceDTO>(HttpStatus.BAD_REQUEST);
 		}

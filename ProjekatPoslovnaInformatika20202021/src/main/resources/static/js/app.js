@@ -192,6 +192,13 @@ function prikazi(){
     }else if(prikaziPreduzeca){
         prikazSvihPreduzeca();
     }else if(dodavanjePreduzeca){
+        $('#naziv').val("");
+        $('#adresa').val("");
+        $('#brojTelefona').val("");
+        $('#pib').val("");
+        $('#mib').val("");
+        $('#btnDodajPreduzece').show();
+        $('#updatePreduzece').hide();
         dodajPreduzece.show();
     }else if(dodavanjeMagacina){
     	dajPreduzeca("selectPreduzeca");
@@ -203,6 +210,9 @@ function prikazi(){
         dajRobuIliUsluge("svaRobaIliUsluge");
         robeUslugeTable.show();
     }else if(prikaziFormuZaDodavanjeRobeUsluge){
+        $("#nazivInputRobaUsluga").val("");
+        $("#dodajRobuIliUslugu").show();
+        $("#izmeniRobuIliUslugu").hide();
         dajPreduzeca("selectPreduzeca");
         dajJediniceMere();
         dodavanjeRobeUsluge.show();
@@ -231,6 +241,9 @@ function prikazi(){
         dajPreduzeca("selectPreduzeca");
         dodavanjePoslovnogPartnera.show();
     }else if(dodavanjeJediniceMere){
+        $('#nazivJediniceMere').val("");
+        $('#btnDodajJedinicuMere').show();
+        $('#izmeniJedinicuMere').hide();
     	dodajJedinicuMere.show();
     }else if(prikaziJediniceMere){       
     	prikazSvihJedinicaMere();
@@ -342,7 +355,6 @@ function selectPreduzece(list){
     var inputMagacinPreduzece = $('#inputMagacinPreduzece');
     var inputKupac = $('#inputKupac');
     var inputProdavac = $('#inputProdavac');
-    var inputPreduzece = $('#inputPreduzece');
     var preduzece = $('#preduzece');
 
     var inputPreduzecePoslovnogPartnera = $('#inputPreduzecePoslovnogPartnera');
@@ -367,9 +379,9 @@ function selectPreduzece(list){
     inputMagacinPreduzece.empty();
     inputMagacinPreduzece.append(html);
 
-    //Pravljenje liste preduzeca za kreiranje robeIliUsluge
-    inputPreduzece.empty();
-    inputPreduzece.append(html);
+    //Pravljenje liste preduzeca za kreiranje poslovnog partnera
+    inputPreduzecePoslovnogPartnera.empty();
+    inputPreduzecePoslovnogPartnera.append(html);
 
     //Pravljenje liste preduzeca za kreiranje magacina
     preduzece.empty();
