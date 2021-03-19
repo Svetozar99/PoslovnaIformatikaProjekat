@@ -77,6 +77,7 @@ public class MagacinController {
 
 	@PutMapping(value = "/{id}", consumes = "application/json")
 	public ResponseEntity<MagacinDTO> updateMagacin(@RequestBody MagacinDTO magacinDTO, @PathVariable("id") Integer id){
+		System.out.println("\n\tMagacin izmeni");
 		Magacin magacin = magacinServiceInterface.findBySifra(id);
 		Preduzece preduzece = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
 		

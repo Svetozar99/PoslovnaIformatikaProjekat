@@ -63,7 +63,8 @@ function submitMagacin(){
             contentType: 'application/json; charset=utf-8',
             data : JSON.stringify(formData),
             success: function(result){
-                alert('Magacin je uspesno dodat');
+                alert('Magacin je uspesno dodat!');
+                odrediPrikaz('sviMagacini');
             },
             error : function(e){
                 alert('Doslo je do neke greške!')
@@ -88,9 +89,10 @@ function submitMagacin(){
 
 function editMagacin(id){
     $('#btnDodajMagacin').show();
-    $("#magacinTable").hide();
+    $("#magaciniTable").hide();
     $("#dodajMagacin").show();
     $('#izmeniMagacin').show();
+    $('#btnDodajMagacin').hide();
     
     function prikaziMagacin(){
 
@@ -100,39 +102,14 @@ function editMagacin(id){
             contentType: 'application/json; charset=utf-8',
 
             success: function(result){
-            	dajPreduzeca("selectPreduzeca");
+                
+            	dajPreduzeca("",result.preduzece);
                 
                 var nazivM = $("#nazivMagacina");
-                var preduzeceM = $("#preduzece");
+                var idMagacinUpdate = $("#idMagacinUpdate");
 
                 nazivM.val(result.naziv);
-                preduzeceM.val(result.nazivPreduzeca);
-
-
-                $("#izmeniMagacin").on('click', function(event){
-                        
-                    var naziv = nazivM.val();
-                    var preduzece = preduzeceM.val();
-
-                    var formData = {
-                        "naziv": naziv,
-                        "preduzece": preduzece
-                    }
-
-                    $.ajax({
-                        url:'http://localhost:8080/api/magacin/' + id,
-                        type: 'PUT',
-                        contentType: 'application/json; charset=utf-8',
-                        data : JSON.stringify(formData),
-                        success: function(result){
-                            alert('Magacin je uspesno izmenjen!');
-                        },
-                        error : function(e){
-                            alert('Doslo je do neke greške!')
-                            console.log("ERROR: ", e);
-                        }
-                    });
-                });
+                idMagacinUpdate.val(result.id);
 
                 },
             error : function(e){
@@ -146,13 +123,43 @@ function editMagacin(id){
     prikaziMagacin();
 }
 
+function submitUpdateMagacin(){
+                        
+    var naziv = $("#nazivMagacina").val();
+    var preduzece = $("#preduzece").val();
+    var id = $("#idMagacinUpdate").val();
+
+    console.log("Id: "+id)
+
+    var formData = {
+        "naziv": naziv,
+        "preduzece": preduzece
+    }
+
+    $.ajax({
+        url:'http://localhost:8080/api/magacin/' + id,
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Magacin je uspesno izmenjen!');
+            odrediPrikaz('sviMagacini');
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
 function deleteMagacin(id){
     $.ajax({
         url:'http://localhost:8080/api/magacin/' + id,
         type: 'DELETE',
         contentType: 'application/json; charset=utf-8',
         success: function(result){
-            prikazSvihMagacina();
+            alert("Magacin je obrisan!");
+            odrediPrikaz('sviMagacini');
         },
         error : function(e){
             alert('Doslo je do neke greške!')

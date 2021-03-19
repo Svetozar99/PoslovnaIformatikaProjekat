@@ -201,6 +201,9 @@ function prikazi(){
         $('#updatePreduzece').hide();
         dodajPreduzece.show();
     }else if(dodavanjeMagacina){
+        $("#nazivMagacina").val("");
+        $('#btnDodajMagacin').show();
+        $('#izmeniMagacin').hide();
     	dajPreduzeca("selectPreduzeca");
     	dodajMagacin.show();
     }else if(prikaziMagacine){
@@ -335,7 +338,8 @@ function promeniIzgledTaba(dropdown){
     }
 }
 
-function dajPreduzeca(text){
+function dajPreduzeca(text,id){
+    
     $.ajax({
         type: "GET",
         contentType : 'application/json; charset=utf-8',
@@ -343,11 +347,33 @@ function dajPreduzeca(text){
         success : function(result){
             if(text === "selectPreduzeca"){
                 selectPreduzece(result);
-            }else {
+            }else if(id != undefined){
+                selectPreduzecaUpdate(result,id)
+            }
+            else {
             	preduzeca = result;
             }
         }
     });
+}
+
+function selectPreduzecaUpdate(result,id){
+
+    var glavnoPreduzece = "";
+    var ostalaPreduzeca = "";
+    var selectJedinicaMere = $("#preduzece");
+    selectJedinicaMere.empty();
+    var html = '';
+    result.forEach(preduzece => {
+        if(id == preduzece.id){
+            glavnoPreduzece = '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
+        }else{
+            ostalaPreduzeca += '<option value="' + preduzece.id + '">' + preduzece.naziv + '</option>';
+        }
+    });
+    html += glavnoPreduzece;
+    html += ostalaPreduzeca;
+    selectJedinicaMere.append(html);
 }
 
 function selectPreduzece(list){
