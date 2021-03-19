@@ -423,10 +423,11 @@
         </div>
         
         <!-- Forma za dodavanje magacina -->
-        <form id="dodajMagacin" style="display: none;">
+        <div id="dodajMagacin" style="display: none;">
           <div class="form-group">
               <label for="naziv">Naziv:</label> <input type="text"
-                                                          class="form-control" id="nazivMagacina" placeholder="Unesite naziv magacina">
+                                                          class="form-control col-sm-5" id="nazivMagacina" placeholder="Unesite naziv magacina">
+                                                <input type="hidden" id="idMagacinUpdate">
           </div>
           
         <div id="selectPreduzeceMagacin" class="form-group">
@@ -437,8 +438,8 @@
         </div>
 
           <button id="btnDodajMagacin" onclick="submitMagacin()" type="submit" class="btn btn-secondary">Dodaj</button>
-          <button id="izmeniMagacin" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
-      </form>
+          <button id="izmeniMagacin" type="submit" class="btn btn-warning" style="display: none;" onclick="submitUpdateMagacin()">Izmeni</button>
+      </div>
 
 
       <!-- Forma za dodavanje robe/usluge -->
