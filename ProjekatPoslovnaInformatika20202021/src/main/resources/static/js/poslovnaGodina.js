@@ -20,10 +20,6 @@ function prikazSvihPoslovnihGodina() {
                 			+'<td align="center">'+result[pg].brojGodine+'</td>'
 							+'<td align="center">'+result[pg].zakljucena+'</a>'+'</td>'
 							+'<td align="center">'+result[pg].nazivPreduzeca+'</td>'
-							+'<td>'
-                                +'<button type="submit" class="btn btn-warning" style="margin-right: 5%;" onclick="editPoslovnaGodina('+result[pg].id+')">IZMENI</button>'
-                                +'<button type="submit" class="btn btn-danger" onclick="deletePoslovnaGodina('+result[pg].id+')">OBRIŠI</button>'
-                            +'</td>'
 						+'</tr>'
                     )};
                     

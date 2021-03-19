@@ -543,6 +543,21 @@
         </tbody>
         
       </table>
+
+      <!-- Prikaz svih poslovnih godina -->
+      <table class="table" id="poslovneGodineTable" style="display: none;">
+        <thead>
+          <tr>
+            <th style="text-align: center;">Broj godine</th>
+            <th style="text-align: center;">Zaključena</th>
+            <th style="text-align: center;">Naziv preduzeća</th>
+          </tr>
+        </thead>
+        <tbody id="tbodyPoslovneGodine">
+
+        </tbody>
+      </table>
+
       <!-- Forma za dodavanje poslovnog partnera -->
       <form id="dodavanjePoslovnogPartnera" style="display: none;">
         <div class="form-group">
@@ -579,21 +594,7 @@
         <button id="btnDodajPoslovnogPartnera" onclick="submitPoslovnogPartnera()" type="submit" class="btn btn-secondary">Dodaj</button>
         <button id="izmeniPoslovnogPartnera" type="submit" class="btn btn-warning" style="display: none;">Izmeni</button>
       </form>
-      </div>
-
-      <!-- Prikaz svih poslovnih godina -->
-      <table class="table" id="poslovneGodineTable" style="display: none;">
-        <thead>
-          <tr>
-            <th style="text-align: center;">Broj godine</th>
-            <th style="text-align: center;">Zaključena</th>
-            <th style="text-align: center;">Naziv preduzeća</th>
-          </tr>
-        </thead>
-        <tbody id="tbodyPoslovneGodine">
-
-        </tbody>
-      </table>
+    </div>
 
       <!-- Forma za dodavanje poslovne godine -->
       <form id="dodajPoslovnuGodinu" style="display: none;">
