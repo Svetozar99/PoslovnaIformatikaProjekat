@@ -1,6 +1,8 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinskaKarticaDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Smer;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaPrometa;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
 
 @RestController
 @RequestMapping(value = "api/magacinska-kartica")
@@ -21,6 +29,9 @@ public class MagacinskaKarticaController {
 	
 	@Autowired
 	private MagacinskaKarticaServiceInterface magaKarticaServiceInterface;
+	
+	@Autowired
+	private PrometMagacinskeKarticeServiceInterface prometMagacinskeKarticeServiceInterface;
 
 	@GetMapping
 	public ResponseEntity<List<MagacinskaKarticaDTO>> getMagacinskeKartice(){
@@ -69,5 +80,38 @@ public class MagacinskaKarticaController {
 		MagacinskaKartica mk = magaKarticaServiceInterface.findOneById(id);
 		
 		return new ResponseEntity<MagacinskaKarticaDTO>(new MagacinskaKarticaDTO(mk),HttpStatus.OK);
+	}
+	
+	@PutMapping
+	public ResponseEntity<MagacinskaKarticaDTO> nivelacija(@RequestBody MagacinskaKarticaDTO dto){
+		MagacinskaKartica kartica = magaKarticaServiceInterface.findOneById(dto.getId());
+		
+		double nivelacija = kartica.getCena()*kartica.getUkupnaKolicina()-kartica.getUkupnaVrednost();
+		
+		PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
+		
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		
+		promet.setRedniBroj(0+"-"+0+"-"+calendar.get(Calendar.YEAR));
+		promet.setVrstaPrometa(VrstaPrometa.NI);
+		promet.setSmer(Smer.U);
+		promet.setKolicina(0);
+		promet.setCena(0);
+		promet.setVrednost(nivelacija);
+		promet.setDokument(VrstaPrometa.NI.label);
+		promet.setDatumPrometa(new Date());
+		promet.setMagacinskaKartica(kartica);
+		
+		kartica.setPrometUlazaVrednosno(promet.getVrednost());
+		
+		double ukupnaVrednost = kartica.getPocetnoStanjeVrednosno()+kartica.getPrometUlazaVrednosno()-kartica.getPrometIzlazaVrednosno();
+		kartica.setUkupnaVrednost(ukupnaVrednost);
+		
+		promet = prometMagacinskeKarticeServiceInterface.save(promet);
+		kartica = magaKarticaServiceInterface.save(kartica);
+		
+		return ResponseEntity.ok().build();
 	}
 }
