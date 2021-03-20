@@ -1,4 +1,5 @@
 var selectedId;
+var kartice = [];
 
 function prikazSvihMagacinskihKartica() {
 
@@ -14,6 +15,7 @@ function prikazSvihMagacinskihKartica() {
             contentType : 'application/json; charset=utf-8',
             url : "http://localhost:8080/api/magacinska-kartica/"+sifraMagacina+"/"+sifraRobeIliUsluge+"/"+brojPoslovneGodine,
             success : function(result){
+                kartice = result;
                 tabelaMK.show();
                 tbodyMK.empty();
                 for(p in result){
@@ -137,4 +139,43 @@ function prikaziOdredjenuMagacinskuKarticu(id){
             alert('ne valja nesto');
         }
     });
+}
+
+function prethodnaKartica(){
+    var idTrenutne = $("#idMagacinskeKartice").val();
+    var kartica;
+    var prethodna;
+    kartice.forEach(k => {
+        if(k.id == idTrenutne){
+            kartica = k;
+        }
+    });
+    //console.log("Kartica: "+JSON.stringify(kartica))
+    var index = kartice.indexOf(kartica);
+    //console.log("Index: "+index)
+    if(index == 0){
+        prethodna = kartice[kartice.length-1];
+    }else{
+        prethodna = kartice[index-1];
+    }
+    prikaziOdredjenuMagacinskuKarticu(prethodna.id);
+}
+
+function sledecaKartica(){
+    var idTrenutne = $("#idMagacinskeKartice").val();
+    var kartica;
+    var sledeca;
+    kartice.forEach(k => {
+        if(k.id == idTrenutne){
+            kartica = k;
+        }
+    });
+    var index = kartice.indexOf(kartica);
+    //console.log("Index: "+index)
+    if(index == kartice.length-1){
+        sledeca = kartice[0];
+    }else{
+        sledeca = kartice[index+1];
+    }
+    prikaziOdredjenuMagacinskuKarticu(sledeca.id);
 }
