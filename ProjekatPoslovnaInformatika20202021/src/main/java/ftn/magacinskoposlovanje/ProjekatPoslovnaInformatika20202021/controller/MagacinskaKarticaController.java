@@ -84,17 +84,18 @@ public class MagacinskaKarticaController {
 	
 	@PutMapping
 	public ResponseEntity<MagacinskaKarticaDTO> nivelacija(@RequestBody MagacinskaKarticaDTO dto){
+		
 		MagacinskaKartica kartica = magaKarticaServiceInterface.findOneById(dto.getId());
 		
 		double nivelacija = kartica.getCena()*kartica.getUkupnaKolicina()-kartica.getUkupnaVrednost();
-		
+		System.out.println("\nNivelacija: "+nivelacija);
 		PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
 		
 		Date date = new Date();
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(date);
 		
-		promet.setRedniBroj(0+"-"+0+"-"+calendar.get(Calendar.YEAR));
+		promet.setRedniBroj(0+"-"+calendar.get(Calendar.YEAR));
 		promet.setVrstaPrometa(VrstaPrometa.NI);
 		promet.setSmer(Smer.U);
 		promet.setKolicina(0);
@@ -104,7 +105,7 @@ public class MagacinskaKarticaController {
 		promet.setDatumPrometa(new Date());
 		promet.setMagacinskaKartica(kartica);
 		
-		kartica.setPrometUlazaVrednosno(promet.getVrednost());
+		kartica.setPrometUlazaVrednosno(kartica.getPrometUlazaVrednosno()+promet.getVrednost());
 		
 		double ukupnaVrednost = kartica.getPocetnoStanjeVrednosno()+kartica.getPrometUlazaVrednosno()-kartica.getPrometIzlazaVrednosno();
 		kartica.setUkupnaVrednost(ukupnaVrednost);

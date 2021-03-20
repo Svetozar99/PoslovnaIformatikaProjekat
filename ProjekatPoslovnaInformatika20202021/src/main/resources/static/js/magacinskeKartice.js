@@ -51,6 +51,30 @@ function magacinskeKarticeTablesP(){
     magacinskeKarticeTables.show();
 }
 
+function nivelacija(){
+    console.log("Nivelacija");
+    var id = $("#idMagacinskeKartice").val();
+
+    var formData = {
+        "id": id
+    }
+
+    $.ajax({
+        url:'http://localhost:8080/api/magacinska-kartica',
+        type: 'PUT',
+        contentType: 'application/json; charset=utf-8',
+        data : JSON.stringify(formData),
+        success: function(result){
+            alert('Nivelacija je uspela!');
+            prikaziOdredjenuMagacinskuKarticu(id);
+        },
+        error : function(e){
+            alert('Doslo je do neke greške!')
+            console.log("ERROR: ", e);
+        }
+    });
+}
+
 function prikaziOdredjenuMagacinskuKarticu(id){
 
    // alert('evo ga !!!!!');
