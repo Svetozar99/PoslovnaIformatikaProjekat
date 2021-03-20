@@ -23,6 +23,8 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 	
 	private double vrednost;
 	
+	private Date datum;
+	
 	private String jedinicaMere;
 	
 	public PrometMagacinskeKarticeDTO() {
@@ -30,7 +32,7 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 	}
 	
 	public PrometMagacinskeKarticeDTO(int id, String redniBroj, VrstaPrometa vrstaPrometa, Smer smer, double kolicina, double cena,
-			double vrednost) {
+			double vrednost, Date datum) {
 		super();
 		this.id = id;
 		this.redniBroj = redniBroj;
@@ -39,12 +41,13 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 		this.kolicina = kolicina;
 		this.cena = cena;
 		this.vrednost = vrednost;
+		this.datum = datum;
 	}
 
 	public PrometMagacinskeKarticeDTO(PrometMagacinskeKartice prometMagacinskeKartice) {
 		this(prometMagacinskeKartice.getId(), prometMagacinskeKartice.getRedniBroj(), prometMagacinskeKartice.getVrstaPrometa(),
 				prometMagacinskeKartice.getSmer(), prometMagacinskeKartice.getKolicina(),
-				prometMagacinskeKartice.getCena(),prometMagacinskeKartice.getVrednost());
+				prometMagacinskeKartice.getCena(),prometMagacinskeKartice.getVrednost(),prometMagacinskeKartice.getDatumPrometa());
 		
 	}
 
@@ -112,12 +115,12 @@ public class PrometMagacinskeKarticeDTO implements Serializable{
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "PrometMagacinskeKarticeDTO [id=" + id + ", redniBroj=" + redniBroj + ", vrstaPrometa=" + vrstaPrometa
-				+ ", smer=" + smer + ", kolicina=" + kolicina + ", cena=" + cena + ", vrednost=" + vrednost
-				+ ", jedinicaMere=" + jedinicaMere + "]";
+	public Date getDatum() {
+		return datum;
 	}
-	
-	
+
+	public void setDatum(Date datum) {
+		this.datum = datum;
+	}
+
 }

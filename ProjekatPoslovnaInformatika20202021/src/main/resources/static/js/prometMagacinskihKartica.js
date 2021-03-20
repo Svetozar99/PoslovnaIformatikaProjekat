@@ -15,6 +15,7 @@ function prikazSvihPrometaMagKartica() {
                 sadrzajTabele.empty();
                 for(p in result){
                     var html="";
+                    d=new Date(result[p].datum);
                     if(result[p].redniBroj.startsWith("0") || result[p].kolicina<0){
                         html = '<tr>'
                                 +'<td align="center">'+result[p].redniBroj+'</td>'
@@ -24,6 +25,7 @@ function prikazSvihPrometaMagKartica() {
                                 +'<td align="center">'+result[p].jedinicaMere+'</td>'
                                 +'<td align="center">'+result[p].vrednost+'</td>'
                                 +'<td align="center">'+result[p].cena+'</td>'
+                                +'<td align="center">'+d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear()+'</td>'
                                 +'<td align="center"></td>'
                             +'</tr>'
                     }else{
@@ -35,6 +37,7 @@ function prikazSvihPrometaMagKartica() {
                                 +'<td align="center">'+result[p].jedinicaMere+'</td>'
                                 +'<td align="center">'+result[p].vrednost+'</td>'
                                 +'<td align="center">'+result[p].cena+'</td>'
+                                +'<td align="center">'+d.getDate()+'-'+d.getMonth()+'-'+d.getFullYear()+'</td>'
                                 +'<td align="center"><button onclick="storniranje(\''+result[p].redniBroj+'\')" class="btn btn-outline-warning">Storniraj</button></td>'
                             +'</tr>'
                     }
