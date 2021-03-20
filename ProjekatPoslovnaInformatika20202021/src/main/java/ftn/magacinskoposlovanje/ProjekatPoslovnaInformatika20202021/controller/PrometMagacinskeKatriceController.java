@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -69,10 +70,6 @@ public class PrometMagacinskeKatriceController {
 	public ResponseEntity<PrometMagacinskeKarticeDTO> getOnePromet(@PathVariable("redniBroj") String redniBroj) throws Exception{
 		System.out.println("\n\n\tRedni broj: "+redniBroj);
 		List<PrometMagacinskeKartice> prometi = prometMagacinskeKarticeService.findByRedniBroj(redniBroj);
-//		PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
-//		PrometMagacinskeKartice promet2 = new PrometMagacinskeKartice();
-//		MagacinskaKartica mk = new MagacinskaKartica();
-//		MagacinskaKartica mk2 = new MagacinskaKartica();
 		System.out.println("\nBroj prometa u listi: "+prometi.size());
 		if(prometi.size() == 0) {
 			return new ResponseEntity<PrometMagacinskeKarticeDTO>(HttpStatus.NOT_FOUND);
@@ -94,7 +91,7 @@ public class PrometMagacinskeKatriceController {
 					mk.setUkupnaVrednost(ukupnaVrednost);
 					
 					if(mk.getUkupnaKolicina()!=0) {
-						mk.setCena(mk.getUkupnaVrednost()/mk.getUkupnaKolicina());
+						mk.setCena(DoubleRounder.round(mk.getUkupnaVrednost()/mk.getUkupnaKolicina(), 2));
 					}else {
 						mk.setCena(0);
 					}
@@ -122,7 +119,7 @@ public class PrometMagacinskeKatriceController {
 					double ukupnaVrednost = mk.getPocetnoStanjeVrednosno()+mk.getPrometUlazaVrednosno()-mk.getPrometIzlazaVrednosno();
 					mk.setUkupnaVrednost(ukupnaVrednost);
 					if(mk.getUkupnaKolicina()!=0) {
-						mk.setCena(mk.getUkupnaVrednost()/mk.getUkupnaKolicina());
+						mk.setCena(DoubleRounder.round(mk.getUkupnaVrednost()/mk.getUkupnaKolicina(), 2));
 					}else {
 						mk.setCena(0);
 					}
@@ -143,46 +140,6 @@ public class PrometMagacinskeKatriceController {
 				}
 			}
 		}
-//		else if(prometi.size()==1) {
-//			promet = prometi.get(0);
-//			mk = promet.getMagacinskaKartica();
-//			if(promet.getVrstaPrometa().equals(VrstaPrometa.PR)) {
-//				mk.setPrometUlazaKolicinski(mk.getPrometUlazaKolicinski()-promet.getKolicina());
-//				mk.setPrometUlazaVrednosno(mk.getPrometUlazaVrednosno()-promet.getVrednost());
-//				mk.setUkupnaKolicina(mk.getUkupnaKolicina() - promet.getKolicina());
-//				mk.setUkupnaVrednost(mk.getUkupnaVrednost() - promet.getVrednost());
-//			}
-//			else if(promet.getVrstaPrometa().equals(VrstaPrometa.OT)) {
-//				mk.setPrometIzlazaKolicinski(mk.getPrometIzlazaKolicinski()-promet.getKolicina());
-//				mk.setPrometIzlazaVrednosno(mk.getPrometIzlazaVrednosno()-promet.getVrednost());
-//				mk.setUkupnaKolicina(mk.getUkupnaKolicina() + promet.getKolicina());
-//				mk.setUkupnaVrednost(mk.getUkupnaVrednost() + promet.getVrednost());
-//		}else if(prometi.size()==2) {
-//			promet = prometi.get(0);
-//			promet2 = prometi.get(1);
-//			mk = promet.getMagacinskaKartica();
-//			mk2 = promet2.getMagacinskaKartica();
-//			if(promet.getSmer().equals(Smer.U)) {
-//				mk.setPrometUlazaKolicinski(mk.getPrometUlazaKolicinski()-promet.getKolicina());
-//				mk.setPrometUlazaVrednosno(mk.getPrometUlazaVrednosno()-promet.getVrednost());
-//				mk.setUkupnaKolicina(mk.getUkupnaKolicina() - promet.getKolicina());
-//				mk.setUkupnaVrednost(mk.getUkupnaVrednost() - promet.getVrednost());
-//			}else {
-//				mk.setPrometIzlazaKolicinski(mk.getPrometIzlazaKolicinski()-promet.getKolicina());
-//				mk.setPrometIzlazaVrednosno(mk.getPrometIzlazaVrednosno()-promet.getVrednost());
-//				mk.setUkupnaKolicina(mk.getUkupnaKolicina() + promet.getKolicina());
-//				mk.setUkupnaVrednost(mk.getUkupnaVrednost() + promet.getVrednost());
-//			}
-//			if(promet2.getSmer().equals(Smer.U)) {
-//				mk2.setPrometUlazaKolicinski(mk2.getPrometUlazaKolicinski()-promet2.getKolicina());
-//				mk2.setPrometUlazaVrednosno(mk2.getPrometUlazaVrednosno()-promet2.getVrednost());
-//				mk2.setUkupnaKolicina(mk2.getUkupnaKolicina() - promet2.getKolicina());
-//				mk2.setUkupnaVrednost(mk2.getUkupnaVrednost() - promet2.getVrednost());
-//			}else {
-//				mk2.setPrometIzlazaKolicinski(mk2.getPrometIzlazaKolicinski()-promet2.getKolicina());
-//				mk2.setPrometIzlazaVrednosno(mk2.getPrometIzlazaVrednosno()-promet2.getVrednost());
-//			}
-//		}
 		
 		
 		List<PrometniDokument> prometniDokumenti = prometniDokumentServiceInterface.findByRedniBroj(redniBroj);
