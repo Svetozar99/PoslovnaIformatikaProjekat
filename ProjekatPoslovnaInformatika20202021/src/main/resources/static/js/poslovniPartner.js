@@ -56,9 +56,9 @@ function submitPoslovnogPartnera(){
     adresaInput = $("#adresaInputPoslovnogPartnera").val();
     brojTelefonaInput = $("#telefonInputPoslovnogPartnera").val();
     email = $("#emailInputPoslovnogPartnera").val();
-    pibInput = $("#pibInputPoslovnogPartnera").val();
-    mibInput = $("#mibInputPoslovnogPartnera").val();
-    var preduzece = $("#inputPreduzecePoslovnogPartnera").val();
+    pibInput = $("#pibPP").val();
+    mibInput = $("#mibPP").val();
+    var preduzece = $("#preduzecePP").val();
 
     var nazivGreska;
     var adresaGreska;
@@ -100,12 +100,14 @@ function submitPoslovnogPartnera(){
             "adresa": adresaInput,
             "brojTelefona": brojTelefonaInput,
             "email": email,
-            "pIB": pibInput,
-            "mIB": mibInput,
+            "pib": pibInput,
+            "mib": mibInput,
             "idPreduzeca": preduzece
             
         }
     
+        alert(JSON.stringify(formData));
+
         $.ajax({
             url : 'http://localhost:8080/api/poslovni-partner',
             type : "POST",
@@ -131,15 +133,12 @@ function editPoslovniPartner(id){
     $('#btnDodajPoslovnogPartnera').hide();
     
     function prikaziPoslovnogPartnera(){
-        // alert('f-ja u prvoj f-ji');
         $.ajax({
             url:'http://localhost:8080/api/poslovni-partner/' + id,
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             success: function(result){
-                alert('success u prvoj f-ji');
                 dajPreduzeca("",result.idPreduzeca);
-                // dajPreduzeca("selectPreduzece");
                 var nazivP = $('#nazivInputPoslovnogPartnera');
                 var adresaP = $('#adresaInputPoslovnogPartnera');
                 var brojTelefonaP = $('#telefonInputPoslovnogPartnera');
@@ -148,7 +147,7 @@ function editPoslovniPartner(id){
                 var mibP = $('#mibPP');
                 var idPreduzecaUpdate = $('#idupdatePoslPartner');
 
-                idPreduzecaUpdate.val(result.sifraPartnera);
+                // idPreduzecaUpdate.val(result.sifraPartnera);
                 nazivP.val(result.nazivPartnera);
                 adresaP.val(result.adresa);
                 emailP.val(result.email);
@@ -156,31 +155,7 @@ function editPoslovniPartner(id){
                 pibP.val(result.pib);
                 mibP.val(result.mib);
                 console.log(JSON.stringify(result));
-
-
-
-            	
-                // dajPreduzeca("",result.idPreduzeca);
-
-                // var idPoslPartn = $("#idupdatePoslPartner");
-                // var nazivPP = $("#nazivInputPoslovnogPartnera");
-                // var adresaPP = $("#adresaInputPoslovnogPartnera");
-                // var telefonPP = $("#telefonInputPoslovnogPartnera");
-                // var emailPP = $("#emailInputPoslovnogPartnera");
-                // var pibPP = $("#pibPP");
-                // var mibPP = $("#mibPP");
-                // var preduzecPP = $("#preduzecePP");
-
-                // idPoslPartn.val(result.sifraPartnera);
-                // // alert(idPoslPartn.val());
-                // nazivPP.val(result.nazivPartnera);
-                // adresaPP.val(result.adresa);
-                // telefonPP.val(result.brojTelefona);
-                // emailPP.val(result.email);
-                // pibPP.val(result.pIB);
-                // mibPP.val(result.mIB);
-                // preduzecPP.val(result.idPreduzeca);
-                },
+            },
             error : function(e){
                 alert('Doslo je do neke greške!')
                 console.log("ERROR: ", e);
@@ -193,7 +168,7 @@ function editPoslovniPartner(id){
 }
 
 function submitUpdatePoslPartner(){
-    alert('druga f-ja');
+    // alert('druga f-ja');
     var naziv = $("#nazivInputPoslovnogPartnera").val();
     var adresa = $("#adresaInputPoslovnogPartnera").val();
     var telefon = $("#telefonInputPoslovnogPartnera").val()
@@ -209,10 +184,10 @@ function submitUpdatePoslPartner(){
         "brojTelefona": telefon,
         "email": email,
         "pib": pib,
-        "m": mib,
+        "mib": mib,
         "idPreduzeca": preduzeceP
     }
-    alert(JSON.stringify(formData));
+    // alert(JSON.stringify(formData));
     $.ajax({
         url:'http://localhost:8080/api/poslovni-partner/' + id,
         type: 'PUT',
