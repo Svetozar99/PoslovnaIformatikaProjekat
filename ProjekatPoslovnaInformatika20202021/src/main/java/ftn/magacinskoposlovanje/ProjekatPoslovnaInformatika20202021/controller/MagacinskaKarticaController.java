@@ -1,6 +1,7 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -131,11 +132,14 @@ public class MagacinskaKarticaController {
 	@GetMapping(value = "/report/{redniBroj}")
 	public ResponseEntity getReport(@PathVariable("redniBroj") String redniBroj){
 		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
+		
 		JasperPrint jp;
 		ByteArrayInputStream bis;
 		try {
+			File file = new File("src\\main\\resources\\PoslovnaInformatika.jasper");
+			System.out.println("\n\tFajl zauzima: "+file.getAbsolutePath());
 			jp = JasperFillManager.fillReport(
-				getClass().getResource("PoslovnaInformatika.jasper").openStream(),
+				getClass().getResource("src\\main\\resources\\PoslovnaInformatika.jasper").openStream(),
 				null, DriverManager.getConnection(connectionUrl , "username", "password"));
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
