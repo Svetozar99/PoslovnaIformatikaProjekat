@@ -128,13 +128,14 @@ public class MagacinskaKarticaController {
 		return ResponseEntity.ok().build();
 	}
 	
-	public ResponseEntity getReport(){
+	@GetMapping(value = "/report/{redniBroj}")
+	public ResponseEntity getReport(@PathVariable("redniBroj") String redniBroj){
 		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
 		JasperPrint jp;
 		ByteArrayInputStream bis;
 		try {
 			jp = JasperFillManager.fillReport(
-				getClass().getResource("/jasper/ZaposleniPoRadnimMestima.jasper").openStream(),
+				getClass().getResource("PoslovnaInformatika.jasper").openStream(),
 				null, DriverManager.getConnection(connectionUrl , "username", "password"));
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
