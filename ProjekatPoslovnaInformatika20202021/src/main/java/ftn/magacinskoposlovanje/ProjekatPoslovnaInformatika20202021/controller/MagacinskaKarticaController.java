@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -141,16 +143,13 @@ public class MagacinskaKarticaController {
 		JasperPrint jp;
 		ByteArrayInputStream bis;
 		try {
-			File file = new File("src\\main\\resources\\PoslovnaInformatika.jasper");
+			File file = new File("src\\main\\resources\\PrometiReport.jasper");
 			InputStream is = new FileInputStream(file);
-//			JasperReport jasperReport = JasperCompileManager.compileReport(
-//					is);
+			Map<String, Object> param = new HashedMap();
+			param.put("redniBroj", redniBroj);
 			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
-			System.out.println("\n\tconn: "+file.getAbsolutePath());
-			System.out.println("\n\tfile: "+file.getAbsolutePath());
-//			jp = JasperFillManager.fillReport(jasperReport, null, conn);
 			jp = JasperFillManager.fillReport(is,
-				null, conn);
+					param, conn);
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
 			HttpHeaders headers = new HttpHeaders();
