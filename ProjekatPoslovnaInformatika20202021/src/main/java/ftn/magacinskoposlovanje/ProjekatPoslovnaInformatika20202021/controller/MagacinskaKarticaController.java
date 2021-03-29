@@ -1,12 +1,19 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinskaKarticaDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
@@ -22,6 +30,10 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Smer;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaPrometa;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @RestController
 @RequestMapping(value = "api/magacinska-kartica")
@@ -114,5 +126,30 @@ public class MagacinskaKarticaController {
 		kartica = magaKarticaServiceInterface.save(kartica);
 		
 		return ResponseEntity.ok().build();
+	}
+	
+	public ResponseEntity getReport(){
+		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
+		JasperPrint jp;
+		ByteArrayInputStream bis;
+		try {
+			jp = JasperFillManager.fillReport(
+				getClass().getResource("/jasper/ZaposleniPoRadnimMestima.jasper").openStream(),
+				null, DriverManager.getConnection(connectionUrl , "username", "password"));
+			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+
+			return ResponseEntity
+		       		.ok()
+		       		.headers(headers)
+		       		.contentType(MediaType.APPLICATION_PDF)
+		       		.body(new InputStreamResource(bis));
+		} catch (JRException | IOException | SQLException e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, "Neka greska", e);
+		}
 	}
 }
