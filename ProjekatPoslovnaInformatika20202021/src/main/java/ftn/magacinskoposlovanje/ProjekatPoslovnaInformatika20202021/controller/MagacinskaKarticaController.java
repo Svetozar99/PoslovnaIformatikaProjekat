@@ -2,7 +2,10 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -32,9 +35,11 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaP
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 
 @RestController
 @RequestMapping(value = "api/magacinska-kartica")
@@ -137,10 +142,15 @@ public class MagacinskaKarticaController {
 		ByteArrayInputStream bis;
 		try {
 			File file = new File("src\\main\\resources\\PoslovnaInformatika.jasper");
-			System.out.println("\n\tFajl zauzima: "+file.getAbsolutePath());
-			jp = JasperFillManager.fillReport(
-				getClass().getResource("src\\main\\resources\\PoslovnaInformatika.jasper").openStream(),
-				null, DriverManager.getConnection(connectionUrl , "username", "password"));
+			InputStream is = new FileInputStream(file);
+//			JasperReport jasperReport = JasperCompileManager.compileReport(
+//					is);
+			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
+			System.out.println("\n\tconn: "+file.getAbsolutePath());
+			System.out.println("\n\tfile: "+file.getAbsolutePath());
+//			jp = JasperFillManager.fillReport(jasperReport, null, conn);
+			jp = JasperFillManager.fillReport(is,
+				null, conn);
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
 			HttpHeaders headers = new HttpHeaders();
