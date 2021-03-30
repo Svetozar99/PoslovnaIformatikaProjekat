@@ -2,17 +2,21 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInte
 
 import java.util.List;
 
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.RobaIliUslugaDTO;
 
 public interface RobaIliUslugaServiceInterface {
 
-	public List<RobaIliUsluga> findAll();
+	public List<RobaIliUslugaDTO> findAll();
 	
-	public RobaIliUsluga save(RobaIliUsluga robaIliUsluga);
+	public List<RobaIliUslugaDTO> findByMagKartica(Integer id);
 	
-	public RobaIliUsluga findOneBySifra(Integer id);
+	public RobaIliUslugaDTO save(RobaIliUslugaDTO robaIliUslugaDTO);
 	
-	public RobaIliUsluga getOne(Integer id);
+	public RobaIliUslugaDTO findOneBySifra(Integer id);
+	
+	public RobaIliUslugaDTO getOne(Integer id);
 	
 	public void delete(Integer i);
+	
+	public RobaIliUslugaDTO update(Integer id, RobaIliUslugaDTO dto);
 }

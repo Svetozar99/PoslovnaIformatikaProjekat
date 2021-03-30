@@ -69,63 +69,64 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	@Override
 	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
 			Integer poslovnaGodinaId, Integer sifraMagacina) throws Exception{
-		RobaIliUsluga robaIliUsluga = robaIliUslugaServiceInterface.findOneBySifra(robaIliUslugaId);
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(poslovnaGodinaId);
-
-		Magacin magacin = magacinServiceInterface.findBySifra(sifraMagacina);
-		
-		MagacinskaKartica kartica = magacinskaKarticaRepository.findOneByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(robaIliUslugaId, poslovnaGodinaId, sifraMagacina);
-		
-		if(kartica == null) {
-			kartica = new MagacinskaKartica();
-			kartica.setPrometUlazaKolicinski(0);
-			kartica.setPrometIzlazaKolicinski(0);
-			kartica.setUkupnaKolicina(0);
-			kartica.setPrometIzlazaKolicinski(0);
-			kartica.setPrometUlazaVrednosno(0);
-			kartica.setUkupnaVrednost(0);
-			kartica.setCena(0);
-			kartica.setMagacin(magacin);
-			kartica.setRobaIliUsluga(robaIliUsluga);
-			
-			kartica.setPoslovnaGodina(poslovnaGodina);
-			List<MagacinskaKartica> kartice = magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, robaIliUslugaId);
-			if(kartice.size()!=0) {
-				System.out.println("Postoji pocetno stanje za ovu robu ili uslugu!");
-				MagacinskaKartica kartica2 = kartice.get(kartice.size()-1);
-				
-				kartica.setPocetnoStanjeKolicinski(kartica2.getUkupnaKolicina());
-				kartica.setPocetnoStanjeVrednosno(kartica2.getPocetnoStanjeVrednosno());
-				
-				kartica = magacinskaKarticaRepository.save(kartica);
-				Date date = new Date();
-				Calendar calendar = Calendar.getInstance();
-				calendar.setTime(date);
-				
-				
-				PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
-				promet.setRedniBroj(0+"-"+calendar.get(Calendar.YEAR));
-				promet.setVrstaPrometa(VrstaPrometa.PS);
-				promet.setSmer(Smer.U);
-				promet.setKolicina(kartica.getPocetnoStanjeKolicinski());
-				promet.setCena(kartica.getCena());
-				promet.setVrednost(kartica.getPocetnoStanjeVrednosno());
-				promet.setDokument(VrstaPrometa.PS.label);
-				promet.setDatumPrometa(new Date());
-				promet.setMagacinskaKartica(kartica);
-				
-				prometMagacinskeKarticeServiceInterface.save(promet);
-			}else {
-				System.out.println("za ovu robu ili uslugu ili poslovnu godinu ne postoji ni jedna magacinska kartica");
-				
-				kartica.setPocetnoStanjeKolicinski(0);
-				kartica.setPocetnoStanjeVrednosno(0);
-				kartica = magacinskaKarticaRepository.save(kartica);
-			}
-			
-			
-		}
-		return kartica;
+//		RobaIliUsluga robaIliUsluga = robaIliUslugaServiceInterface.findOneBySifra(robaIliUslugaId);
+//		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(poslovnaGodinaId);
+//
+//		Magacin magacin = magacinServiceInterface.findBySifra(sifraMagacina);
+//		
+//		MagacinskaKartica kartica = magacinskaKarticaRepository.findOneByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(robaIliUslugaId, poslovnaGodinaId, sifraMagacina);
+//		
+//		if(kartica == null) {
+//			kartica = new MagacinskaKartica();
+//			kartica.setPrometUlazaKolicinski(0);
+//			kartica.setPrometIzlazaKolicinski(0);
+//			kartica.setUkupnaKolicina(0);
+//			kartica.setPrometIzlazaKolicinski(0);
+//			kartica.setPrometUlazaVrednosno(0);
+//			kartica.setUkupnaVrednost(0);
+//			kartica.setCena(0);
+//			kartica.setMagacin(magacin);
+//			kartica.setRobaIliUsluga(robaIliUsluga);
+//			
+//			kartica.setPoslovnaGodina(poslovnaGodina);
+//			List<MagacinskaKartica> kartice = magacinskaKarticaRepository.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, robaIliUslugaId);
+//			if(kartice.size()!=0) {
+//				System.out.println("Postoji pocetno stanje za ovu robu ili uslugu!");
+//				MagacinskaKartica kartica2 = kartice.get(kartice.size()-1);
+//				
+//				kartica.setPocetnoStanjeKolicinski(kartica2.getUkupnaKolicina());
+//				kartica.setPocetnoStanjeVrednosno(kartica2.getPocetnoStanjeVrednosno());
+//				
+//				kartica = magacinskaKarticaRepository.save(kartica);
+//				Date date = new Date();
+//				Calendar calendar = Calendar.getInstance();
+//				calendar.setTime(date);
+//				
+//				
+//				PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
+//				promet.setRedniBroj(0+"-"+calendar.get(Calendar.YEAR));
+//				promet.setVrstaPrometa(VrstaPrometa.PS);
+//				promet.setSmer(Smer.U);
+//				promet.setKolicina(kartica.getPocetnoStanjeKolicinski());
+//				promet.setCena(kartica.getCena());
+//				promet.setVrednost(kartica.getPocetnoStanjeVrednosno());
+//				promet.setDokument(VrstaPrometa.PS.label);
+//				promet.setDatumPrometa(new Date());
+//				promet.setMagacinskaKartica(kartica);
+//				
+//				prometMagacinskeKarticeServiceInterface.save(promet);
+//			}else {
+//				System.out.println("za ovu robu ili uslugu ili poslovnu godinu ne postoji ni jedna magacinska kartica");
+//				
+//				kartica.setPocetnoStanjeKolicinski(0);
+//				kartica.setPocetnoStanjeVrednosno(0);
+//				kartica = magacinskaKarticaRepository.save(kartica);
+//			}
+//			
+//			
+//		}
+//		return kartica;
+			return null;
 	}
 
 	@Override

@@ -1,12 +1,8 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.RobaIliUslugaDTO;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.JedinicaMere;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.JedinicaMereServiceInterface;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinskaKarticaServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.RobaIliUslugaServiceInterface;
 
 @RestController
@@ -32,101 +23,46 @@ public class RobaIliUslugaController {
 	@Autowired
 	private RobaIliUslugaServiceInterface robaIliUslugaServiceInterface;
 	
-	@Autowired
-	private JedinicaMereServiceInterface jedinicaMereServiceInterface;
-	
-	@Autowired
-	private MagacinskaKarticaServiceInterface magacinskaKarticaServiceInterface;
-	
 	@GetMapping
 	public ResponseEntity<List<RobaIliUslugaDTO>> getRobeIliUsluge(){
-		List<RobaIliUsluga> robaIliUsluga = robaIliUslugaServiceInterface.findAll();
 		
-		List<RobaIliUslugaDTO> dtos = new ArrayList<RobaIliUslugaDTO>();
-		for(RobaIliUsluga ru: robaIliUsluga) {
-			RobaIliUslugaDTO dto = new RobaIliUslugaDTO();
-			dto.setSifra(ru.getSifra());
-			dto.setNaziv(ru.getNaziv());
-			dto.setJedinicaMere(ru.getJedinicaMere().getSkraceniNaziv());
-			dtos.add(dto);
-		}
-		return new ResponseEntity<List<RobaIliUslugaDTO>>(dtos, HttpStatus.OK);
+		return ResponseEntity.ok().body(robaIliUslugaServiceInterface.findAll());
 	}
 	
 	@GetMapping(value = "/{sifraMagacina}")
 	public ResponseEntity<List<RobaIliUslugaDTO>> getRobeIliUslugeByMagacin(@PathVariable("sifraMagacina") Integer sifraMagacina){
-		List<RobaIliUsluga> robaIliUsluga = robaIliUslugaServiceInterface.findAll();
 		
-		Date date = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		
-		List<RobaIliUslugaDTO> dtos = new ArrayList<RobaIliUslugaDTO>();
-		for(RobaIliUsluga ru: robaIliUsluga) {
-			List<MagacinskaKartica> kartice= magacinskaKarticaServiceInterface.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(ru.getSifra(), calendar.get(Calendar.YEAR), sifraMagacina);
-			RobaIliUslugaDTO dto = new RobaIliUslugaDTO();
-			dto.setSifra(ru.getSifra());
-			dto.setNaziv(ru.getNaziv());
-			dto.setJedinicaMere(ru.getJedinicaMere().getSkraceniNaziv());
-			if(kartice.size() != 0) {
-				dto.setCena(kartice.get(0).getCena());
-				if(kartice.get(0).getUkupnaKolicina()>0) {
-					dtos.add(dto);
-				}
-			}
-		}
-		return new ResponseEntity<List<RobaIliUslugaDTO>>(dtos, HttpStatus.OK);
+		return ResponseEntity.ok().body(robaIliUslugaServiceInterface.findByMagKartica(sifraMagacina));
 	}
 	
 	@GetMapping(value = "jedna-roba-ili-usluga/{id}")
 	public ResponseEntity<RobaIliUslugaDTO> getRiliL(@PathVariable("id") Integer id){
-		RobaIliUsluga rl = robaIliUslugaServiceInterface.getOne(id);
 		
-		if(rl == null) {
-			return new ResponseEntity<RobaIliUslugaDTO>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<RobaIliUslugaDTO>(new RobaIliUslugaDTO(rl), HttpStatus.OK);
+		return ResponseEntity.ok().body(robaIliUslugaServiceInterface.findOneBySifra(id));
 	}
 	
 	@PostMapping
 	public ResponseEntity<RobaIliUslugaDTO> addRobaIliUsluga(@RequestBody RobaIliUslugaDTO dto){
-		JedinicaMere jedinicaMere = jedinicaMereServiceInterface.findOneById(dto.getIdJedinicaMere());
-
-		RobaIliUsluga robaIliUsluga = new RobaIliUsluga();
-		robaIliUsluga.setNaziv(dto.getNaziv());
-		robaIliUsluga.setJedinicaMere(jedinicaMere);
-		
-		robaIliUsluga = robaIliUslugaServiceInterface.save(robaIliUsluga);
-		dto.setSifra(robaIliUsluga.getSifra());
-		dto.setJedinicaMere(robaIliUsluga.getJedinicaMere().getSkraceniNaziv());
-		return new ResponseEntity<RobaIliUslugaDTO>(dto, HttpStatus.CREATED);
+		return ResponseEntity.ok().body(robaIliUslugaServiceInterface.save(dto));
 	}
 	
 	@PutMapping(value = "/{sifra}", consumes = "application/json")
-	public ResponseEntity<RobaIliUslugaDTO> updateRobaIliUsluga(@RequestBody RobaIliUslugaDTO robaIliUslugaDTO, @PathVariable("sifra") Integer sifra){
-		RobaIliUsluga rilil = robaIliUslugaServiceInterface.findOneBySifra(sifra);
-		JedinicaMere jm = jedinicaMereServiceInterface.findOneById(robaIliUslugaDTO.getIdJedinicaMere());
-		
-		if(rilil == null) {
-			return new ResponseEntity<RobaIliUslugaDTO>(HttpStatus.BAD_REQUEST);
+	public ResponseEntity<Void> updateRobaIliUsluga(@RequestBody RobaIliUslugaDTO robaIliUslugaDTO, @PathVariable("sifra") Integer sifra){
+		try {
+			robaIliUslugaServiceInterface.update(sifra,robaIliUslugaDTO);
+			return  ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
 		}
-		rilil.setNaziv(robaIliUslugaDTO.getNaziv());
-		rilil.setJedinicaMere(jm);
-		rilil.setCena(robaIliUslugaDTO.getCena());
-		rilil = robaIliUslugaServiceInterface.save(rilil);
-//		robaIliUslugaDTO.setJedinicaMere(rilil.getJedinicaMere().getSkraceniNaziv());
-		System.out.println(robaIliUslugaDTO.getIdJedinicaMere()+ " id jedinice mere");
-		return new ResponseEntity<RobaIliUslugaDTO>(new RobaIliUslugaDTO(rilil), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteRobaIliUsluga(@PathVariable("id") Integer id){
-		RobaIliUsluga r = robaIliUslugaServiceInterface.findOneBySifra(id);
-		if(r != null) {
+		try {
 			robaIliUslugaServiceInterface.delete(id);
-			
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return  ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
 		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 }
