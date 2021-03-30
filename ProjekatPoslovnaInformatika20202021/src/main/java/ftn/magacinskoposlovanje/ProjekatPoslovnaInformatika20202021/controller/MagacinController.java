@@ -1,10 +1,8 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinDTO;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.MagacinServiceInterface;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
 
@@ -33,71 +29,45 @@ public class MagacinController {
 	
 	@GetMapping
 	public ResponseEntity<List<MagacinDTO>> getMagacin(){
-		System.out.println("pozvana f-ja");
-		List<Magacin> magacini = magacinServiceInterface.findAll();
 		
-		List<MagacinDTO> magacinDTO = new ArrayList<MagacinDTO>();
-		for(Magacin mag: magacini) {
-			magacinDTO.add(new MagacinDTO(mag));
-		}
-		return new ResponseEntity<List<MagacinDTO>>(magacinDTO, HttpStatus.OK);
+		return ResponseEntity.ok().body(magacinServiceInterface.findAll());
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MagacinDTO> getMagacin(@PathVariable("id") Integer id){
-		Magacin magacin = magacinServiceInterface.findOne(id);
 		
-		if(magacin == null) {
-			return new ResponseEntity<MagacinDTO>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<MagacinDTO>(new MagacinDTO(magacin), HttpStatus.OK);
+		return ResponseEntity.ok().body(magacinServiceInterface.findOne(id));
 	}
 	
 	@GetMapping(value = "preduzece/{id}")
 	public ResponseEntity<List<MagacinDTO>> getMagaciniByPreduzece(@PathVariable("id") Integer id){
-		List<Magacin> magacini = magacinServiceInterface.findByPreduzece_id(id);
-		List<MagacinDTO> dtos = new ArrayList<MagacinDTO>();
-		for (Magacin m : magacini) {
-			MagacinDTO dto = new MagacinDTO(m);
-			dtos.add(dto);
-		}
-		return new ResponseEntity<List<MagacinDTO>>(dtos, HttpStatus.OK);
+		
+		return ResponseEntity.ok().body(magacinServiceInterface.findByPreduzece_id(id));
 	}
 	
 	@PostMapping
 	public ResponseEntity<MagacinDTO> addMagacin(@RequestBody MagacinDTO magacinDTO){
-		Preduzece p = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
-		Magacin m = new Magacin();
-		m.setNazivMagacina(magacinDTO.getNaziv());	
-		m.setPreduzece(p);
 		
-		m = magacinServiceInterface.save(m);
-		return new ResponseEntity<MagacinDTO>(new MagacinDTO(m), HttpStatus.CREATED);
+		return ResponseEntity.ok().body(magacinServiceInterface.save(magacinDTO));
 	}
 
 	@PutMapping(value = "/{id}", consumes = "application/json")
-	public ResponseEntity<MagacinDTO> updateMagacin(@RequestBody MagacinDTO magacinDTO, @PathVariable("id") Integer id){
-		System.out.println("\n\tMagacin izmeni");
-		Magacin magacin = magacinServiceInterface.findBySifra(id);
-		Preduzece preduzece = preduzeceServiceInterface.findById(magacinDTO.getPreduzece());
-		
-		if(magacin == null) {
-			return new ResponseEntity<MagacinDTO>(HttpStatus.BAD_REQUEST);
+	public ResponseEntity<Void> updateMagacin(@RequestBody MagacinDTO magacinDTO, @PathVariable("id") Integer id){
+		try {
+			magacinServiceInterface.update(id,magacinDTO);
+			return  ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
 		}
-		magacin.setNazivMagacina(magacinDTO.getNaziv());	
-		magacin.setPreduzece(preduzece);
-		magacin = magacinServiceInterface.save(magacin);
-		return new ResponseEntity<MagacinDTO>(new MagacinDTO(magacin), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteMagacin(@PathVariable("id") Integer id){
-		Magacin magacin = magacinServiceInterface.findBySifra(id);
-		if(magacin != null) {
+		try {
 			magacinServiceInterface.remove(id);
-			
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return  ResponseEntity.noContent().build();
+		} catch (Exception e) {
+			return ResponseEntity.notFound().build();
 		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
 }
