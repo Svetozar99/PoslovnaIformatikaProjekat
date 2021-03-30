@@ -11,10 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -136,8 +136,8 @@ public class MagacinskaKarticaController {
 		return ResponseEntity.ok().build();
 	}
 	
-	@GetMapping(value = "/report/{redniBroj}")
-	public ResponseEntity getReport(@PathVariable("redniBroj") String redniBroj){
+	@GetMapping(value = "/report/{ovde-treba-da-bude-id-kartice}")
+	public ResponseEntity getReport(@PathVariable("ovde-treba-da-bude-id-kartice") String redniBroj){
 		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
 		
 		JasperPrint jp;
@@ -145,7 +145,7 @@ public class MagacinskaKarticaController {
 		try {
 			File file = new File("src\\main\\resources\\PrometiReport.jasper");
 			InputStream is = new FileInputStream(file);
-			Map<String, Object> param = new HashedMap();
+			Map<String, Object> param = new HashMap();
 			param.put("redniBroj", redniBroj);
 			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
 			jp = JasperFillManager.fillReport(is,

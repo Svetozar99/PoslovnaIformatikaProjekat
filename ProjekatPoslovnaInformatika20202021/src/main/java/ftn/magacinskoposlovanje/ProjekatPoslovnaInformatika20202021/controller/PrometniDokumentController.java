@@ -13,8 +13,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -148,7 +148,7 @@ public class PrometniDokumentController {
 		try {
 			File file = new File("src\\main\\resources\\OtpremnicaReport.jasper");
 			InputStream is = new FileInputStream(file);
-			Map<String, Object> param = new HashedMap();
+			Map<String, Object> param = new HashMap();
 			param.put("redniBroj", redniBroj);
 			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
 			jp = JasperFillManager.fillReport(is,
