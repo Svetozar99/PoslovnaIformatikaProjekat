@@ -193,9 +193,15 @@ function proknjizi(){
                         contentType: 'application/json; charset=utf-8',
                         data : JSON.stringify(stavke),
                         success: function(result){
-                            alert('Prometni dokument i stavke dokumenta su uspesno dodati');
+                            alert('Prometni dokument i stavke dokumenta su uspesno proknjižene');
                             redovi=[];
-                            location.reload();
+                            if(prikaziOtpremnicu){
+                                $('#btnProknjizi').hide();
+                                $('#btnIzvestaj').show();
+                            }
+                            else{
+                                location.reload();
+                            }
                         },
                         error : function(e){
                             alert(JSON.stringify(e.responseJSON.message));
@@ -208,6 +214,12 @@ function proknjizi(){
             }
         });
     }
+}
+
+function otpremnicaIzvestaj(){
+    var redniBroj = $('#inputOtpremnicaBr').val();
+    window.open('http://localhost:8080/api/prometni-dokument/report/'+redniBroj);
+    location.reload();
 }
 
 function postaviInformacijePreduzecaPrijemnica(){

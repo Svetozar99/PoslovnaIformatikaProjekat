@@ -1,6 +1,8 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,16 +57,22 @@ public class RobaIliUslugaController {
 	public ResponseEntity<List<RobaIliUslugaDTO>> getRobeIliUslugeByMagacin(@PathVariable("sifraMagacina") Integer sifraMagacina){
 		List<RobaIliUsluga> robaIliUsluga = robaIliUslugaServiceInterface.findAll();
 		
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		
 		List<RobaIliUslugaDTO> dtos = new ArrayList<RobaIliUslugaDTO>();
 		for(RobaIliUsluga ru: robaIliUsluga) {
-			MagacinskaKartica kartica = magacinskaKarticaServiceInterface.findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina,ru.getSifra());
+			List<MagacinskaKartica> kartice= magacinskaKarticaServiceInterface.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(ru.getSifra(), calendar.get(Calendar.YEAR), sifraMagacina);
 			RobaIliUslugaDTO dto = new RobaIliUslugaDTO();
 			dto.setSifra(ru.getSifra());
 			dto.setNaziv(ru.getNaziv());
 			dto.setJedinicaMere(ru.getJedinicaMere().getSkraceniNaziv());
-			if(kartica != null) {
-				dto.setCena(kartica.getCena());
-				dtos.add(dto);
+			if(kartice.size() != 0) {
+				dto.setCena(kartice.get(0).getCena());
+				if(kartice.get(0).getUkupnaKolicina()>0) {
+					dtos.add(dto);
+				}
 			}
 		}
 		return new ResponseEntity<List<RobaIliUslugaDTO>>(dtos, HttpStatus.OK);

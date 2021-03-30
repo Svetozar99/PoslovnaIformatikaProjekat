@@ -37,7 +37,6 @@
 	  <script src="js/jedinicaMere.js"></script>
     <script src="js/poslovniPartner.js"></script>
     <script src="js/poslovnaGodina.js"></script>
-
   </head>
 
 <body>
@@ -313,7 +312,15 @@
             <footer style="padding-top: 10%;">
                 <br>
                 <div style="display: inline-flexbox; text-align: center;">
-                  <button onclick="proknjizi()" class="btn btn-secondary">Proknjiži</button>
+                  <button onclick="proknjizi()" class="btn btn-secondary" id="btnProknjizi" style="margin-bottom: 10px;">Proknjiži</button>
+                  <button 
+                    onclick="otpremnicaIzvestaj()" 
+                    class="btn btn-secondary" 
+                    id="btnIzvestaj" 
+                    style="display: none; margin-bottom: 10px;"
+                  >
+                          Štampaj izveštaj
+                  </button>
                 </div>
             </footer>
         </div>

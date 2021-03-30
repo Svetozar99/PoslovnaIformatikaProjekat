@@ -156,7 +156,7 @@ public class PrometniDokumentController {
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+			headers.add("Content-Disposition", "inline; filename=otpremnica_"+redniBroj+".pdf");
 
 			return ResponseEntity
 		       		.ok()
