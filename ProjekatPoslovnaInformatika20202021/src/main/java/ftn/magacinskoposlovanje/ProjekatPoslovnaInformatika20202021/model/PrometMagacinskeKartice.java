@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,9 +27,11 @@ public class PrometMagacinskeKartice {
 	private String redniBroj;
 	
 	@Column(name = "vrsta_prometa", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private VrstaPrometa vrstaPrometa;//mozda treba enumeracija // prepravljeno da bude enumeracija
 	
 	@Column(name = "smer", nullable = false)
+	@Enumerated(EnumType.STRING)
 	private Smer smer;//i ovdje isto // prepravljeno da bude enumeracija
 	
 	@Column(name = "kolicina", nullable = false)

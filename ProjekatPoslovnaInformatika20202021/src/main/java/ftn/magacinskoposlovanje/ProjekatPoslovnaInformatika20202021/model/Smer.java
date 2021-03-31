@@ -5,9 +5,9 @@ public enum Smer {
 	U("Ulaz"),
 	I("Izlaz");
 	
-	public final String label;
+	public final String name;
 
     private Smer(String label) {
-        this.label = label;
+        this.name = label;
     }
 }
