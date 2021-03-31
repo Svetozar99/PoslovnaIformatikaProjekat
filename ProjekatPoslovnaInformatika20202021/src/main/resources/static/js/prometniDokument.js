@@ -124,27 +124,59 @@ function proknjizi(){
         sifraMagacinaIzlaz = $('#inputMagacin2').val();
     }
     var datumIzdavanja = $('#inputDatumIzdavanja').val();
-    if(sifraMagacinaUlaz == 0){
+    var greskaCena = false;
+    var greskaKolicina = false;
+    var stavke = [];
+    var greska2=""
+    console.log("Redovi: "+JSON.stringify(redovi));
+    // var i =0;
+    redovi.forEach(red => {
+        //console.log(JSON.stringify(red))
+        // i++
+        // console.log("I: "+i)
+        if($('#'+red.cena).val()==="" || $('#'+red.cena).val()==0){
+            greskaCena = true;
+            greska2 += "\nMorate uneti cenu za robu ili uslugu!";
+        }
+        if($('#'+red.kolicina).val()==="" || $('#'+red.kolicina).val()==0){
+            greskaKolicina = true;
+            greska2 += "\nMorate uneti kolicinu za robu ili uslugu!";
+        }
+        if(!greskaCena && !greskaKolicina){
+            var stavka = {
+                'kolicina':$('#'+red.kolicina).val(),
+                'cena':$('#'+red.cena).val(),
+                'vrednost':$('#'+red.vrednost).val(),
+                'robaUsluga':$('#'+red.naziv).val()
+            }
+            stavke.push(stavka)
+        }
+    });
+    if((sifraMagacinaUlaz == 0 && prikaziPrijemnicu) || (sifraMagacinaUlaz == 0 && prikaziMedjumagacinskiPromet)){
         greska += "\nIzaberite magacin!"
     }
     if(brojPrometnogDokumenta == ""){
         greska += "\nUnesite broj dokumenta!"
     }
-    if(sifraMagacinaIzlaz == 0){
+    if((sifraMagacinaIzlaz == 0 && prikaziOtpremnicu) || (sifraMagacinaIzlaz == 0 && prikaziMedjumagacinskiPromet)){
         greska += "\nIzaberite magacin!"
-    }
-    var formData = {
-        "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
-        "sifraMagacina1": sifraMagacinaUlaz,
-        "sifraMagacina2": sifraMagacinaIzlaz,
-        "vrstaDokumenta": vrstaDokumenta,
-        "brojPrometnogDokumenta":brojPrometnogDokumenta,
-        "datumIzdavanja": datumIzdavanja,
-        "idPreduzeca":idPreduzeca
     }
     if(redovi.length == 0){
         alert("Morate dodati robu ili uslugu za prometni dokument!");
+    }
+    else if(greskaCena || greskaKolicina){
+        alert(greska2);
     }else{
+        var formData = {
+            "sifraPoslovnogPartnera": sifraPoslovnogPartnera,
+            "sifraMagacina1": sifraMagacinaUlaz,
+            "sifraMagacina2": sifraMagacinaIzlaz,
+            "vrstaDokumenta": vrstaDokumenta,
+            "brojPrometnogDokumenta":brojPrometnogDokumenta,
+            "datumIzdavanja": datumIzdavanja,
+            "idPreduzeca":idPreduzeca,
+            "stavkeDTO":stavke
+        }
         console.log("ajax!!! "+JSON.stringify(formData));
         $.ajax({
             url : 'http://localhost:8080/api/prometni-dokument',
@@ -152,65 +184,23 @@ function proknjizi(){
             contentType: 'application/json; charset=utf-8',
             data : JSON.stringify(formData),
             success: function(result){
-                
-                var greskaCena = false;
-                var greskaKolicina = false;
-                var stavke = [];
-                var greska2=""
-                console.log("Redovi: "+JSON.stringify(redovi));
-               // var i =0;
-                redovi.forEach(red => {
-                    //console.log(JSON.stringify(red))
-                    // i++
-                    // console.log("I: "+i)
-                    if($('#'+red.cena).val()==="" || $('#'+red.cena).val()==0){
-                        greskaCena = true;
-                        greska2 += "\nMorate uneti cenu za robu ili uslugu!";
-                    }
-                    if($('#'+red.kolicina).val()==="" || $('#'+red.kolicina).val()==0){
-                        greskaKolicina = true;
-                        greska2 += "\nMorate uneti kolicinu za robu ili uslugu!";
-                    }
-                    if(!greskaCena && !greskaKolicina){
-                        var stavka = {
-                            'kolicina':$('#'+red.kolicina).val(),
-                            'cena':$('#'+red.cena).val(),
-                            'vrednost':$('#'+red.vrednost).val(),
-                            'prometniDokument':result.id,
-                            'robaUsluga':$('#'+red.naziv).val()
-                        }
-                        stavke.push(stavka)
-                    }
-                });
-                if(greskaCena || greskaKolicina){
-                    alert(greska2);
+                alert('Prometni dokument i stavke dokumenta su uspesno proknjižene');
+                if(prikaziOtpremnicu){
+                    $('#btnProknjizi').hide();
+                    $('#btnIzvestaj').show();
                 }
                 else{
-                    console.log(JSON.stringify(stavke));
-                    $.ajax({
-                        url : 'http://localhost:8080/api/stavka-dokumenta',
-                        type : "POST",
-                        contentType: 'application/json; charset=utf-8',
-                        data : JSON.stringify(stavke),
-                        success: function(result){
-                            alert('Prometni dokument i stavke dokumenta su uspesno proknjižene');
-                            redovi=[];
-                            if(prikaziOtpremnicu){
-                                $('#btnProknjizi').hide();
-                                $('#btnIzvestaj').show();
-                            }
-                            else{
-                                location.reload();
-                            }
-                        },
-                        error : function(e){
-                            alert(JSON.stringify(e.responseJSON.message));
-                        }
-                    });
+                    location.reload();
                 }
             },
             error : function(e){
-                alert(greska);
+                if(greska !== ''){
+                    alert(greska+'\n'+JSON.stringify(e.responseJSON.message));
+                }
+                else{
+                    console.log(e)
+                    alert(JSON.stringify(e.responseJSON.message));
+                }
             }
         });
     }
@@ -375,3 +365,59 @@ function formatirajBroj(){
         }
     });
 }
+
+//     var greskaCena = false;
+            //     var greskaKolicina = false;
+            //     var stavke = [];
+            //     var greska2=""
+            //     console.log("Redovi: "+JSON.stringify(redovi));
+            //    // var i =0;
+            //     redovi.forEach(red => {
+            //         //console.log(JSON.stringify(red))
+            //         // i++
+            //         // console.log("I: "+i)
+            //         if($('#'+red.cena).val()==="" || $('#'+red.cena).val()==0){
+            //             greskaCena = true;
+            //             greska2 += "\nMorate uneti cenu za robu ili uslugu!";
+            //         }
+            //         if($('#'+red.kolicina).val()==="" || $('#'+red.kolicina).val()==0){
+            //             greskaKolicina = true;
+            //             greska2 += "\nMorate uneti kolicinu za robu ili uslugu!";
+            //         }
+            //         if(!greskaCena && !greskaKolicina){
+            //             var stavka = {
+            //                 'kolicina':$('#'+red.kolicina).val(),
+            //                 'cena':$('#'+red.cena).val(),
+            //                 'vrednost':$('#'+red.vrednost).val(),
+            //                 'prometniDokument':result.id,
+            //                 'robaUsluga':$('#'+red.naziv).val()
+            //             }
+            //             stavke.push(stavka)
+            //         }
+            //     });
+            //     if(greskaCena || greskaKolicina){
+            //         alert(greska2);
+            //     }
+            //     else{
+            //         console.log(JSON.stringify(stavke));
+            //         $.ajax({
+            //             url : 'http://localhost:8080/api/stavka-dokumenta',
+            //             type : "POST",
+            //             contentType: 'application/json; charset=utf-8',
+            //             data : JSON.stringify(stavke),
+            //             success: function(result){
+            //                 alert('Prometni dokument i stavke dokumenta su uspesno proknjižene');
+            //                 redovi=[];
+            //                 if(prikaziOtpremnicu){
+            //                     $('#btnProknjizi').hide();
+            //                     $('#btnIzvestaj').show();
+            //                 }
+            //                 else{
+            //                     location.reload();
+            //                 }
+            //             },
+            //             error : function(e){
+            //                 alert(JSON.stringify(e.responseJSON.message));
+            //             }
+            //         });
+            //     }

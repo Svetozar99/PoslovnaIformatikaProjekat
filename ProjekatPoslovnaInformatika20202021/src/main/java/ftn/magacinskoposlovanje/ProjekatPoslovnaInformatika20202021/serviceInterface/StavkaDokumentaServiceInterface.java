@@ -11,7 +11,7 @@ public interface StavkaDokumentaServiceInterface {
 	
 	public StavkaDokumenta findOne(Integer id);
 	
-	public List<StavkaDokumentaDTO> save(List<StavkaDokumentaDTO> stavke) throws Exception;
+	public List<StavkaDokumentaDTO> save(List<StavkaDokumentaDTO> stavke, Integer idDokumenta) throws Exception;
 	
 	public void remove(Integer id);
 	

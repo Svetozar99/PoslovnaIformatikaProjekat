@@ -21,7 +21,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class PrometMagacinskeKarticeInterface implements PrometMagacinskeKarticeServiceInterface {
 
 	@Autowired

@@ -28,7 +28,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInter
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.StavkaDokumentaServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class StavkaDokumentaService implements StavkaDokumentaServiceInterface {
 
 	@Autowired
@@ -60,20 +60,25 @@ public class StavkaDokumentaService implements StavkaDokumentaServiceInterface {
 	}
 
 	@Override
-	public List<StavkaDokumentaDTO> save(List<StavkaDokumentaDTO> dtos) throws Exception {
+	public List<StavkaDokumentaDTO> save(List<StavkaDokumentaDTO> dtos,Integer idDokumenta) throws Exception {
 		System.out.println("\n\taddStavke");
 		MagacinskaKartica kartica = new MagacinskaKartica();
 		MagacinskaKartica kartica2 = new MagacinskaKartica();
+		int nevalidneStavke = 0;
 		for (StavkaDokumentaDTO stavkaDokumentaDTO : dtos) {
 			
 			if(stavkaDokumentaDTO.getRobaUsluga()==null) {
+				nevalidneStavke ++;
+				if(nevalidneStavke == dtos.size()) {
+					throw new Exception("Niste dodali stavke dokumenta!");
+				}
 				continue;
 			}
 			
 			PrometMagacinskeKartice prometKartice = new PrometMagacinskeKartice();
 			PrometMagacinskeKartice prometKartice2 = new PrometMagacinskeKartice();
 			
-			PrometniDokument pd = dokumentR.findOneById(stavkaDokumentaDTO.getPrometniDokument());
+			PrometniDokument pd = dokumentR.findOneById(idDokumenta);
 			
 			RobaIliUsluga ru = robaUslugaR.findOneBySifra(stavkaDokumentaDTO.getRobaUsluga());
 			StavkaDokumenta stavkaDokumenta = new StavkaDokumenta();

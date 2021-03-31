@@ -49,7 +49,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterface {
 
 	@Autowired

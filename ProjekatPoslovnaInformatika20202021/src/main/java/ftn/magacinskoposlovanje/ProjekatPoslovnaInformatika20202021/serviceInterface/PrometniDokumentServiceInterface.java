@@ -11,7 +11,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Promet
 public interface PrometniDokumentServiceInterface {
 
 	List<PrometniDokument> findAll();
-	PrometniDokumentDTO save(PrometniDokumentDTO prometniDokument);
+	PrometniDokumentDTO save(PrometniDokumentDTO prometniDokument) throws Exception;
 	PrometniDokument findOneById(Integer id);
 	PrometniDokument findOneByRedniBroj(String redniBroj);
 	String findByMaxid();

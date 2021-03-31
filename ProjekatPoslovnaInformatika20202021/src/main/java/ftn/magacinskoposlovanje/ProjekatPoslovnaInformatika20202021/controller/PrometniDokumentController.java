@@ -59,7 +59,14 @@ public class PrometniDokumentController {
 	
 	@PostMapping
 	public ResponseEntity<PrometniDokumentDTO> addPrometniDokument(@RequestBody PrometniDokumentDTO dto){
-		return new ResponseEntity<PrometniDokumentDTO>(dokumentS.save(dto), HttpStatus.OK);
+		PrometniDokumentDTO createdDTO;
+		try {
+			createdDTO = dokumentS.save(dto);
+			return new ResponseEntity<PrometniDokumentDTO>(createdDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, e.getMessage(), e);
+		}
 	}
 	
 	@GetMapping

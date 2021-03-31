@@ -77,7 +77,7 @@ public class StavkaDokumentaController {
 
 		List<StavkaDokumentaDTO> listCreatedDtos;
 		try {
-			listCreatedDtos = stavkaDokumentaServiceInterface.save(dtos);
+			listCreatedDtos = stavkaDokumentaServiceInterface.save(dtos,1);
 		} catch (Exception e) {
 			throw new ResponseStatusException(
 			          HttpStatus.NOT_FOUND, "Nema dovoljno robe u magacinu", e);

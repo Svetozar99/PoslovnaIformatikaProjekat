@@ -13,7 +13,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class PreduzeceService implements PreduzeceServiceInterface {
 
 	@Autowired

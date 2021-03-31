@@ -21,7 +21,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.R
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.RobaIliUslugaServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class RobaIliUslugaService implements RobaIliUslugaServiceInterface{
 
 	@Autowired

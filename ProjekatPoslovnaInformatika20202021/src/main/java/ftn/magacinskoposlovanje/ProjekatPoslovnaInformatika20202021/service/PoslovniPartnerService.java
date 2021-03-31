@@ -17,7 +17,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovniPartnerServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class PoslovniPartnerService implements PoslovniPartnerServiceInterface {
 
 	@Autowired

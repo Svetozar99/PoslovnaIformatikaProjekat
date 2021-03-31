@@ -12,7 +12,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.J
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.JedinicaMereServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class JedinicaMereService implements JedinicaMereServiceInterface{
 
 	@Autowired

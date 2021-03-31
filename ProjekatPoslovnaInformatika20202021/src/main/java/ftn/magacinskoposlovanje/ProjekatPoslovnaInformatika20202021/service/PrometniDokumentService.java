@@ -45,7 +45,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class PrometniDokumentService implements PrometniDokumentServiceInterface {
 
 	@Autowired
@@ -72,10 +72,9 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 	}
 
 	@Override
-	public PrometniDokumentDTO save(PrometniDokumentDTO dto) {
+	public PrometniDokumentDTO save(PrometniDokumentDTO dto) throws Exception {
 		System.out.println("\n\tPost!");
 		System.out.println(dto.toString());
-		
 		PoslovniPartner poslovniPartner = new PoslovniPartner();
 		Date date = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -123,7 +122,7 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 		}
 		prometniDokument = prometniDokumentRepository.save(prometniDokument);
 		
-//		stavkeS.save(dto.getStavke());
+		stavkeS.save(dto.getStavkeDTO(),prometniDokument.getId());
 		dto.setId(prometniDokument.getId());
 		return dto;
 	}

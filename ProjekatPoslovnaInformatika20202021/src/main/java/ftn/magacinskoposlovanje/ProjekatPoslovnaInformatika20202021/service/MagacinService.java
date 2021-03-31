@@ -16,7 +16,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInter
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
 
 @Service
-@Transactional
+@Transactional(rollbackFor=Exception.class)
 public class MagacinService implements MagacinServiceInterface{
 
 	@Autowired

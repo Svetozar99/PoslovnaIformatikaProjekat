@@ -1,6 +1,8 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
@@ -15,6 +17,7 @@ public class PrometniDokumentDTO {
 	private String brojPrometnogDokumenta;
 	private Date datumIzdavanja;
 	private String vrstaDokumenta;
+	private List<StavkaDokumentaDTO> stavkeDTO = new ArrayList<StavkaDokumentaDTO>();
 	
 	public Integer getId() {
 		return id;
@@ -63,6 +66,13 @@ public class PrometniDokumentDTO {
 	}
 	public void setVrstaDokumenta(String vrstaDokumenta) {
 		this.vrstaDokumenta = vrstaDokumenta;
+	}
+	
+	public List<StavkaDokumentaDTO> getStavkeDTO() {
+		return stavkeDTO;
+	}
+	public void setStavkeDTO(List<StavkaDokumentaDTO> stavkeDTO) {
+		this.stavkeDTO = stavkeDTO;
 	}
 	@Override
 	public String toString() {
