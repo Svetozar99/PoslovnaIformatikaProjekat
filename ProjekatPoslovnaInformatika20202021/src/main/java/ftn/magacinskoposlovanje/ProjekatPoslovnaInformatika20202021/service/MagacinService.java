@@ -42,7 +42,8 @@ public class MagacinService implements MagacinServiceInterface{
 
 	@Override
 	public MagacinDTO save(MagacinDTO magacinDTO) {
-		Preduzece p = predrepos.findById(magacinDTO.getPreduzece());
+		Integer id = magacinDTO.getPreduzece();
+		Preduzece p = predrepos.findOne(id);
 		Magacin m = new Magacin();
 		m.setNazivMagacina(magacinDTO.getNaziv());	
 		m.setPreduzece(p);
@@ -78,7 +79,7 @@ public class MagacinService implements MagacinServiceInterface{
 	@Override
 	public MagacinDTO update(Integer id, MagacinDTO dto) {
 		Magacin magacin = magacinRepository.findOneBySifraMagacina(id);
-		Preduzece preduzece = predrepos.findById(dto.getPreduzece());
+		Preduzece preduzece = magacin.getPreduzece();
 		magacin.setNazivMagacina(dto.getNaziv());	
 		magacin.setPreduzece(preduzece);
 		magacin = magacinRepository.save(magacin);

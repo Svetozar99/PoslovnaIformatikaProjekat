@@ -63,11 +63,7 @@ public class MagacinController {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteMagacin(@PathVariable("id") Integer id){
-		try {
-			magacinServiceInterface.remove(id);
-			return  ResponseEntity.noContent().build();
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+		magacinServiceInterface.remove(id);
+		return  ResponseEntity.noContent().build();
 	}
 }

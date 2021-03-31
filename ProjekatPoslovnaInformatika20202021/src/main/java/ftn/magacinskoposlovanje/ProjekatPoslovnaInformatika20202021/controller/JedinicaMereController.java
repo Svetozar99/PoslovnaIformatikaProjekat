@@ -54,12 +54,7 @@ public class JedinicaMereController {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteJedMere(@PathVariable("id") Integer id){
-		try {
-			jedinicaMereServiceInterface.remove(id);
-			return  ResponseEntity.noContent().build();
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
-		}
-//		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		jedinicaMereServiceInterface.remove(id);
+		return  ResponseEntity.noContent().build();
 	}
 }
