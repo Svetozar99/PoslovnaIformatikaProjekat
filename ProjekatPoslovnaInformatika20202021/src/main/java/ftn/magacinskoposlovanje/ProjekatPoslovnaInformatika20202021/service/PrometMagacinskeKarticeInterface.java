@@ -7,6 +7,7 @@ import java.util.List;
 import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometMagacinskeKarticeDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
@@ -20,6 +21,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometMagacinskeKarticeServiceInterface;
 
 @Service
+@Transactional
 public class PrometMagacinskeKarticeInterface implements PrometMagacinskeKarticeServiceInterface {
 
 	@Autowired

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
@@ -15,6 +16,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInter
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
 
 @Service
+@Transactional
 public class MagacinService implements MagacinServiceInterface{
 
 	@Autowired

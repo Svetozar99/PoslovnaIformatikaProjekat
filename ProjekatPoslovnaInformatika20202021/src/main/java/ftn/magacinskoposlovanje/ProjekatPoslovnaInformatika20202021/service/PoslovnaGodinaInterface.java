@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PoslovnaGodinaDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
@@ -14,6 +15,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PoslovnaGodinaServiceInterface;
 
 @Service
+@Transactional
 public class PoslovnaGodinaInterface implements PoslovnaGodinaServiceInterface {
 
 	@Autowired

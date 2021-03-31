@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometniDokumentDTO;
@@ -37,14 +38,19 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.PreduzeceRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.PrometniDokumentRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometniDokumentServiceInterface;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.StavkaDokumentaServiceInterface;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
+@Transactional
 public class PrometniDokumentService implements PrometniDokumentServiceInterface {
 
+	@Autowired
+	StavkaDokumentaServiceInterface stavkeS;
+	
 	@Autowired
 	PrometniDokumentRepository prometniDokumentRepository;
 	
@@ -116,6 +122,8 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 			prometniDokument.setUlazniMagacin(ulazniMagacin);
 		}
 		prometniDokument = prometniDokumentRepository.save(prometniDokument);
+		
+//		stavkeS.save(dto.getStavke());
 		dto.setId(prometniDokument.getId());
 		return dto;
 	}

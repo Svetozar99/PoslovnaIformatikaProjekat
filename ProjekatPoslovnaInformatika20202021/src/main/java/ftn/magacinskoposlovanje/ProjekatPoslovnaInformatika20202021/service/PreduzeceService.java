@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PreduzeceDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
@@ -12,6 +13,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PreduzeceServiceInterface;
 
 @Service
+@Transactional
 public class PreduzeceService implements PreduzeceServiceInterface {
 
 	@Autowired
