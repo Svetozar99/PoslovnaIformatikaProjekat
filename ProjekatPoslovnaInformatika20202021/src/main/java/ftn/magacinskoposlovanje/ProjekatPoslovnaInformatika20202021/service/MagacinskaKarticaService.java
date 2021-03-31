@@ -23,18 +23,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinskaKarticaDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometMagacinskeKarticeDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.RobaIliUsluga;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Smer;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Status;
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaDokumenta;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.VrstaPrometa;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.MagacinRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.MagacinskaKarticaRepository;
@@ -136,7 +132,7 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	public MagacinskaKarticaDTO findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
 			Integer poslovnaGodinaId, Integer sifraMagacina) throws Exception{
 		RobaIliUsluga robaIliUsluga = riliureposl.findOneBySifra(robaIliUslugaId);
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(poslovnaGodinaId);
+		PoslovnaGodina poslovnaGodina = posgodrepos.findOneByBrojGodine(poslovnaGodinaId);
 
 		Magacin magacin = magacinrepos.findOneBySifraMagacina(sifraMagacina);
 		
