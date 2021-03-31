@@ -13,7 +13,7 @@ function prikazSvihPrometaMagKartica() {
             url : "http://localhost:8080/api/promet-magacinske-kartice/"+idMk,
             success : function(result){
                 sadrzajTabele.empty();
-                for(p in result){
+                for(p in result){ 
                     var html="";
                     d=new Date(result[p].datum);
                     if(result[p].redniBroj.startsWith("0") || result[p].kolicina<0){
