@@ -49,11 +49,7 @@ public class PoslovniPartnerController {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletePoslovniPartner(@PathVariable("id") Integer id){
-		try {
-			poslovniPartnerServiceInterface.remove(id);
-			return  ResponseEntity.noContent().build();
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+		poslovniPartnerServiceInterface.remove(id);
+		return  ResponseEntity.noContent().build();
 	}
 }

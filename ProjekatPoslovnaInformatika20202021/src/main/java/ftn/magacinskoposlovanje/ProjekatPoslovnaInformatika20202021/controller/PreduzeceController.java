@@ -29,61 +29,31 @@ public class PreduzeceController {
 	
 	@GetMapping
 	public ResponseEntity<List<PreduzeceDTO>> getPreduzeca(){
-		List<Preduzece> preduzeca = preduzeceService.findAll();
 		
-		List<PreduzeceDTO> preduzeceDTOs = new ArrayList<PreduzeceDTO>();
-		for(Preduzece p: preduzeca) {
-			preduzeceDTOs.add(new PreduzeceDTO(p));
-		}
-		return new ResponseEntity<List<PreduzeceDTO>>(preduzeceDTOs, HttpStatus.OK);
+		return ResponseEntity.ok().body(preduzeceService.findAll());
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<PreduzeceDTO> getPreduzece(@PathVariable("id") Integer id){
-		Preduzece preduzece = preduzeceService.findOne(id);
+	public ResponseEntity<PreduzeceDTO> getPreduzece(@PathVariable("id") Integer id) throws Exception{
 		
-		if(preduzece == null) {
-			return new ResponseEntity<PreduzeceDTO>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<PreduzeceDTO>(new PreduzeceDTO(preduzece), HttpStatus.OK);
+		return ResponseEntity.ok().body(preduzeceService.findById(id));
 	}
 	
 	@PostMapping
 	public ResponseEntity<PreduzeceDTO> addPreduzece(@RequestBody PreduzeceDTO preduzeceDTO){
-		Preduzece preduzece = new Preduzece();
-		preduzece.setNazivPreduzeca(preduzeceDTO.getNaziv());
-		preduzece.setAdresa(preduzeceDTO.getAdresa());
-		preduzece.setTelefon(preduzeceDTO.getTelefon());
-		preduzece.setPIB(preduzeceDTO.getpIB());
-		preduzece.setMIB(preduzeceDTO.getmIB());
 		
-		preduzece = preduzeceService.save(preduzece);
-		return new ResponseEntity<PreduzeceDTO>(new PreduzeceDTO(preduzece), HttpStatus.CREATED);
+		return ResponseEntity.ok().body(preduzeceService.save(preduzeceDTO));
 	}
 	
 	@PutMapping(value = "/{id}", consumes = "application/json")
-	public ResponseEntity<PreduzeceDTO> updatePreduzece(@RequestBody PreduzeceDTO preduzeceDTO, @PathVariable("id") Integer id) throws ParseException{
-		Preduzece preduzece = preduzeceService.findById(id);
-		System.out.println("\n\tPoziva se funkcija POST");
-		if(preduzece == null) {
-			return new ResponseEntity<PreduzeceDTO>(HttpStatus.BAD_REQUEST);
-		}
-		preduzece.setNazivPreduzeca(preduzeceDTO.getNaziv());
-		preduzece.setAdresa(preduzeceDTO.getAdresa());
-		preduzece.setTelefon(preduzeceDTO.getTelefon());
-		preduzece.setPIB(preduzeceDTO.getpIB());
-		preduzece.setMIB(preduzeceDTO.getmIB());
-		preduzece = preduzeceService.save(preduzece);
-		return new ResponseEntity<PreduzeceDTO>(new PreduzeceDTO(preduzece), HttpStatus.OK);
+	public ResponseEntity<PreduzeceDTO> updatePreduzece(@RequestBody PreduzeceDTO preduzeceDTO, @PathVariable("id") Integer id) throws Exception{
+		
+		return ResponseEntity.ok().body(preduzeceService.update(id, preduzeceDTO));
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deletePreduzece(@PathVariable("id") Integer id){
-		Preduzece preduzece = preduzeceService.findById(id);
-		if(preduzece != null) {
-			preduzeceService.remove(id);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		}
-		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		preduzeceService.remove(id);
+		return  ResponseEntity.noContent().build();
 	}
 }

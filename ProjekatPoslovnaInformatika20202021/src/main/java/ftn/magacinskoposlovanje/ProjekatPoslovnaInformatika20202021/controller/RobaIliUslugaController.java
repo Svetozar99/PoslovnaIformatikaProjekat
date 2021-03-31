@@ -58,11 +58,7 @@ public class RobaIliUslugaController {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteRobaIliUsluga(@PathVariable("id") Integer id){
-		try {
-			robaIliUslugaServiceInterface.delete(id);
-			return  ResponseEntity.noContent().build();
-		} catch (Exception e) {
-			return ResponseEntity.notFound().build();
-		}
+		robaIliUslugaServiceInterface.delete(id);
+		return  ResponseEntity.noContent().build();
 	}
 }
