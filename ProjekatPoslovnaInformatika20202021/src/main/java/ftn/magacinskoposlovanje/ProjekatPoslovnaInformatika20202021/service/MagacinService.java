@@ -71,7 +71,8 @@ public class MagacinService implements MagacinServiceInterface{
 	@Override
 	public MagacinDTO findBySifra(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		Magacin m = magacinRepository.findOneBySifraMagacina(id);
+		return new MagacinDTO(m);
 	}
 
 	@Override

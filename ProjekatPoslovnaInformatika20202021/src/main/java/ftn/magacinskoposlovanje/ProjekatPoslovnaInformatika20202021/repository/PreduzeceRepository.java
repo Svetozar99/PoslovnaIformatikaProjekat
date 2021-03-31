@@ -8,7 +8,7 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduz
 public interface PreduzeceRepository extends JpaRepository<Preduzece, Integer> {
 	
 	Preduzece findOneByIdPreduzeca(Integer preduzeceId); 
-	
+//	Preduzece findByIdPreduzecaAnd(Integer idPreduz, Integer partnerId);
 //	Preduzece findOneById(Integer id);
 
 }
