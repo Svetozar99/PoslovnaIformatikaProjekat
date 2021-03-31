@@ -15,6 +15,7 @@ public class PrometniDokumentDTO {
 	private String brojPrometnogDokumenta;
 	private Date datumIzdavanja;
 	private String vrstaDokumenta;
+	
 	public Integer getId() {
 		return id;
 	}

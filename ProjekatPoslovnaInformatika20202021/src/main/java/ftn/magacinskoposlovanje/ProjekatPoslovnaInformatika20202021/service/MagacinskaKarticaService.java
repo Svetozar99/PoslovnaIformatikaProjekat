@@ -133,7 +133,7 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	}
 
 	@Override
-	public MagacinskaKarticaDTO findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
+	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId,
 			Integer poslovnaGodinaId, Integer sifraMagacina) throws Exception{
 		RobaIliUsluga robaIliUsluga = riliureposl.findOneBySifra(robaIliUslugaId);
 		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(poslovnaGodinaId);
@@ -193,7 +193,7 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 			
 			
 		}
-		return new MagacinskaKarticaDTO(kartica);
+		return kartica;
 	}
 
 	@Override

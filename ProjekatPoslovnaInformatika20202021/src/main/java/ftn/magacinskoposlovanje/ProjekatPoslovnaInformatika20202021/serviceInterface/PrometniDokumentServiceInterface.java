@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometniDokumentDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometniDokument;
 
 public interface PrometniDokumentServiceInterface {
 
 	List<PrometniDokument> findAll();
-	PrometniDokument save(PrometniDokument prometniDokument);
+	PrometniDokumentDTO save(PrometniDokumentDTO prometniDokument);
 	PrometniDokument findOneById(Integer id);
 	PrometniDokument findOneByRedniBroj(String redniBroj);
 	Integer findByMaxid();

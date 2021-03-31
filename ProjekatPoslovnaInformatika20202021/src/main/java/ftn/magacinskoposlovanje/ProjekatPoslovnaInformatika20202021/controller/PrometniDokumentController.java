@@ -55,71 +55,11 @@ public class PrometniDokumentController {
 	private PrometniDokumentServiceInterface prometniDokumentServiceInterface;
 	
 	@Autowired
-	private PoslovniPartnerServiceInterface poslovniPartnerServiceInterface;
-	
-	@Autowired
-	private PoslovnaGodinaServiceInterface poslovnaGodinaServiceInterface;
-	
-	@Autowired
-	private PreduzeceServiceInterface preduzeceServiceInterface;
-	
-	@Autowired
-	private MagacinServiceInterface magacinServiceInterface;
+	private PrometniDokumentServiceInterface dokumentS;
 	
 	@PostMapping
 	public ResponseEntity<PrometniDokumentDTO> addPrometniDokument(@RequestBody PrometniDokumentDTO dto){
-//		System.out.println("\n\tPost!");
-//		System.out.println(dto.toString());
-//		
-//		PoslovniPartner poslovniPartner = new PoslovniPartner();
-//		Date date = new Date();
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.setTime(date);
-//		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR));
-//		Preduzece preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
-//		if(poslovnaGodina == null) {
-//			PoslovnaGodina godina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR)-1);
-//			godina.setZakljucena(true);
-//			poslovnaGodinaServiceInterface.save(godina);
-//			poslovnaGodina = new PoslovnaGodina();
-//			poslovnaGodina.setBrojGodine(calendar.get(Calendar.YEAR));
-//			poslovnaGodina.setPreduzece(preduzece);
-//			poslovnaGodina.setZakljucena(false);
-//			poslovnaGodina = poslovnaGodinaServiceInterface.save(poslovnaGodina);
-//		}
-//		Magacin ulazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina1());
-//		Magacin izlazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina2());
-//		
-//		PrometniDokument prometniDokument = new PrometniDokument();
-//		prometniDokument.setRedniBroj(dto.getBrojPrometnogDokumenta());
-//		prometniDokument.setDatum(dto.getDatumIzdavanja());
-//		prometniDokument.setStatus(Status.P);
-//		prometniDokument.setPoslovnaGodina(poslovnaGodina);
-//		
-//		if(dto.getVrstaDokumenta().equals(VrstaDokumenta.PR.toString())) {
-//			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
-//			
-//			prometniDokument.setVrstaDokumenta(VrstaDokumenta.PR);
-//			prometniDokument.setPoslovniPartner(poslovniPartner);
-//			prometniDokument.setPreduzece(preduzece);
-//			prometniDokument.setUlazniMagacin(ulazniMagacin);
-//		}else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.OT.toString())) {
-//			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
-//			
-//			prometniDokument.setVrstaDokumenta(VrstaDokumenta.OT);
-//			prometniDokument.setPoslovniPartner(poslovniPartner);
-//			prometniDokument.setPreduzece(preduzece);
-//			prometniDokument.setIzlazniMagacin(izlazniMagacin);
-//		}
-//		else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.MM.toString())) {
-//			prometniDokument.setVrstaDokumenta(VrstaDokumenta.MM);
-//			prometniDokument.setIzlazniMagacin(izlazniMagacin);
-//			prometniDokument.setUlazniMagacin(ulazniMagacin);
-//		}
-//		prometniDokument = prometniDokumentServiceInterface.save(prometniDokument);
-//		dto.setId(prometniDokument.getId());
-//		return new ResponseEntity<PrometniDokumentDTO>(dto, HttpStatus.OK);
-		return null;
+		return new ResponseEntity<PrometniDokumentDTO>(dokumentS.save(dto), HttpStatus.OK);
 	}
 	
 	@GetMapping

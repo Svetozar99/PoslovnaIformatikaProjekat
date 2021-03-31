@@ -95,8 +95,8 @@ public class StavkaDokumentaController {
 		return new ResponseEntity<List<StavkaDokumentaDTO>>(sdtos, HttpStatus.OK);
 	}
 	
-//	@PostMapping
-//	public ResponseEntity<List<StavkaDokumentaDTO>> addStavke(@RequestBody List<StavkaDokumentaDTO> dtos) throws Exception{
+	@PostMapping
+	public ResponseEntity<List<StavkaDokumentaDTO>> addStavke(@RequestBody List<StavkaDokumentaDTO> dtos){
 //		System.out.println("\n\taddStavke");
 //		MagacinskaKartica kartica = new MagacinskaKartica();
 //		MagacinskaKartica kartica2 = new MagacinskaKartica();
@@ -282,6 +282,13 @@ public class StavkaDokumentaController {
 //				prometMagacinskeKarticeInterface.save(prometKartice2);
 //			}
 //		}
-//		return new ResponseEntity<List<StavkaDokumentaDTO>>(dtos, HttpStatus.CREATED);
-//	}
+		List<StavkaDokumentaDTO> listCreatedDtos;
+		try {
+			listCreatedDtos = stavkaDokumentaServiceInterface.save(dtos);
+		} catch (Exception e) {
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, "Nema dovoljno robe u magacinu", e);
+		}
+		return new ResponseEntity<List<StavkaDokumentaDTO>>(listCreatedDtos, HttpStatus.CREATED);
+	}
 }

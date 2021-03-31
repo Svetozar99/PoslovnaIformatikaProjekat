@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinskaKarticaDTO;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.MagacinskaKartica;
 
 public interface MagacinskaKarticaServiceInterface {
 
@@ -13,7 +14,7 @@ public interface MagacinskaKarticaServiceInterface {
 	public MagacinskaKarticaDTO save(MagacinskaKarticaDTO magacinskaKartica) throws Exception;
 	public MagacinskaKarticaDTO findOneById(Integer id);
 	public MagacinskaKarticaDTO findOneByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,Integer sifraRobeIliUsluge);
-	public MagacinskaKarticaDTO findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId, Integer poslovnaGodinaId,Integer sifraMagacina) throws Exception;
+	public MagacinskaKartica findOneByRobaIliUslugaAndPoslovnaGodinaAndMagacin(Integer robaIliUslugaId, Integer poslovnaGodinaId,Integer sifraMagacina) throws Exception;
 
 	List<MagacinskaKarticaDTO> findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(Integer sifraRobeUsluge,Integer brojGodine, Integer sifraMagacina);
 	List<MagacinskaKarticaDTO> findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(Integer sifraMagacina,Integer sifraRobeIliUsluge);
