@@ -9,6 +9,6 @@ public interface PreduzeceRepository extends JpaRepository<Preduzece, Integer> {
 	
 	Preduzece findOneByIdPreduzeca(Integer preduzeceId); 
 	
-	Preduzece findOneById(Integer id);
+//	Preduzece findOneById(Integer id);
 
 }

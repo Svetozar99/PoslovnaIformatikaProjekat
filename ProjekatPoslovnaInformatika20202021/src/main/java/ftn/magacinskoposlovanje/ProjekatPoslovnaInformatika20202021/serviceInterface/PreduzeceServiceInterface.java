@@ -15,4 +15,5 @@ public interface PreduzeceServiceInterface {
 	public void remove(Integer id);
 	
 	public Preduzece findById(Integer preduzeceId);
+	
 }
