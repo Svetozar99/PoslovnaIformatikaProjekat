@@ -41,6 +41,7 @@ function prikazSvihPrometaMagKartica() {
                                 +'<td align="center"><button onclick="storniranje(\''+result[p].redniBroj+'\')" class="btn btn-outline-warning">Storniraj</button></td>'
                             +'</tr>'
                     }
+
                     sadrzajTabele.append(html)};
                     
             },
@@ -50,6 +51,8 @@ function prikazSvihPrometaMagKartica() {
         });
     }
     prikaziPromete();
+
+    $('#btnIzvestajPrometa').show();
 
     console.log('aaaaa');
 }
@@ -89,4 +92,10 @@ function storniranje(redniBroj){
             alert('ne valja nesto kod storniranja');
         }
     });
+}
+
+function prometMagKarticaIzvestaj(){
+    var redniBroj = $('#sifraRobeIliUslugePromMagKart').val();
+    window.open('http://localhost:8080/api/promet-magacinske-kartice/report/'+redniBroj);
+    location.reload();
 }
