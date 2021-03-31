@@ -1,11 +1,27 @@
 package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.service;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometniDokumentDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
@@ -21,6 +37,10 @@ import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.P
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.PreduzeceRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.repository.PrometniDokumentRepository;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInterface.PrometniDokumentServiceInterface;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Service
 public class PrometniDokumentService implements PrometniDokumentServiceInterface {
@@ -106,9 +126,20 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 	}
 
 	@Override
-	public Integer findByMaxid() {
-		// TODO Auto-generated method stub
-		return prometniDokumentRepository.najveciID();
+	public String findByMaxid() {
+		Date date = new Date();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		
+		Integer id = prometniDokumentRepository.najveciID();
+		
+		if(id == null) {
+			id = 0;
+		}
+		String brojDokumenta = "";
+		int trenutnaGodina = calendar.get(Calendar.YEAR);
+		brojDokumenta = id+1 + "-" + trenutnaGodina;
+		return brojDokumenta;
 	}
 
 	@Override
@@ -121,6 +152,37 @@ public class PrometniDokumentService implements PrometniDokumentServiceInterface
 	public List<PrometniDokument> findByRedniBroj(String redniBroj) {
 		// TODO Auto-generated method stub
 		return prometniDokumentRepository.findByRedniBroj(redniBroj);
+	}
+
+	@Override
+	public ResponseEntity report(String redniBroj) {
+		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
+		
+		JasperPrint jp;
+		ByteArrayInputStream bis;
+		try {
+			File file = new File("src\\main\\resources\\OtpremnicaReport.jasper");
+			InputStream is = new FileInputStream(file);
+			Map<String, Object> param = new HashMap();
+			param.put("redniBroj", redniBroj);
+			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
+			jp = JasperFillManager.fillReport(is,
+					param, conn);
+			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Disposition", "inline; filename=otpremnica_"+redniBroj+".pdf");
+
+			return ResponseEntity
+		       		.ok()
+		       		.headers(headers)
+		       		.contentType(MediaType.APPLICATION_PDF)
+		       		.body(new InputStreamResource(bis));
+		} catch (JRException | IOException | SQLException e) {
+			e.printStackTrace();
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, "Neka greska", e);
+		}
 	}
 
 }

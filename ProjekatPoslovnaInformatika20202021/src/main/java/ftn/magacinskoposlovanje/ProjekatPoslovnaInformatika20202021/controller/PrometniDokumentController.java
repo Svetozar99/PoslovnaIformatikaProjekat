@@ -65,49 +65,11 @@ public class PrometniDokumentController {
 	@GetMapping
 	public ResponseEntity<String> getFormatBroj(){
 		
-		Date date = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		
-		Integer id = prometniDokumentServiceInterface.findByMaxid();
-		
-		if(id == null) {
-			id = 0;
-		}
-		String brojDokumenta = "";
-		int trenutnaGodina = calendar.get(Calendar.YEAR);
-		brojDokumenta = id+1 + "-" + trenutnaGodina;
-		return new ResponseEntity<String>(brojDokumenta, HttpStatus.OK);
+		return new ResponseEntity<String>(prometniDokumentServiceInterface.findByMaxid(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/report/{redniBroj}")
 	public ResponseEntity getReport(@PathVariable("redniBroj") String redniBroj){
-		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
-		
-		JasperPrint jp;
-		ByteArrayInputStream bis;
-		try {
-			File file = new File("src\\main\\resources\\OtpremnicaReport.jasper");
-			InputStream is = new FileInputStream(file);
-			Map<String, Object> param = new HashMap();
-			param.put("redniBroj", redniBroj);
-			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
-			jp = JasperFillManager.fillReport(is,
-					param, conn);
-			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "inline; filename=otpremnica_"+redniBroj+".pdf");
-
-			return ResponseEntity
-		       		.ok()
-		       		.headers(headers)
-		       		.contentType(MediaType.APPLICATION_PDF)
-		       		.body(new InputStreamResource(bis));
-		} catch (JRException | IOException | SQLException e) {
-			e.printStackTrace();
-			throw new ResponseStatusException(
-			          HttpStatus.NOT_FOUND, "Neka greska", e);
-		}
+		return dokumentS.report(redniBroj);
 	}
 }
