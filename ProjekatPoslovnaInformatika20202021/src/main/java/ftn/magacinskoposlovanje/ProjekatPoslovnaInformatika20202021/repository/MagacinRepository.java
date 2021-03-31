@@ -10,4 +10,5 @@ public interface MagacinRepository extends JpaRepository<Magacin, Integer>{
 	List<Magacin> findByPreduzece_idPreduzeca(Integer id);
 	
 	Magacin findOneBySifraMagacina(Integer id);
+//	Magacin findOneBySifraMagacina(Integer id);
 }

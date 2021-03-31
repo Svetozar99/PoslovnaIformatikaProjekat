@@ -2,17 +2,21 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInte
 
 import java.util.List;
 
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PreduzeceDTO;
 import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Preduzece;
 
 public interface PreduzeceServiceInterface {
 
-	public List<Preduzece> findAll();
+	public List<PreduzeceDTO> findAll();
 	
 	public Preduzece findOne(Integer preduzeceId);
 	
-	public Preduzece save(Preduzece preduzece);
+	public PreduzeceDTO save(PreduzeceDTO preduzeceDTO);
 	
 	public void remove(Integer id);
 	
-	public Preduzece findById(Integer preduzeceId);
+	public PreduzeceDTO findById(Integer preduzeceId) throws Exception;
+	
+	public PreduzeceDTO update(Integer id,PreduzeceDTO pdto) throws Exception;
+	
 }

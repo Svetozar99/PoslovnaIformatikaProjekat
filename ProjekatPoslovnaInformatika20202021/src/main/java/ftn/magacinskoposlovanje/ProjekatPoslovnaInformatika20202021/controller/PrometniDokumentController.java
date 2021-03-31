@@ -55,118 +55,28 @@ public class PrometniDokumentController {
 	private PrometniDokumentServiceInterface prometniDokumentServiceInterface;
 	
 	@Autowired
-	private PoslovniPartnerServiceInterface poslovniPartnerServiceInterface;
-	
-	@Autowired
-	private PoslovnaGodinaServiceInterface poslovnaGodinaServiceInterface;
-	
-	@Autowired
-	private PreduzeceServiceInterface preduzeceServiceInterface;
-	
-	@Autowired
-	private MagacinServiceInterface magacinServiceInterface;
+	private PrometniDokumentServiceInterface dokumentS;
 	
 	@PostMapping
 	public ResponseEntity<PrometniDokumentDTO> addPrometniDokument(@RequestBody PrometniDokumentDTO dto){
-		System.out.println("\n\tPost!");
-		System.out.println(dto.toString());
-		
-		PoslovniPartner poslovniPartner = new PoslovniPartner();
-		Date date = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		PoslovnaGodina poslovnaGodina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR));
-		Preduzece preduzece = preduzeceServiceInterface.findOne(dto.getIdPreduzeca());
-		if(poslovnaGodina == null) {
-			PoslovnaGodina godina = poslovnaGodinaServiceInterface.findByBrojGodine(calendar.get(Calendar.YEAR)-1);
-			godina.setZakljucena(true);
-			poslovnaGodinaServiceInterface.save(godina);
-			poslovnaGodina = new PoslovnaGodina();
-			poslovnaGodina.setBrojGodine(calendar.get(Calendar.YEAR));
-			poslovnaGodina.setPreduzece(preduzece);
-			poslovnaGodina.setZakljucena(false);
-			poslovnaGodina = poslovnaGodinaServiceInterface.save(poslovnaGodina);
+		PrometniDokumentDTO createdDTO;
+		try {
+			createdDTO = dokumentS.save(dto);
+			return new ResponseEntity<PrometniDokumentDTO>(createdDTO, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ResponseStatusException(
+			          HttpStatus.NOT_FOUND, e.getMessage(), e);
 		}
-		Magacin ulazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina1());
-		Magacin izlazniMagacin = magacinServiceInterface.findOne(dto.getSifraMagacina2());
-		
-		PrometniDokument prometniDokument = new PrometniDokument();
-		prometniDokument.setRedniBroj(dto.getBrojPrometnogDokumenta());
-		prometniDokument.setDatum(dto.getDatumIzdavanja());
-		prometniDokument.setStatus(Status.P);
-		prometniDokument.setPoslovnaGodina(poslovnaGodina);
-		
-		if(dto.getVrstaDokumenta().equals(VrstaDokumenta.PR.toString())) {
-			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
-			
-			prometniDokument.setVrstaDokumenta(VrstaDokumenta.PR);
-			prometniDokument.setPoslovniPartner(poslovniPartner);
-			prometniDokument.setPreduzece(preduzece);
-			prometniDokument.setUlazniMagacin(ulazniMagacin);
-		}else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.OT.toString())) {
-			poslovniPartner = poslovniPartnerServiceInterface.findOneBySifraPartnera(dto.getSifraPoslovnogPartnera());
-			
-			prometniDokument.setVrstaDokumenta(VrstaDokumenta.OT);
-			prometniDokument.setPoslovniPartner(poslovniPartner);
-			prometniDokument.setPreduzece(preduzece);
-			prometniDokument.setIzlazniMagacin(izlazniMagacin);
-		}
-		else if(dto.getVrstaDokumenta().equals(VrstaDokumenta.MM.toString())) {
-			prometniDokument.setVrstaDokumenta(VrstaDokumenta.MM);
-			prometniDokument.setIzlazniMagacin(izlazniMagacin);
-			prometniDokument.setUlazniMagacin(ulazniMagacin);
-		}
-		prometniDokument = prometniDokumentServiceInterface.save(prometniDokument);
-		dto.setId(prometniDokument.getId());
-		return new ResponseEntity<PrometniDokumentDTO>(dto, HttpStatus.OK);
 	}
 	
 	@GetMapping
 	public ResponseEntity<String> getFormatBroj(){
 		
-		Date date = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		
-		Integer id = prometniDokumentServiceInterface.findByMaxid();
-		
-		if(id == null) {
-			id = 0;
-		}
-		String brojDokumenta = "";
-		int trenutnaGodina = calendar.get(Calendar.YEAR);
-		brojDokumenta = id+1 + "-" + trenutnaGodina;
-		return new ResponseEntity<String>(brojDokumenta, HttpStatus.OK);
+		return new ResponseEntity<String>(prometniDokumentServiceInterface.findByMaxid(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/report/{redniBroj}")
 	public ResponseEntity getReport(@PathVariable("redniBroj") String redniBroj){
-		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
-		
-		JasperPrint jp;
-		ByteArrayInputStream bis;
-		try {
-			File file = new File("src\\main\\resources\\OtpremnicaReport.jasper");
-			InputStream is = new FileInputStream(file);
-			Map<String, Object> param = new HashMap();
-			param.put("redniBroj", redniBroj);
-			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
-			jp = JasperFillManager.fillReport(is,
-					param, conn);
-			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "inline; filename=otpremnica_"+redniBroj+".pdf");
-
-			return ResponseEntity
-		       		.ok()
-		       		.headers(headers)
-		       		.contentType(MediaType.APPLICATION_PDF)
-		       		.body(new InputStreamResource(bis));
-		} catch (JRException | IOException | SQLException e) {
-			e.printStackTrace();
-			throw new ResponseStatusException(
-			          HttpStatus.NOT_FOUND, "Neka greska", e);
-		}
+		return dokumentS.report(redniBroj);
 	}
 }

@@ -50,120 +50,32 @@ public class MagacinskaKarticaController {
 	@Autowired
 	private MagacinskaKarticaServiceInterface magaKarticaServiceInterface;
 	
-	@Autowired
-	private PrometMagacinskeKarticeServiceInterface prometMagacinskeKarticeServiceInterface;
-
 	@GetMapping
 	public ResponseEntity<List<MagacinskaKarticaDTO>> getMagacinskeKartice(){
-		List<MagacinskaKartica> magacinskaKarticas = magaKarticaServiceInterface.findAll();
 		
-		List<MagacinskaKarticaDTO> karicaDTOs = new ArrayList<MagacinskaKarticaDTO>();
-		for(MagacinskaKartica m : magacinskaKarticas) {
-			karicaDTOs.add(new MagacinskaKarticaDTO(m));
-		}
-		return new ResponseEntity<List<MagacinskaKarticaDTO>>(karicaDTOs, HttpStatus.OK);
+		return ResponseEntity.ok().body(magaKarticaServiceInterface.findAll());
 	}
 	
 	@GetMapping(value = "{sifraMagacina}/{sifraRobeIliUsluge}/{brojPoslovneGodine}")
 	public ResponseEntity<List<MagacinskaKarticaDTO>> getMagKartByRobaIliUslua(@PathVariable("sifraMagacina") Integer sifraMagacina, @PathVariable("sifraRobeIliUsluge") Integer sifraRobeIliUsluge, 
 			@PathVariable("brojPoslovneGodine") Integer brojPoslovneGodine){
-		List<MagacinskaKartica> kartice = new ArrayList<MagacinskaKartica>();
-		List<MagacinskaKarticaDTO> dtos = new ArrayList<MagacinskaKarticaDTO>();
-		if(sifraMagacina==0 && sifraRobeIliUsluge==0 && brojPoslovneGodine==0) {
-			kartice = magaKarticaServiceInterface.findAll();
-		}else if(sifraMagacina!=0 && sifraRobeIliUsluge!=0 && brojPoslovneGodine!=0) {
-			kartice = magaKarticaServiceInterface.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(sifraRobeIliUsluge, brojPoslovneGodine, sifraMagacina);
-		}else if(sifraMagacina!=0 && sifraRobeIliUsluge!=0) {
-			kartice = magaKarticaServiceInterface.findByMagacin_sifraMagacinaAndRobaIliUsluga_sifra(sifraMagacina, sifraRobeIliUsluge);
-		}else if(sifraRobeIliUsluge!=0 && brojPoslovneGodine!=0) {
-			kartice = magaKarticaServiceInterface.findByPoslovnaGodina_brojGodineAndRobaIliUsluga_sifra(brojPoslovneGodine, sifraRobeIliUsluge);
-		}else if(sifraMagacina!=0 &&brojPoslovneGodine!=0) {
-			kartice = magaKarticaServiceInterface.findByMagacin_sifraMagacinaAndPoslovnaGodina_brojGodine(sifraMagacina, brojPoslovneGodine);
-		}else if(sifraMagacina!=0) {
-			kartice = magaKarticaServiceInterface.findByMagacin_sifraMagacina(sifraMagacina);
-		}
-		else if(sifraRobeIliUsluge!=0) {
-			kartice = magaKarticaServiceInterface.findByRobaIliUsluga_sifra(sifraRobeIliUsluge);
-		}
-		else if(brojPoslovneGodine!=0) {
-			kartice = magaKarticaServiceInterface.findByPoslovnaGodina_brojGodine(brojPoslovneGodine);
-		}
-		for (MagacinskaKartica k : kartice) {
-			dtos.add(new MagacinskaKarticaDTO(k));
-		}
-		return ResponseEntity.ok(dtos);
+		
+		return ResponseEntity.ok().body(magaKarticaServiceInterface.findByRobaIliUsluga_sifraAndPoslovnaGodina_brojGodineAndMagacin_sifraMagacina(sifraRobeIliUsluge, brojPoslovneGodine, sifraMagacina));
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<MagacinskaKarticaDTO> getOneMagKar(@PathVariable("id") Integer id){
-		
-		MagacinskaKartica mk = magaKarticaServiceInterface.findOneById(id);
-		
-		return new ResponseEntity<MagacinskaKarticaDTO>(new MagacinskaKarticaDTO(mk),HttpStatus.OK);
+		return ResponseEntity.ok().body(magaKarticaServiceInterface.findOneById(id));
 	}
 	
 	@PutMapping
 	public ResponseEntity<MagacinskaKarticaDTO> nivelacija(@RequestBody MagacinskaKarticaDTO dto){
 		
-		MagacinskaKartica kartica = magaKarticaServiceInterface.findOneById(dto.getId());
-		
-		double nivelacija = kartica.getCena()*kartica.getUkupnaKolicina()-kartica.getUkupnaVrednost();
-		System.out.println("\nNivelacija: "+nivelacija);
-		PrometMagacinskeKartice promet = new PrometMagacinskeKartice();
-		
-		Date date = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(date);
-		
-		promet.setRedniBroj(0+"-"+calendar.get(Calendar.YEAR));
-		promet.setVrstaPrometa(VrstaPrometa.NI);
-		promet.setSmer(Smer.U);
-		promet.setKolicina(0);
-		promet.setCena(0);
-		promet.setVrednost(nivelacija);
-		promet.setDokument(VrstaPrometa.NI.label);
-		promet.setDatumPrometa(new Date());
-		promet.setMagacinskaKartica(kartica);
-		
-		kartica.setPrometUlazaVrednosno(kartica.getPrometUlazaVrednosno()+promet.getVrednost());
-		
-		double ukupnaVrednost = kartica.getPocetnoStanjeVrednosno()+kartica.getPrometUlazaVrednosno()-kartica.getPrometIzlazaVrednosno();
-		kartica.setUkupnaVrednost(ukupnaVrednost);
-		
-		promet = prometMagacinskeKarticeServiceInterface.save(promet);
-		kartica = magaKarticaServiceInterface.save(kartica);
-		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(magaKarticaServiceInterface.nivelacija(dto));
 	}
 	
 	@GetMapping(value = "/report/{ovde-treba-da-bude-id-kartice}")
 	public ResponseEntity getReport(@PathVariable("ovde-treba-da-bude-id-kartice") String redniBroj){
-		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
-		
-		JasperPrint jp;
-		ByteArrayInputStream bis;
-		try {
-			File file = new File("src\\main\\resources\\PrometiReport.jasper");
-			InputStream is = new FileInputStream(file);
-			Map<String, Object> param = new HashMap();
-			param.put("redniBroj", redniBroj);
-			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
-			jp = JasperFillManager.fillReport(is,
-					param, conn);
-			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
-
-			return ResponseEntity
-		       		.ok()
-		       		.headers(headers)
-		       		.contentType(MediaType.APPLICATION_PDF)
-		       		.body(new InputStreamResource(bis));
-		} catch (JRException | IOException | SQLException e) {
-			e.printStackTrace();
-			throw new ResponseStatusException(
-			          HttpStatus.NOT_FOUND, "Neka greska", e);
-		}
+		return ResponseEntity.ok().body(magaKarticaServiceInterface.report(redniBroj));
 	}
 }

@@ -2,19 +2,19 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInte
 
 import java.util.List;
 
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PrometMagacinskeKartice;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PrometMagacinskeKarticeDTO;
 
 public interface PrometMagacinskeKarticeServiceInterface {
 
-public List<PrometMagacinskeKartice> findAll();
+public List<PrometMagacinskeKarticeDTO> findAll();
 	
-	public PrometMagacinskeKartice findOne(String redniBroj);
+	public PrometMagacinskeKarticeDTO findOne(String redniBroj);
 	
-	public PrometMagacinskeKartice save(PrometMagacinskeKartice prometMagacinskeKartice);
+	public PrometMagacinskeKarticeDTO save(Integer id, PrometMagacinskeKarticeDTO prometMagacinskeKarticeDTO);
 	
 	public void remove(Integer id);
 	
-	public List<PrometMagacinskeKartice> findByMagacinskaKartica(Integer id);
+	public List<PrometMagacinskeKarticeDTO> findByMagacinskaKartica(Integer id);
 	
-	public List<PrometMagacinskeKartice> findByRedniBroj(String redniBroj);
+	public PrometMagacinskeKarticeDTO findByRedniBroj(String redniBroj) throws Exception;
 }

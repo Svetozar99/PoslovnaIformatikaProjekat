@@ -2,15 +2,17 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInte
 
 import java.util.List;
 
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.Magacin;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.MagacinDTO;
 
 public interface MagacinServiceInterface {
 	
-	public List<Magacin> findAll();
-	public Magacin findOne(Integer magacinId);
-	public Magacin save(Magacin magacin);
+	public List<MagacinDTO> findAll();
+	public MagacinDTO findOne(Integer magacinId);
+	public MagacinDTO save(MagacinDTO magacinDTO);
 	public void remove(Integer magacinId);
-	public List<Magacin> findByPreduzece_id(Integer id);
+	public List<MagacinDTO> findByPreduzece_id(Integer id);
 	
-	public Magacin findBySifra(Integer id);
+	public MagacinDTO findBySifra(Integer id);
+	
+	public MagacinDTO update(Integer id, MagacinDTO dto);
 }

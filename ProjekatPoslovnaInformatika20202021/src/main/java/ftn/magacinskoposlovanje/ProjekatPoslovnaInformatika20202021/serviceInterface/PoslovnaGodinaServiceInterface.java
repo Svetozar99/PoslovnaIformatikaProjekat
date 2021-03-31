@@ -2,21 +2,23 @@ package ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.serviceInte
 
 import java.util.List;
 
-import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.model.PoslovnaGodina;
+import ftn.magacinskoposlovanje.ProjekatPoslovnaInformatika20202021.entityDTO.PoslovnaGodinaDTO;
 
 public interface PoslovnaGodinaServiceInterface {
 
-	public List<PoslovnaGodina> findAll();
+	public List<PoslovnaGodinaDTO> findAll();
 	
-	public PoslovnaGodina findOne(Integer id);
+	public PoslovnaGodinaDTO findOne(Integer id);
 	
-	public PoslovnaGodina save(PoslovnaGodina poslovnaGodina);
+	public PoslovnaGodinaDTO save(PoslovnaGodinaDTO poslovnaGodina);
 	
 	public void remove(Integer id);
 	
-	public List<PoslovnaGodina> findByPreduzece_id(Integer id);
+	public List<PoslovnaGodinaDTO> findByPreduzece_id(Integer id);
 	
-	public PoslovnaGodina findByBrojGodine(Integer brojGodine);
+	public PoslovnaGodinaDTO findByBrojGodine(Integer brojGodine);
 	
-	public PoslovnaGodina findById(Integer id);
+	public PoslovnaGodinaDTO findById(Integer id);
+	
+	public void update(PoslovnaGodinaDTO pgdto);
 }
