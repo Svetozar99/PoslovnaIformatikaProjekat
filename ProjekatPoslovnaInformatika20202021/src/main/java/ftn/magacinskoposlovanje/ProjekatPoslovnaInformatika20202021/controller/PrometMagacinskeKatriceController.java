@@ -181,7 +181,7 @@ public class PrometMagacinskeKatriceController {
 			Map<String, Object> param = new HashMap();
 			param.put("redniBrojPMK", redniBrojPMK);
 			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
-			jp = JasperFillManager.fillReport(is,
+			jp = JasperFillManager.fillReport(is, 
 					param, conn);
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
