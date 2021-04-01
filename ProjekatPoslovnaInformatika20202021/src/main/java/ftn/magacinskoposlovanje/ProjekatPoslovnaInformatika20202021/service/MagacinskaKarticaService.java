@@ -329,23 +329,23 @@ public class MagacinskaKarticaService implements MagacinskaKarticaServiceInterfa
 	}
 
 	@Override
-	public ResponseEntity report(String broj) {
+	public ResponseEntity report(String idMagacinskeKartice) {
 		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
 		
 		JasperPrint jp;
 		ByteArrayInputStream bis;
 		try {
-			File file = new File("src\\main\\resources\\PrometiReport.jasper");
+			File file = new File("src\\main\\resources\\PrometMagacinskeKartice.jasper");
 			InputStream is = new FileInputStream(file);
 			Map<String, Object> param = new HashMap();
-			param.put("redniBroj", broj);
+			param.put("idMagacinskeKartice", idMagacinskeKartice);
 			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
 			jp = JasperFillManager.fillReport(is,
 					param, conn);
 			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
 			
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+			headers.add("Content-Disposition", "inline; filename=promet_"+ idMagacinskeKartice +".pdf");
 
 			return ResponseEntity
 		       		.ok()

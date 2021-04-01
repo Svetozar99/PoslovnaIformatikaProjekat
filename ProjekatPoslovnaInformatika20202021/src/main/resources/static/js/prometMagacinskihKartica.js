@@ -95,7 +95,7 @@ function storniranje(redniBroj){
 }
 
 function prometMagKarticaIzvestaj(){
-    var redniBroj = $('#sifraRobeIliUslugePromMagKart').val();
-    window.open('http://localhost:8080/api/promet-magacinske-kartice/report/'+redniBroj);
+    var idMk = $("#idMagacinskeKartice").val();
+    window.open('http://localhost:8080/api/magacinska-kartica/report/'+idMk);
     location.reload();
 }

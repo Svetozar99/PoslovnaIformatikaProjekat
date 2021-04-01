@@ -64,36 +64,4 @@ public class PrometMagacinskeKatriceController {
 		return ResponseEntity.ok().body(prometMagacinskeKarticeService.findByRedniBroj(redniBroj));
 	}
 	
-	@GetMapping(value = "/report/{redniBrojPMK}")
-	public ResponseEntity getReport(@PathVariable("redniBrojPMK") String redniBrojPMK){
-		String connectionUrl = "jdbc:mysql://localhost/magacinsko";
-		
-		JasperPrint jp;
-		ByteArrayInputStream bis;
-		try {
-			File file = new File("src\\main\\resources\\PrometMagacinskeKartice.jasper");
-			InputStream is = new FileInputStream(file);
-			Map<String, Object> param = new HashMap();
-			param.put("redniBrojPMK", redniBrojPMK);
-			Connection conn = DriverManager.getConnection(connectionUrl , "root", "root");
-			jp = JasperFillManager.fillReport(is,
-					param, conn);
-			bis = new ByteArrayInputStream(JasperExportManager.exportReportToPdf(jp));
-			
-			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-Disposition", "inline; filename=prometMagacinskeKartice_"+redniBrojPMK+".pdf");
-
-			return ResponseEntity
-		       		.ok()
-		       		.headers(headers)
-		       		.contentType(MediaType.APPLICATION_PDF)
-		       		.body(new InputStreamResource(bis));
-		} catch (JRException | IOException | SQLException e) {
-			e.printStackTrace();
-			throw new ResponseStatusException(
-			          HttpStatus.NOT_FOUND, "Neka greska", e);
-		}
-	}
-	
-	
 }

@@ -74,8 +74,8 @@ public class MagacinskaKarticaController {
 		return ResponseEntity.ok().body(magaKarticaServiceInterface.nivelacija(dto));
 	}
 	
-	@GetMapping(value = "/report/{ovde-treba-da-bude-id-kartice}")
-	public ResponseEntity getReport(@PathVariable("ovde-treba-da-bude-id-kartice") String redniBroj){
-		return ResponseEntity.ok().body(magaKarticaServiceInterface.report(redniBroj));
+	@GetMapping(value = "/report/{idMagacinskeKartice}")
+	public ResponseEntity getReport(@PathVariable("idMagacinskeKartice") String idMagacinskeKartice){
+		return magaKarticaServiceInterface.report(idMagacinskeKartice);
 	}
 }
